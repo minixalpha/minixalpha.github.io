@@ -1,0 +1,27 @@
+---
+layout: default
+title: 分类
+---
+
+<ul class="post-list">
+  {% for post in site.categories[page.category] %}
+    <li>
+      <div class="post-title">
+        <a href="{{site.baseurl}}{{post.url}}"> {{post.title}}</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">{{ post.date | date: '%Y-%m-%d' }}</li> 
+          <li class="post-category"> {{ post.category }} </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        {{ post.excerpt }} 
+        <a href="{{site.baseurl}}{{post.url}}"> Read More ... </a> </br>
+      </div>
+
+    </li>
+  {% endfor %}
+</ul>

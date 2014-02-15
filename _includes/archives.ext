@@ -1,0 +1,20 @@
+<h2> 归档 </h2>
+  <ul class="archive-list">
+    {% assign precount = 0 %}
+    {% capture postcount %} {% increment postcount %} {% endcapture %}
+    {% for post in site.posts %}
+        {% capture month %}{{ post.date | date: '%m%Y' }}{% endcapture %}
+        {% capture nmonth %}{{ post.previous.date | date: '%m%Y' }}{% endcapture %}
+        {% capture postcount %} {% increment postcount %} {% endcapture %}
+        {% if month != nmonth %}
+            {% capture curcount %}{{postcount | minus: precount}}{% endcapture %}
+            <li>
+                <a href="{{ site.baseurl }}/{{ post.date | date: '%Y/%m' }}">
+                    {{ post.date | date: '%Y-%m' }} ({{curcount}})
+                </a>
+            </li>
+
+        {% assign precount = postcount %}
+        {% endif %}
+    {% endfor %}
+  </ul>

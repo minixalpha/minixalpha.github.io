@@ -1,0 +1,14 @@
+<h2> 分类 </h2>
+  <ul class="category-list">
+      {% for cat in site.categories %}
+            {% if cat[0] != page.category %}
+                <li>
+                <a href="{{ site.baseurl }}/categories/{{ cat[0] }}"> {{ cat[0] }} ({{ cat | last | size}}) </a>
+                </li>
+            {% else %}
+                <li style="background-color: #444">
+                <a href="{{ site.baseurl }}/categories/{{ cat[0] }}"> {{ cat[0] }} ({{ cat | last | size}}) </a>
+                </li>
+            {% endif %}
+      {% endfor %}
+  </ul>
