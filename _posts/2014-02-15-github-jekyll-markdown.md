@@ -17,7 +17,7 @@ GitHub 和 Jekyll，我们可以打造自己的独立博客，你可以自由地
 一切都是免费的。
 
 这是我在GitHub上自己建立的[博客](http://minixalpha.github.io/)
-及[源代码](https://github.com/minixalpha/tree/master)
+及[源代码](https://github.com/minixalpha/minixalpha.github.io)
 （两个分支），在下文的讲解中，你可以随时查看博客的源代码，以便有直观的认识。
 
 网站截图：
