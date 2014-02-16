@@ -123,7 +123,7 @@ Segmentation fault (core dumped)
 
 下图是一个Linux进程的虚拟内存空间
 
-![vir_mem](/StrayBirds/assets/blog-images/vir_mem.png)
+![vir_mem](/assets/blog-images/vir_mem.png)
 
 所有的Linux进程的虚拟内存空间都是以这种方式组织的，只不过不同进程因为映射表不同，所以
 同一虚拟地址对应不同的物理地址。如果进程需要共享一块内存区，只需要在映射表中把同一虚拟内存
@@ -224,7 +224,7 @@ p指向的"hello",初始化时，直接指向了一个固定的位置,这意味�
 
 从这段汇编代码。我们从直觉上会感觉到这三种使用内存方式的不同，接下来，我们再来看一下Linux运行时存储器映像。
 
-![linux_runtime_mem_img](/StrayBirds/assets/blog-images/linux_runtime_mem_img.png)
+![linux_runtime_mem_img](/assets/blog-images/linux_runtime_mem_img.png)
 
 .text 段放着已经编译的程序机器代码。  
 .rodata 段放着只读数据，`printf`函数参数中的字符串，p指向的"hello"，
@@ -362,4 +362,4 @@ bfa8b000-bfaac000 rw-p 00000000 00:00 0          [stack]
 
 ---
 
-转载请注明出处： http://minixalpha.github.io/StrayBirds/2013/10/25/charpointerarray.html
+转载请注明出处： http://minixalpha.github.io/2013/10/25/charpointerarray.html

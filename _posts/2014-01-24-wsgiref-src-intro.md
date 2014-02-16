@@ -23,7 +23,7 @@ wsgiref 源代码可以在 [pypi wsgiref 0.1.2](https://pypi.python.org/pypi/wsg
 
 ### 结构
 
-![wsgiref](/StrayBirds/assets/blog-images/wsgiref.bmp)
+![wsgiref](/assets/blog-images/wsgiref.bmp)
 
 上图描述了wsgiref的所有模块及模块间的调用关系，可以看出，wsgiref有以下模块：
 
@@ -47,7 +47,7 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 ### simple_server
 
 
-![simple_server](/StrayBirds/assets/blog-images/simple_server.bmp)
+![simple_server](/assets/blog-images/simple_server.bmp)
 
 可以看出，simple_server 模块主要有两部分内容
 
@@ -279,7 +279,7 @@ python simple_server.py
 
 * make_server
 
-![make_server](/StrayBirds/assets/blog-images/make_server.png)
+![make_server](/assets/blog-images/make_server.png)
 
 上图可以看出函数之间的调用关系，也可以看出 make_server 到 使用 socket 监听用户请求的过程。
 
@@ -287,14 +287,14 @@ python simple_server.py
 
 handle_request 的过程真正将各个模块联系起来了。
 
-![handle_request](/StrayBirds/assets/blog-images/handle_request.png)
+![handle_request](/assets/blog-images/handle_request.png)
 
 上图很清楚地说明了 由handle_request到demo_app的执行过程，把这个模块的各个部分联系起来。相信无需多言了。
 
 ### handlers
 
 
-![handlers](/StrayBirds/assets/blog-images/handlers.bmp)
+![handlers](/assets/blog-images/handlers.bmp)
 
 从图中可以看出handler模块中的四部分，它们其实是四个类，从基类到子类依次为：
 
@@ -461,14 +461,14 @@ headers 模块图
 ### util
 
 
-![util](/StrayBirds/assets/blog-images/util.bmp)
+![util](/assets/blog-images/util.bmp)
 
 这个模块主要就是一些有用的函数，用于处理URL, 环境变量。
 
 ### validate
 
 
-![validate](/StrayBirds/assets/blog-images/validate.bmp)
+![validate](/assets/blog-images/validate.bmp)
 
 这个模块主要是检查你对WSGI的实现，是否满足标准，包含三个部分：
 

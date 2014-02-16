@@ -4,9 +4,9 @@
     <meta charset='utf-8'>
 
     <link rel="stylesheet" type="text/css" 
-      href="/StrayBirds/assets/css/straybirds.css" media="screen" />
+      href="/assets/css/straybirds.css" media="screen" />
     <link rel="stylesheet" type="text/css" 
-      href="/StrayBirds/assets/css/pygments.css" media="screen" />
+      href="/assets/css/pygments.css" media="screen" />
 
     <!-- MathJax Section Start -->
 
@@ -51,7 +51,7 @@
       <header>
         <div class="container">
           <h1>
-              <a href="/StrayBirds/"> 潇湘夜雨 </a>
+              <a href="/"> 潇湘夜雨 </a>
           </h1>
         </div>
       </header>
@@ -62,25 +62,25 @@
       
             
                 <li style="background-color: #444">
-                <a href="//categories/源代码阅读"> 源代码阅读 (10) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
                 </li>
             
       
             
                 <li>
-                <a href="//categories/工具"> 工具 (2) </a>
+                <a href="/categories/技术"> 技术 (3) </a>
                 </li>
             
       
             
                 <li>
-                <a href="//categories/技术"> 技术 (3) </a>
+                <a href="/categories/思想"> 思想 (2) </a>
                 </li>
             
       
             
                 <li>
-                <a href="//categories/思想"> 思想 (2) </a>
+                <a href="/categories/工具"> 工具 (2) </a>
                 </li>
             
       
@@ -100,7 +100,7 @@
         
             
             <li>
-                <a href="//2014/02">
+                <a href="/2014/02">
                     2014-02 (1)
                 </a>
             </li>
@@ -124,7 +124,7 @@
         
             
             <li>
-                <a href="//2014/01">
+                <a href="/2014/01">
                     2014-01 (3)
                 </a>
             </li>
@@ -183,7 +183,7 @@
         
             
             <li>
-                <a href="//2013/11">
+                <a href="/2013/11">
                     2013-11 (10)
                 </a>
             </li>
@@ -207,7 +207,7 @@
         
             
             <li>
-                <a href="//2013/10">
+                <a href="/2013/10">
                     2013-10 (3)
                 </a>
             </li>
@@ -239,7 +239,7 @@
 
 <h3>结构</h3>
 
-<p><img src="/StrayBirds/assets/blog-images/wsgiref.bmp" alt="wsgiref"></p>
+<p><img src="/assets/blog-images/wsgiref.bmp" alt="wsgiref"></p>
 
 <p>上图描述了wsgiref的所有模块及模块间的调用关系，可以看出，wsgiref有以下模块：</p>
 
@@ -266,7 +266,7 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 
 <h3>simple_server</h3>
 
-<p><img src="/StrayBirds/assets/blog-images/simple_server.bmp" alt="simple_server"></p>
+<p><img src="/assets/blog-images/simple_server.bmp" alt="simple_server"></p>
 
 <p>可以看出，simple_server 模块主要有两部分内容</p>
 
@@ -491,7 +491,7 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 <li>make_server</li>
 </ul>
 
-<p><img src="/StrayBirds/assets/blog-images/make_server.png" alt="make_server"></p>
+<p><img src="/assets/blog-images/make_server.png" alt="make_server"></p>
 
 <p>上图可以看出函数之间的调用关系，也可以看出 make_server 到 使用 socket 监听用户请求的过程。</p>
 
@@ -501,13 +501,13 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 
 <p>handle_request 的过程真正将各个模块联系起来了。</p>
 
-<p><img src="/StrayBirds/assets/blog-images/handle_request.png" alt="handle_request"></p>
+<p><img src="/assets/blog-images/handle_request.png" alt="handle_request"></p>
 
 <p>上图很清楚地说明了 由handle<em>request到demo</em>app的执行过程，把这个模块的各个部分联系起来。相信无需多言了。</p>
 
 <h3>handlers</h3>
 
-<p><img src="/StrayBirds/assets/blog-images/handlers.bmp" alt="handlers"></p>
+<p><img src="/assets/blog-images/handlers.bmp" alt="handlers"></p>
 
 <p>从图中可以看出handler模块中的四部分，它们其实是四个类，从基类到子类依次为：</p>
 
@@ -660,13 +660,13 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 
 <h3>util</h3>
 
-<p><img src="/StrayBirds/assets/blog-images/util.bmp" alt="util"></p>
+<p><img src="/assets/blog-images/util.bmp" alt="util"></p>
 
 <p>这个模块主要就是一些有用的函数，用于处理URL, 环境变量。</p>
 
 <h3>validate</h3>
 
-<p><img src="/StrayBirds/assets/blog-images/validate.bmp" alt="validate"></p>
+<p><img src="/assets/blog-images/validate.bmp" alt="validate"></p>
 
 <p>这个模块主要是检查你对WSGI的实现，是否满足标准，包含三个部分：</p>
 

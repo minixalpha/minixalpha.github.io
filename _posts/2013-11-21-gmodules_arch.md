@@ -65,7 +65,7 @@ LICENCE 文件描述了项目使用的开源协议: GPLv3。
 
 先看看代码统计
 
-![googlemodules_code_stat.jpg](/StrayBirds/assets/blog-images/googlemodules_code_stat.jpg)
+![googlemodules_code_stat.jpg](/assets/blog-images/googlemodules_code_stat.jpg)
 
 ## application 模块
 

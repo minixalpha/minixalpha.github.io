@@ -16,13 +16,13 @@ comments: true
 GitHub 和 Jekyll，我们可以打造自己的独立博客，你可以自由地定制网站的风格，并且这
 一切都是免费的。
 
-这是我在GitHub上自己建立的[博客](http://minixalpha.github.io/StrayBirds/)
-及[源代码](https://github.com/minixalpha/StrayBirds/tree/master)
+这是我在GitHub上自己建立的[博客](http://minixalpha.github.io/)
+及[源代码](https://github.com/minixalpha/tree/master)
 （两个分支），在下文的讲解中，你可以随时查看博客的源代码，以便有直观的认识。
 
 网站截图：
 
-![blog_snapshot](/StrayBirds/assets/blog-images/blog_snapshot.png)
+![blog_snapshot](/assets/blog-images/blog_snapshot.png)
 
 
 ## 入门指引
@@ -356,7 +356,7 @@ comments: true
 ```
 
 来引用这个文件的内容，方便代码模块化和重用。我的博客
-[主页](http://minixalpha.github.io/StrayBirds/)上的
+[主页](http://minixalpha.github.io/)上的
 分类，归档，这些模块的代码都是通过这种方式引用的。
 
 * _plugins
@@ -431,7 +431,7 @@ comments: true
 
 评论区截图：
 
-![blog_comments_snapshot](/StrayBirds/assets/blog-images/blog_comments_snapshot.png)
+![blog_comments_snapshot](/assets/blog-images/blog_comments_snapshot.png)
 
 
 基本的内容就介绍到这里，任何问题，欢迎留言。
