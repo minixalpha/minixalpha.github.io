@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/%E5%B7%A5%E5%85%B7/2014/02/15/github-jekyll-markdown.html</loc>
+    <loc>http://minixalpha.github.io/%E5%B7%A5%E5%85%B7/2014/02/15/github-jekyll-markdown.html</loc>
     
     <lastmod>2014-02-15T00:00:00+08:00</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html</loc>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html</loc>
     
     <lastmod>2014-01-26T00:00:00+08:00</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html</loc>
     
     <lastmod>2014-01-24T00:00:00+08:00</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>/%E6%80%9D%E6%83%B3/2014/01/13/write_high_quality_program.html</loc>
+    <loc>http://minixalpha.github.io/%E6%80%9D%E6%83%B3/2014/01/13/write_high_quality_program.html</loc>
     
     <lastmod>2014-01-13T00:00:00+08:00</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/21/gmodules_arch.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/21/gmodules_arch.html</loc>
     
     <lastmod>2013-11-21T00:00:00+08:00</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/18/blog_arch.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/18/blog_arch.html</loc>
     
     <lastmod>2013-11-18T00:00:00+08:00</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html</loc>
     
     <lastmod>2013-11-17T00:00:00+08:00</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testreloader.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testreloader.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testUppercaseMethods.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testUppercaseMethods.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html</loc>
+    <loc>http://minixalpha.github.io/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html</loc>
     
     <lastmod>2013-11-14T00:00:00+08:00</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>/%E6%8A%80%E6%9C%AF/2013/11/01/pypkg.html</loc>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/2013/11/01/pypkg.html</loc>
     
     <lastmod>2013-11-01T00:00:00+08:00</lastmod>
     
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>/%E6%80%9D%E6%83%B3/2013/10/26/whyds.html</loc>
+    <loc>http://minixalpha.github.io/%E6%80%9D%E6%83%B3/2013/10/26/whyds.html</loc>
     
     <lastmod>2013-10-26T00:00:00+08:00</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>/%E6%8A%80%E6%9C%AF/2013/10/25/charpointerarray.html</loc>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/2013/10/25/charpointerarray.html</loc>
     
     <lastmod>2013-10-25T00:00:00+08:00</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>/%E5%B7%A5%E5%85%B7/2013/10/24/markdonnote.html</loc>
+    <loc>http://minixalpha.github.io/%E5%B7%A5%E5%85%B7/2013/10/24/markdonnote.html</loc>
     
     <lastmod>2013-10-24T00:00:00+08:00</lastmod>
     
