@@ -137,12 +137,17 @@ li {
     padding-left: 30px;
 }
 
+.archive-list li{
+    line-height: 30px;
+}
 .archive-list li {
     background:
         url('/assets/images/glyphicons_045_calendar.png')
         no-repeat
         left
         center;
+    width: 120px;
+    line-height: 30px;
     padding-left: 30px;
 }
 
@@ -199,9 +204,6 @@ aside ul {
 }
 
 
-.archive-list li{
-    line-height: 30px;
-}
 
 
 img {
