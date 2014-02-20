@@ -50,6 +50,7 @@ GitHub 和 Jekyll 搭建独立博客非常好的入门文章，**强烈建议先
 ## GitHub + Jekyll 工作机制
 
 * 机制一
+
 简单地说，你在 GitHub 上有一个账号，名为`username`(任意)，
 有一个项目，名为 `username.github.io`(固定格式，username与账号名一致)，
 项目分支名为 `master`(固定)，这个分支有着类似下面的
