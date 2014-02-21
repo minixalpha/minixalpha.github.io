@@ -2,6 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://minixalpha.github.io/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html</loc>
+    
+    <lastmod>2014-02-21T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://minixalpha.github.io/%E8%AF%BB%E4%B9%A6/2014/02/20/read-mactalk.html</loc>
     
     <lastmod>2014-02-20T00:00:00+08:00</lastmod>
@@ -162,6 +171,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
   
   
   
