@@ -2,6 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://minixalpha.github.io/%E5%B7%A5%E5%85%B7/c%E8%AF%AD%E8%A8%80/2014/02/22/gcc-intro.html</loc>
+    
+    <lastmod>2014-02-22T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://minixalpha.github.io/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html</loc>
     
     <lastmod>2014-02-21T00:00:00+08:00</lastmod>
@@ -171,6 +180,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
   
   
   

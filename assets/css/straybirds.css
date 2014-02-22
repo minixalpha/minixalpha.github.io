@@ -219,3 +219,7 @@ img {
     text-align: center;
 }
 
+p code {
+    background-color: #333;
+    padding: 3px;
+}
