@@ -13,7 +13,9 @@ title: 首页
       <div class="post-info">
         <ol>
           <li class="post-time">{{ post.date | date: "%F" }}</li> 
-          <li class="post-category"> {{ post.category }} </li>
+          <li class="post-category"> 
+           {{ post.categories | join: '&nbsp&nbsp' }}
+          </li>
         </ol>
       </div>
 
