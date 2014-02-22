@@ -1,0 +1,142 @@
+---
+layout: default
+title: GCC 的基本使用
+categories: [工具, C语言]
+comments: true
+---
+
+# GCC 的基本使用
+
+[GCC](http://gcc.gnu.org/) 是一款非常著名的编译器，支持诸如 C, C++, Java在内的多种程序设计语言，并且提供了许多选项，以支持用户不同程度的需求，例如查看编译中间结果，指定语言标准，指定优化程度等等 ，下面的内容就介绍这些最重要的功能。
+
+
+首先查看一下 GCC 的版本，有时候可能版本不同，编译的功能和结果就不同。
+[这里](http://gcc.gnu.org/onlinedocs/) 有不同版本的手册。
+
+## 查看版本
+    $ gcc --version
+    gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+    Copyright (C) 2011 Free Software Foundation, Inc.
+    This is free software; see the source for copying conditions.  There is NO
+    warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+## 编译过程
+### 一次编译
+如果想直接得到可执行文件，最简单的是这样：
+
+        gcc test.c -o test
+
+### 分段编译
+有时候，我们可能需要看到编译的中间结果，比如查看汇编代码，没有经过链接的二进制文件等等，这时候可以这样：
+
+* 源文件->预处理->中间文件  
+
+        gcc -E test.c -o test.i
+
+* 中间文件->编译->汇编文件  
+
+           gcc -S test.i -o test.s
+
+* 汇编文件->转换->二进制代码  
+
+           gcc -c test.s -o test.o
+
+* 二进制代码->链接->可执行文件  
+
+           gcc test.o -o test
+
+## 设定C语言标准
+不同的标准对于语言特性的支持是不一样的，所以一定要关注标准，别写了半天程序连自己是在什么标准下写的都不知道。
+
+关于C语言的标准，首先要提到的就是 ANSI C, 1989年批准，即C89，1990年批准成为ISO标准，即C90或ISO/IEC 9899:1990。C89和C90其实是一样的。可以使用 `-ansi` 或者  `-std=c89` 或者 `-std=c90` 或者`-std=iso9899:1990` 来指定，例如：
+
+     $ gcc -ansi test.c -o test
+     $ gcc -std=c89 test.c -o test
+     $ gcc -std=iso9899:1990 test.c -o test
+
+在1999年，新版本的C语言标准发布，即 ISO/IEC 9899:1999，江湖人称C99。C99引入了一些新特性，例如：inline 函数，long long int 类型，变长数组，单行注释等等 。GCC对此标准的支持并不完整，但许多新特性已经可以支持。可以使用`-std=c99` 或者 `-std=iso9899:1999` 来指定。
+
+下一个版本的C语言标准是C1X，正在制定中，GCC只支持其中一部分特性，可以使用`-std=c1x`来指定。
+
+另外，GCC对各个C语言标准都提供了一些扩展，可以使用 `-std=gnu89` 或者 `-std=gnu99` 或者 `-std=gnu1x`来指定。
+
+如果没有指定标准，默认情况下 GCC 使用 `-std=gnu90`。
+
+更多关于GCC支持的语言标准的描述，可以在这里找到：[Language Standards Supported by GCC](http://gcc.gnu.org/onlinedocs/gcc-4.6.4/gcc/Standards.html)
+。
+
+关于各个标准的简介可以在 Wikipedia 的 C (programming language) 的 [History](http://en.wikipedia.org/wiki/C_(programming_language)#History) 中找到，另外强烈建议把这个词条完整地阅读一遍，可以对C语言有一个全方位的概览。
+
+ISO对于各个标准的介绍可以在 [iso9899](http://www.iso-9899.info/wiki/The_Standard#C89_.2F_C90_.2F_C95)中找到。
+
+## 警告
+
+GCC 的警告信息有时候会给我们一些非常重要的提示，防止我们写出错误的程序，最常用的选项是 `-Wall`，意思是打开全部的警告信息。如果没有错误，仅仅是得到了警告，程序不会停止编译，因为警告不一定是错误的。但是如果你对程序要求比较高，想让编译器在出现警告时停止编译，那么可以在`-Wall`基础上，使用 `-Werror` 选项，这样GCC会把警告当成错误来处理。
+
+例如，我们有这样一个程序：
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int foo = 2;
+
+    if (foo = 1) {
+        printf("hello, world\n");
+    }
+    return 0;
+}
+```
+
+注意 `=` 和 `==` 的区别，我们试试警告选项：
+
+    $ gcc -Wall -ansi test.c -o test
+    test.c: In function ‘main’:
+    test.c:6:5: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+
+可以看出，GCC对我们提出了警告。我们再加上 `-Werror` 试试：
+
+    $ gcc -Wall -Werror -ansi test.c -o test
+    test.c: In function ‘main’:
+    test.c:6:5: error: suggest parentheses around assignment used as truth value [-    Werror=parentheses]
+    cc1: all warnings being treated as errors
+
+这一次，GCC把上一次的警告当成错误来处理了。
+
+关于 GCC Warning 的更多信息可以在 GCC文档的 [Warnign Options](http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html)中找到。
+
+## 调试信息
+
+有时候我们的程序需要使用 GDB 来调试，就需要在编译时加入调试信息，可以通过 `-g` 选项来加入：
+
+    $ gcc -g -ansi test.c -o test
+
+然后通过 GDB 来调试:
+
+    $ gdb test
+    GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+    Copyright (C) 2012 Free Software Foundation, Inc.
+    License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+    This is free software: you are free to change and redistribute it.
+    There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+    and "show warranty" for details.
+    This GDB was configured as "i686-linux-gnu".
+    For bug reporting instructions, please see:
+    <http://bugs.launchpad.net/gdb-linaro/>...
+    Reading symbols from /home/minix/Project/C/language/test...done.
+
+可以看到最后一句，gdb 从 test中读取到了 symbols。
+
+更多关于GCC调试的描述可以在 GCC 文档的 [Debugging Options](http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html)中找到。
+
+## 优化
+
+GCC 可以对程序提供不同程度的优化，`-O0` 不提供任何优化，这也是默认的情况，从 `-O1` 到 `-O3`提供越来越多的优化，例如：
+
+    $ gcc -O1 test.c -o test
+    $ gcc -O3 test.c -o test
+
+更多关于优化的信息可以在 GCC 文档的 [Optimize Options](http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)中找到。
+
+好了，就讲到这里。
