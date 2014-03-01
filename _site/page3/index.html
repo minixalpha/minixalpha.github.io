@@ -69,7 +69,7 @@
       
             
                 <li>
-                <a href="/categories/读书"> 读书 (1) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
                 </li>
             
       
@@ -81,19 +81,7 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -105,13 +93,25 @@
       
             
                 <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (1) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
+                <a href="/categories/英语"> 英语 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
                 </li>
             
       
@@ -149,10 +149,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/02">
-                    2014-02 (5)
+                    2014-02 (6)
                 </a>
             </li>
 
@@ -273,6 +278,66 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/18/blog_arch.html"> web.py 项目架构分析之 blog</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2013-11-18</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>web.py 项目之 blog</h1>
+
+<h2>目录树</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">src/
+├── blog.py
+├── model.py
+├── schema.sql
+└── templates
+    ├── base.html
+    ├── edit.html
+    ├── index.html
+    ├── new.html
+    └── view.html
+
+1 directory, 8 files
+</code></pre></div>
+<h2>项目说明</h2>
+
+<p>项目来自 <a href="http://webpy.org/src/blog/0.3">webpy.org</a>,
+主要实现一个基于web的博客系统，实现了基本的增删查改。</p>
+
+<h2>结构分析</h2>
+
+<h3>控制模块</h3>
+
+<p>控制模块包括 blog.py</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="sd">&quot;&quot;&quot; Basic blog using webpy 0.3 &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">model</span>
+
+<span class="c">### Url mappings</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;Index&#39;</span><span class="p">,</span>
+    <span class="s">&#39;/view/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;View&#39;</span><span class="p">,</span>
+    <span class="s">&#39;/new&#39;</span><span class="p">,</span> <span class="s">&#39;New&#39;</span><span class="p">,</span>
+    <span class="s">&#39;/delete/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Delete&#39;</span><span class="p">,</span>
+    <span class="s">&#39;/edit/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Edit&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div> 
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/18/blog_arch.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -682,33 +747,6 @@ app = web.application(urls, globals(), autoreload=True)</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
 </code></pre></div> 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testUppercaseMethods.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html"> web.py 源代码分析之 web.test.application.testRedirect</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2013-11-14</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>分模块测试</h1>
-
-<h2>application.py</h2>
-
-<p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html"> Read More ... </a> </br>
       </div>
 
     </li>
