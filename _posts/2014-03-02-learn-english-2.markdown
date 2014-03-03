@@ -13,7 +13,7 @@ comments: true
 
 | Book |	Time | Total Time | Progress |  
 |:----:|  :----:|  :----:|  :----:|  
-|The Three Musketeers|	2014.02.23  20:20 - 22:20 | 	 2h |308/625/625|   
+|The Three Musketeers|	2014.02.23  20:20 - 22:20 | 	 2h |308/625|   
 |The Three Musketeers|	2014.02.24  19:00 - 21:00 	 |2h	 |330/625|  
 |The Three Musketeers|	2014.02.25  18:40 - 20:10  	 |1.5h|	355/625  |
 |The Three Musketeers|	2014.02.26 18:40 - 20:10|	 1.5h|	375/625|  
