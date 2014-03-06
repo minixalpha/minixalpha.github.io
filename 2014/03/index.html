@@ -69,25 +69,7 @@
       
             
                 <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/英语"> 英语 (2) </a>
                 </li>
             
       
@@ -99,19 +81,43 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (2) </a>
+                <a href="/categories/c语言"> c语言 (3) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (1) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (2) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
                 </li>
             
       
@@ -129,10 +135,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/03">
-                    2014-03 (1)
+                    2014-03 (2)
                 </a>
             </li>
 
@@ -376,68 +387,58 @@
 <h2>学习音标</h2>
 
 <p>这周的任务是学习辅音，到这周结束，已经完成了任务。下面是时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">内容</th>
-<th align="center">时间</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">元音复习</td>
-<td align="center">2014.02.23 08:40-09:00</td>
-</tr>
-<tr>
-<td align="center">辅音四个</td>
-<td align="center">2014.02.24 08:30-09:10</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音四个</td>
-<td align="center">2014.02.25 08:40-09:40</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音四个</td>
-<td align="center">2014.02.26 08:40-09:40</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音四个</td>
-<td align="center">2014.02.27 08:40-09:30</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音四个</td>
-<td align="center">2014.02.28 08:40-09:30</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音四个</td>
-<td align="center">2014.03.01 08:40-09:40</td>
-</tr>
-<tr>
-<td align="center">辅音四个 复习辅音，字母</td>
-<td align="center">2014.03.02 09:40-10:40</td>
-</tr>
-</tbody></table>
-
-<p>到这周结束，已经把原音和辅音学完了，总的来说，进步还是挺大的，会注意到以前注意不到的发音。</p>
-
-<p>这一周就总结到这里。</p>
-
-<p>下一周的目标是:</p>
-
-<ul>
-<li>学完连读，把元音复习一遍</li>
-<li>每天读20页The Three Musketeers。</li>
-</ul>
-
-<p>年度目标是：</p>
-
-<ul>
-<li>英语听说，按《把你的英语用起来》中初中高级的材料学习一遍。</li>
-<li>英文阅读，读10本英文原著。</li>
-</ul>
-
-<p>下周见。</p>
  
         <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> Read More ... </a> </br>
+      </div>
+    </li>
+
+    <li>
+      <div class="post-title">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> C语言中的int类型的范围是由什么决定的</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-06</li> 
+          <li class="post-category">  </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>C语言中的int类型的范围是由什么决定的</h1>
+
+<p>在 K&amp;R 经典教材 <em>The C Programming Language</em> 的2.2节中，对 int 类型是这样描述的</p>
+
+<blockquote>
+<p>an integer, typically reflecting the natural size of integers on the host machine</p>
+</blockquote>
+
+<p>意思是反映了机器整数类型的 <em>natural size</em>，可是，</p>
+
+<blockquote>
+<p>这个 natural size 又是什么意思呢？</p>
+</blockquote>
+
+<p>书中后来在谈到 short, int, long 的关系时，又说，这些类型由编译器根据机器自由选择合适的大小，但是 short 和 int 至少 16 位，long 至少 32 位。</p>
+
+<p>这里的问题是  </p>
+
+<blockquote>
+<p>编译器是根据什么决定类型大小呢？</p>
+</blockquote>
+
+<p>后面书中又提到，这些类型啊，在<code>&lt;limits.h&gt;</code>中都有，我就在ubuntu下查看了 <code>/usr/include/limits.h</code>，里面确实提到 </p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* Minimum and maximum values a `signed int&#39; can hold.  */</span>
+<span class="cp">#  define INT_MIN   (-INT_MAX - 1)</span>
+<span class="cp">#  define INT_MAX   2147483647</span>
+</code></pre></div>
+<p>但是，这也是一种定义，还是没有说出为什么，我现在想知道的是</p>
+
+<blockquote>
+<p>为什么</p>
+</blockquote>
+ 
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> Read More ... </a> </br>
       </div>
     </li>
 
