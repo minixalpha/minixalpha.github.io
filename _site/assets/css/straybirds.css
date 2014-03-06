@@ -120,7 +120,7 @@ li {
 }
 
 .post-info ol li {
-    width: 150px;
+    width: 200px;
     margin-top: 0px;
     margin-right: 10px;
     list-style-type: none;
@@ -140,6 +140,7 @@ li {
 .archive-list li{
     line-height: 30px;
 }
+
 .archive-list li {
     background:
         url('/assets/images/glyphicons_045_calendar.png')
@@ -183,7 +184,7 @@ aside li {
 
 aside li:hover {
     background-color: #444;
-    width: 200px;
+    width: 130px;
     transition: 0.5s;
 }
 
@@ -203,15 +204,23 @@ aside ul {
     padding-left: 10px;
 }
 
-
-
-
 img {
     max-width: 100%;
 }
 
 .highlight pre{
     padding: 10px;
+}
+
+blockquote {
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+    background-color: #333;
+}
+
+blockquote p {
+    margin: 0px;
 }
 
 
