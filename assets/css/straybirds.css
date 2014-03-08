@@ -178,14 +178,28 @@ li {
 aside li {
     margin-left: 30px;
     line-height: 40px;
-    width: 200px;
     list-style: none;
+}
+
+aside ul.category-list li {
+    width: 140px;
+ }
+
+aside ul.archive-list li {
+    width: 130px;
 }
 
 aside li:hover {
     background-color: #444;
-    width: 130px;
     transition: 0.5s;
+}
+
+aside ul.category-list li:hover {
+    width: 140px;
+}
+
+aside ul.archive-list li:hover {
+    width: 130px;
 }
 
 aside li a:before {
