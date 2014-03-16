@@ -43,7 +43,7 @@
 
     <!-- Google Analytics End -->
 
-    <title>Category: 生活</title>
+    <title>对Data Race Free 的理解</title>
   </head>
 
   <body>
@@ -110,7 +110,7 @@
             
       
             
-                <li style="background-color: #444">
+                <li>
                 <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
@@ -343,42 +343,77 @@
 
       <article>
 
-<ul class="post-list">
-  
-    <li>
-      <div class="post-title">
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> 不要做无谓的坚持和幻想的努力</a> </br>
-      </div>
+<h1>对Data Race Free 的理解</h1>
 
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-02-21</li> 
-          <li class="post-category"> 生活 </li>
-        </ol>
-      </div>
+<h2>Data Race Free 的动机</h2>
 
-      <div class="post-preview">
-        <h1>不要做无谓的坚持和幻想的努力</h1>
+<p>Data Race Free 是对多线程程序 <strong>同步程度</strong> 的一种描述，假如你的多线程程序的同步程度满足 DRF 的要求，那么，你的程序会有这样一个好处：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">程序在弱一致性模型下执行，执行的结果与在SC模型下执行一样
+</code></pre></div>
+<p>这意味着，程序员在写程序时，可以按SC模型来推断程序的执行。而程序在底层运行时，可以享受弱一致性模型带来的种种优化措施。</p>
 
-<p>有时候，你觉得自己一直在坚持和努力，可是从没问问自己这样的坚持和努力有用吗？</p>
+<h2>Data Race Free 具体内容</h2>
 
-<p>其实你就是一只温水里的青蛙，还觉得自己一直都在坚持游泳呢。</p>
+<p>DRF 要求多线程程序中不能有冲突的操作。</p>
 
-<p>最近我有了一个非常明确和重要的启发，就是不要做无谓的坚持和幻想的努力。</p>
+<p>什么是冲突的操作呢？</p>
 
-<p>我在一个背单词的网站上背了471天单词，不长，不短，再坚持下去我也完全没有问题。但是，这真的就叫坚持，就叫努力吗？</p>
- 
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> Read More ... </a> </br>
-      </div>
+<p>冲突的操作是指：两个操作来自不同线程，操作同一地址，至少有一个是写操作。</p>
 
-    </li>
-  
+<p>如何让冲突的操作不冲突呢？</p>
+
+<p>需要使用同步操作将冲突的操作隔离开。</p>
+
+<p>为什么要用同步操作将冲突的操作隔离开呢?</p>
+
+<p>因为如果不隔离开，程序在弱一致性模型下执行的结果就和在SC模型下执行的结果不一样了。这意味着如果你用SC模型推断程序执行结果，而程序又运行在弱一致性模型下，那么程序的真正结果可能和你推断的不一样。</p>
+
+<p>那么，又为什么：如果不隔离开，程序在弱一致性模型下执行结果就和SC模型下不一样了呢？</p>
+
+<p>这个问题其实在问：为什么隔离会使得程序在弱一致性模型下执行结果与SC模型下执行结果一致？</p>
+
+<p>这个问题用一句话来回答是：隔离使得我们可以找到所有操作的一种全序，而这种全序正是SC所需要的。</p>
+
+<p>从上图可以看出，同步操作将相互冲突的操作隔离开，这种隔离为原本无序的多线程程序添加了一些顺序：</p>
+
+<ul>
+<li>同步操作之间有顺序了</li>
+<li>同步操作与其之前的所有操作之间有顺序了</li>
+<li>同步操作与其之后的所有操作之间有顺序了</li>
 </ul>
+
+<p>这些顺序保证了程序在弱一致性模型下与在SC模型下执行结果一样。</p>
+
+<p>另外，我们还发现，有些操作之间并没有顺序保证，这正是DRF的优势所在，这些无须顺序保证的操作可以在弱一致性模型下得到优化，同时他们的无序又不会使得执行结果与SC下有任何不同。</p>
+
+<p>如果我们想找一个所有操作之间的全序，只需要在这些无须保证顺序的操作中随便选择一个顺序，另外，还需要保证那些因为同步而添加的顺序关系。如此构成一个全序。这个全序正是SC模型所需要的。</p>
+
+<p>由此，我们也明白了DRF的精髓:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">只保证必要的顺序，不保证不必要的顺序。
+</code></pre></div>
+<p>所谓必要是指，保证这些顺序就可以使得程序在弱一致性模型下的执行结果与SC模型下的执行结果一致，不保证就不行。</p>
 
 
       </article>
 
       <div class="comments">
+        
+          <div id="disqus_thread"></div>
+ <script type="text/javascript">
+     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+     var disqus_shortname = 'minixalpha'; // required: replace example with your forum shortname
+
+     /* * * DON'T EDIT BELOW THIS LINE * * */
+     (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+ </script>
+ <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
         
       </div>
 

@@ -43,7 +43,7 @@
 
     <!-- Google Analytics End -->
 
-    <title>Monthly archive for 2013/10</title>
+    <title>首页</title>
   </head>
 
   <body>
@@ -343,143 +343,143 @@
 
       <article>
 
-<div class="post-list">
-    <ul>
-
+<ul class="post-list">
+    
     <li>
       <div class="post-title">
-        <a href="/%E5%B7%A5%E5%85%B7/2013/10/24/markdonnote.html"> 使用 Markdown</a> </br>
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html"> web.py 源代码分析之　web.test.application</a> </br>
       </div>
 
       <div class="post-info">
         <ol>
-          <li class="post-time">2013-10-24</li> 
-          <li class="post-category"> 工具 </li>
+          <li class="post-time">2013-11-14</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
         </ol>
       </div>
 
       <div class="post-preview">
-        <h1>为什么使用 Markdown</h1>
+        <h2>分模块测试</h2>
 
-<ul>
-<li>看上去不错<br></li>
-<li>既然看上去不错，为什么不试试呢<br></li>
-</ul>
+<h3>application.py</h3>
 
-<hr>
-
-<h1>如何使用 Markdonw</h1>
-
-<h2>1. 标题级别</h2>
-
-<h3>效果</h3>
-
-<h1>一级标题</h1>
-
-<h2>二级标题</h2>
-
-<h3>三级标题</h3>
-
-<h3>代码</h3>
-<div class="highlight"><pre><code class="text language-text" data-lang="text"># 一级标题  
-## 二级标题
-### 三级标题
-</code></pre></div>
-<hr>
-
-<h2>2. 列表</h2>
-
-<h3>效果</h3>
-
-<ul>
-<li>列表1</li>
-<li>列表2</li>
-<li>列表3</li>
-</ul>
-
-<h3>代码 (注意星号与文字之间的空格)</h3>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">* 列表1
-* 列表2
-* 列表3
+<p>对 application.py 的测试，调用命令：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
 </code></pre></div> 
-        <a href="/%E5%B7%A5%E5%85%B7/2013/10/24/markdonnote.html"> Read More ... </a> </br>
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html"> Read More ... </a> </br>
       </div>
-    </li>
 
+    </li>
+    
     <li>
       <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2013/10/25/charpointerarray.html"> 字符指针与字符数组真正的区别</a> </br>
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> web.py 源代码分析之 web.test 主要文件及测试流程</a> </br>
       </div>
 
       <div class="post-info">
         <ol>
-          <li class="post-time">2013-10-25</li> 
-          <li class="post-category">  </li>
+          <li class="post-time">2013-11-14</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
         </ol>
       </div>
 
       <div class="post-preview">
-        <h1>字符指针与字符数组真正的区别</h1>
+        <h1>目录文件说明</h1>
 
-<hr>
+<h2>README</h2>
 
-<h2>问题缘起</h2>
+<p>如何运行测试文件，包含全部测试及分模块测试</p>
 
-<p>先看一个示例</p>
-
-<h3>示例1</h3>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">q</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
-
-    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;p: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
-    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;q: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<p>调用</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
 </code></pre></div>
-<p>上面的例子会给出这样的输出</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">p: hello
-q: hello
+<p>运行全部测试</p>
+
+<p>调用</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/db.py
 </code></pre></div>
-<p>这样看，<code>char *p</code> 和 <code>char q[]</code> 好像没什么区别, 那么我们再看一个例子</p>
+<p>运行db模块测试</p>
 
-<h3>示例2</h3>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<h2>alltest.py</h2>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">q</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<p>运行全部测试入口，调用 <code>webtest</code> 模块完成测试</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># alltest.py</span>
 
-    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;s&#39;</span><span class="p">;</span>
-    <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;s&#39;</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">webtest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </code></pre></div>
-<p>如果你在Linux下，运行时可能得到这样的结果</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Segmentation fault (core dumped)
+<h2>webtest.py</h2>
+
+<p>我们发现 webtest.py 中并没有 main 函数，而是从 <code>web.test</code> 中导入，</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># webtest.py</span>
+<span class="kn">from</span> <span class="nn">web.test</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
-<p>这时候你看到了区别，出现了段错误, 你一定想明白，到底发生了什么，
-经过几个小实验，你可能会发现使用 <code>char *p</code> 定义时，p指向的数据是无法改变的。
-然后你Google, 别人可能会告诉你  </p>
+<p>也就是说，如果 <code>web.test</code>中有main函数的话，<code>webtest.main()</code>
+其实是调用 <code>web.test</code> 中的main函数。</p>
 
-<ul>
-<li>char 指针指向的数据不能修改</li>
-<li>char 指针指向的数据没有分配</li>
-<li>...</li>
-</ul>
+<p>感觉～ 好神奇</p>
 
-<p>你听了还是一头雾水，不能修改是什么意思，没有分配？没有分配为什么能输出?</p>
+<h2>web.test</h2>
 
-<p>作为一个好奇心很重的人，你是绝对不能容忍这些问题的困扰的，且听我慢慢道来</p>
+<p>看web目录下的test.py文件，果然发现了main函数，终于找到入口啦~</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">suite</span><span class="p">:</span>
+        <span class="n">main_module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;__main__&#39;</span><span class="p">)</span>
+        <span class="c"># allow command line switches</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)]</span>
+        <span class="n">suite</span> <span class="o">=</span> <span class="n">module_suite</span><span class="p">(</span><span class="n">main_module</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">runTests</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">wasSuccessful</span><span class="p">())</span>
+</code></pre></div>
+<p>把这个main函数改掉，再运行一下：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
+</code></pre></div>
+<p>果然是运行修改后的函数，所以这里确定是入口。</p>
+
+<p>在进入下一步之前，我们需要学习一下Python自动单元测试框架，即<code>unittest</code>模块。关于 <code>unittest</code> ，可以参考这篇文章：
+<a href="http://www.ibm.com/developerworks/cn/linux/l-pyunit/">Python自动单元测试框架</a></p>
  
-        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2013/10/25/charpointerarray.html"> Read More ... </a> </br>
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> Read More ... </a> </br>
       </div>
-    </li>
 
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/2013/11/01/pypkg.html"> Python包管理不同方式的区别</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2013-11-01</li> 
+          <li class="post-category"> 
+           技术
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>Python包管理不同方式的区别</h1>
+
+<p>学习Python已经有一段时间，经常会遇到安装各种包的问题，一会 <code>setup.py</code>，
+一会 <code>easy_install</code>，一会又是<code>pip</code>，还有一些概念比如<code>distutils</code>，
+<code>setuptools</code>等等，搞不清楚谁是谁，什么时候应该用什么，今天就把这些概念
+澄清一下。</p>
+
+<h2>distutils</h2>
+
+<p>distutils是Python标准库的一部分，其初衷是为开发者提供一种方便的打包方式，
+同时为使用者提供方便的安装方式。</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/2013/11/01/pypkg.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
     <li>
       <div class="post-title">
         <a href="/%E6%80%9D%E6%83%B3/2013/10/26/whyds.html"> 为什么我们需要数据结构</a> </br>
@@ -488,7 +488,9 @@ q: hello
       <div class="post-info">
         <ol>
           <li class="post-time">2013-10-26</li> 
-          <li class="post-category"> 思想 </li>
+          <li class="post-category"> 
+           思想
+          </li>
         </ol>
       </div>
 
@@ -609,12 +611,130 @@ q: hello
  
         <a href="/%E6%80%9D%E6%83%B3/2013/10/26/whyds.html"> Read More ... </a> </br>
       </div>
+
     </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2013/10/25/charpointerarray.html"> 字符指针与字符数组真正的区别</a> </br>
+      </div>
 
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2013-10-25</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspc语言&nbsp&nbsp计算机系统
+          </li>
+        </ol>
+      </div>
 
-    </ul>
-  </div>
+      <div class="post-preview">
+        <h1>字符指针与字符数组真正的区别</h1>
+
+<hr>
+
+<h2>问题缘起</h2>
+
+<p>先看一个示例</p>
+
+<h3>示例1</h3>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">q</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;p: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;q: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>上面的例子会给出这样的输出</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">p: hello
+q: hello
+</code></pre></div>
+<p>这样看，<code>char *p</code> 和 <code>char q[]</code> 好像没什么区别, 那么我们再看一个例子</p>
+
+<h3>示例2</h3>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">q</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+
+    <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;s&#39;</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;s&#39;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如果你在Linux下，运行时可能得到这样的结果</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Segmentation fault (core dumped)
+</code></pre></div>
+<p>这时候你看到了区别，出现了段错误, 你一定想明白，到底发生了什么，
+经过几个小实验，你可能会发现使用 <code>char *p</code> 定义时，p指向的数据是无法改变的。
+然后你Google, 别人可能会告诉你  </p>
+
+<ul>
+<li>char 指针指向的数据不能修改</li>
+<li>char 指针指向的数据没有分配</li>
+<li>...</li>
+</ul>
+
+<p>你听了还是一头雾水，不能修改是什么意思，没有分配？没有分配为什么能输出?</p>
+
+<p>作为一个好奇心很重的人，你是绝对不能容忍这些问题的困扰的，且听我慢慢道来</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2013/10/25/charpointerarray.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+</ul>
+
+<!-- Pagination links -->
+
+<div class="pagination">
+  
+    <a href="/page5">&laquo; Prev</a>
+  
+
+  
+    
+      <a href="/index.html">1</a>
+    
+  
+    
+      <a href="/page2">2</a>
+    
+  
+    
+      <a href="/page3">3</a>
+    
+  
+    
+      <a href="/page4">4</a>
+    
+  
+    
+      <a href="/page5">5</a>
+    
+  
+    
+      6
+    
+  
+    
+      <a href="/page7">7</a>
+    
+  
+
+  
+    <a href="/page7">Next &raquo;</a>
+  
 </div>
+
 
 
       </article>

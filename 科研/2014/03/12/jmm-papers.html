@@ -43,7 +43,7 @@
 
     <!-- Google Analytics End -->
 
-    <title>首页</title>
+    <title>Java 内存模型论文阅读</title>
   </head>
 
   <body>
@@ -343,208 +343,7 @@
 
       <article>
 
-<ul class="post-list">
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/16/learn-english-4.html"> 学习英语第四周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-16</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第四周</h1>
-
-<h2>阅读英文原著</h2>
-
-<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.10 12:30-13:30</td>
-<td align="center">1h</td>
-<td align="center">80/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.11 12:30-13:30</td>
-<td align="center">1h</td>
-<td align="center">112/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.12 12:40-13:40</td>
-<td align="center">1h</td>
-<td align="center">142/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.13 12:45-13:45</td>
-<td align="center">1h</td>
-<td align="center">180/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.14 12:36-13:14</td>
-<td align="center">0.5h</td>
-<td align="center">214/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.15 14:43-15:05</td>
-<td align="center">0.3h</td>
-<td align="center">227/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.13 13:39-14:45</td>
-<td align="center">1h</td>
-<td align="center">261/309</td>
-</tr>
-</tbody></table>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/16/learn-english-4.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> 内存模型的验证论文阅读</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-14</li> 
-          <li class="post-category"> 
-           科研
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>内存模型的验证论文阅读</h1>
-
-<h2>动态验证</h2>
-
-<h3>Hangal2004</h3>
-
-<ul>
-<li><p>论文名
-Hangal S, Vahia D, Manovit C, et al. TSOtool: A program for verifying memory systems using the memory consistency model[C]//ACM SIGARCH Computer Architecture News. IEEE Computer Society, 2004, 32(2): 114.</p></li>
-<li><p>主要内容</p>
-
-<ul>
-<li>实现工具TSOtool，用于检测多处理器的共享内存系统</li>
-<li>内存模型TSO</li>
-<li>随机生成包含data race的程序</li>
-<li>提出多项式时间算法，incomplete</li>
-<li>检测出商业系统中的设计错误</li>
-<li>根据内存模型定义一种次序关系，通过程序及结果构造有向图，
-在图中找环</li>
-<li>时间复杂度：最坏O(n^5)</li>
-</ul></li>
-<li><p>参考文献</p>
-
-<ul>
-<li>验证SC的复杂度, 将问题定义为VSC, VSC-read(map read to write), VSC-conflict(VSC-read + total order of write): Gibbons P B, Korach E. Testing shared memories[J]. SIAM Journal on Computing, 1997, 26(4): 1208-1244. </li>
-</ul></li>
-</ul>
-
-<h3>Manovit 2005</h3>
-
-<ul>
-<li><p>论文名
-Manovit C, Hangal S. Efficient algorithms for verifying memory consistency[C]//Proceedings of the seventeenth annual ACM symposium on Parallelism in algorithms and architectures. ACM, 2005: 245-252.</p></li>
-<li><p>主要内容　</p>
-
-<ul>
-<li>将vector clock引入TSOtool工具</li>
-<li>为VSC-conflict问题提出一个多项式算法</li>
-<li>为VSC-read提出多项式算法，快速，有效，但不完备</li>
-<li>时间复杂度：O(k*n^3)</li>
-</ul></li>
-<li><p>参考文献</p></li>
-</ul>
-
-<h3>Manovit 2006</h3>
-
-<ul>
-<li><p>论文名
-Manovit C, Hangal S. Completely verifying memory consistency of test program executions[C]//High-Performance Computer Architecture, 2006. The Twelfth International Symposium on. IEEE, 2006: 166-175.</p></li>
-<li><p>主要内容 </p>
-
-<ul>
-<li>在TSOtool中引入回溯，使验证TSO内存模型的算法完备</li>
-<li>时间复杂度: O(p*n^3)</li>
-</ul></li>
-<li><p>参考文献</p></li>
-</ul>
- 
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/hd-mm.html"> 硬件内存模型论文阅读</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-14</li> 
-          <li class="post-category"> 
-           科研
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>硬件内存模型论文阅读</h1>
-
-<h2>引言</h2>
-
-<p>内存模型定义了内存操作的语义,提出内存模型的目的在于指明内存操作之间的次序有何限制.</p>
-
-<p>内存模型并不直接指定内存操作的次序,它只提供一种行为描述,只要<strong>你的执行结果</strong> 与 <strong>按内存模型规定的次序执行结果</strong> 一致就行,并不要求具体实现一定按这个顺序.</p>
- 
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/hd-mm.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/12/jmm-papers.html"> Java 内存模型论文阅读</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-12</li> 
-          <li class="post-category"> 
-           科研
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>Java 内存模型论文阅读</h1>
+<h1>Java 内存模型论文阅读</h1>
 
 <h2>引言</h2>
 
@@ -631,150 +430,285 @@ Polyakov S, Schuster A.
 <li>Gibbons 1993：使用frontier graph验证SC</li>
 </ul></li>
 </ul>
- 
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/12/jmm-papers.html"> Read More ... </a> </br>
-      </div>
 
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/09/learn-english-3.html"> 学习英语第三周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-09</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第三周</h1>
-
-<h2>阅读英文原著</h2>
-
-<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.03  16:00-17:30 18:30-19:00</td>
-<td align="center">2h</td>
-<td align="center">487/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.04  13:00-14:00 18:40-19:40</td>
-<td align="center">2h</td>
-<td align="center">510/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.05  12:30-13:10 19:00-20:00</td>
-<td align="center">1.6h</td>
-<td align="center">530/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.06  13:00-13:40 18:50-20:10</td>
-<td align="center">2h</td>
-<td align="center">564/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.07  13:00-13:45  19:00-20:00 21:00-23:15</td>
-<td align="center">4h</td>
-<td align="center">625/625</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.08 16:30-18:00</td>
-<td align="center">1.5h</td>
-<td align="center">30/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.09 12:30-14:30</td>
-<td align="center">2h</td>
-<td align="center">60/309</td>
-</tr>
-</tbody></table>
-
-<p>这周把 <em>The Three Musketeers</em> 阅读完了，第一本英文小说，从一开始看40页需要六个小时，到最后基本可以流畅地看下来，感觉还是不错的。</p>
-
-<p>下面是关键数据：</p>
+<h3>Aspinall 2007-1</h3>
 
 <ul>
-<li>20天（2月16日至3月7日）</li>
-<li>625页</li>
-<li>228402单词</li>
-<li>320个新单词</li>
+<li><p>论文名
+Aspinall D, Ševčík J. 
+<em>Formalising Java’s data race free guarantee</em>
+[M]//Theorem Proving in Higher Order Logics. Springer Berlin Heidelberg, 2007: 22-37.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>给出精确的DRF定义和证明</li>
+<li>发现要保证DRF，JMM中并非所有条件都要满足</li>
+<li>形式化定义为测试具体实例提供了基础</li>
+<li>证明了JMM中给定的条件可以保证DRF</li>
+</ul></li>
+<li><p>参考文献</p></li>
 </ul>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/09/learn-english-3.html"> Read More ... </a> </br>
-      </div>
 
-    </li>
-    
+<h3>Huisman 2007</h3>
+
+<ul>
+<li><p>论文名
+Huisman M, Petri G.
+<em>The Java memory model: a formal explanation</em>
+[J]. VAMP, 2007, 7: 81-96.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>使用Coq中形式化描述JMM</li>
+<li>证明DRF的条件</li>
+</ul></li>
+<li><p>参考文献</p></li>
 </ul>
 
-<!-- Pagination links -->
+<h3>Cenciarelli 2007</h3>
 
-<div class="pagination">
-  
-    <span>&laquo; Prev</span>
-  
+<p><em>论文名
+Cenciarelli P, Knapp A, Sibilio E. 
+*The Java memory model: Operationally, denotationally, axiomatically</em>
+[M]//Programming Languages and Systems. Springer Berlin Heidelberg, 2007: 331-346.</p>
 
-  
-    
-      1
-    
-  
-    
-      <a href="/page2">2</a>
-    
-  
-    
-      <a href="/page3">3</a>
-    
-  
-    
-      <a href="/page4">4</a>
-    
-  
-    
-      <a href="/page5">5</a>
-    
-  
-    
-      <a href="/page6">6</a>
-    
-  
-    
-      <a href="/page7">7</a>
-    
-  
+<ul>
+<li><p>主要内容</p>
 
-  
-    <a href="/page2">Next &raquo;</a>
-  
-</div>
+<ul>
+<li>构建新的语义框架，由 operational step 构成 denotional model，并被 axioms 限制</li>
+<li>使用Configuration Theory 描述 Java 操作规则</li>
+<li>为 Java 提供一个基于事件的语义</li>
+</ul></li>
+</ul>
 
+<h3>Aspinall 2007-2</h3>
+
+<ul>
+<li><p>论文名
+Aspinall D, Sevcik J.
+<em>Java memory model examples: Good, bad and ugly</em>
+[J]. VAMP07 Proceedings 2007.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>Good Example: JMM 允许的行为,展示了非SC的行为和一些优化 </li>
+<li>Bad Example:JMM禁止的行为</li>
+<li>Ugly Example:JMM禁止,但却出现的行为</li>
+<li>通过这些例子展示 Aspinall 2007-1 中提出的形式化定义优于官方定义</li>
+</ul></li>
+</ul>
+
+<h3>Botinan 2007</h3>
+
+<ul>
+<li><p>论文名
+Botincan M, Glavan P, Runje D. 
+<em>Distributed Algorithms: A Case Study of the Java Memory Model[J].</em>
+Proceedings of the ASM, 2007.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>对 JMM 提供数学化的精确定义</li>
+<li>为其在ASM context下提供解释</li>
+</ul></li>
+</ul>
+
+<h3>Sevcik 2008</h3>
+
+<ul>
+<li><p>论文名
+Ševčík J, Aspinall D. 
+<em>On validity of program transformations in the Java memory model[M]</em>
+//ECOOP 2008–Object-Oriented Programming. Springer Berlin Heidelberg, 2008: 27-51.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>分析了一些常见但在JMM中禁止的优化措施,揭示了  Hotspot JVM 中违背JMM的情况</li>
+<li>对data race程序的要求比设计者想的要强</li>
+</ul></li>
+</ul>
+
+<h3><strong>arnabde 2008</strong></h3>
+
+<ul>
+<li><p>论文名
+De A, Roychoudhury A, D&#39;Souza D. 
+<em>Java memory model aware software validation[C]</em>
+//Proceedings of the 8th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering. ACM, 2008: 8-14.</p></li>
+<li><p>主要内容</p></li>
+</ul>
+
+<p>提出一种近似JMM的内存模型OpMM,它可以与模型检测工具JPF结合,寻找软件中的bug.</p>
+
+<h3><strong>Chen Chen 2009</strong></h3>
+
+<ul>
+<li><p>论文名
+Chen C, Chen W, Sreedhar V, et al. 
+<em>Formalizing Causality as a Desideratum for Memory Models and transformations of Parallel Programs[J].</em>
+2009.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>提出causally ordered,用以构造 causality graph 框架,以找环的方式分析内存模型是否违反 causality</li>
+<li>识别出代码转换中保持/违反 causality的措施</li>
+<li>提出CMM内存模型,是保证不违反causality的最弱的内存模型</li>
+</ul></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>JMM 社区提出了20 causality test cases,用于编译器和虚拟机验证</li>
+</ul></li>
+</ul>
+
+<h3>Botincan 2010</h3>
+
+<ul>
+<li><p>论文名
+Botinčan M, Glavan P, Runje D. Verification of causality requirements in Java memory model is undecidable[M]//Parallel Processing and Applied Mathematics. Springer Berlin Heidelberg, 2010: 62-67.</p></li>
+<li><p>主要内容
+证明验证任意有限次执行的多线程程序是否满足causality requirments是undecidable的.</p></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Polyakov 2006:在无同步操作,final作用域上,通过验证有限次数执行的多线程程序,来验证JMM的causality requirements.证明了在给定的一些假设上,此问题是NP-complete的.</li>
+</ul></li>
+</ul>
+
+<h3><strong>Torlak 2010</strong></h3>
+
+<ul>
+<li><p>论文名
+Torlak E, Vaziri M, Dolby J. 
+<em>MemSAT: checking axiomatic specifications of memory models[J].</em>
+ACM Sigplan Notices, 2010, 45(6): 341-350.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>基于SAT solver的工具MEMSAT,用于调试推导内存模型,如果给出内存模型的公理化描述,包含断言的多线程程序,工具可以输出一个trace,保证内存模型及多线程程序的断言都得到满足.</li>
+<li>在Manson 的 JMM上,以及Sevcik的修复版本上测试过.</li>
+<li>第一个对 JMM 的公理化描述进行自动调试推理的工具</li>
+</ul></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>litmus tests 用于对内存模型的形式化说明进行补充,方便人们理解内存模型,验证litmus tests的工作包括:
+
+<ul>
+<li>model checking
+arnabde 2008: Java memory model aware software validation
+yang 2001: Analyzing the CRF Java memory model</li>
+<li>constrain solving
+Burckhardt 2007: CheckFence: checking consistency of concurrent data types on relaxed memory models
+Gopalakrishnan 2004: QB or Not QB: An efﬁcient execution veriﬁcation tool for memory orderings
+Yang 2003: Analyzing the Intel Itanium memory ordering rules using logic programming and SAT.</li>
+<li>custome search
+Sarkar 2009:The semantics of x86–CC multiproces sor machine code
+这些工作已经成功对 Intel Itanium x86-CC MM, <strong>JMM</strong> 进行验证,但Aspinall 2007指出了JMM中commiting semantics带来的巨大状态空间使得model checking难以适用.</li>
+</ul></li>
+<li>Yang 2004:Nemos:a framework for axiomatic and executable speciﬁcations of memory consistency models指出公理语义在描述内存模型上优于操作语义,</li>
+<li>Sevcik 2008: 对Manson的JMM进行修复.</li>
+<li>JMM 发展历史,相关工作
+
+<ul>
+<li>J. Manson JMM simulator</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3>Lochbihler 2012</h3>
+
+<ul>
+<li><p>论文名
+Lochbihler A. 
+<em>Java and the Java memory model—A unified, machine-checked formalisation[M]</em>
+//Programming Languages and Systems. Springer Berlin Heidelberg, 2012: 497-517.</p></li>
+<li><p>主要内容
+对 JMM 进行形式化,并通过机器检查,与Java源代码及字节码的操作语义联系在一起.
+证明了语义保证了DRF</p></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Related Work 介绍的挺全</li>
+</ul></li>
+</ul>
+
+<h3>Jin 2012</h3>
+
+<ul>
+<li><p>论文名
+Jin H, Yavuz-Kahveci T, Sanders B A. Java memory model-aware model checking[M]. Springer Berlin Heidelberg, 2012.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>扩展JPF,产生包含data race的执行</li>
+<li>提供工具 Java PathRelaxer(JPR),用于推导包含data race的程序,验证它的性质</li>
+</ul></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Manson 2002:  The Java memory model simulator</li>
+</ul></li>
+</ul>
+
+<h3>Demange 2013</h3>
+
+<ul>
+<li><p>论文名
+Demange D, Laporte V, Zhao L, et al. 
+<em>Plan B: A buffered memory model for Java[C]</em>
+//ACM SIGPLAN Notices. ACM, 2013, 48(1): 329-342.</p></li>
+<li><p>主要内容</p></li>
+<li><p>提出了一种新的Java 内存模型BMM,给出公理化定义,刻画了内存事件的次序</p></li>
+<li><p>给出BMM&#39;的形式化定义,对Java程序的语义来说,这是一个可操作的定义,容易用于x86体系结构.</p></li>
+<li><p>证明BMM和BMM&#39;是一样的</p></li>
+<li><p>给出BMM性能测试结果</p></li>
+<li><p>相关工作介绍了JMM发展,验证等等.</p></li>
+<li><p>参考文献 </p>
+
+<ul>
+<li>Sevcik 2011: Relaxed-memory Concurrency and Veriﬁed Compilation</li>
+<li>在当前情况下,证明一个编译器是否符合JMM中的定义仍然是一个open的问题.</li>
+<li>Sevcik2008: 现存的JVM是不符合JMM的</li>
+</ul></li>
+</ul>
+
+<h3><strong>LOCHBIHLER 2013</strong></h3>
+
+<ul>
+<li><p>论文名
+Lochbihler A.
+Making the Java memory model safe[J]. 
+ACM Transactions on Programming Languages and Systems (TOPLAS), 2013, 35(4): 12.</p></li>
+<li><p>主要内容 
+    * 基于之前的JinJiaThread语义,为公理语义的JMM提出了一个 <em>unified formalization</em>,将Java与JMM结合在一起
+    * 澄清了现有的JMM标准,修复了一些不合适的地方
+    * 证明了DRF需要满足的条件</p></li>
+<li><p>参考文献</p></li>
+</ul>
 
 
       </article>
 
       <div class="comments">
+        
+          <div id="disqus_thread"></div>
+ <script type="text/javascript">
+     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+     var disqus_shortname = 'minixalpha'; // required: replace example with your forum shortname
+
+     /* * * DON'T EDIT BELOW THIS LINE * * */
+     (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+ </script>
+ <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
         
       </div>
 

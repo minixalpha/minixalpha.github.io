@@ -43,7 +43,7 @@
 
     <!-- Google Analytics End -->
 
-    <title>学习英语第一周</title>
+    <title>Data Race Free 的前世今生</title>
   </head>
 
   <body>
@@ -104,7 +104,7 @@
             
       
             
-                <li style="background-color: #444">
+                <li>
                 <a href="/categories/英语"> 英语 (4) </a>
                 </li>
             
@@ -343,149 +343,55 @@
 
       <article>
 
-<h1>学习英语第一周</h1>
+<h1>Data Race Free 的前世今生</h1>
 
-<p>这是英语学习计划的第一周，完成了预定的目标，包括阅读英文原著和学习音标。</p>
+<p>Data Race Free 是多线程程序是非常重要的概念，因为Java 和 C++的内存模型都是基于 Data Race Free 的，这篇文章将介绍这个概念的由来，另一篇文章《Data Race Free的理解》介绍它的主要思想。</p>
 
-<h2>阅读英文原著</h2>
+<p>事情要追溯到遥远的1979年， Lamport 在他的著名论文  <em>How to make a multiprocessor computer that correctly executes multiprocess programs</em> 中提出了今后在内存模型领域被广泛使用的概念 ：<em>sequential consistency</em>，即顺序一致性。这篇文章告诉我们，你要做一台多处理器的计算机，需要满足什么条件，才能保证程序的正确性。当然，这里的程序跑在不同处理器上，共享同一块内存。虽然现在不说多处理器了，都说多核，多线程，但是问题的本质是没有变的。就是多个执行单元一起完成一个任务，并且通过共享存储单元的方式通信，在这种情况下，底层的系统需要提供什么样的支持，才能保证计算的结果和程序员的预期是一样的。</p>
 
-<p>出于对武侠小说的热爱，选择了 The Three Musketeers 作为第一本英文原著，下面是过去一周的时间表。</p>
+<p>7年后的1986年，Dubois,  Scheurich , Briggs 三人在论文 <em>Memory access buffering in multiprocessors</em> 中对 Lamport 的工作进行了扩展，他们提出了一种框架，用于分析共享内存的多处理器系统中的一致性问题。文中引入了三个 states，以此为基础提出了strong ordering的概念，并说明了他与Lamport提出的sequential consistency是一致的。但是，strong ordering对内存操作的限制太强了，对系统性能是一个阻碍，所以，他们又提出了 weak ordering的概念，以此提高系统性能。 满足weak ordering的系统并不是 sequential consistency的，程序员们需要自己去声明同步变量，以保证程序的正确性。</p>
 
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.16  15:00 ~ 17:30 18:30 ~ 21:00 21:30 ~ 22:30</td>
-<td align="center">6h</td>
-<td align="center">43/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.17  19:00 ~ 23:00</td>
-<td align="center">4h</td>
-<td align="center">83/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.18  19:00 ~ 20:00 21:00 ~ 24:00</td>
-<td align="center">4h</td>
-<td align="center">123/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.19  18:50 ~  22:50</td>
-<td align="center">4h</td>
-<td align="center">163/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.20  18:30 ~  20:00 21:30 ~ 23:00</td>
-<td align="center">3h</td>
-<td align="center">203/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.21  18:30 ~  21:00</td>
-<td align="center">3h</td>
-<td align="center">243/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.22  15:30 - 17:30 18:30-21:30</td>
-<td align="center">5h</td>
-<td align="center">283/625</td>
-</tr>
-</tbody></table>
+<p>又过了4年，到了1990年，Adve大妈出手了，大妈现在是内存模型这个领域的权威，Java和C++内存模型的确立都有大妈的功劳，而Java和C++内存模型中相当重要的Data Race Free 概念就是Adve大妈在这一年提出的。</p>
 
-<p>按照计划，每天40页，每两页只可以查一个单词，已经按时完成了。可以看出，除了最后一天晚节不保（也可能是我记错时间了），整体上看，仅仅是在七天内，阅读的速度就有一定改变。第一天足足用了六个小时，现在还记得当时的感觉，几乎看不懂，脑子里只有一个大概的模糊的印象，知道故事大体上发生了什么。后面几天渐入佳境，虽然有的地方还是看不明白，比如生词太多，词组不知道什么意思，句子太长，但是总体来看，还是在进步的。</p>
+<p>在这篇名为 <em>Weak ordering—a new definition</em>的文章中，Adve对Dubois等人提出的Weak Ordering进行了新的定义，并做出了一些修改以便进一步提高系统的性能。
+新的定义出于这样一种想法，程序员习惯使用 sequential consistency来推断程序的运行结果，而底层的系统要想取得更高的性能，又不能使用sequential consistency内存模型来运行程序。那么</p>
 
-<p>这个学习方法让我明白了一个道理，要想养成一个习惯，就用一周时间去培养，并且需要高强度的练习，一周后就适应了，不用那么高强度，自然可以坚持下来。目前我的感觉是没有问题，可以坚持下来，并且已经对阅读英文原著有了兴趣，已经入手了哈里波特系列，读完这本书就开始阅读。</p>
+<blockquote>
+<p>如何使得程序员可以使用sequential consistency推断程序结果，底层的实现又可以进行种种优化呢？</p>
+</blockquote>
 
-<p>另外，这种阅读原著的方式，初步感觉对学习英语是有很大好处的，因为一些单词，句子会经常重复出现，所以很容易记住，之前背单词都是脱离语境，即使记住了这个单词，遇到具体的语境就会感觉这个单词见过，但是想不起来什么意思了。</p>
+<p>解决方案是：对程序本身进行足够的同步。</p>
 
-<h2>学习音标</h2>
+<p>这种内存模型保证：如果你的程序进行了足够的同步，那么在我的weak oerding内存模型上运行，我可以保证结果和你在sequential consistency模型下运行的结果一样。</p>
 
-<p>音标是跟着《赖世雄美语音标》学的，每天早上起来学40分钟到一个小时，下面是时间表：</p>
+<p>这样一来，程序员保证程序正确同步，就可以使用sequential consistency推断程序结果，而底层又可以灵活地进行各种优化，提高系统性能。</p>
 
-<table><thead>
-<tr>
-<th align="center">内容</th>
-<th align="center">时间</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">英文字母</td>
-<td align="center">2014.02.12 08:00 ~ 08:30</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.13 08:00 ~ 08:30</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.14 08:00 ~ 09:20</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.15 08:00 ~ 09:20</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.16 14:00 ~ 14:50</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.17 08:00 ~ 09:00</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.18 08:00 ~ 09:00</td>
-</tr>
-<tr>
-<td align="center">元音两个</td>
-<td align="center">2014.02.19 08:00 ~ 09:00</td>
-</tr>
-<tr>
-<td align="center">元音三个</td>
-<td align="center">2014.02.20 09:00 ~ 09:40</td>
-</tr>
-<tr>
-<td align="center">元音四个</td>
-<td align="center">2014.02.21 09:00 ~ 09:40</td>
-</tr>
-<tr>
-<td align="center">元音总复习</td>
-<td align="center">2014.02.22 09:00 ~ 10:00</td>
-</tr>
-</tbody></table>
+<p>这里有一个关键问题：</p>
 
-<p>上面的统计数目可能不太对，没有刻意记每天学了多少，我就不具体算了，不过元音是学完了。</p>
+<blockquote>
+<p>什么叫“足够的同步”</p>
+</blockquote>
 
-<p>总体来说，收获是极大的，这确实是一个非常好的学习材料，这是一份广播式的录音，会有讲解，而不是冷冰冰干巴巴的音标句子录音，声音后面是一个有感情的人，时不时还开开玩笑，而不是像机器一样进行发音。另外，专门针对中国人发音容易发错的地方进行反复地讲解，印象非常深刻。</p>
+<p>Adve提出了Data Race Free的概念，也就是说，你的程序要是满足Data Race Free的条件了，你的同步就足够了，“足够”的意思就是说，这程序在weak ordering上跑和在sequential consistency上跑，结果是一样一样的～</p>
 
-<p>这一周就总结到这里。</p>
+<p>Adve对weak ordering给出的新定义是：</p>
 
-<p>下一周的目标是:</p>
+<blockquote>
+<p>Hardware is weakly ordered with respect to a synchronization model if
+and only if it appears sequentially consistent to all software that obey the synchronization model.</p>
+</blockquote>
 
-<ul>
-<li>学完辅音，每天大概要学习4个。</li>
-<li>每天读20页The Three Musketeers。</li>
-</ul>
+<p>这里的synchronization model的<strong>一种实现方式</strong>，就是 Data Race Free。</p>
 
-<p>年度目标是：</p>
+<p>Data Race Free 后来成为了 Java 和 C++ 内存模型的基础。</p>
 
-<ul>
-<li>英语听说，按《把你的英语用起来》中初中高级的材料学习一遍。</li>
-<li>英文阅读，读10本英文原著。</li>
-</ul>
+<p>Java 的内存模型最早出现在1995年，但是自1997年起，这一内存模型被发现了许多严重的错误和缺陷，它阻碍了很多优化措施，对程序的安全性也没有足够的保证。2001年<a href="https://www.jcp.org/en/jsr/detail?id=133">JSR 133</a>被确立下来，由William Pugh领导，专家组的成员包括了Adve，Doug Lea， William Pugh等。2004年，JSR 133最终版本发布。2005年，Manson  Jeremy, William Pugh, 和 Sarita V. Adve 一同发表了论文 <em>The Java memory model</em>，描述了最新的Java内存模型，这一内存模型在Java 5.0中引入，一直沿用至今。</p>
 
-<p>下周见。</p>
+<p>Java 内存模型的关键是：如果多线程程序满足Data Race Free，那么内存模型保证程序执行结果和sequentially consistent模型下一样。另外，Java 内存模型的复杂之处还在于，为了保证程序的安全性，即使多线程程序不满足Data Race Free，我们也要对它进行一定程度的限制，这种限制必须恰到好处，太强会阻碍合理的优化，太弱保证不了程序的安全性。</p>
+
+<p>三年后的2008年，Hans-J. Boehm 和 Sarita V. Adve 一同发表了文章 <em>Foundations of the C++ concurrency memory model</em>，描述了C++内存模型的基础，这一内存模型为C++ 11标准中的线程提供了明确的语义。</p>
+
+<p>C++内存模型与的关键在于：如果多线程程序满足Data Race Free，那么内存模型保证程序执行结果和sequentially consistent模型下一样。与Java内存模型不同，对于那些不满足 Data Race Free的多线程程序，C++内存模型不对其结果提供任何保证。另外，C++内存模型提供了一些特性用以实现不同的内存模型。</p>
 
 
       </article>

@@ -43,7 +43,7 @@
 
     <!-- Google Analytics End -->
 
-    <title>Category: 生活</title>
+    <title>硬件内存模型论文阅读</title>
   </head>
 
   <body>
@@ -110,7 +110,7 @@
             
       
             
-                <li style="background-color: #444">
+                <li>
                 <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
@@ -343,42 +343,127 @@
 
       <article>
 
-<ul class="post-list">
-  
-    <li>
-      <div class="post-title">
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> 不要做无谓的坚持和幻想的努力</a> </br>
-      </div>
+<h1>硬件内存模型论文阅读</h1>
 
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-02-21</li> 
-          <li class="post-category"> 生活 </li>
-        </ol>
-      </div>
+<h2>引言</h2>
 
-      <div class="post-preview">
-        <h1>不要做无谓的坚持和幻想的努力</h1>
+<p>内存模型定义了内存操作的语义,提出内存模型的目的在于指明内存操作之间的次序有何限制.</p>
 
-<p>有时候，你觉得自己一直在坚持和努力，可是从没问问自己这样的坚持和努力有用吗？</p>
+<p>内存模型并不直接指定内存操作的次序,它只提供一种行为描述,只要<strong>你的执行结果</strong> 与 <strong>按内存模型规定的次序执行结果</strong> 一致就行,并不要求具体实现一定按这个顺序.</p>
 
-<p>其实你就是一只温水里的青蛙，还觉得自己一直都在坚持游泳呢。</p>
+<h2>论文</h2>
 
-<p>最近我有了一个非常明确和重要的启发，就是不要做无谓的坚持和幻想的努力。</p>
+<h3>Lamport 1979</h3>
 
-<p>我在一个背单词的网站上背了471天单词，不长，不短，再坚持下去我也完全没有问题。但是，这真的就叫坚持，就叫努力吗？</p>
- 
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> Read More ... </a> </br>
-      </div>
+<ul>
+<li><p>论文名
+Lamport L. How to make a multiprocessor computer that correctly executes multiprocess programs[J]. Computers, IEEE Transactions on, 1979, 100(9): 690-691.</p></li>
+<li><p>主要内容</p>
 
-    </li>
-  
+<ul>
+<li>提出 sequencial consistency 的概念</li>
+<li>SC 的两个条件
+
+<ul>
+<li>程序的任意一次执行,其结果都和所有处理器操作以某种次序依次执行的结果一致</li>
+<li>在上述次序中,同一处理器的操作之间的次序与它们在程序中的次序一致</li>
+</ul></li>
+<li>多处理器计算机实现SC的两个条件
+
+<ul>
+<li>每个处理器都按照程序给出的顺序 issue 内存请求</li>
+<li>所有处理器被 issue 到同一 memory module的操作都在一个FIFO队列中接受服务</li>
+</ul></li>
+</ul></li>
+<li><p>参考文献</p></li>
+</ul>
+
+<h3><strong>SPARC-V9 1994</strong></h3>
+
+<ul>
+<li>论文名</li>
+</ul>
+
+<p>The SPARC architecture manual[M]. Englewood Cliffs, NJ 07632: PTR Prentice Hall, 1994.</p>
+
+<ul>
+<li><p>主要内容</p>
+
+<ul>
+<li>定义了三种内存模型:TSO,PSO,RMO</li>
+<li>介绍了 Sparc Processor Model:描述 了issue, reorder, execution</li>
+</ul></li>
+<li><p>参考文献 </p></li>
+</ul>
+
+<h3>Gharachorloo 1990</h3>
+
+<ul>
+<li>论文名</li>
+</ul>
+
+<p>Gharachorloo K, Lenoski D, Laudon J, et al. 
+<em>Memory consistency and event ordering in scalable shared-memory multiprocessors[M].</em>
+ACM, 1990.</p>
+
+<ul>
+<li><p>主要内容</p>
+
+<ul>
+<li>提出release consistency内存模型</li>
+<li>RC 对weak consistency进行扩展,支持更多的buffering和pipelining</li>
+<li>RC与SC对进行足够同步的并行程序而言是等价的</li>
+<li>介绍了 performed , globally performed</li>
+<li>采用event ordering 的方式描述内存模型</li>
+<li>回顾之前的内存模型: sequential consistency, processor consistency, weak consistency.</li>
+<li>与 weak consistency 相比, 将同步操作分成 acquire 和 release, 对次序进行进一步的放松</li>
+</ul></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Memory access buffering in multiprocessors. 1986: 使用 event ordering 描述内存模型, 提出 weak consistency(weak ordering). </li>
+<li>Efficient and correct execution of parallel programs that share memory. 1988: conflicting accesses.</li>
+</ul></li>
+</ul>
+
+<h3>Sewell 2010</h3>
+
+<ul>
+<li><p>论文名
+Sewell P, Sarkar S, Owens S, et al. 
+<em>x86-TSO: a rigorous and usable programmer&#39;s model for x86 multiprocessors[J].</em>
+Communications of the ACM, 2010, 53(7): 89-97.</p></li>
+<li><p>主要内容 </p>
+
+<ul>
+<li>动机: x86系列处理器文档中对内存模型的描述不精确,有些甚至是错误的,与实际的实现不一样,这妨碍了程序员编写正确的程序,也不利于对内存模型进行验证.</li>
+<li>回顾了各种x86系列处理器内存模型描述中的错误</li>
+<li>给出了对x86系列处理器内存模型数据化的精确描述以解决上述错误 </li>
+</ul></li>
+<li><p>参考文献</p></li>
 </ul>
 
 
       </article>
 
       <div class="comments">
+        
+          <div id="disqus_thread"></div>
+ <script type="text/javascript">
+     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+     var disqus_shortname = 'minixalpha'; // required: replace example with your forum shortname
+
+     /* * * DON'T EDIT BELOW THIS LINE * * */
+     (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+ </script>
+ <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
         
       </div>
 
