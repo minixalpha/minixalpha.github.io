@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/英语"> 英语 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/计算机系统"> 计算机系统 (2) </a>
                 </li>
             
@@ -81,43 +123,7 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (3) </a>
+                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -140,10 +146,45 @@
         
         
         
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/03">
-                    2014-03 (2)
+                    2014-03 (9)
                 </a>
             </li>
 
@@ -306,74 +347,224 @@
     
     <li>
       <div class="post-title">
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> 不要做无谓的坚持和幻想的努力</a> </br>
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/07/history-of-data-race-free.html"> Data Race Free 的前世今生</a> </br>
       </div>
 
       <div class="post-info">
         <ol>
-          <li class="post-time">2014-02-21</li> 
+          <li class="post-time">2014-03-07</li> 
           <li class="post-category"> 
-           生活
+           科研
           </li>
         </ol>
       </div>
 
       <div class="post-preview">
-        <h1>不要做无谓的坚持和幻想的努力</h1>
+        <h1>Data Race Free 的前世今生</h1>
 
-<p>有时候，你觉得自己一直在坚持和努力，可是从没问问自己这样的坚持和努力有用吗？</p>
+<p>Data Race Free 是多线程程序是非常重要的概念，因为Java 和 C++的内存模型都是基于 Data Race Free 的，这篇文章将介绍这个概念的由来，另一篇文章《Data Race Free的理解》介绍它的主要思想。</p>
 
-<p>其实你就是一只温水里的青蛙，还觉得自己一直都在坚持游泳呢。</p>
-
-<p>最近我有了一个非常明确和重要的启发，就是不要做无谓的坚持和幻想的努力。</p>
-
-<p>我在一个背单词的网站上背了471天单词，不长，不短，再坚持下去我也完全没有问题。但是，这真的就叫坚持，就叫努力吗？</p>
+<p>事情要追溯到遥远的1979年， Lamport 在他的著名论文  <em>How to make a multiprocessor computer that correctly executes multiprocess programs</em> 中提出了今后在内存模型领域被广泛使用的概念 ：<em>sequential consistency</em>，即顺序一致性。这篇文章告诉我们，你要做一台多处理器的计算机，需要满足什么条件，才能保证程序的正确性。当然，这里的程序跑在不同处理器上，共享同一块内存。虽然现在不说多处理器了，都说多核，多线程，但是问题的本质是没有变的。就是多个执行单元一起完成一个任务，并且通过共享存储单元的方式通信，在这种情况下，底层的系统需要提供什么样的支持，才能保证计算的结果和程序员的预期是一样的。</p>
  
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> Read More ... </a> </br>
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/07/history-of-data-race-free.html"> Read More ... </a> </br>
       </div>
 
     </li>
     
     <li>
       <div class="post-title">
-        <a href="/%E8%AF%BB%E4%B9%A6/2014/02/20/read-mactalk.html"> 读《MacTalk 人生元编程》</a> </br>
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/06/think-of-data-race-free.html"> 对Data Race Free 的理解</a> </br>
       </div>
 
       <div class="post-info">
         <ol>
-          <li class="post-time">2014-02-20</li> 
+          <li class="post-time">2014-03-06</li> 
           <li class="post-category"> 
-           读书
+           科研
           </li>
         </ol>
       </div>
 
       <div class="post-preview">
-        <h1>读 《MacTalk 人生元编程》</h1>
+        <h1>对Data Race Free 的理解</h1>
 
-<p>今天看了一本书，叫《MacTalk 人生元编程》，讲述了Mac，编程，科技与人文还有职场等内容，书是在作者的微信公众号基础上写成的，挺有趣的，感兴趣的可以买来看看。</p>
+<h2>Data Race Free 的动机</h2>
 
-<p>我记得小时候不管是读书，看电影，还是春游，老师都要求写读后感，当时的感觉已经忘了，不过小孩子谁愿意写这种玩意？而现在看着书就不断地会有感慨，这就叫有感而发吧。</p>
+<p>Data Race Free 是对多线程程序 <strong>同步程度</strong> 的一种描述，假如你的多线程程序的同步程度满足 DRF 的要求，那么，你的程序会有这样一个好处：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">程序在弱一致性模型下执行，执行的结果与在SC模型下执行一样
+</code></pre></div>
+<p>这意味着，程序员在写程序时，可以按SC模型来推断程序的执行。而程序在底层运行时，可以享受弱一致性模型带来的种种优化措施。</p>
 
-<p>先说读书</p>
+<h2>Data Race Free 具体内容</h2>
 
-<p>从书中可以明显看出，作者虽然是一个70后的老程序员，但是是非常喜欢读书的。我是非常喜欢热爱读书的人的，阅读量大的人明显与其它人拉开一个档次，无论是知识面还是对事物的看法。我这么多年没什么悔恨的事，唯一有一点悔恨的事就是年少的时候没有意识到读书的重要性。</p>
+<p>DRF 要求多线程程序中不能有冲突的操作。</p>
 
-<p>读一本书给我一种什么感觉呢？</p>
+<p>什么是冲突的操作呢？</p>
+
+<p>冲突的操作是指：两个操作来自不同线程，操作同一地址，至少有一个是写操作。</p>
+
+<p>如何让冲突的操作不冲突呢？</p>
+
+<p>需要使用同步操作将冲突的操作隔离开。</p>
+
+<p>为什么要用同步操作将冲突的操作隔离开呢?</p>
  
-        <a href="/%E8%AF%BB%E4%B9%A6/2014/02/20/read-mactalk.html"> Read More ... </a> </br>
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/06/think-of-data-race-free.html"> Read More ... </a> </br>
       </div>
 
     </li>
     
     <li>
       <div class="post-title">
-        <a href="/%E5%B7%A5%E5%85%B7/2014/02/15/github-jekyll-markdown.html"> 使用 GitHub, Jekyll, Markdown 打造自己的博客</a> </br>
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> C语言中的int类型的范围是由什么决定的</a> </br>
       </div>
 
       <div class="post-info">
         <ol>
-          <li class="post-time">2014-02-15</li> 
+          <li class="post-time">2014-03-06</li> 
+          <li class="post-category"> 
+           计算机系统&nbsp&nbspc语言
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>C语言中的int类型的范围是由什么决定的</h1>
+
+<p>在 K&amp;R 经典教材 <em>The C Programming Language</em> 的2.2节中，对 int 类型是这样描述的</p>
+
+<blockquote>
+<p>an integer, typically reflecting the natural size of integers on the host machine</p>
+</blockquote>
+
+<p>意思是反映了机器整数类型的 <em>natural size</em>，可是，</p>
+
+<blockquote>
+<p>这个 natural size 又是什么意思呢？</p>
+</blockquote>
+
+<p>书中后来在谈到 short, int, long 的关系时，又说，这些类型由编译器根据机器自由选择合适的大小，但是 short 和 int 至少 16 位，long 至少 32 位。</p>
+
+<p>这里的问题是  </p>
+
+<blockquote>
+<p>编译器是根据什么决定类型大小呢？</p>
+</blockquote>
+
+<p>后面书中又提到，这些类型啊，在<code>&lt;limits.h&gt;</code>中都有，我就在ubuntu下查看了 <code>/usr/include/limits.h</code>，里面确实提到 </p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* Minimum and maximum values a `signed int&#39; can hold.  */</span>
+<span class="cp">#  define INT_MIN   (-INT_MAX - 1)</span>
+<span class="cp">#  define INT_MAX   2147483647</span>
+</code></pre></div>
+<p>但是，这也是一种定义，还是没有说出为什么，我现在想知道的是</p>
+
+<blockquote>
+<p>为什么</p>
+</blockquote>
+ 
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> 学习英语第二周</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-02</li> 
+          <li class="post-category"> 
+           英语
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>学习英语第二周</h1>
+
+<h2>阅读英文原著</h2>
+
+<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
+
+<table><thead>
+<tr>
+<th align="center">Book</th>
+<th align="center">Time</th>
+<th align="center">Total Time</th>
+<th align="center">Progress</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.23  20:20 - 22:20</td>
+<td align="center">2h</td>
+<td align="center">308/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.24  19:00 - 21:00</td>
+<td align="center">2h</td>
+<td align="center">330/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.25  18:40 - 20:10</td>
+<td align="center">1.5h</td>
+<td align="center">355/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.26 18:40 - 20:10</td>
+<td align="center">1.5h</td>
+<td align="center">375/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.27 13:00-14:00 18:40 - 19:40</td>
+<td align="center">2h</td>
+<td align="center">399/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.02.28 13:00-13:45 19:00-19:30 19:50-20:15</td>
+<td align="center">1.6h</td>
+<td align="center">425/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.01 14:00-16:00</td>
+<td align="center">2h</td>
+<td align="center">444/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.02 13:00-15:00</td>
+<td align="center">2h</td>
+<td align="center">465/625</td>
+</tr>
+</tbody></table>
+
+<p>这周阅读起来没什么压力了，下周还按这个节奏，努力一下没准就能读完了。</p>
+
+<h2>学习音标</h2>
+
+<p>这周的任务是学习辅音，到这周结束，已经完成了任务。下面是时间表。</p>
+ 
+        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E5%B7%A5%E5%85%B7/2014/02/28/terminal-shell.html"> 控制台，终端，tty，shell等概念的区别</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-02-28</li> 
           <li class="post-category"> 
            工具
           </li>
@@ -381,129 +572,13 @@
       </div>
 
       <div class="post-preview">
-        <h1>使用 GitHub, Jekyll 打造自己的独立博客</h1>
+        <h1>控制台，终端，tty，shell等概念的区别</h1>
 
-<p><a href="https://github.com/">GitHub</a>是一个代码托管网站，现在很多开源项目都放在GitHub上。
-利用GitHub，可以让全球各地的程序员们一起协作开发。GitHub 提供了一种功能，叫
-<a href="https://help.github.com/categories/20/articles">GitHub Pages</a>, 利用这个功能，我
-们可以为项目建立网站，当然，这也意味着我们可以通过 GitHub Pages 建立自己的网站。</p>
+<p>使用linux已经有一段时间，却一直弄不明白这几个概念之间的区别。虽然一直在用，但是很多概念都感觉模糊不清，这样不上不下的状态实在令人不爽。下面就澄清一下这些概念。</p>
 
-<p><a href="http://jekyllrb.com/">Jekyll</a>是一个简单的，针对博客设计的静态网站生成器。使用
-GitHub 和 Jekyll，我们可以打造自己的独立博客，你可以自由地定制网站的风格，并且这
-一切都是免费的。</p>
-
-<p>这是我在GitHub上自己建立的<a href="http://minixalpha.github.io/">博客</a>
-及<a href="https://github.com/minixalpha/minixalpha.github.io">源代码</a>
-（两个分支），在下文的讲解中，你可以随时查看博客的源代码，以便有直观的认识。</p>
-
-<p>网站截图：</p>
-
-<p><img src="/assets/blog-images/blog_snapshot.png" alt="blog_snapshot"></p>
+<p>这些概念本身有着非常浓厚的历史气息，随着时代的发展，他们的含义也在发生改变，它们有些已经失去了最初的含义，但是它们的名字却被保留了下来。</p>
  
-        <a href="/%E5%B7%A5%E5%85%B7/2014/02/15/github-jekyll-markdown.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html"> WSGI 简介</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-01-26</li> 
-          <li class="post-category"> 
-           技术
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>WSGI 简介</h1>
-
-<h2>背景</h2>
-
-<p>Python Web 开发中，服务端程序可以分为两个部分，一是服务器程序，二是应用程序。前者负责把客户端请求接收，整理，后者负责具体的逻辑处理。为了方便应用程序的开发，我们把常用的功能封装起来，成为各种Web开发框架，例如 Django, Flask, Tornado。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用。</p>
-
-<p>这时候，标准化就变得尤为重要。我们可以设立一个标准，只要服务器程序支持这个标准，框架也支持这个标准，那么他们就可以配合使用。一旦标准确定，双方各自实现。这样，服务器可以支持更多支持标准的框架，框架也可以使用更多支持标准的服务器。</p>
-
-<p>Python Web开发中，这个标准就是 <em>The Web Server Gateway Interface</em>, 即 <strong>WSGI</strong>. 这个标准在<a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a>中描述，后来，为了支持 Python 3.x, 并且修正一些问题，新的版本在<a href="http://www.python.org/dev/peps/pep-3333/">PEP 3333</a>中描述。</p>
-
-<h2>WSGI 是什么</h2>
-
-<p>WSGI 是服务器程序与应用程序的一个约定，它规定了双方各自需要实现什么接口，提供什么功能，以便二者能够配合使用。</p>
-
-<p>WSGI 不能规定的太复杂，否则对已有的服务器来说，实现起来会困难，不利于WSGI的普及。同时WSGI也不能规定的太多，例如cookie处理就没有在WSGI中规定，这是为了给框架最大的灵活性。要知道WSGI最终的目的是为了方便服务器与应用程序配合使用，而不是成为一个Web框架的标准。</p>
-
-<p>另一方面，WSGI需要使得middleware（是中间件么？）易于实现。middleware处于服务器程序与应用程序之间，对服务器程序来说，它相当于应用程序，对应用程序来说，它相当于服务器程序。这样，对用户请求的处理，可以变成多个 middleware 叠加在一起，每个middleware实现不同的功能。请求从服务器来的时候，依次通过middleware，响应从应用程序返回的时候，反向通过层层middleware。我们可以方便地添加，替换middleware，以便对用户请求作出不同的处理。</p>
- 
-        <a href="/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> wsgiref 源代码分析</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-01-24</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>wsgiref 源代码分析</h1>
-
-<h2>wsgiref</h2>
-
-<p><a href="http://docs.python.org/2/library/wsgiref.html">wsgiref</a> 是Python标准库给出的 <a href="http://www.python.org/dev/peps/pep-0333/">WSGI</a> 的参考实现。</p>
-
-<p>WSGI是Python Web 开发中为服务器程序和应用程序设定的标准，满足这一标准的服务器程序和应用程序可以配合使用。我在上一篇博文《<a href="http://blog.csdn.net/on_1y/article/details/18803563">WSGI简介</a>》中对此有详细的介绍。在阅读wsgiref源代码之前，一定要对WSGI有一定了解。</p>
-
-<p>WSGI 在 <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> 中描述，但是只靠阅读PEP 333 可能在理解上还是不够深入，所以阅读官方给出的参考实现是很有必要的。阅读完这份源代码后，不仅有利于对WSGI的理解。而且会让你对服务端程序如何对客户端请求有一个直观的理解，从相对底层的socket监听请求，到上层对HTTP请求的处理。</p>
-
-<p>当然，这只是对WSGI的参考实现，目的是为了描述清楚WSGI，而不是真正用在产品中。如果想对Python Web开发中服务器端的实现有更广泛，更深入的理解，需要进一步阅读Python常用框架的源代码。</p>
-
-<h2>wsgiref 源代码分析</h2>
-
-<p>wsgiref 源代码可以在 <a href="https://pypi.python.org/pypi/wsgiref">pypi wsgiref 0.1.2</a> 下载。另外，我在阅读的过程中作了大量注释，包含模块介绍，调用层次关系，demo的运行结果，等 等，还包含了阅读过程中制作的思维导图。GitHub地址<a href="https://github.com/minixalpha/SourceLearning/tree/master/wsgiref-0.1.2">注释版wsgiref</a>。</p>
-
-<h3>结构</h3>
-
-<p><img src="/assets/blog-images/wsgiref.bmp" alt="wsgiref"></p>
-
-<p>上图描述了wsgiref的所有模块及模块间的调用关系，可以看出，wsgiref有以下模块：</p>
-
-<ul>
-<li><p>simple_server<br>
-这一模块实现了一个简单的 HTTP 服务器，并给出了一个简单的 demo，运行：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python simple_server.py
-</code></pre></div></li>
-</ul>
-
-<p>会启动这个demo，运行一次请求，并把这次请求中涉及到的环境变量在浏览器中显示出来。</p>
-
-<ul>
-<li>handlers<br>
-simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前者负责接收请求，后者负责具体的处理，
-其中Handler部分主要在handlers中实现。</li>
-<li>headers<br>
-这一模块主要是为HTTP协议中header部分建立数据结构。</li>
-<li>util<br>
-这一模块包含了一些工具函数，主要用于对环境变量，URL的处理。</li>
-<li>validate<br>
-这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准。</li>
-</ul>
-
-<h3>simple_server</h3>
- 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> Read More ... </a> </br>
+        <a href="/%E5%B7%A5%E5%85%B7/2014/02/28/terminal-shell.html"> Read More ... </a> </br>
       </div>
 
     </li>
@@ -536,6 +611,14 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
   
     
       <a href="/page5">5</a>
+    
+  
+    
+      <a href="/page6">6</a>
+    
+  
+    
+      <a href="/page7">7</a>
     
   
 

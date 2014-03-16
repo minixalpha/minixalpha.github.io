@@ -1,0 +1,131 @@
+---
+layout: default
+title: 内存模型的验证论文阅读
+categories: [科研]
+comments: true
+---
+
+
+# 内存模型的验证论文阅读
+
+## 动态验证
+
+### Hangal2004
+
+* 论文名
+Hangal S, Vahia D, Manovit C, et al. TSOtool: A program for verifying memory systems using the memory consistency model[C]//ACM SIGARCH Computer Architecture News. IEEE Computer Society, 2004, 32(2): 114.
+
+* 主要内容
+    * 实现工具TSOtool，用于检测多处理器的共享内存系统
+    * 内存模型TSO
+    * 随机生成包含data race的程序
+    * 提出多项式时间算法，incomplete
+    * 检测出商业系统中的设计错误
+    * 根据内存模型定义一种次序关系，通过程序及结果构造有向图，
+        在图中找环
+    * 时间复杂度：最坏O(n^5)
+
+* 参考文献
+    * 验证SC的复杂度, 将问题定义为VSC, VSC-read(map read to write), VSC-conflict(VSC-read + total order of write): Gibbons P B, Korach E. Testing shared memories[J]. SIAM Journal on Computing, 1997, 26(4): 1208-1244. 
+    
+    
+
+### Manovit 2005
+
+* 论文名
+Manovit C, Hangal S. Efficient algorithms for verifying memory consistency[C]//Proceedings of the seventeenth annual ACM symposium on Parallelism in algorithms and architectures. ACM, 2005: 245-252.
+
+* 主要内容　
+    * 将vector clock引入TSOtool工具
+    * 为VSC-conflict问题提出一个多项式算法
+    * 为VSC-read提出多项式算法，快速，有效，但不完备
+    * 时间复杂度：O(k*n^3)
+
+* 参考文献
+
+###  Manovit 2006
+
+* 论文名
+Manovit C, Hangal S. Completely verifying memory consistency of test program executions[C]//High-Performance Computer Architecture, 2006. The Twelfth International Symposium on. IEEE, 2006: 166-175.
+
+* 主要内容 
+    * 在TSOtool中引入回溯，使验证TSO内存模型的算法完备
+    * 时间复杂度: O(p*n^3)
+
+* 参考文献
+
+
+### Roy 2006
+
+* 论文名
+Roy A, Zeisset S, Fleckenstein C J, et al. Fast and generalized polynomial time memory consistency verification[C]//Computer Aided Verification. Springer Berlin Heidelberg, 2006: 503-516.
+
+* 主要内容
+    * 提出新的算法，将最坏时间复杂度降低至O(n^4)，适用于任何占用O(n^2)空间的内存一致性模型
+    
+* 参考文献
+
+### Chen 2008
+
+* 论文名
+Chen Y, Lv Y, Hu W, et al. Fast complete memory consistency verification[C]//High Performance Computer Architecture, 2009. HPCA 2009. IEEE 15th International Symposium on. IEEE, 2009: 381-392.
+
+* 主要内容　
+    * 实现工具LCHECK
+    * 引入time order的概念
+    * 对可靠完备性验证，时间复杂度O(C^p*p^2*n^2)
+    * 对可靠但不完备性验证，时间复杂度(p^3*n)
+
+* 参考文献
+
+## 静态验证
+
+### Park 1995
+
+* 论文名
+Park S, Dill D L. An executable specification, analyzer and verifier for RMO (relaxed memory order)[C]//Proceedings of the seventh annual ACM symposium on Parallel algorithms and architectures. ACM, 1995: 34-41.
+
+* 主要内容
+    * 使用murphi语言描述SPARC的RMO内存模型
+    * murphi verifier 可以生成小断汇编语言多处理器程序的所有结果
+
+* 参考文献
+
+### Condon 1999
+
+* 论文名
+Condon A E, Hill M D, Plakal M, et al. Using lamport clocks to reason about relaxed memory models[C]//High-Performance Computer Architecture, 1999. Proceedings. Fifth International Symposium On. IEEE, 1999: 270-278.
+
+* 主要内容
+    * 对TSO和Alapha内存模型，给出定义，实现，以及对实现的证明
+
+* 参考文献
+
+
+### Chatterjee2002 
+
+* 论文名　
+Chatterjee P, Sivaraj H, Gopalakrishnan G. Shared memory consistency protocol verification against weak memory models: Refinement via model-checking[C]//Computer Aided Verification. Springer Berlin Heidelberg, 2002: 123-136.
+
+* 主要内容
+
+   * 设计者需要为具体实现建立一个高度简化的抽象，这层抽象可以用定理证明验证正确性
+  * 抽象层和具体实现同时在模型检测工具上运行，检测refinement
+  * 验证了四种Alpha内存模型，三种Itanium内存模型
+  * 使用并行化的murphi模型检测工具
+
+
+### Condon 2001
+
+* 论文名
+Condon A E, Hu A J. Automatable verification of sequential consistency[J]. Theory of Computing Systems, 2003, 36(5): 431-460.
+
+* 主要内容
+    * 对实现内存系统的有限状态协议进行验证，看是否满足SC
+    * SC基于图定义
+    * 协议满足SC当且仅当它的所有trace无环
+    * observer 观察协议执行，收集信息，构造图
+    * 图被送给 chekcer ，检查是否有环
+    * 如果chekcer接受了observer产生的所有图，那么协议是正确的 
+
+* 参考文献

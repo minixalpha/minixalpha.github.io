@@ -1,0 +1,88 @@
+---
+layout: default
+title: 硬件内存模型论文阅读
+categories: [科研]
+comments: true
+---
+
+# 硬件内存模型论文阅读
+
+## 引言
+内存模型定义了内存操作的语义,提出内存模型的目的在于指明内存操作之间的次序有何限制.
+
+内存模型并不直接指定内存操作的次序,它只提供一种行为描述,只要**你的执行结果** 与 **按内存模型规定的次序执行结果** 一致就行,并不要求具体实现一定按这个顺序.
+
+
+## 论文
+
+### Lamport 1979
+
+* 论文名
+Lamport L. How to make a multiprocessor computer that correctly executes multiprocess programs[J]. Computers, IEEE Transactions on, 1979, 100(9): 690-691.
+
+* 主要内容
+    * 提出 sequencial consistency 的概念
+    * SC 的两个条件
+        * 程序的任意一次执行,其结果都和所有处理器操作以某种次序依次执行的结果一致
+        * 在上述次序中,同一处理器的操作之间的次序与它们在程序中的次序一致
+    * 多处理器计算机实现SC的两个条件
+        * 每个处理器都按照程序给出的顺序 issue 内存请求
+        * 所有处理器被 issue 到同一 memory module的操作都在一个FIFO队列中接受服务
+        
+        
+
+* 参考文献
+
+### **SPARC-V9 1994**
+
+* 论文名
+
+The SPARC architecture manual[M]. Englewood Cliffs, NJ 07632: PTR Prentice Hall, 1994.
+
+* 主要内容
+
+    * 定义了三种内存模型:TSO,PSO,RMO
+    * 介绍了 Sparc Processor Model:描述 了issue, reorder, execution
+
+* 参考文献 
+
+
+### Gharachorloo 1990
+
+* 论文名
+
+Gharachorloo K, Lenoski D, Laudon J, et al. 
+*Memory consistency and event ordering in scalable shared-memory multiprocessors[M].*
+ACM, 1990.
+
+* 主要内容
+
+    * 提出release consistency内存模型
+    * RC 对weak consistency进行扩展,支持更多的buffering和pipelining
+    * RC与SC对进行足够同步的并行程序而言是等价的
+    * 介绍了 performed , globally performed
+    * 采用event ordering 的方式描述内存模型
+    * 回顾之前的内存模型: sequential consistency, processor consistency, weak consistency.
+    * 与 weak consistency 相比, 将同步操作分成 acquire 和 release, 对次序进行进一步的放松
+
+* 参考文献
+    * Memory access buffering in multiprocessors. 1986: 使用 event ordering 描述内存模型, 提出 weak consistency(weak ordering). 
+    * Efficient and correct execution of parallel programs that share memory. 1988: conflicting accesses.
+
+
+### Sewell 2010
+
+* 论文名
+Sewell P, Sarkar S, Owens S, et al. 
+*x86-TSO: a rigorous and usable programmer's model for x86 multiprocessors[J].*
+Communications of the ACM, 2010, 53(7): 89-97.
+
+* 主要内容 
+       * 动机: x86系列处理器文档中对内存模型的描述不精确,有些甚至是错误的,与实际的实现不一样,这妨碍了程序员编写正确的程序,也不利于对内存模型进行验证.
+       * 回顾了各种x86系列处理器内存模型描述中的错误
+       * 给出了对x86系列处理器内存模型数据化的精确描述以解决上述错误 
+
+
+
+* 参考文献
+
