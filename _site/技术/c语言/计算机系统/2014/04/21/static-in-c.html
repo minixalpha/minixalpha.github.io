@@ -69,49 +69,19 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (7) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/读书"> 读书 (1) </a>
+                <a href="/categories/技术"> 技术 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
                 </li>
             
       
@@ -123,7 +93,37 @@
       
             
                 <li>
-                <a href="/categories/技术"> 技术 (4) </a>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (7) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -540,12 +540,11 @@ collect2: ld returned 1 exit status
 <li>只被m引用的本地符号：m中的static函数，static全局变量。</li>
 </ul>
 
-<p>现在编译一下，然后用GNU READELF工具看一下符号表。
-```
-    $ gcc -c test<em>static1.c -o test</em>static1.o
-    $ readelf -s test_static1.o</p>
+<p>现在编译一下，然后用GNU READELF工具看一下符号表。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    $ gcc -c test_static1.c -o test_static1.o
+    $ readelf -s test_static1.o
 
-<p>Symbol table &#39;.symtab&#39; contains 15 entries:
+Symbol table &#39;.symtab&#39; contains 15 entries:
    Num:    Value  Size Type    Bind   Vis      Ndx Name
      0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
      1: 00000000     0 FILE    LOCAL  DEFAULT  ABS test_static1.c
@@ -562,8 +561,7 @@ collect2: ld returned 1 exit status
     12: 00000000     4 OBJECT  GLOBAL DEFAULT    3 i
     13: 0000000a    62 FUNC    GLOBAL DEFAULT    1 main
     14: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND printf
-```</p>
-
+</code></pre></div>
 <p>表的数据结构不解释，有兴趣，看扩展阅读部分。</p>
 
 <p>现在，假如你是链接器ld，我给你2个可重定位目标程序，你从中得到两个符号表，这时候，你就可以检查出两个符号表是否存在冲突了。</p>

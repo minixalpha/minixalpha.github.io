@@ -180,6 +180,7 @@ static int j = 2;
 此时，我们不得不回到可重定位目标文件的格式。
 
 ![re](/assets/blog-images/relocatable_elf.png)
+
 图3 可重定位目标程序
 
 注意 .symtab节，这个节存储符号表，假设当前可重定位目标模块为m, 符号表会告诉我们m中定义和引用的符号信息，主要分为：

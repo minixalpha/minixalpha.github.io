@@ -190,6 +190,7 @@ static int j = 2;
 * 只被m引用的本地符号：m中的static函数，static全局变量。
 
 现在编译一下，然后用GNU READELF工具看一下符号表。
+
 ```
     $ gcc -c test_static1.c -o test_static1.o
     $ readelf -s test_static1.o
