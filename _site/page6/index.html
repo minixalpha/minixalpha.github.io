@@ -69,37 +69,37 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (7) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (3) </a>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (7) </a>
                 </li>
             
       
@@ -117,13 +117,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/技术"> 技术 (3) </a>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -141,10 +141,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/04">
-                    2014-04 (1)
+                    2014-04 (2)
                 </a>
             </li>
 
@@ -368,6 +373,161 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html"> web.py 项目架构分析之 skeleton</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2013-11-14</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>web.py 项目之 skeleton</h1>
+
+<p>skeleton 是 web.py 官网上给出的一个最简单的项目结构示例。</p>
+
+<h2>目录树</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">.
+└── src  
+    ├── code.py  
+    ├── config.py  
+    ├── db.py  
+    ├── sql
+    │   └── tables.sql
+    ├── templates
+    │   ├── base.html
+    │   ├── item.html
+    │   └── listing.html
+    └── view.py
+
+3 directories, 9 files
+</code></pre></div>
+<h2>结构分析</h2>
+
+<h3>控制模块</h3>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#code.py</span>
+
+<span class="kn">import</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">view</span><span class="o">,</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;index&#39;</span>
+<span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">index</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">listing</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">internalerror</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">debugerror</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<p><code>code</code> 模块作为入口:</p>
+
+<ul>
+<li>app 的创建与启动</li>
+<li>url　与　处理类的映射与处理入口</li>
+</ul>
+
+<p>但是，具体的处理并不在这里实现。而是放在了 <code>view</code> 模块中。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的C吗？
+</code></pre></div>
+<h3>显示模块</h3>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#view.py</span>
+
+<span class="kn">import</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">db</span>
+<span class="kn">import</span> <span class="nn">config</span>
+
+<span class="n">t_globals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+  <span class="n">datestr</span><span class="o">=</span><span class="n">web</span><span class="o">.</span><span class="n">datestr</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">render</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;templates/&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> 
+    <span class="nb">globals</span><span class="o">=</span><span class="n">t_globals</span><span class="p">)</span>
+<span class="n">render</span><span class="o">.</span><span class="n">_keywords</span><span class="p">[</span><span class="s">&#39;globals&#39;</span><span class="p">][</span><span class="s">&#39;render&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render</span>
+
+<span class="k">def</span> <span class="nf">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</code></pre></div>
+<p>从这里可以看出　<code>view</code> 模块</p>
+
+<ul>
+<li>与模板关联 </li>
+<li>从数据库中取数据，然后发给模板</li>
+</ul>
+
+<p>我们再来看看模板:</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
+<span class="c">    templates/base.html</span>
+<span class="c">--&gt;</span>
+
+$def with (page, title=None)
+<span class="nt">&lt;html&gt;&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>my site\
+$if title: : $title\
+<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>my site<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
+$:page   
+<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
+</code></pre></div>
+<p><code>base.html</code> 是所有模块的公共部分，每个模块只需要提供
+它的 <code>page</code> ，即内容就可以了。</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
+<span class="c">    templates/listing.html</span>
+<span class="c">--&gt;</span>
+
+$def with (items)
+
+$for item in items:
+    $:render.item(item)
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的V吗
+</code></pre></div>
+<h3>数据操作</h3>
+
+<p>数据库操作分三部分</p>
+
+<ul>
+<li>sql/tables.sql 数据库表定义</li>
+<li>config.py 数据库连接</li>
+<li>db.py 数据库操作</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/* tables.sql */
+CREATE TABLE items (
+    id serial primary key,
+    author_id int references users,
+    body text,
+    created timestamp default current_timestamp 
+);
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">#config.py
+
+import web
+DB = web.database(dbn=&#39;mysql&#39;, db=&#39;skeleton&#39;, user=&#39;root&#39;, pw=&#39;xx&#39;)
+cache = False
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text"># db.py
+import config
+
+def listing(\**k):
+    return config.DB.select(&#39;items&#39;, **k)
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这是MVC中的M吗
+</code></pre></div>
+<p>这是 web.py 中最基本的一个项目结构。应该是使用的MVC设计模式。但是
+因为程序本身不大，还体会不到 MVC 的好处。</p>
+ 
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -620,82 +780,6 @@ app = web.application(urls, globals(), autoreload=True)</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
 </code></pre></div> 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> web.py 源代码分析之 web.test 主要文件及测试流程</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2013-11-14</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>目录文件说明</h1>
-
-<h2>README</h2>
-
-<p>如何运行测试文件，包含全部测试及分模块测试</p>
-
-<p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
-<p>运行全部测试</p>
-
-<p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/db.py
-</code></pre></div>
-<p>运行db模块测试</p>
-
-<h2>alltest.py</h2>
-
-<p>运行全部测试入口，调用 <code>webtest</code> 模块完成测试</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># alltest.py</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">webtest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<h2>webtest.py</h2>
-
-<p>我们发现 webtest.py 中并没有 main 函数，而是从 <code>web.test</code> 中导入，</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># webtest.py</span>
-<span class="kn">from</span> <span class="nn">web.test</span> <span class="kn">import</span> <span class="o">*</span>
-</code></pre></div>
-<p>也就是说，如果 <code>web.test</code>中有main函数的话，<code>webtest.main()</code>
-其实是调用 <code>web.test</code> 中的main函数。</p>
-
-<p>感觉～ 好神奇</p>
-
-<h2>web.test</h2>
-
-<p>看web目录下的test.py文件，果然发现了main函数，终于找到入口啦~</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">suite</span><span class="p">:</span>
-        <span class="n">main_module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;__main__&#39;</span><span class="p">)</span>
-        <span class="c"># allow command line switches</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)]</span>
-        <span class="n">suite</span> <span class="o">=</span> <span class="n">module_suite</span><span class="p">(</span><span class="n">main_module</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">)</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">runTests</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">wasSuccessful</span><span class="p">())</span>
-</code></pre></div>
-<p>把这个main函数改掉，再运行一下：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
-<p>果然是运行修改后的函数，所以这里确定是入口。</p>
-
-<p>在进入下一步之前，我们需要学习一下Python自动单元测试框架，即<code>unittest</code>模块。关于 <code>unittest</code> ，可以参考这篇文章：
-<a href="http://www.ibm.com/developerworks/cn/linux/l-pyunit/">Python自动单元测试框架</a></p>
- 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> Read More ... </a> </br>
       </div>
 
     </li>

@@ -69,37 +69,37 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (7) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (3) </a>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (7) </a>
                 </li>
             
       
@@ -117,13 +117,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/技术"> 技术 (3) </a>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -141,10 +141,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/04">
-                    2014-04 (1)
+                    2014-04 (2)
                 </a>
             </li>
 
@@ -368,6 +373,42 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2014/04/21/static-in-c.html"> 对C语言中的static关键字的深入理解</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-04-21</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspc语言&nbsp&nbsp计算机系统
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>对C语言中的static关键字的深入理解</h1>
+
+<p>在阅读一些项目源代码时，我发现很多时候，会把函数和变量声明为static，所以，很好奇为什么要这样做，于是有了下面这篇文章。</p>
+
+<h1>基本概念</h1>
+
+<p>使用static有三种情况：</p>
+
+<ul>
+<li>函数内部static变量</li>
+<li>函数外部static变量</li>
+<li>static函数</li>
+</ul>
+
+<p>函数内部的static变量，关键在于生命周期持久，他的值不会随着函数调用的结束而消失，下一次调用时，static变量的值，还保留着上次调用后的内容。</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2014/04/21/static-in-c.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -637,84 +678,6 @@
 </tbody></table>
  
         <a href="/%E8%8B%B1%E8%AF%AD/2014/03/16/learn-english-4.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> 内存模型的验证论文阅读</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-14</li> 
-          <li class="post-category"> 
-           科研
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>内存模型的验证论文阅读</h1>
-
-<h2>动态验证</h2>
-
-<h3>Hangal2004</h3>
-
-<ul>
-<li><p>论文名
-Hangal S, Vahia D, Manovit C, et al. TSOtool: A program for verifying memory systems using the memory consistency model[C]//ACM SIGARCH Computer Architecture News. IEEE Computer Society, 2004, 32(2): 114.</p></li>
-<li><p>主要内容</p>
-
-<ul>
-<li>实现工具TSOtool，用于检测多处理器的共享内存系统</li>
-<li>内存模型TSO</li>
-<li>随机生成包含data race的程序</li>
-<li>提出多项式时间算法，incomplete</li>
-<li>检测出商业系统中的设计错误</li>
-<li>根据内存模型定义一种次序关系，通过程序及结果构造有向图，
-在图中找环</li>
-<li>时间复杂度：最坏O(n^5)</li>
-</ul></li>
-<li><p>参考文献</p>
-
-<ul>
-<li>验证SC的复杂度, 将问题定义为VSC, VSC-read(map read to write), VSC-conflict(VSC-read + total order of write): Gibbons P B, Korach E. Testing shared memories[J]. SIAM Journal on Computing, 1997, 26(4): 1208-1244. </li>
-</ul></li>
-</ul>
-
-<h3>Manovit 2005</h3>
-
-<ul>
-<li><p>论文名
-Manovit C, Hangal S. Efficient algorithms for verifying memory consistency[C]//Proceedings of the seventeenth annual ACM symposium on Parallelism in algorithms and architectures. ACM, 2005: 245-252.</p></li>
-<li><p>主要内容　</p>
-
-<ul>
-<li>将vector clock引入TSOtool工具</li>
-<li>为VSC-conflict问题提出一个多项式算法</li>
-<li>为VSC-read提出多项式算法，快速，有效，但不完备</li>
-<li>时间复杂度：O(k*n^3)</li>
-</ul></li>
-<li><p>参考文献</p></li>
-</ul>
-
-<h3>Manovit 2006</h3>
-
-<ul>
-<li><p>论文名
-Manovit C, Hangal S. Completely verifying memory consistency of test program executions[C]//High-Performance Computer Architecture, 2006. The Twelfth International Symposium on. IEEE, 2006: 166-175.</p></li>
-<li><p>主要内容 </p>
-
-<ul>
-<li>在TSOtool中引入回溯，使验证TSO内存模型的算法完备</li>
-<li>时间复杂度: O(p*n^3)</li>
-</ul></li>
-<li><p>参考文献</p></li>
-</ul>
- 
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> Read More ... </a> </br>
       </div>
 
     </li>

@@ -120,7 +120,7 @@ li {
 }
 
 .post-info ol li {
-    width: 250px;
+    width: 200px;
     margin-top: 0px;
     margin-right: 10px;
     list-style-type: none;

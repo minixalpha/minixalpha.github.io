@@ -69,37 +69,37 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (7) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (3) </a>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (7) </a>
                 </li>
             
       
@@ -117,13 +117,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/技术"> 技术 (3) </a>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -141,10 +141,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/04">
-                    2014-04 (1)
+                    2014-04 (2)
                 </a>
             </li>
 
@@ -368,6 +373,84 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> 内存模型的验证论文阅读</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-14</li> 
+          <li class="post-category"> 
+           科研
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>内存模型的验证论文阅读</h1>
+
+<h2>动态验证</h2>
+
+<h3>Hangal2004</h3>
+
+<ul>
+<li><p>论文名
+Hangal S, Vahia D, Manovit C, et al. TSOtool: A program for verifying memory systems using the memory consistency model[C]//ACM SIGARCH Computer Architecture News. IEEE Computer Society, 2004, 32(2): 114.</p></li>
+<li><p>主要内容</p>
+
+<ul>
+<li>实现工具TSOtool，用于检测多处理器的共享内存系统</li>
+<li>内存模型TSO</li>
+<li>随机生成包含data race的程序</li>
+<li>提出多项式时间算法，incomplete</li>
+<li>检测出商业系统中的设计错误</li>
+<li>根据内存模型定义一种次序关系，通过程序及结果构造有向图，
+在图中找环</li>
+<li>时间复杂度：最坏O(n^5)</li>
+</ul></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>验证SC的复杂度, 将问题定义为VSC, VSC-read(map read to write), VSC-conflict(VSC-read + total order of write): Gibbons P B, Korach E. Testing shared memories[J]. SIAM Journal on Computing, 1997, 26(4): 1208-1244. </li>
+</ul></li>
+</ul>
+
+<h3>Manovit 2005</h3>
+
+<ul>
+<li><p>论文名
+Manovit C, Hangal S. Efficient algorithms for verifying memory consistency[C]//Proceedings of the seventeenth annual ACM symposium on Parallelism in algorithms and architectures. ACM, 2005: 245-252.</p></li>
+<li><p>主要内容　</p>
+
+<ul>
+<li>将vector clock引入TSOtool工具</li>
+<li>为VSC-conflict问题提出一个多项式算法</li>
+<li>为VSC-read提出多项式算法，快速，有效，但不完备</li>
+<li>时间复杂度：O(k*n^3)</li>
+</ul></li>
+<li><p>参考文献</p></li>
+</ul>
+
+<h3>Manovit 2006</h3>
+
+<ul>
+<li><p>论文名
+Manovit C, Hangal S. Completely verifying memory consistency of test program executions[C]//High-Performance Computer Architecture, 2006. The Twelfth International Symposium on. IEEE, 2006: 166-175.</p></li>
+<li><p>主要内容 </p>
+
+<ul>
+<li>在TSOtool中引入回溯，使验证TSO内存模型的算法完备</li>
+<li>时间复杂度: O(p*n^3)</li>
+</ul></li>
+<li><p>参考文献</p></li>
+</ul>
+ 
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/14/mm-verify.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -616,49 +699,6 @@ Polyakov S, Schuster A.
 <p>事情要追溯到遥远的1979年， Lamport 在他的著名论文  <em>How to make a multiprocessor computer that correctly executes multiprocess programs</em> 中提出了今后在内存模型领域被广泛使用的概念 ：<em>sequential consistency</em>，即顺序一致性。这篇文章告诉我们，你要做一台多处理器的计算机，需要满足什么条件，才能保证程序的正确性。当然，这里的程序跑在不同处理器上，共享同一块内存。虽然现在不说多处理器了，都说多核，多线程，但是问题的本质是没有变的。就是多个执行单元一起完成一个任务，并且通过共享存储单元的方式通信，在这种情况下，底层的系统需要提供什么样的支持，才能保证计算的结果和程序员的预期是一样的。</p>
  
         <a href="/%E7%A7%91%E7%A0%94/2014/03/07/history-of-data-race-free.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/06/think-of-data-race-free.html"> 对Data Race Free 的理解</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-06</li> 
-          <li class="post-category"> 
-           科研
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>对Data Race Free 的理解</h1>
-
-<h2>Data Race Free 的动机</h2>
-
-<p>Data Race Free 是对多线程程序 <strong>同步程度</strong> 的一种描述，假如你的多线程程序的同步程度满足 DRF 的要求，那么，你的程序会有这样一个好处：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">程序在弱一致性模型下执行，执行的结果与在SC模型下执行一样
-</code></pre></div>
-<p>这意味着，程序员在写程序时，可以按SC模型来推断程序的执行。而程序在底层运行时，可以享受弱一致性模型带来的种种优化措施。</p>
-
-<h2>Data Race Free 具体内容</h2>
-
-<p>DRF 要求多线程程序中不能有冲突的操作。</p>
-
-<p>什么是冲突的操作呢？</p>
-
-<p>冲突的操作是指：两个操作来自不同线程，操作同一地址，至少有一个是写操作。</p>
-
-<p>如何让冲突的操作不冲突呢？</p>
-
-<p>需要使用同步操作将冲突的操作隔离开。</p>
-
-<p>为什么要用同步操作将冲突的操作隔离开呢?</p>
- 
-        <a href="/%E7%A7%91%E7%A0%94/2014/03/06/think-of-data-race-free.html"> Read More ... </a> </br>
       </div>
 
     </li>
