@@ -87,11 +87,13 @@ static 函数也与此类似，将函数声明为static，说明我们只在当�
 我们的程序，从源代码经过编译，链接生成了可执行文件，可执行文件被加载到存储器中，然后执行。以Unix程序为例，每个Unix程序都有一个运行时存储器映像。可以理解为程序运行时，存储器中的数据分布。
 
 ![linux_rtmi](/assets/blog-images/linux_run_time_memory_image.png)
+
 图1 Linux运行时存储器映像
 
 当程序运行时，操作系统会创建用户栈(User stack)，一个函数被调用时，它的参数，局部变量，返回地址等等，都会被压入栈中，当函数执行结束后，这些数据就会被其它函数使用，所以函数调用结束后，局部变量的值不会被保持。我们将此区域放大，可以看到用户栈中都有哪些内容。
 
 ![sfs](/assets/blog-images/stack_frame_structure.png)
+
 图2 栈帧结构
 
 而static变量与普通局部变量不同，它不是保留在栈中。注意图一中，有一块区域，"Loaded from executable file"，其中有一块 .data, .bss区，static变量会被存储在这里，所以函数调用结束后，static变量的值仍然会得到保留。而 .data, .bss区，executable file，与程序的编译，链接，相关。
@@ -99,6 +101,7 @@ static 函数也与此类似，将函数声明为static，说明我们只在当�
 首先，多个源代码会分别被编译成可重定位目标程序，然后链接器会最终生成可执行目标程序。可重定位目标程序的结构如图3所示，可以看出，此时，.data, .bss区，已经出现。
 
 ![re](/assets/blog-images/relocatable_elf.png)
+
 图3 可重定位目标程序
 
 .data 区存储已经初始化的全局C变量，.bss 区存储没有初始化的全局C变量，而编译器会为每个static变量在.data或者.bss中分配空间。
@@ -106,6 +109,7 @@ static 函数也与此类似，将函数声明为static，说明我们只在当�
 可执行目标程序的结构如图4所示
 
 ![ee](/assets/blog-images/executable_elf.png)
+
 图4 可执行目标程序
 
 将图4与图1比较，就会发现，可执行目标程序的一部分被加载到存储器中，这就是"Loaded from executable file"的来源。
@@ -176,6 +180,7 @@ static int j = 2;
 此时，我们不得不回到可重定位目标文件的格式。
 
 ![re](/assets/blog-images/relocatable_elf.png)
+
 图3 可重定位目标程序
 
 注意 .symtab节，这个节存储符号表，假设当前可重定位目标模块为m, 符号表会告诉我们m中定义和引用的符号信息，主要分为：
