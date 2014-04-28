@@ -69,37 +69,7 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
@@ -111,19 +81,61 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/英语"> 英语 (7) </a>
                 </li>
             
       
             
                 <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -146,10 +158,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/04">
-                    2014-04 (2)
+                    2014-04 (3)
                 </a>
             </li>
 
@@ -373,6 +390,38 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html"> 使用JVMTI获取Java多线程程序指令执行次序</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-04-28</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp虚拟机
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>使用JVMTI获取Java多线程程序指令执行次序</h1>
+
+<hr>
+
+<p>在Java多线程程序中，由于线程调度，指令间的次序在每次运行时都可能不相同，有时候，我们需要得到指令次序，用来分析程序的行为。这样细粒度的底层行为用一般方法很难完成，我们需要借助 <a href="http://docs.oracle.com/javase/7/docs/platform/jvmti/jvmti.html">JVM Tool Interface</a>，即JVMTI，来帮助我们获取Java虚拟机执行时的信息。本文先介绍编写JVMTI程序的基本框架，然后介绍如何使用JVMTI来获取多线程程序中指令之间的次序。</p>
+
+<h2>JVMTI简介</h2>
+
+<p>JVMTI是用于编写开发与监视工具的编程接口，使用它可以检查并控制运行于Java虚拟机上的程序。使用它可以完成性能分析，调试，监视(monitoring)，线程分析，覆盖分析(coverage analysis)等工具。</p>
+
+<p>使用JVMTI可以编写出一个agent。在运行Java程序时，指定这个agent，那么当虚拟机运行程序时，如果agent中指定的一些事件发生，虚拟机就会调用agent中相应的回调函数。JVMTI提供了一系列可以指定的事件，以及获取虚拟机中信息的函数接口。</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -604,84 +653,6 @@
 
     </li>
     
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/16/learn-english-4.html"> 学习英语第四周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-16</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第四周</h1>
-
-<h2>阅读英文原著</h2>
-
-<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.10 12:30-13:30</td>
-<td align="center">1h</td>
-<td align="center">80/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.11 12:30-13:30</td>
-<td align="center">1h</td>
-<td align="center">112/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.12 12:40-13:40</td>
-<td align="center">1h</td>
-<td align="center">142/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.13 12:45-13:45</td>
-<td align="center">1h</td>
-<td align="center">180/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.14 12:36-13:14</td>
-<td align="center">0.5h</td>
-<td align="center">214/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.15 14:43-15:05</td>
-<td align="center">0.3h</td>
-<td align="center">227/309</td>
-</tr>
-<tr>
-<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
-<td align="center">2014.03.13 13:39-14:45</td>
-<td align="center">1h</td>
-<td align="center">261/309</td>
-</tr>
-</tbody></table>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/16/learn-english-4.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
 </ul>
 
 <!-- Pagination links -->
@@ -718,6 +689,10 @@
   
     
       <a href="/page7">7</a>
+    
+  
+    
+      <a href="/page8">8</a>
     
   
 

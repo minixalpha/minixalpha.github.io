@@ -12,3 +12,5 @@ deploy:
 	git push origin master
 	git checkout source
 	echo "deploy succeed"
+	git push origin source
+	echo "push source"
