@@ -69,37 +69,7 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
@@ -111,19 +81,61 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/英语"> 英语 (7) </a>
                 </li>
             
       
             
                 <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -146,10 +158,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/04">
-                    2014-04 (2)
+                    2014-04 (3)
                 </a>
             </li>
 
@@ -373,6 +390,44 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html"> WSGI 简介</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-01-26</li> 
+          <li class="post-category"> 
+           技术
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>WSGI 简介</h1>
+
+<h2>背景</h2>
+
+<p>Python Web 开发中，服务端程序可以分为两个部分，一是服务器程序，二是应用程序。前者负责把客户端请求接收，整理，后者负责具体的逻辑处理。为了方便应用程序的开发，我们把常用的功能封装起来，成为各种Web开发框架，例如 Django, Flask, Tornado。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用。</p>
+
+<p>这时候，标准化就变得尤为重要。我们可以设立一个标准，只要服务器程序支持这个标准，框架也支持这个标准，那么他们就可以配合使用。一旦标准确定，双方各自实现。这样，服务器可以支持更多支持标准的框架，框架也可以使用更多支持标准的服务器。</p>
+
+<p>Python Web开发中，这个标准就是 <em>The Web Server Gateway Interface</em>, 即 <strong>WSGI</strong>. 这个标准在<a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a>中描述，后来，为了支持 Python 3.x, 并且修正一些问题，新的版本在<a href="http://www.python.org/dev/peps/pep-3333/">PEP 3333</a>中描述。</p>
+
+<h2>WSGI 是什么</h2>
+
+<p>WSGI 是服务器程序与应用程序的一个约定，它规定了双方各自需要实现什么接口，提供什么功能，以便二者能够配合使用。</p>
+
+<p>WSGI 不能规定的太复杂，否则对已有的服务器来说，实现起来会困难，不利于WSGI的普及。同时WSGI也不能规定的太多，例如cookie处理就没有在WSGI中规定，这是为了给框架最大的灵活性。要知道WSGI最终的目的是为了方便服务器与应用程序配合使用，而不是成为一个Web框架的标准。</p>
+
+<p>另一方面，WSGI需要使得middleware（是中间件么？）易于实现。middleware处于服务器程序与应用程序之间，对服务器程序来说，它相当于应用程序，对应用程序来说，它相当于服务器程序。这样，对用户请求的处理，可以变成多个 middleware 叠加在一起，每个middleware实现不同的功能。请求从服务器来的时候，依次通过middleware，响应从应用程序返回的时候，反向通过层层middleware。我们可以方便地添加，替换middleware，以便对用户请求作出不同的处理。</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -742,62 +797,6 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
 
     </li>
     
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html"> web.py 项目架构分析之 todolist</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2013-11-17</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>web.py 项目之 todolist</h1>
-
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">.
-└── src
-    ├── model.py
-    ├── schema.sql
-    ├── templates
-    │   ├── base.html
-    │   └── index.html
-    ├── todo.py
-
-2 directories, 8 files
-</code></pre></div>
-<h2>项目说明</h2>
-
-<p>项目来自 <a href="http://webpy.org/src/todo-list/0.3">webpy.org</a>,
-主要实现一个基于web的 todolist，就是可以添加删除一些任务。
-非常简单</p>
-
-<h2>结构分析</h2>
-
-<h3>控制模块</h3>
-
-<p>控制模块只有todo.py</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="sd">&quot;&quot;&quot; Basic todo list using webpy 0.3 &quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">model</span>
-
-<span class="c">### Url mappings</span>
-
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;Index&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/del/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Delete&#39;</span>
-<span class="p">)</span>
-</code></pre></div> 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
 </ul>
 
 <!-- Pagination links -->
@@ -834,6 +833,10 @@ simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前
   
     
       <a href="/page7">7</a>
+    
+  
+    
+      <a href="/page8">8</a>
     
   
 
