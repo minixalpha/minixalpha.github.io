@@ -269,64 +269,44 @@ java -classpath . -agentpath:`pwd`/jvmagent/TraceAgent.so=log.txt PossibleReorde
 即可得到指令次序信息：
 
 ```
-Thread-0	LPossibleReordering$1;	0	run 0:23	
-Thread-0	LPossibleReordering$1;	1	run 0:23	
-Thread-0	LPossibleReordering$1;	2	run 0:23	
-Thread-0	LPossibleReordering$1;	3	run 0:23	
-Thread-0	LPossibleReordering$1;	4	run 0:23	
-Thread-0	LPossibleReordering$1;	7	run 0:23	
-Thread-0	LPossibleReordering$1;	8	run 0:23	
-Thread-0	LPossibleReordering$1;	11	run 0:23	
-Thread-0	LPossibleReordering$1;	14	run 0:23	
-Thread-0	LPossibleReordering$1;	17	run 0:23	
-Thread-0	LPossibleReordering$1;	20	run 0:23	
-Thread-0	LPossibleReordering$1;	2	run 0:23	
-Thread-0	LPossibleReordering$1;	3	run 0:23	
-Thread-0	LPossibleReordering$1;	4	run 0:23	
-Thread-0	LPossibleReordering$1;	23	run 0:23	
-Thread-1	LPossibleReordering$2;	0	run 0:93	
-Thread-1	LPossibleReordering$2;	1	run 0:93	
-Thread-1	LPossibleReordering$2;	2	run 0:93	
-Thread-1	LPossibleReordering$2;	3	run 0:93	
-Thread-1	LPossibleReordering$2;	4	run 0:93	
-Thread-1	LPossibleReordering$2;	7	run 0:93	
-Thread-1	LPossibleReordering$2;	8	run 0:93	
-Thread-1	LPossibleReordering$2;	11	run 0:93	
-Thread-1	LPossibleReordering$2;	14	run 0:93	
-Thread-1	LPossibleReordering$2;	17	run 0:93	
-Thread-1	LPossibleReordering$2;	18	run 0:93	
-Thread-1	LPossibleReordering$2;	21	run 0:93	
-Thread-1	LPossibleReordering$2;	24	run 0:93	
-Thread-1	LPossibleReordering$2;	27	run 0:93	
-Thread-1	LPossibleReordering$2;	28	run 0:93	
-Thread-1	LPossibleReordering$2;	31	run 0:93	
-Thread-1	LPossibleReordering$2;	34	run 0:93	
-Thread-1	LPossibleReordering$2;	37	run 0:93	
-Thread-1	LPossibleReordering$2;	38	run 0:93	
-Thread-1	LPossibleReordering$2;	41	run 0:93	
-Thread-1	LPossibleReordering$2;	44	run 0:93	
-Thread-1	LPossibleReordering$2;	47	run 0:93	
-Thread-1	LPossibleReordering$2;	48	run 0:93	
-Thread-1	LPossibleReordering$2;	51	run 0:93	
-Thread-1	LPossibleReordering$2;	54	run 0:93	
-Thread-1	LPossibleReordering$2;	57	run 0:93	
-Thread-1	LPossibleReordering$2;	58	run 0:93	
-Thread-1	LPossibleReordering$2;	61	run 0:93	
-Thread-1	LPossibleReordering$2;	64	run 0:93	
-Thread-1	LPossibleReordering$2;	67	run 0:93	
-Thread-1	LPossibleReordering$2;	68	run 0:93	
-Thread-1	LPossibleReordering$2;	71	run 0:93	
-Thread-1	LPossibleReordering$2;	74	run 0:93	
-Thread-1	LPossibleReordering$2;	77	run 0:93	
-Thread-1	LPossibleReordering$2;	78	run 0:93	
-Thread-1	LPossibleReordering$2;	81	run 0:93	
-Thread-1	LPossibleReordering$2;	84	run 0:93	
-Thread-1	LPossibleReordering$2;	87	run 0:93	
-Thread-1	LPossibleReordering$2;	90	run 0:93	
-Thread-1	LPossibleReordering$2;	2	run 0:93	
-Thread-1	LPossibleReordering$2;	3	run 0:93	
-Thread-1	LPossibleReordering$2;	4	run 0:93	
-Thread-1	LPossibleReordering$2;	93	run 0:93	
+Thread-0	LPossibleReordering$1;	0	run 0:10	
+Thread-0	LPossibleReordering$1;	1	run 0:10	
+Thread-1	LPossibleReordering$2;	0	run 0:80	
+Thread-0	LPossibleReordering$1;	4	run 0:10	
+Thread-0	LPossibleReordering$1;	7	run 0:10	
+Thread-0	LPossibleReordering$1;	10	run 0:10	
+Thread-1	LPossibleReordering$2;	1	run 0:80	
+Thread-1	LPossibleReordering$2;	4	run 0:80	
+Thread-1	LPossibleReordering$2;	7	run 0:80	
+Thread-1	LPossibleReordering$2;	10	run 0:80	
+Thread-1	LPossibleReordering$2;	11	run 0:80	
+Thread-1	LPossibleReordering$2;	14	run 0:80	
+Thread-1	LPossibleReordering$2;	17	run 0:80	
+Thread-1	LPossibleReordering$2;	20	run 0:80	
+Thread-1	LPossibleReordering$2;	21	run 0:80	
+Thread-1	LPossibleReordering$2;	24	run 0:80	
+Thread-1	LPossibleReordering$2;	27	run 0:80	
+Thread-1	LPossibleReordering$2;	30	run 0:80	
+Thread-1	LPossibleReordering$2;	31	run 0:80	
+Thread-1	LPossibleReordering$2;	34	run 0:80	
+Thread-1	LPossibleReordering$2;	37	run 0:80	
+Thread-1	LPossibleReordering$2;	40	run 0:80	
+Thread-1	LPossibleReordering$2;	41	run 0:80	
+Thread-1	LPossibleReordering$2;	44	run 0:80	
+Thread-1	LPossibleReordering$2;	47	run 0:80	
+Thread-1	LPossibleReordering$2;	50	run 0:80	
+Thread-1	LPossibleReordering$2;	51	run 0:80	
+Thread-1	LPossibleReordering$2;	54	run 0:80	
+Thread-1	LPossibleReordering$2;	57	run 0:80	
+Thread-1	LPossibleReordering$2;	60	run 0:80	
+Thread-1	LPossibleReordering$2;	61	run 0:80	
+Thread-1	LPossibleReordering$2;	64	run 0:80	
+Thread-1	LPossibleReordering$2;	67	run 0:80	
+Thread-1	LPossibleReordering$2;	70	run 0:80	
+Thread-1	LPossibleReordering$2;	71	run 0:80	
+Thread-1	LPossibleReordering$2;	74	run 0:80	
+Thread-1	LPossibleReordering$2;	77	run 0:80	
+Thread-1	LPossibleReordering$2;	80	run 0:80		
 ```
 
 最终的源代码中，我还输出了线程名，和方法的指令地址范围。
@@ -345,18 +325,11 @@ final class PossibleReordering$1 implements java.lang.Runnable {
 
   public void run();
     Code:
-       0: iconst_0      
-       1: istore_1      
-       2: iload_1       
-       3: iconst_1      
-       4: if_icmpge     23
-       7: iconst_1      
-       8: putstatic     #2                  // Field PossibleReordering.a:I
-      11: getstatic     #3                  // Field PossibleReordering.b:I
-      14: putstatic     #4                  // Field PossibleReordering.x:I
-      17: iinc          1, 1
-      20: goto          2
-      23: return        
+       0: iconst_1      
+       1: putstatic     #2                  // Field PossibleReordering.a:I
+       4: getstatic     #3                  // Field PossibleReordering.b:I
+       7: putstatic     #4                  // Field PossibleReordering.x:I
+      10: return        
 }
 ```
 
@@ -372,49 +345,42 @@ final class PossibleReordering$2 implements java.lang.Runnable {
 
   public void run();
     Code:
-       0: iconst_0      
-       1: istore_1      
-       2: iload_1       
-       3: iconst_1      
-       4: if_icmpge     93
-       7: iconst_1      
-       8: putstatic     #2                  // Field PossibleReordering.b:I
-      11: getstatic     #3                  // Field PossibleReordering.a:I
-      14: putstatic     #4                  // Field PossibleReordering.y:I
-      17: iconst_1      
-      18: putstatic     #3                  // Field PossibleReordering.a:I
-      21: getstatic     #2                  // Field PossibleReordering.b:I
-      24: putstatic     #5                  // Field PossibleReordering.x:I
-      27: iconst_1      
-      28: putstatic     #3                  // Field PossibleReordering.a:I
-      31: getstatic     #2                  // Field PossibleReordering.b:I
-      34: putstatic     #5                  // Field PossibleReordering.x:I
-      37: iconst_1      
-      38: putstatic     #3                  // Field PossibleReordering.a:I
-      41: getstatic     #2                  // Field PossibleReordering.b:I
-      44: putstatic     #5                  // Field PossibleReordering.x:I
-      47: iconst_1      
-      48: putstatic     #3                  // Field PossibleReordering.a:I
-      51: getstatic     #2                  // Field PossibleReordering.b:I
-      54: putstatic     #5                  // Field PossibleReordering.x:I
-      57: iconst_1      
-      58: putstatic     #3                  // Field PossibleReordering.a:I
-      61: getstatic     #2                  // Field PossibleReordering.b:I
-      64: putstatic     #5                  // Field PossibleReordering.x:I
-      67: iconst_1      
-      68: putstatic     #3                  // Field PossibleReordering.a:I
-      71: getstatic     #2                  // Field PossibleReordering.b:I
-      74: putstatic     #5                  // Field PossibleReordering.x:I
-      77: iconst_1      
-      78: putstatic     #3                  // Field PossibleReordering.a:I
-      81: getstatic     #2                  // Field PossibleReordering.b:I
-      84: putstatic     #5                  // Field PossibleReordering.x:I
-      87: iinc          1, 1
-      90: goto          2
-      93: return        
+       0: iconst_1      
+       1: putstatic     #2                  // Field PossibleReordering.b:I
+       4: getstatic     #3                  // Field PossibleReordering.a:I
+       7: putstatic     #4                  // Field PossibleReordering.y:I
+      10: iconst_1      
+      11: putstatic     #3                  // Field PossibleReordering.a:I
+      14: getstatic     #2                  // Field PossibleReordering.b:I
+      17: putstatic     #5                  // Field PossibleReordering.x:I
+      20: iconst_1      
+      21: putstatic     #3                  // Field PossibleReordering.a:I
+      24: getstatic     #2                  // Field PossibleReordering.b:I
+      27: putstatic     #5                  // Field PossibleReordering.x:I
+      30: iconst_1      
+      31: putstatic     #3                  // Field PossibleReordering.a:I
+      34: getstatic     #2                  // Field PossibleReordering.b:I
+      37: putstatic     #5                  // Field PossibleReordering.x:I
+      40: iconst_1      
+      41: putstatic     #3                  // Field PossibleReordering.a:I
+      44: getstatic     #2                  // Field PossibleReordering.b:I
+      47: putstatic     #5                  // Field PossibleReordering.x:I
+      50: iconst_1      
+      51: putstatic     #3                  // Field PossibleReordering.a:I
+      54: getstatic     #2                  // Field PossibleReordering.b:I
+      57: putstatic     #5                  // Field PossibleReordering.x:I
+      60: iconst_1      
+      61: putstatic     #3                  // Field PossibleReordering.a:I
+      64: getstatic     #2                  // Field PossibleReordering.b:I
+      67: putstatic     #5                  // Field PossibleReordering.x:I
+      70: iconst_1      
+      71: putstatic     #3                  // Field PossibleReordering.a:I
+      74: getstatic     #2                  // Field PossibleReordering.b:I
+      77: putstatic     #5                  // Field PossibleReordering.x:I
+      80: return        
 }
 ```
 
-可以看出，确实是一个线程的run方法指令范围是 `0:23` ，另一个是 `0:93`，说明我们正确获取了相应指令。
+可以看出，确实是一个线程的run方法指令范围是 `0:10` ，另一个是 `0:80`，说明我们正确获取了相应指令。
 
 完整的源代码，包含如何编译，运行，可以在我的GitHub中找到：[AgentDemo](https://github.com/minixalpha/Demo/tree/master/AgentDemo)

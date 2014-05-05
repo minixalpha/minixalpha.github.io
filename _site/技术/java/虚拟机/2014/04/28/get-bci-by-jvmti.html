@@ -69,24 +69,6 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (7) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
@@ -99,19 +81,7 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/技术"> 技术 (5) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
                 </li>
             
       
@@ -123,7 +93,37 @@
       
             
                 <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (8) </a>
                 </li>
             
       
@@ -135,7 +135,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (10) </a>
                 </li>
             
       
@@ -148,6 +148,20 @@
   <ul class="archive-list">
     
     
+    
+        
+        
+        
+        
+            
+            <li>
+                <a href="/2014/05">
+                    2014-05 (1)
+                </a>
+            </li>
+
+        
+        
     
         
         
@@ -609,64 +623,44 @@ SingleStep(jvmtiEnv *jvmti_env,
 <div class="highlight"><pre><code class="sh language-sh" data-lang="sh">java -classpath . -agentpath:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/jvmagent/TraceAgent.so<span class="o">=</span>log.txt PossibleReordering
 </code></pre></div>
 <p>即可得到指令次序信息：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Thread-0    LPossibleReordering$1;  0   run 0:23    
-Thread-0    LPossibleReordering$1;  1   run 0:23    
-Thread-0    LPossibleReordering$1;  2   run 0:23    
-Thread-0    LPossibleReordering$1;  3   run 0:23    
-Thread-0    LPossibleReordering$1;  4   run 0:23    
-Thread-0    LPossibleReordering$1;  7   run 0:23    
-Thread-0    LPossibleReordering$1;  8   run 0:23    
-Thread-0    LPossibleReordering$1;  11  run 0:23    
-Thread-0    LPossibleReordering$1;  14  run 0:23    
-Thread-0    LPossibleReordering$1;  17  run 0:23    
-Thread-0    LPossibleReordering$1;  20  run 0:23    
-Thread-0    LPossibleReordering$1;  2   run 0:23    
-Thread-0    LPossibleReordering$1;  3   run 0:23    
-Thread-0    LPossibleReordering$1;  4   run 0:23    
-Thread-0    LPossibleReordering$1;  23  run 0:23    
-Thread-1    LPossibleReordering$2;  0   run 0:93    
-Thread-1    LPossibleReordering$2;  1   run 0:93    
-Thread-1    LPossibleReordering$2;  2   run 0:93    
-Thread-1    LPossibleReordering$2;  3   run 0:93    
-Thread-1    LPossibleReordering$2;  4   run 0:93    
-Thread-1    LPossibleReordering$2;  7   run 0:93    
-Thread-1    LPossibleReordering$2;  8   run 0:93    
-Thread-1    LPossibleReordering$2;  11  run 0:93    
-Thread-1    LPossibleReordering$2;  14  run 0:93    
-Thread-1    LPossibleReordering$2;  17  run 0:93    
-Thread-1    LPossibleReordering$2;  18  run 0:93    
-Thread-1    LPossibleReordering$2;  21  run 0:93    
-Thread-1    LPossibleReordering$2;  24  run 0:93    
-Thread-1    LPossibleReordering$2;  27  run 0:93    
-Thread-1    LPossibleReordering$2;  28  run 0:93    
-Thread-1    LPossibleReordering$2;  31  run 0:93    
-Thread-1    LPossibleReordering$2;  34  run 0:93    
-Thread-1    LPossibleReordering$2;  37  run 0:93    
-Thread-1    LPossibleReordering$2;  38  run 0:93    
-Thread-1    LPossibleReordering$2;  41  run 0:93    
-Thread-1    LPossibleReordering$2;  44  run 0:93    
-Thread-1    LPossibleReordering$2;  47  run 0:93    
-Thread-1    LPossibleReordering$2;  48  run 0:93    
-Thread-1    LPossibleReordering$2;  51  run 0:93    
-Thread-1    LPossibleReordering$2;  54  run 0:93    
-Thread-1    LPossibleReordering$2;  57  run 0:93    
-Thread-1    LPossibleReordering$2;  58  run 0:93    
-Thread-1    LPossibleReordering$2;  61  run 0:93    
-Thread-1    LPossibleReordering$2;  64  run 0:93    
-Thread-1    LPossibleReordering$2;  67  run 0:93    
-Thread-1    LPossibleReordering$2;  68  run 0:93    
-Thread-1    LPossibleReordering$2;  71  run 0:93    
-Thread-1    LPossibleReordering$2;  74  run 0:93    
-Thread-1    LPossibleReordering$2;  77  run 0:93    
-Thread-1    LPossibleReordering$2;  78  run 0:93    
-Thread-1    LPossibleReordering$2;  81  run 0:93    
-Thread-1    LPossibleReordering$2;  84  run 0:93    
-Thread-1    LPossibleReordering$2;  87  run 0:93    
-Thread-1    LPossibleReordering$2;  90  run 0:93    
-Thread-1    LPossibleReordering$2;  2   run 0:93    
-Thread-1    LPossibleReordering$2;  3   run 0:93    
-Thread-1    LPossibleReordering$2;  4   run 0:93    
-Thread-1    LPossibleReordering$2;  93  run 0:93    
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Thread-0    LPossibleReordering$1;  0   run 0:10    
+Thread-0    LPossibleReordering$1;  1   run 0:10    
+Thread-1    LPossibleReordering$2;  0   run 0:80    
+Thread-0    LPossibleReordering$1;  4   run 0:10    
+Thread-0    LPossibleReordering$1;  7   run 0:10    
+Thread-0    LPossibleReordering$1;  10  run 0:10    
+Thread-1    LPossibleReordering$2;  1   run 0:80    
+Thread-1    LPossibleReordering$2;  4   run 0:80    
+Thread-1    LPossibleReordering$2;  7   run 0:80    
+Thread-1    LPossibleReordering$2;  10  run 0:80    
+Thread-1    LPossibleReordering$2;  11  run 0:80    
+Thread-1    LPossibleReordering$2;  14  run 0:80    
+Thread-1    LPossibleReordering$2;  17  run 0:80    
+Thread-1    LPossibleReordering$2;  20  run 0:80    
+Thread-1    LPossibleReordering$2;  21  run 0:80    
+Thread-1    LPossibleReordering$2;  24  run 0:80    
+Thread-1    LPossibleReordering$2;  27  run 0:80    
+Thread-1    LPossibleReordering$2;  30  run 0:80    
+Thread-1    LPossibleReordering$2;  31  run 0:80    
+Thread-1    LPossibleReordering$2;  34  run 0:80    
+Thread-1    LPossibleReordering$2;  37  run 0:80    
+Thread-1    LPossibleReordering$2;  40  run 0:80    
+Thread-1    LPossibleReordering$2;  41  run 0:80    
+Thread-1    LPossibleReordering$2;  44  run 0:80    
+Thread-1    LPossibleReordering$2;  47  run 0:80    
+Thread-1    LPossibleReordering$2;  50  run 0:80    
+Thread-1    LPossibleReordering$2;  51  run 0:80    
+Thread-1    LPossibleReordering$2;  54  run 0:80    
+Thread-1    LPossibleReordering$2;  57  run 0:80    
+Thread-1    LPossibleReordering$2;  60  run 0:80    
+Thread-1    LPossibleReordering$2;  61  run 0:80    
+Thread-1    LPossibleReordering$2;  64  run 0:80    
+Thread-1    LPossibleReordering$2;  67  run 0:80    
+Thread-1    LPossibleReordering$2;  70  run 0:80    
+Thread-1    LPossibleReordering$2;  71  run 0:80    
+Thread-1    LPossibleReordering$2;  74  run 0:80    
+Thread-1    LPossibleReordering$2;  77  run 0:80    
+Thread-1    LPossibleReordering$2;  80  run 0:80        
 </code></pre></div>
 <p>最终的源代码中，我还输出了线程名，和方法的指令地址范围。</p>
 
@@ -682,18 +676,11 @@ final class PossibleReordering<span class="nv">$1</span> implements java.lang.Ru
 
 <span class="k">  </span>public void run<span class="o">()</span>;
     Code:
-       0: iconst_0      
-       1: istore_1      
-       2: iload_1       
-       3: iconst_1      
-       4: if_icmpge     23
-       7: iconst_1      
-       8: putstatic     <span class="c">#2                  // Field PossibleReordering.a:I</span>
-      11: getstatic     <span class="c">#3                  // Field PossibleReordering.b:I</span>
-      14: putstatic     <span class="c">#4                  // Field PossibleReordering.x:I</span>
-      17: iinc          1, 1
-      20: goto          2
-      23: <span class="k">return</span>        
+       0: iconst_1      
+       1: putstatic     <span class="c">#2                  // Field PossibleReordering.a:I</span>
+       4: getstatic     <span class="c">#3                  // Field PossibleReordering.b:I</span>
+       7: putstatic     <span class="c">#4                  // Field PossibleReordering.x:I</span>
+      10: <span class="k">return</span>        
 <span class="o">}</span>
 </code></pre></div><div class="highlight"><pre><code class="sh language-sh" data-lang="sh"><span class="nv">$ </span>javap -c PossibleReordering<span class="se">\$</span>2.class 
 Compiled from <span class="s2">&quot;PossibleReordering.java&quot;</span>
@@ -706,49 +693,42 @@ final class PossibleReordering<span class="nv">$2</span> implements java.lang.Ru
 
 <span class="k">  </span>public void run<span class="o">()</span>;
     Code:
-       0: iconst_0      
-       1: istore_1      
-       2: iload_1       
-       3: iconst_1      
-       4: if_icmpge     93
-       7: iconst_1      
-       8: putstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      11: getstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      14: putstatic     <span class="c">#4                  // Field PossibleReordering.y:I</span>
-      17: iconst_1      
-      18: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      21: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      24: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      27: iconst_1      
-      28: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      31: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      34: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      37: iconst_1      
-      38: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      41: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      44: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      47: iconst_1      
-      48: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      51: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      54: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      57: iconst_1      
-      58: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      61: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      64: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      67: iconst_1      
-      68: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      71: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      74: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      77: iconst_1      
-      78: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
-      81: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
-      84: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
-      87: iinc          1, 1
-      90: goto          2
-      93: <span class="k">return</span>        
+       0: iconst_1      
+       1: putstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+       4: getstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+       7: putstatic     <span class="c">#4                  // Field PossibleReordering.y:I</span>
+      10: iconst_1      
+      11: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      14: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      17: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      20: iconst_1      
+      21: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      24: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      27: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      30: iconst_1      
+      31: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      34: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      37: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      40: iconst_1      
+      41: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      44: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      47: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      50: iconst_1      
+      51: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      54: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      57: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      60: iconst_1      
+      61: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      64: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      67: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      70: iconst_1      
+      71: putstatic     <span class="c">#3                  // Field PossibleReordering.a:I</span>
+      74: getstatic     <span class="c">#2                  // Field PossibleReordering.b:I</span>
+      77: putstatic     <span class="c">#5                  // Field PossibleReordering.x:I</span>
+      80: <span class="k">return</span>        
 <span class="o">}</span>
 </code></pre></div>
-<p>可以看出，确实是一个线程的run方法指令范围是 <code>0:23</code> ，另一个是 <code>0:93</code>，说明我们正确获取了相应指令。</p>
+<p>可以看出，确实是一个线程的run方法指令范围是 <code>0:10</code> ，另一个是 <code>0:80</code>，说明我们正确获取了相应指令。</p>
 
 <p>完整的源代码，包含如何编译，运行，可以在我的GitHub中找到：<a href="https://github.com/minixalpha/Demo/tree/master/AgentDemo">AgentDemo</a></p>
 

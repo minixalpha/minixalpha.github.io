@@ -2,6 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://minixalpha.github.io/%E8%8B%B1%E8%AF%AD/2014/05/05/learn-english-10-11.html</loc>
+    
+    <lastmod>2014-05-05T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html</loc>
     
     <lastmod>2014-04-28T00:00:00+08:00</lastmod>
@@ -324,6 +333,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
   
   
   
