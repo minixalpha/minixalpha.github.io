@@ -69,25 +69,7 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (12) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
+                <a href="/categories/java"> java (9) </a>
                 </li>
             
       
@@ -99,19 +81,19 @@
       
             
                 <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (17) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (8) </a>
+                <a href="/categories/英语"> 英语 (10) </a>
                 </li>
             
       
@@ -123,7 +105,13 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
+                <a href="/categories/技术"> 技术 (13) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
                 </li>
             
       
@@ -135,7 +123,19 @@
       
             
                 <li>
-                <a href="/categories/读书"> 读书 (1) </a>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -203,10 +203,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/05">
-                    2014-05 (11)
+                    2014-05 (12)
                 </a>
             </li>
 
@@ -457,6 +462,41 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/28/read-openjdk-src-LinkedList.html"> OpenJDK 源码阅读之 LinkedList</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-05-28</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源码阅读之 LinkedList</h1>
+
+<hr>
+
+<h2>概要</h2>
+
+<ul>
+<li>类继承关系</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
+    java.util.AbstractCollection&lt;E&gt;
+        java.util.AbstractList&lt;E&gt;
+            java.util.AbstractSequentialList&lt;E&gt;
+                java.util.LinkedList&lt;E&gt;
+</code></pre></div> 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/28/read-openjdk-src-LinkedList.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/27/read-openjdk-src.html"> 开始OpenJDK源代码阅读</a> </br>
       </div>
 
@@ -618,48 +658,6 @@ implements NavigableMap&lt;K,V&gt;, Cloneable, Serializable
 </tbody></table>
  
         <a href="/%E8%8B%B1%E8%AF%AD/2014/05/25/learn-english-1314.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/24/read-openjdk-src-ArrayList.html"> OpenJDK 源码阅读之 ArrayList</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-05-24</li> 
-          <li class="post-category"> 
-           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>OpenJDK 源码阅读之 ArrayList</h1>
-
-<hr>
-
-<h2>概要</h2>
-
-<ul>
-<li>类继承关系 </li>
-</ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span>
-    <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">AbstractCollection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-        <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-            <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-</code></pre></div>
-<ul>
-<li>定义</li>
-</ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-        <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
-<span class="o">{</span>
-<span class="o">}</span>
-</code></pre></div> 
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/24/read-openjdk-src-ArrayList.html"> Read More ... </a> </br>
       </div>
 
     </li>

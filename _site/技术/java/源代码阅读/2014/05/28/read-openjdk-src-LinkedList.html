@@ -462,23 +462,107 @@
 
 <hr>
 
-<h2>定义</h2>
+<h2>概要</h2>
+
+<ul>
+<li>类继承关系</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
+    java.util.AbstractCollection&lt;E&gt;
+        java.util.AbstractList&lt;E&gt;
+            java.util.AbstractSequentialList&lt;E&gt;
+                java.util.LinkedList&lt;E&gt;
+</code></pre></div>
+<ul>
+<li>定义</li>
+</ul>
 <div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
     <span class="kd">extends</span> <span class="n">AbstractSequentialList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
     <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
 <span class="o">{</span>
 <span class="o">}</span>
 </code></pre></div>
-<h2>盲点</h2>
+<ul>
+<li>要点</li>
+</ul>
 
+<ol>
+<li>双链表</li>
+<li>非同步</li>
+<li>fail-fast: 即创建 iterator 后，对链表进行了添加，删除，但是却没有用 iterator 的方法，就会抛出 ConcurrentModificationException 异常。</li>
+</ol>
+
+<h2>实现</h2>
+
+<ul>
+<li>Node</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">E</span> <span class="n">item</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">;</span>
+
+    <span class="n">Node</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>双链表每个结点由 <code>Node</code> 类表示, 由其成员可以看出，确实是一个双链表。</p>
+
+<ul>
+<li>add</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Appends the specified element to the end of this list.</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;This method is equivalent to {@link #addLast}.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param e element to be appended to this list</span>
+<span class="cm"> * @return {@code true} (as specified by {@link Collection#add})</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">linkLast</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p><code>add</code> 操作会在表的最后添加一个元素，调用 <code>linkLast</code> 实现。</p>
+
+<ul>
+<li>LinkLast</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kt">void</span> <span class="nf">linkLast</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">l</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+    <span class="k">else</span>
+        <span class="n">l</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+    <span class="n">size</span><span class="o">++;</span>
+    <span class="n">modCount</span><span class="o">++;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p><code>linkLast</code> 先生成新的结点，再将原来的最后结点的 <code>next</code> 指向新结点，需要注意链表为空时的情况。另外，新结点的 <code>prev</code>, <code>next</code> 都是在其构造函数中设置的，所以需要将其相邻结点传入。构造函数为：</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="n">E</span> <span class="n">item</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="n">Node</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div>
 <ul>
 <li>serialVersionUID</li>
 </ul>
 <div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">876323262645176354L</span><span class="o">;</span>
 </code></pre></div>
 <p>序列化版本号，如果前一版本序列化后，后一版本发生了很大改变，就使用这个号告诉虚拟机，不能反序列化了。</p>
-
-<h2>问题</h2>
 
 <ul>
 <li>writeObject</li>
@@ -518,8 +602,6 @@
 </code></pre></div>
 <p>注意后者没有检查　<code>modCount</code>，这是为什么呢？之前看 <code>ArrayList</code>的时候觉得是为线程安全考虑的，可是现在为什么又不检查了呢？虽然两个文件的注释中都说到，如果有多个线程操作此数据结构，应该从外部进行同步。但是一个检查，一个不检查是几个意思呀？</p>
 
-<h2>思考</h2>
-
 <ul>
 <li>维护数据结构一致性</li>
 </ul>
@@ -549,8 +631,6 @@
 </code></pre></div>
 <p>注意返回的是数据，而不是<code>Node</code>，外部根本不需要知道 <code>Node</code> 的存在。
 另外，为什么 <code>f == null</code> 要抛出异常而不是返回 <code>null</code>？</p>
-
-<h2>问题</h2>
 
 <ul>
 <li>为什么要分成两个函数　</li>
