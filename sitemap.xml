@@ -2,6 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/07/11/java-io-read-bytes.html</loc>
+    
+    <lastmod>2014-07-11T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/28/read-openjdk-src-LinkedList.html</loc>
     
     <lastmod>2014-05-28T00:00:00+08:00</lastmod>
@@ -432,6 +441,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
   
   
   
