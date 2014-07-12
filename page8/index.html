@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
@@ -81,7 +123,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
                 </li>
             
       
@@ -93,49 +135,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -153,10 +153,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (1)
+                    2014-07 (2)
                 </a>
             </li>
 
@@ -473,6 +478,71 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> wsgiref 源代码分析</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-01-24</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>wsgiref 源代码分析</h1>
+
+<h2>wsgiref</h2>
+
+<p><a href="http://docs.python.org/2/library/wsgiref.html">wsgiref</a> 是Python标准库给出的 <a href="http://www.python.org/dev/peps/pep-0333/">WSGI</a> 的参考实现。</p>
+
+<p>WSGI是Python Web 开发中为服务器程序和应用程序设定的标准，满足这一标准的服务器程序和应用程序可以配合使用。我在上一篇博文《<a href="http://blog.csdn.net/on_1y/article/details/18803563">WSGI简介</a>》中对此有详细的介绍。在阅读wsgiref源代码之前，一定要对WSGI有一定了解。</p>
+
+<p>WSGI 在 <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> 中描述，但是只靠阅读PEP 333 可能在理解上还是不够深入，所以阅读官方给出的参考实现是很有必要的。阅读完这份源代码后，不仅有利于对WSGI的理解。而且会让你对服务端程序如何对客户端请求有一个直观的理解，从相对底层的socket监听请求，到上层对HTTP请求的处理。</p>
+
+<p>当然，这只是对WSGI的参考实现，目的是为了描述清楚WSGI，而不是真正用在产品中。如果想对Python Web开发中服务器端的实现有更广泛，更深入的理解，需要进一步阅读Python常用框架的源代码。</p>
+
+<h2>wsgiref 源代码分析</h2>
+
+<p>wsgiref 源代码可以在 <a href="https://pypi.python.org/pypi/wsgiref">pypi wsgiref 0.1.2</a> 下载。另外，我在阅读的过程中作了大量注释，包含模块介绍，调用层次关系，demo的运行结果，等 等，还包含了阅读过程中制作的思维导图。GitHub地址<a href="https://github.com/minixalpha/SourceLearning/tree/master/wsgiref-0.1.2">注释版wsgiref</a>。</p>
+
+<h3>结构</h3>
+
+<p><img src="/assets/blog-images/wsgiref.bmp" alt="wsgiref"></p>
+
+<p>上图描述了wsgiref的所有模块及模块间的调用关系，可以看出，wsgiref有以下模块：</p>
+
+<ul>
+<li><p>simple_server<br>
+这一模块实现了一个简单的 HTTP 服务器，并给出了一个简单的 demo，运行：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">python simple_server.py
+</code></pre></div></li>
+</ul>
+
+<p>会启动这个demo，运行一次请求，并把这次请求中涉及到的环境变量在浏览器中显示出来。</p>
+
+<ul>
+<li>handlers<br>
+simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前者负责接收请求，后者负责具体的处理，
+其中Handler部分主要在handlers中实现。</li>
+<li>headers<br>
+这一模块主要是为HTTP协议中header部分建立数据结构。</li>
+<li>util<br>
+这一模块包含了一些工具函数，主要用于对环境变量，URL的处理。</li>
+<li>validate<br>
+这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准。</li>
+</ul>
+
+<h3>simple_server</h3>
+ 
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
@@ -829,161 +899,6 @@
 <span class="p">)</span>
 </code></pre></div> 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html"> web.py 项目架构分析之 skeleton</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2013-11-14</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>web.py 项目之 skeleton</h1>
-
-<p>skeleton 是 web.py 官网上给出的一个最简单的项目结构示例。</p>
-
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">.
-└── src  
-    ├── code.py  
-    ├── config.py  
-    ├── db.py  
-    ├── sql
-    │   └── tables.sql
-    ├── templates
-    │   ├── base.html
-    │   ├── item.html
-    │   └── listing.html
-    └── view.py
-
-3 directories, 9 files
-</code></pre></div>
-<h2>结构分析</h2>
-
-<h3>控制模块</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#code.py</span>
-
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">view</span><span class="o">,</span> <span class="nn">config</span>
-<span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">render</span>
-
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;index&#39;</span>
-<span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">index</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">listing</span><span class="p">())</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">internalerror</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">debugerror</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
-<p><code>code</code> 模块作为入口:</p>
-
-<ul>
-<li>app 的创建与启动</li>
-<li>url　与　处理类的映射与处理入口</li>
-</ul>
-
-<p>但是，具体的处理并不在这里实现。而是放在了 <code>view</code> 模块中。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的C吗？
-</code></pre></div>
-<h3>显示模块</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#view.py</span>
-
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">db</span>
-<span class="kn">import</span> <span class="nn">config</span>
-
-<span class="n">t_globals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-  <span class="n">datestr</span><span class="o">=</span><span class="n">web</span><span class="o">.</span><span class="n">datestr</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">render</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;templates/&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> 
-    <span class="nb">globals</span><span class="o">=</span><span class="n">t_globals</span><span class="p">)</span>
-<span class="n">render</span><span class="o">.</span><span class="n">_keywords</span><span class="p">[</span><span class="s">&#39;globals&#39;</span><span class="p">][</span><span class="s">&#39;render&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render</span>
-
-<span class="k">def</span> <span class="nf">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">):</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</code></pre></div>
-<p>从这里可以看出　<code>view</code> 模块</p>
-
-<ul>
-<li>与模板关联 </li>
-<li>从数据库中取数据，然后发给模板</li>
-</ul>
-
-<p>我们再来看看模板:</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
-<span class="c">    templates/base.html</span>
-<span class="c">--&gt;</span>
-
-$def with (page, title=None)
-<span class="nt">&lt;html&gt;&lt;head&gt;</span>
-<span class="nt">&lt;title&gt;</span>my site\
-$if title: : $title\
-<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
-<span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>my site<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
-$:page   
-<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
-</code></pre></div>
-<p><code>base.html</code> 是所有模块的公共部分，每个模块只需要提供
-它的 <code>page</code> ，即内容就可以了。</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
-<span class="c">    templates/listing.html</span>
-<span class="c">--&gt;</span>
-
-$def with (items)
-
-$for item in items:
-    $:render.item(item)
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的V吗
-</code></pre></div>
-<h3>数据操作</h3>
-
-<p>数据库操作分三部分</p>
-
-<ul>
-<li>sql/tables.sql 数据库表定义</li>
-<li>config.py 数据库连接</li>
-<li>db.py 数据库操作</li>
-</ul>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">/* tables.sql */
-CREATE TABLE items (
-    id serial primary key,
-    author_id int references users,
-    body text,
-    created timestamp default current_timestamp 
-);
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">#config.py
-
-import web
-DB = web.database(dbn=&#39;mysql&#39;, db=&#39;skeleton&#39;, user=&#39;root&#39;, pw=&#39;xx&#39;)
-cache = False
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text"># db.py
-import config
-
-def listing(\**k):
-    return config.DB.select(&#39;items&#39;, **k)
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这是MVC中的M吗
-</code></pre></div>
-<p>这是 web.py 中最基本的一个项目结构。应该是使用的MVC设计模式。但是
-因为程序本身不大，还体会不到 MVC 的好处。</p>
- 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html"> Read More ... </a> </br>
       </div>
 
     </li>

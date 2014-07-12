@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
@@ -81,7 +123,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
                 </li>
             
       
@@ -93,49 +135,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -153,10 +153,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (1)
+                    2014-07 (2)
                 </a>
             </li>
 
@@ -476,6 +481,118 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/21/read-openjdk-src-LinkedList.html"> OpenJDK 源码阅读之 LinkedList</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-05-21</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源码阅读之 LinkedList</h1>
+
+<hr>
+
+<h2>定义</h2>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+    <span class="kd">extends</span> <span class="n">AbstractSequentialList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+    <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+<span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div>
+<h2>盲点</h2>
+
+<ul>
+<li>serialVersionUID</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">876323262645176354L</span><span class="o">;</span>
+</code></pre></div>
+<p>序列化版本号，如果前一版本序列化后，后一版本发生了很大改变，就使用这个号告诉虚拟机，不能反序列化了。</p>
+
+<h2>问题</h2>
+
+<ul>
+<li>writeObject</li>
+</ul>
+
+<p>比例一下 <code>ArrayList</code> 与 <code>LinkedList</code> 中的 writeObject</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">{</span>
+        <span class="c1">// Write out element count, and any hidden stuff</span>
+        <span class="kt">int</span> <span class="n">expectedModCount</span> <span class="o">=</span> <span class="n">modCount</span><span class="o">;</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
+
+        <span class="c1">// Write out array length</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+
+        <span class="c1">// Write out all elements in the proper order.</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">modCount</span> <span class="o">!=</span> <span class="n">expectedModCount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ConcurrentModificationException</span><span class="o">();</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+</code></pre></div><div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span> <span class="o">{</span>
+        <span class="c1">// Write out any hidden serialization magic</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
+
+        <span class="c1">// Write out size</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+
+        <span class="c1">// Write out all elements in the proper order.</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>注意后者没有检查　<code>modCount</code>，这是为什么呢？之前看 <code>ArrayList</code>的时候觉得是为线程安全考虑的，可是现在为什么又不检查了呢？虽然两个文件的注释中都说到，如果有多个线程操作此数据结构，应该从外部进行同步。但是一个检查，一个不检查是几个意思呀？</p>
+
+<h2>思考</h2>
+
+<ul>
+<li>维护数据结构一致性</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">linkFirst</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">f</span><span class="o">);</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="n">f</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+        <span class="n">size</span><span class="o">++;</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>注意代码第 <code>5</code>行对 <code>f</code> 的检查，<code>6</code> 行对 <code>last</code> 的调整。一定要细心，保证操作后， <code>所有可能</code> 涉及的数据都得到相应更新。</p>
+
+<ul>
+<li>隐藏实现</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="n">E</span> <span class="nf">getFirst</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NoSuchElementException</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>注意返回的是数据，而不是<code>Node</code>，外部根本不需要知道 <code>Node</code> 的存在。
+另外，为什么 <code>f == null</code> 要抛出异常而不是返回 <code>null</code>？</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/21/read-openjdk-src-LinkedList.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E8%8B%B1%E8%AF%AD/2014/05/12/learn-english-12.html"> 学习英语第十二周</a> </br>
       </div>
 
@@ -620,42 +737,6 @@
 <p>使用JVMTI可以编写出一个agent。在运行Java程序时，指定这个agent，那么当虚拟机运行程序时，如果agent中指定的一些事件发生，虚拟机就会调用agent中相应的回调函数。JVMTI提供了一系列可以指定的事件，以及获取虚拟机中信息的函数接口。</p>
  
         <a href="/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2014/04/21/static-in-c.html"> 对C语言中的static关键字的深入理解</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-04-21</li> 
-          <li class="post-category"> 
-           技术&nbsp&nbspc语言&nbsp&nbsp计算机系统
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>对C语言中的static关键字的深入理解</h1>
-
-<p>在阅读一些项目源代码时，我发现很多时候，会把函数和变量声明为static，所以，很好奇为什么要这样做，于是有了下面这篇文章。</p>
-
-<h1>基本概念</h1>
-
-<p>使用static有三种情况：</p>
-
-<ul>
-<li>函数内部static变量</li>
-<li>函数外部static变量</li>
-<li>static函数</li>
-</ul>
-
-<p>函数内部的static变量，关键在于生命周期持久，他的值不会随着函数调用的结束而消失，下一次调用时，static变量的值，还保留着上次调用后的内容。</p>
- 
-        <a href="/%E6%8A%80%E6%9C%AF/c%E8%AF%AD%E8%A8%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2014/04/21/static-in-c.html"> Read More ... </a> </br>
       </div>
 
     </li>

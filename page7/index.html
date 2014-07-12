@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
@@ -81,7 +123,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
                 </li>
             
       
@@ -93,49 +135,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -153,10 +153,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (1)
+                    2014-07 (2)
                 </a>
             </li>
 
@@ -476,6 +481,30 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E5%B7%A5%E5%85%B7/c%E8%AF%AD%E8%A8%80/2014/02/22/gcc-intro.html"> GCC 的基本使用</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-02-22</li> 
+          <li class="post-category"> 
+           工具&nbsp&nbspc语言
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>GCC 的基本使用</h1>
+
+<p><a href="http://gcc.gnu.org/">GCC</a> 是一款非常著名的编译器，支持诸如 C, C++, Java在内的多种程序设计语言，并且提供了许多选项，以支持用户不同程度的需求，例如查看编译中间结果，指定语言标准，指定优化程度等等 ，下面的内容就介绍这些最重要的功能。</p>
+ 
+        <a href="/%E5%B7%A5%E5%85%B7/c%E8%AF%AD%E8%A8%80/2014/02/22/gcc-intro.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> 不要做无谓的坚持和幻想的努力</a> </br>
       </div>
 
@@ -609,71 +638,6 @@ GitHub 和 Jekyll，我们可以打造自己的独立博客，你可以自由地
 <p>另一方面，WSGI需要使得middleware（是中间件么？）易于实现。middleware处于服务器程序与应用程序之间，对服务器程序来说，它相当于应用程序，对应用程序来说，它相当于服务器程序。这样，对用户请求的处理，可以变成多个 middleware 叠加在一起，每个middleware实现不同的功能。请求从服务器来的时候，依次通过middleware，响应从应用程序返回的时候，反向通过层层middleware。我们可以方便地添加，替换middleware，以便对用户请求作出不同的处理。</p>
  
         <a href="/%E6%8A%80%E6%9C%AF/2014/01/26/wsgi-intro.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> wsgiref 源代码分析</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-01-24</li> 
-          <li class="post-category"> 
-           源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>wsgiref 源代码分析</h1>
-
-<h2>wsgiref</h2>
-
-<p><a href="http://docs.python.org/2/library/wsgiref.html">wsgiref</a> 是Python标准库给出的 <a href="http://www.python.org/dev/peps/pep-0333/">WSGI</a> 的参考实现。</p>
-
-<p>WSGI是Python Web 开发中为服务器程序和应用程序设定的标准，满足这一标准的服务器程序和应用程序可以配合使用。我在上一篇博文《<a href="http://blog.csdn.net/on_1y/article/details/18803563">WSGI简介</a>》中对此有详细的介绍。在阅读wsgiref源代码之前，一定要对WSGI有一定了解。</p>
-
-<p>WSGI 在 <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> 中描述，但是只靠阅读PEP 333 可能在理解上还是不够深入，所以阅读官方给出的参考实现是很有必要的。阅读完这份源代码后，不仅有利于对WSGI的理解。而且会让你对服务端程序如何对客户端请求有一个直观的理解，从相对底层的socket监听请求，到上层对HTTP请求的处理。</p>
-
-<p>当然，这只是对WSGI的参考实现，目的是为了描述清楚WSGI，而不是真正用在产品中。如果想对Python Web开发中服务器端的实现有更广泛，更深入的理解，需要进一步阅读Python常用框架的源代码。</p>
-
-<h2>wsgiref 源代码分析</h2>
-
-<p>wsgiref 源代码可以在 <a href="https://pypi.python.org/pypi/wsgiref">pypi wsgiref 0.1.2</a> 下载。另外，我在阅读的过程中作了大量注释，包含模块介绍，调用层次关系，demo的运行结果，等 等，还包含了阅读过程中制作的思维导图。GitHub地址<a href="https://github.com/minixalpha/SourceLearning/tree/master/wsgiref-0.1.2">注释版wsgiref</a>。</p>
-
-<h3>结构</h3>
-
-<p><img src="/assets/blog-images/wsgiref.bmp" alt="wsgiref"></p>
-
-<p>上图描述了wsgiref的所有模块及模块间的调用关系，可以看出，wsgiref有以下模块：</p>
-
-<ul>
-<li><p>simple_server<br>
-这一模块实现了一个简单的 HTTP 服务器，并给出了一个简单的 demo，运行：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python simple_server.py
-</code></pre></div></li>
-</ul>
-
-<p>会启动这个demo，运行一次请求，并把这次请求中涉及到的环境变量在浏览器中显示出来。</p>
-
-<ul>
-<li>handlers<br>
-simple_server模块将HTTP服务器分成了 Server 部分和Handler部分，前者负责接收请求，后者负责具体的处理，
-其中Handler部分主要在handlers中实现。</li>
-<li>headers<br>
-这一模块主要是为HTTP协议中header部分建立数据结构。</li>
-<li>util<br>
-这一模块包含了一些工具函数，主要用于对环境变量，URL的处理。</li>
-<li>validate<br>
-这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准。</li>
-</ul>
-
-<h3>simple_server</h3>
- 
-        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/01/24/wsgiref-src-intro.html"> Read More ... </a> </br>
       </div>
 
     </li>

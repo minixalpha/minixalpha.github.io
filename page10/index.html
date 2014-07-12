@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
@@ -81,7 +123,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
                 </li>
             
       
@@ -93,49 +135,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -153,10 +153,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (1)
+                    2014-07 (2)
                 </a>
             </li>
 
@@ -473,6 +478,82 @@
       <article>
 
 <ul class="post-list">
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> web.py 源代码分析之 web.test 主要文件及测试流程</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2013-11-14</li> 
+          <li class="post-category"> 
+           源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>目录文件说明</h1>
+
+<h2>README</h2>
+
+<p>如何运行测试文件，包含全部测试及分模块测试</p>
+
+<p>调用</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
+</code></pre></div>
+<p>运行全部测试</p>
+
+<p>调用</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/db.py
+</code></pre></div>
+<p>运行db模块测试</p>
+
+<h2>alltest.py</h2>
+
+<p>运行全部测试入口，调用 <code>webtest</code> 模块完成测试</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># alltest.py</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">webtest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<h2>webtest.py</h2>
+
+<p>我们发现 webtest.py 中并没有 main 函数，而是从 <code>web.test</code> 中导入，</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># webtest.py</span>
+<span class="kn">from</span> <span class="nn">web.test</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+<p>也就是说，如果 <code>web.test</code>中有main函数的话，<code>webtest.main()</code>
+其实是调用 <code>web.test</code> 中的main函数。</p>
+
+<p>感觉～ 好神奇</p>
+
+<h2>web.test</h2>
+
+<p>看web目录下的test.py文件，果然发现了main函数，终于找到入口啦~</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">suite</span><span class="p">:</span>
+        <span class="n">main_module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;__main__&#39;</span><span class="p">)</span>
+        <span class="c"># allow command line switches</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)]</span>
+        <span class="n">suite</span> <span class="o">=</span> <span class="n">module_suite</span><span class="p">(</span><span class="n">main_module</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">runTests</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">wasSuccessful</span><span class="p">())</span>
+</code></pre></div>
+<p>把这个main函数改掉，再运行一下：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
+</code></pre></div>
+<p>果然是运行修改后的函数，所以这里确定是入口。</p>
+
+<p>在进入下一步之前，我们需要学习一下Python自动单元测试框架，即<code>unittest</code>模块。关于 <code>unittest</code> ，可以参考这篇文章：
+<a href="http://www.ibm.com/developerworks/cn/linux/l-pyunit/">Python自动单元测试框架</a></p>
+ 
+        <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
     
     <li>
       <div class="post-title">
