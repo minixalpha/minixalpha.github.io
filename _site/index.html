@@ -69,6 +69,48 @@
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
@@ -81,7 +123,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
                 </li>
             
       
@@ -93,49 +135,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (19) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (5) </a>
                 </li>
             
       
@@ -153,10 +153,15 @@
         
         
         
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (1)
+                    2014-07 (2)
                 </a>
             </li>
 
@@ -476,6 +481,30 @@
     
     <li>
       <div class="post-title">
+        <a href="/2014/07/12/java-io-write-bytes.html"> Java Io Write Bytes</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-07-12</li> 
+          <li class="post-category"> 
+           
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输出</h1>
+
+<p>标签（空格分隔）： 源代码阅读 Java 封神之路</p>
+ 
+        <a href="/2014/07/12/java-io-write-bytes.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/07/11/java-io-read-bytes.html"> OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输入</a> </br>
       </div>
 
@@ -610,56 +639,6 @@
 4) 非线程安全</p>
  
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/26/read-openjdk-src-TreeMap.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/25/read-openjdk-src-HashMap.html"> OpenJDK 源码阅读之 HashMap</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-05-25</li> 
-          <li class="post-category"> 
-           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>OpenJDK 源代码阅读之 HashMap</h1>
-
-<hr>
-
-<h2>概要</h2>
-
-<ul>
-<li>类继承关系</li>
-</ul>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
-    java.util.AbstractMap&lt;K,V&gt;
-        java.util.TreeMap&lt;K,V&gt;
-</code></pre></div>
-<ul>
-<li>定义 </li>
-</ul>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">public class TreeMap&lt;K,V&gt;
-extends AbstractMap&lt;K,V&gt;
-implements NavigableMap&lt;K,V&gt;, Cloneable, Serializable
-</code></pre></div>
-<ul>
-<li>要点</li>
-</ul>
-
-<p>1) 与 Hashtable 区别在于：非同步，允许 <code>null</code>
-2) 不保证次序，甚至不保证次序随时间不变
-3) 基本操作 put, get 常量时间
-4) 遍历操作 与 capacity+size 成正比
-5) HashMap 性能与 <code>capacity</code> 和 <code>load factor</code> 相关，<code>load factor</code> 是当前元素个数与 <code>capacity</code> 的比值，通常设定为 <code>0.75</code>，如果此值过大，空间利用率高，但是冲突的可能性增加，因而可能导致查找时间增加，如果过小，反之。当元素个数大于 <code>capacity * load_factor</code> 时，<code>HashMap</code> 会重新安排 Hash 表。因此高效地使用 <code>HashMap</code> 需要预估元素个数，设置最佳的 <code>capacity</code> 和 <code>load factor</code> ，使得重新安排 Hash 表的次数下降。</p>
- 
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/25/read-openjdk-src-HashMap.html"> Read More ... </a> </br>
       </div>
 
     </li>
