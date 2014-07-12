@@ -12,6 +12,7 @@ comments: true
 
 ### 字节流输出
 
+
 ![java_io_write_bytes](/assets/blog-images/java_io_write_bytes.png)
 
 图1 Java 字节输出类
