@@ -69,43 +69,13 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (15) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -123,19 +93,55 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -158,10 +164,25 @@
         
         
         
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (2)
+                    2014-07 (5)
                 </a>
             </li>
 
@@ -481,6 +502,229 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/12/jmm-papers.html"> Java 内存模型论文阅读</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-12</li> 
+          <li class="post-category"> 
+           科研
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>Java 内存模型论文阅读</h1>
+
+<h2>引言</h2>
+
+<p>Java 的内存模型最早出现在1995年，但是自1997年起，这一内存模型被发现了许多严重的错误和缺陷，它阻碍了很多优化措施，对程序的安全性也没有足够的保证。2001年<a href="https://www.jcp.org/en/jsr/detail?id=133">JSR 133</a>被确立下来，由William Pugh领导，专家组的成员包括了Adve，Doug Lea， William Pugh等。2004年，JSR 133最终版本发布。2005年，Manson  Jeremy, William Pugh, 和 Sarita V. Adve 一同发表了论文 <em>The Java memory model</em>，描述了最新的Java内存模型，这一内存模型在Java 5.0中引入，一直沿用至今。此后，科学家们对Java内存模型进行了进一步的研究的探索，但大的改动并没有出现。</p>
+
+<h2>论文介绍</h2>
+
+<h3>Pugh2000</h3>
+
+<ul>
+<li><p>论文名
+Pugh W. The Java memory model is fatally flawed[J]. Concurrency - Practice and Experience, 2000, 12(6): 445-455.</p></li>
+<li><p>主要内容
+介绍了现有Java内存模型的不足之处：
+    * 难以理解，不同的人有不同解读
+    * 禁止了很多编译器优化，大多数JVM实现都违反Java内存模型
+    * 一些常用编程范式违反Java内存模型
+    * 没有考虑到在共享内存，弱一致性内存模型下实现Java所带来的一些问题</p></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Gontmakher 1997: 证明了Java内存模型需要Coherence</li>
+</ul></li>
+</ul>
+
+<h3><strong>Manson 2005</strong></h3>
+
+<ul>
+<li><p>论文名
+Manson J, Pugh W, Adve S V. The Java memory model[M]. ACM, 2005.</p></li>
+<li><p>主要内容
+JSR 133的成果，介绍了新的Java内存模型，由Java 5.0引入，沿用至今。
+基本思想包括：
+    * 对满足 Data Race Free 的程序保证顺序一致性(sequential consistency)
+    * 对没有正确同步的程序，使用causality的概念加以限制，以保证程序的安全性
+    * 新的内存模型足够强，以保证安全性，又足够弱，以保证编译器可以使用足够的优化</p></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Lamport 1979: 提出 Sequential Consistency 概念</li>
+<li>Relaxed models in academia and commercial hardware
+        - Adve 1990
+        - Adve 1993
+        - Dubois 1986
+        - Gharachorloo 1990
+        - IBM 1983(System/370 Principles of Operation)
+        - May 1994(The PowerPC Architecture)
+        - Sites 1995(Alpha AXP Architecture Reference Manual)
+        - Weaver 1994(The SPARC Architecture Manual)</li>
+<li>SC for DRF
+        - Adve 1990
+        - Adve 1993
+        - Gharachorloo 1990</li>
+<li>Flaws in original Java Memory Model
+        - Pugh 1999</li>
+<li>Original Java Memory Model Research
+        - Gosling 1996
+        - Kotrajaras 2001
+        - Saraswat 2004</li>
+</ul></li>
+</ul>
+
+<h3><strong>Polyakov 2006</strong></h3>
+
+<ul>
+<li><p>论文名
+Polyakov S, Schuster A. 
+<em>Verification of the Java causality requirements</em>
+[M]//Hardware and Software, Verification and Testing. Springer Berlin Heidelberg, 2006: 224-246.</p></li>
+<li><p>主要内容
+    * 证明验证causality是NP-complete的
+    * 跟踪每个线程实际运行时 read 操作的顺序可以简化验证
+    * 对可简化的验证提出了多项式算法
+    * 不能简化的提出非多项式算法（仅用于短的测试序列）
+    * 使用了Post-mortem的方法，实际运行一个多线程程序，在JVM或者定制过的JVM或者模拟器上运行程序，拿到trace，分析trace，以验证内存是否有问题
+    * 使用frontier graph验证</p></li>
+<li><p>参考文献</p>
+
+<ul>
+<li>Boehm 2005: 通过库实现多线程不能保证程序正确性</li>
+<li>causal acyclicity 形式化定义(reach condition)：
+      -   Suﬃcient System Requirements for  Supporting the PLpc Memory Model. 1993
+      -  Specifying System Requirements for Memory Consistency Models. 1993</li>
+<li>Gibbons 1993：使用frontier graph验证SC</li>
+</ul></li>
+</ul>
+ 
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/12/jmm-papers.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/09/learn-english-3.html"> 学习英语第三周</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-09</li> 
+          <li class="post-category"> 
+           英语
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>学习英语第三周</h1>
+
+<h2>阅读英文原著</h2>
+
+<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
+
+<table><thead>
+<tr>
+<th align="center">Book</th>
+<th align="center">Time</th>
+<th align="center">Total Time</th>
+<th align="center">Progress</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.03  16:00-17:30 18:30-19:00</td>
+<td align="center">2h</td>
+<td align="center">487/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.04  13:00-14:00 18:40-19:40</td>
+<td align="center">2h</td>
+<td align="center">510/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.05  12:30-13:10 19:00-20:00</td>
+<td align="center">1.6h</td>
+<td align="center">530/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.06  13:00-13:40 18:50-20:10</td>
+<td align="center">2h</td>
+<td align="center">564/625</td>
+</tr>
+<tr>
+<td align="center">The Three Musketeers</td>
+<td align="center">2014.03.07  13:00-13:45  19:00-20:00 21:00-23:15</td>
+<td align="center">4h</td>
+<td align="center">625/625</td>
+</tr>
+<tr>
+<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
+<td align="center">2014.03.08 16:30-18:00</td>
+<td align="center">1.5h</td>
+<td align="center">30/309</td>
+</tr>
+<tr>
+<td align="center">Harry Potter and the Philosopher&#39;s Stone</td>
+<td align="center">2014.03.09 12:30-14:30</td>
+<td align="center">2h</td>
+<td align="center">60/309</td>
+</tr>
+</tbody></table>
+
+<p>这周把 <em>The Three Musketeers</em> 阅读完了，第一本英文小说，从一开始看40页需要六个小时，到最后基本可以流畅地看下来，感觉还是不错的。</p>
+
+<p>下面是关键数据：</p>
+
+<ul>
+<li>20天（2月16日至3月7日）</li>
+<li>625页</li>
+<li>228402单词</li>
+<li>320个新单词</li>
+</ul>
+ 
+        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/09/learn-english-3.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/07/history-of-data-race-free.html"> Data Race Free 的前世今生</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-07</li> 
+          <li class="post-category"> 
+           科研
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>Data Race Free 的前世今生</h1>
+
+<p>Data Race Free 是多线程程序是非常重要的概念，因为Java 和 C++的内存模型都是基于 Data Race Free 的，这篇文章将介绍这个概念的由来，另一篇文章《Data Race Free的理解》介绍它的主要思想。</p>
+
+<p>事情要追溯到遥远的1979年， Lamport 在他的著名论文  <em>How to make a multiprocessor computer that correctly executes multiprocess programs</em> 中提出了今后在内存模型领域被广泛使用的概念 ：<em>sequential consistency</em>，即顺序一致性。这篇文章告诉我们，你要做一台多处理器的计算机，需要满足什么条件，才能保证程序的正确性。当然，这里的程序跑在不同处理器上，共享同一块内存。虽然现在不说多处理器了，都说多核，多线程，但是问题的本质是没有变的。就是多个执行单元一起完成一个任务，并且通过共享存储单元的方式通信，在这种情况下，底层的系统需要提供什么样的支持，才能保证计算的结果和程序员的预期是一样的。</p>
+ 
+        <a href="/%E7%A7%91%E7%A0%94/2014/03/07/history-of-data-race-free.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E7%A7%91%E7%A0%94/2014/03/06/think-of-data-race-free.html"> 对Data Race Free 的理解</a> </br>
       </div>
 
@@ -575,204 +819,6 @@
 
     </li>
     
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> 学习英语第二周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-03-02</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第二周</h1>
-
-<h2>阅读英文原著</h2>
-
-<p>这周按照预定计划，把每天的阅读量降低了一半，每天20页左右。下面是时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.23  20:20 - 22:20</td>
-<td align="center">2h</td>
-<td align="center">308/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.24  19:00 - 21:00</td>
-<td align="center">2h</td>
-<td align="center">330/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.25  18:40 - 20:10</td>
-<td align="center">1.5h</td>
-<td align="center">355/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.26 18:40 - 20:10</td>
-<td align="center">1.5h</td>
-<td align="center">375/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.27 13:00-14:00 18:40 - 19:40</td>
-<td align="center">2h</td>
-<td align="center">399/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.28 13:00-13:45 19:00-19:30 19:50-20:15</td>
-<td align="center">1.6h</td>
-<td align="center">425/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.01 14:00-16:00</td>
-<td align="center">2h</td>
-<td align="center">444/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.03.02 13:00-15:00</td>
-<td align="center">2h</td>
-<td align="center">465/625</td>
-</tr>
-</tbody></table>
-
-<p>这周阅读起来没什么压力了，下周还按这个节奏，努力一下没准就能读完了。</p>
-
-<h2>学习音标</h2>
-
-<p>这周的任务是学习辅音，到这周结束，已经完成了任务。下面是时间表。</p>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E5%B7%A5%E5%85%B7/2014/02/28/terminal-shell.html"> 控制台，终端，tty，shell等概念的区别</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-02-28</li> 
-          <li class="post-category"> 
-           工具
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>控制台，终端，tty，shell等概念的区别</h1>
-
-<p>使用linux已经有一段时间，却一直弄不明白这几个概念之间的区别。虽然一直在用，但是很多概念都感觉模糊不清，这样不上不下的状态实在令人不爽。下面就澄清一下这些概念。</p>
-
-<p>这些概念本身有着非常浓厚的历史气息，随着时代的发展，他们的含义也在发生改变，它们有些已经失去了最初的含义，但是它们的名字却被保留了下来。</p>
- 
-        <a href="/%E5%B7%A5%E5%85%B7/2014/02/28/terminal-shell.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/02/22/learn-english-1.html"> 学习英语第一周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-02-22</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第一周</h1>
-
-<p>这是英语学习计划的第一周，完成了预定的目标，包括阅读英文原著和学习音标。</p>
-
-<h2>阅读英文原著</h2>
-
-<p>出于对武侠小说的热爱，选择了 The Three Musketeers 作为第一本英文原著，下面是过去一周的时间表。</p>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Total Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.16  15:00 ~ 17:30 18:30 ~ 21:00 21:30 ~ 22:30</td>
-<td align="center">6h</td>
-<td align="center">43/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.17  19:00 ~ 23:00</td>
-<td align="center">4h</td>
-<td align="center">83/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.18  19:00 ~ 20:00 21:00 ~ 24:00</td>
-<td align="center">4h</td>
-<td align="center">123/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.19  18:50 ~  22:50</td>
-<td align="center">4h</td>
-<td align="center">163/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.20  18:30 ~  20:00 21:30 ~ 23:00</td>
-<td align="center">3h</td>
-<td align="center">203/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.21  18:30 ~  21:00</td>
-<td align="center">3h</td>
-<td align="center">243/625</td>
-</tr>
-<tr>
-<td align="center">The Three Musketeers</td>
-<td align="center">2014.02.22  15:30 - 17:30 18:30-21:30</td>
-<td align="center">5h</td>
-<td align="center">283/625</td>
-</tr>
-</tbody></table>
-
-<p>按照计划，每天40页，每两页只可以查一个单词，已经按时完成了。可以看出，除了最后一天晚节不保（也可能是我记错时间了），整体上看，仅仅是在七天内，阅读的速度就有一定改变。第一天足足用了六个小时，现在还记得当时的感觉，几乎看不懂，脑子里只有一个大概的模糊的印象，知道故事大体上发生了什么。后面几天渐入佳境，虽然有的地方还是看不明白，比如生词太多，词组不知道什么意思，句子太长，但是总体来看，还是在进步的。</p>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/02/22/learn-english-1.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
 </ul>
 
 <!-- Pagination links -->
@@ -821,6 +867,10 @@
   
     
       <a href="/page10">10</a>
+    
+  
+    
+      <a href="/page11">11</a>
     
   
 
