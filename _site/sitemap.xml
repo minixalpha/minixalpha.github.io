@@ -2,6 +2,33 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2014/07/27/singleton.html</loc>
+    
+    <lastmod>2014-07-27T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2014/07/27/facade.html</loc>
+    
+    <lastmod>2014-07-27T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2014/07/25/observer.html</loc>
+    
+    <lastmod>2014-07-25T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://minixalpha.github.io/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/07/12/java-io-write-bytes.html</loc>
     
     <lastmod>2014-07-12T00:00:00+08:00</lastmod>
@@ -450,6 +477,10 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
+  
+  
   
   
   

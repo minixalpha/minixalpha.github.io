@@ -1,0 +1,68 @@
+---
+layout: default
+title: 外观模式
+categories: [技术, 设计模式]
+comments: true
+---
+
+# 外观模式
+
+---
+
+* 定义 
+
+外观模式提供了一个统一的接口，用来访问子系统中的一群接口。外观定义了一个高层接口，让子系统的更容易使用。
+
+* 解释
+
+我有一个多功能的盒子，盒子让提供了100个接口，每个都有不同的功能。现在我要把这个盒子给别人用了，我只想让别人用到其中5个接口，或者别人只需要其中5个接口。那么，我可以再做一个盒子，这个盒子套在原来的盒子外面，并且只提供5个接口。这样，用的人会觉得很方便，我也觉得这样很安全。
+
+我们可能要问，为什么原来的盒子要有100个接口呢？为什么不直接提供5个接口呢？原因可能会很多，可能这个盒子我们没法控制，是别人给我们的。也可能这个盒子要与其它众多盒子配合使用，其它盒子要用到其它的95个接口。
+
+
+* 示例
+
+Tomcat 中有一系列 XXXFacade 类，就是为 XXX类提供一种外观。例如 `org.apache.catalina.connector.RequestFacade` 类，就是 `org.apache.catalina.connector.Request` 类的外观，它的构造器中要指明 `Request` 类：
+
+```java
+public RequestFacade(Request request) {
+
+    this.request = request;
+
+}
+```
+
+它提供的功能，也是调用 `Request` 类的方法完成的，例如：
+
+```java
+@Override
+public Object getAttribute(String name) {
+
+    if (request == null) {
+        throw new IllegalStateException(
+                        sm.getString("requestFacade.nullRequest"));
+    }
+
+    return request.getAttribute(name);
+}
+```
+
+为什么要费此周折呢，直接用 `Request` 类不好么？
+
+```
+不好
+```
+
+原因在于，Tomcat 作为 `Servlet` 容器，是要调用客户端的 `jsp` 代码，并将实现 `HttpServletRequest` 及 `HttpServletResponse` 类的对象传递给客户端代码。如果直接传递 `Request` 对象，那么知道 `Request` 实现细节的程序员就可以通过转型调用 `Request` 的所有 `public` 方法，这是我们不愿意看到的，因为其中一部分 `public` 方法不是给客户端程序员使用的，是用于 Tomcat 内部的。所以，可以为 `Request` 类提供了一个外观类 `RequestFacade`，把 `RequestFacade` 类的对象传递给客户端代码，在 `RequestFacade` 类中，只开放必要的接口。
+
+```java
+protected void doGet(
+HttpServletRequest request, HttpServletResponse response) 
+throws ServletException, IOException {
+	response.getWriter().write("bar");
+}
+```
+
+
+
+

@@ -69,43 +69,13 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (15) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -123,19 +93,55 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
             
                 <li>
+                <a href="/categories/科研"> 科研 (5) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -158,10 +164,25 @@
         
         
         
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
             
             <li>
                 <a href="/2014/07">
-                    2014-07 (2)
+                    2014-07 (5)
                 </a>
             </li>
 
@@ -481,6 +502,221 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/24/read-openjdk-src-ArrayList.html"> OpenJDK 源码阅读之 ArrayList</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-05-24</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源码阅读之 ArrayList</h1>
+
+<hr>
+
+<h2>概要</h2>
+
+<ul>
+<li>类继承关系 </li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span>
+    <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">AbstractCollection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+        <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+            <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+</code></pre></div>
+<ul>
+<li>定义</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+        <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+<span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div> 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/24/read-openjdk-src-ArrayList.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/23/read-openjdk-src-String.html"> OpenJDK 源码阅读之 String</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-05-23</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源代码阅读之 String</h1>
+
+<hr>
+
+<h2>概要</h2>
+
+<ul>
+<li>类继承关系</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
+    java.lang.String
+</code></pre></div>
+<ul>
+<li>定义</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">String</span>
+<span class="kd">extends</span> <span class="n">Object</span>
+<span class="kd">implements</span> <span class="n">Serializable</span><span class="o">,</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;,</span> <span class="n">CharSequence</span>
+</code></pre></div>
+<ul>
+<li>要点</li>
+</ul>
+
+<p>一旦创建就不可改变</p>
+
+<h2>实现</h2>
+
+<ul>
+<li>storage</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/** The value is used for character storage. */</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="kt">char</span> <span class="n">value</span><span class="o">[];</span>
+</code></pre></div>
+<p>可以看出 <code>String</code> 中的数据是如何存储的。</p>
+
+<ul>
+<li>初始化</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">String</span> <span class="n">original</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">hash</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="na">hash</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>可以看出使用 <code>String</code> 类型初始化，新 <code>String</code> 实际上与原来的 <code>String</code> 指向同一块内存。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="kt">char</span> <span class="n">value</span><span class="o">[])</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>如果用 <code>char[]</code> 初始化，可以看出，新分配了内存，并复制，保证了两者相互独立，只是内容相同。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">buffer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">synchronized</span><span class="o">(</span><span class="n">buffer</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">buffer</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>注意用 <code>StringBuffer</code> 初始化时，对同一 <code>buffer</code> 是线程安全的，即初始化 <code>String</code> 的过程中，其它线程不会改变 <code>buffer</code> 的内容。</p>
+
+<p>另外，能告诉我下面这段代码是怎么回事么？</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">   <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">StringBuilder</span> <span class="n">builder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">builder</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>为啥这次不同步了呢？</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/23/read-openjdk-src-String.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/22/read-openjdk-src-HashSet.html"> OpenJDK 源码阅读之 HashSet</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-05-22</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源代码阅读之 HashSet</h1>
+
+<hr>
+
+<h2>概要</h2>
+
+<ul>
+<li>类继承关系</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
+    java.util.AbstractCollection&lt;E&gt;
+        java.util.AbstractSet&lt;E&gt;
+            java.util.HashSet&lt;E&gt;
+</code></pre></div>
+<ul>
+<li>定义</li>
+</ul>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public class HashSet&lt;E&gt;
+extends AbstractSet&lt;E&gt;
+implements Set&lt;E&gt;, Cloneable, Serializable
+</code></pre></div>
+<ul>
+<li>要点</li>
+</ul>
+
+<ol>
+<li>不保证元素次序，甚至不保证次序不随时间变化</li>
+<li>基本操作(add, remove, contains, size)常量时间</li>
+<li>迭代操作与当前元素个数加底层容量大小成正比</li>
+<li>不保证同步</li>
+</ol>
+
+<h2>思考</h2>
+
+<ul>
+<li>总体实现</li>
+</ul>
+
+<p>底层是用 <code>HashMap</code> 实现的，<code>Set</code> 中的数据是 <code>HashMap</code> 的 <code>key</code>，所有的 <code>key</code> 指向同一个 <code>value</code>, 此 <code>value</code> 定义为：</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="c1">// Dummy value to associate with an Object in the backing Map</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">PRESENT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
+</code></pre></div>
+<p>再看一下 <code>add</code>，大概就能明白了</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Adds the specified element to this set if it is not already present.</span>
+<span class="cm"> * More formally, adds the specified element &lt;tt&gt;e&lt;/tt&gt; to this set if</span>
+<span class="cm"> * this set contains no element &lt;tt&gt;e2&lt;/tt&gt; such that</span>
+<span class="cm"> * &lt;tt&gt;(e==null&amp;nbsp;?&amp;nbsp;e2==null&amp;nbsp;:&amp;nbsp;e.equals(e2))&lt;/tt&gt;.</span>
+<span class="cm"> * If this set already contains the element, the call leaves the set</span>
+<span class="cm"> * unchanged and returns &lt;tt&gt;false&lt;/tt&gt;.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param e element to be added to this set</span>
+<span class="cm"> * @return &lt;tt&gt;true&lt;/tt&gt; if this set did not already contain the specified</span>
+<span class="cm"> * element</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="n">PRESENT</span><span class="o">)==</span><span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+<ul>
+<li>load factor</li>
+</ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">HashSet</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;(</span><span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">()/.</span><span class="mi">75</span><span class="n">f</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">16</span><span class="o">));</span>
+        <span class="n">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>初始化中，注意使用的 <code>HashMap</code> 的 load factor 设置为 0.75，如果太小，就设置成 16. 为什么要 0.75 呢？ 有什么依据吗？</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/22/read-openjdk-src-HashSet.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/21/read-openjdk-src-LinkedList.html"> OpenJDK 源码阅读之 LinkedList</a> </br>
       </div>
 
@@ -631,116 +867,6 @@
 
     </li>
     
-    <li>
-      <div class="post-title">
-        <a href="/2014/05/05/learn-english-1011.html"> Learn English 1011</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-05-05</li> 
-          <li class="post-category"> 
-           
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第十周至第十一周</h1>
-
-<p>标签：英语</p>
-
-<h2>阅读英文原著</h2>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">Harry Potter And The Goblet of Fire</td>
-<td align="center">2014.04.21 ~ 2014.05.04</td>
-<td align="center">312/734</td>
-</tr>
-</tbody></table>
- 
-        <a href="/2014/05/05/learn-english-1011.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/05/05/learn-english-10-11.html"> 学习英语第十周至第十一周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-05-05</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第十周至第十一周</h1>
-
-<h2>阅读英文原著</h2>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">Harry Potter And The Goblet of Fire</td>
-<td align="center">2014.04.21 ~ 2014.05.04</td>
-<td align="center">312/734</td>
-</tr>
-</tbody></table>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/05/05/learn-english-10-11.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html"> 使用JVMTI获取Java多线程程序指令执行次序</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-04-28</li> 
-          <li class="post-category"> 
-           技术&nbsp&nbspjava&nbsp&nbsp虚拟机
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>使用JVMTI获取Java多线程程序指令执行次序</h1>
-
-<hr>
-
-<p>在Java多线程程序中，由于线程调度，指令间的次序在每次运行时都可能不相同，有时候，我们需要得到指令次序，用来分析程序的行为。这样细粒度的底层行为用一般方法很难完成，我们需要借助 <a href="http://docs.oracle.com/javase/7/docs/platform/jvmti/jvmti.html">JVM Tool Interface</a>，即JVMTI，来帮助我们获取Java虚拟机执行时的信息。本文先介绍编写JVMTI程序的基本框架，然后介绍如何使用JVMTI来获取多线程程序中指令之间的次序。</p>
-
-<h2>JVMTI简介</h2>
-
-<p>JVMTI是用于编写开发与监视工具的编程接口，使用它可以检查并控制运行于Java虚拟机上的程序。使用它可以完成性能分析，调试，监视(monitoring)，线程分析，覆盖分析(coverage analysis)等工具。</p>
-
-<p>使用JVMTI可以编写出一个agent。在运行Java程序时，指定这个agent，那么当虚拟机运行程序时，如果agent中指定的一些事件发生，虚拟机就会调用agent中相应的回调函数。JVMTI提供了一系列可以指定的事件，以及获取虚拟机中信息的函数接口。</p>
- 
-        <a href="/%E6%8A%80%E6%9C%AF/java/%E8%99%9A%E6%8B%9F%E6%9C%BA/2014/04/28/get-bci-by-jvmti.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
 </ul>
 
 <!-- Pagination links -->
@@ -789,6 +915,10 @@
   
     
       <a href="/page10">10</a>
+    
+  
+    
+      <a href="/page11">11</a>
     
   
 

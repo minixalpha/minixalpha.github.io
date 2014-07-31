@@ -1,0 +1,85 @@
+---
+layout: default
+title: 观察者模式
+categories: [技术, 设计模式]
+comments: true
+---
+
+# 观察者模式
+
+---
+
+* 定义 
+
+观察者模式定义了对象之间的一对多依赖，当一个对象改变时，所以依赖于它的对象都会得到通知。
+
+
+* 示例
+
+```java
+interface Observer {
+	void update(int data);
+}
+
+class NewsPaper {
+	private LinkedList<Observer> observers;
+
+	public NewsPaper() {
+		observers = new LinkedList<>();
+	}
+
+	public void subscribe(Observer o) {
+		observers.add(o);
+	}
+
+	public void unsubscribe(Observer o) {
+		observers.remove(o);
+	}
+
+	public void changeData(int data) {
+		for (Observer o : observers) {
+			o.update(data);
+		}
+	}
+}
+
+class Reader implements Observer {
+	private String name;
+
+	public Reader(NewsPaper paper, String name) {
+		this.name = name;
+		paper.subscribe(this);
+	}
+
+	@Override
+	public void update(int data) {
+		System.out.println(name + " update data:" + data);
+	}
+}
+
+public class TestObserve {
+	public static void main(String[] args) {
+		NewsPaper newsPaper = new NewsPaper();
+		Reader tom = new Reader(newsPaper, "tom");
+		Reader jack = new Reader(newsPaper, "jack");
+		newsPaper.changeData(10);
+		System.out.println("--");
+		newsPaper.unsubscribe(tom);
+		newsPaper.changeData(5);
+	}
+}
+```
+
+所有  Reader 都是观察者，当他订阅了 NewsPaper 后。NewsPaper 一有新数据，就会通知所有订阅了它的 Reader。
+
+* 为什么
+
+为什么要使用观察者模式？因为在初始化被观察者时，并不知道当数据变化时，需要通知谁。需要通知的对象是动态变化的。
+
+* 谁还用了观察者模式
+
+在 GUI 编程时，我们想要在事件被触发时，执行我们指定的动作。例如想在按钮被点击时弹窗口，就可以通过类似 `AddListener`，将已经实现相应接口的对象添加到按钮的“订阅列表”中，当按钮被点击时，系统会依次调用“订阅列表”中对象的相应方法。弹窗口因此被触发。
+
+
+
+
