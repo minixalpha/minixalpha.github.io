@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
@@ -147,7 +87,67 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
                 </li>
             
       
@@ -160,6 +160,20 @@
   <ul class="archive-list">
     
     
+    
+        
+        
+        
+        
+            
+            <li>
+                <a href="/2014/08">
+                    2014-08 (1)
+                </a>
+            </li>
+
+        
+        
     
         
         
@@ -522,6 +536,34 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/07/11/java-io-read-bytes.html"> OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输入</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-07-11</li> 
+          <li class="post-category"> 
+           技术&nbsp&nbspjava&nbsp&nbsp源代码阅读
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输入</h1>
+
+<p>标签（空格分隔）： 源代码阅读 Java 封神之路</p>
+
+<p>Java 的输入输出总是给人一种很混乱的感觉，要想把这个问题搞清楚，必须对各种与输入输出相关的类之间的关系有所了解。只有你了解了他们之间的关系，知道设计这个类的目的是什么，才能更从容的使用他们。</p>
+
+<p>我们先对 Java I/O 的总体结构进行一个总结，再通过分析源代码，给出把每个类的关键功能是如何实现的。</p>
+ 
+        <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/07/11/java-io-read-bytes.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/28/read-openjdk-src-LinkedList.html"> OpenJDK 源码阅读之 LinkedList</a> </br>
       </div>
 
@@ -678,46 +720,6 @@ implements NavigableMap&lt;K,V&gt;, Cloneable, Serializable
 5) HashMap 性能与 <code>capacity</code> 和 <code>load factor</code> 相关，<code>load factor</code> 是当前元素个数与 <code>capacity</code> 的比值，通常设定为 <code>0.75</code>，如果此值过大，空间利用率高，但是冲突的可能性增加，因而可能导致查找时间增加，如果过小，反之。当元素个数大于 <code>capacity * load_factor</code> 时，<code>HashMap</code> 会重新安排 Hash 表。因此高效地使用 <code>HashMap</code> 需要预估元素个数，设置最佳的 <code>capacity</code> 和 <code>load factor</code> ，使得重新安排 Hash 表的次数下降。</p>
  
         <a href="/%E6%8A%80%E6%9C%AF/java/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2014/05/25/read-openjdk-src-HashMap.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/05/25/learn-english-1314.html"> 学习英语第十三十四周</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-05-25</li> 
-          <li class="post-category"> 
-           英语
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>学习英语第十三十四周</h1>
-
-<p>标签：英语</p>
-
-<h2>阅读英文原著</h2>
-
-<table><thead>
-<tr>
-<th align="center">Book</th>
-<th align="center">Time</th>
-<th align="center">Progress</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center">Harry Potter And The Goblet of Fire</td>
-<td align="center">2014.05.12 ~ 2014.05.23</td>
-<td align="center">734/734</td>
-</tr>
-</tbody></table>
- 
-        <a href="/%E8%8B%B1%E8%AF%AD/2014/05/25/learn-english-1314.html"> Read More ... </a> </br>
       </div>
 
     </li>

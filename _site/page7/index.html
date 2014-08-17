@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/英语"> 英语 (10) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/读书"> 读书 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
                 </li>
             
       
@@ -147,7 +87,67 @@
       
             
                 <li>
-                <a href="/categories/科研"> 科研 (5) </a>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
                 </li>
             
       
@@ -160,6 +160,20 @@
   <ul class="archive-list">
     
     
+    
+        
+        
+        
+        
+            
+            <li>
+                <a href="/2014/08">
+                    2014-08 (1)
+                </a>
+            </li>
+
+        
+        
     
         
         
@@ -522,6 +536,59 @@
     
     <li>
       <div class="post-title">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> C语言中的int类型的范围是由什么决定的</a> </br>
+      </div>
+
+      <div class="post-info">
+        <ol>
+          <li class="post-time">2014-03-06</li> 
+          <li class="post-category"> 
+           计算机系统&nbsp&nbspc语言
+          </li>
+        </ol>
+      </div>
+
+      <div class="post-preview">
+        <h1>C语言中的int类型的范围是由什么决定的</h1>
+
+<p>在 K&amp;R 经典教材 <em>The C Programming Language</em> 的2.2节中，对 int 类型是这样描述的</p>
+
+<blockquote>
+<p>an integer, typically reflecting the natural size of integers on the host machine</p>
+</blockquote>
+
+<p>意思是反映了机器整数类型的 <em>natural size</em>，可是，</p>
+
+<blockquote>
+<p>这个 natural size 又是什么意思呢？</p>
+</blockquote>
+
+<p>书中后来在谈到 short, int, long 的关系时，又说，这些类型由编译器根据机器自由选择合适的大小，但是 short 和 int 至少 16 位，long 至少 32 位。</p>
+
+<p>这里的问题是  </p>
+
+<blockquote>
+<p>编译器是根据什么决定类型大小呢？</p>
+</blockquote>
+
+<p>后面书中又提到，这些类型啊，在<code>&lt;limits.h&gt;</code>中都有，我就在ubuntu下查看了 <code>/usr/include/limits.h</code>，里面确实提到 </p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* Minimum and maximum values a `signed int&#39; can hold.  */</span>
+<span class="cp">#  define INT_MIN   (-INT_MAX - 1)</span>
+<span class="cp">#  define INT_MAX   2147483647</span>
+</code></pre></div>
+<p>但是，这也是一种定义，还是没有说出为什么，我现在想知道的是</p>
+
+<blockquote>
+<p>为什么</p>
+</blockquote>
+ 
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c%E8%AF%AD%E8%A8%80/2014/03/06/think-int-in-c.html"> Read More ... </a> </br>
+      </div>
+
+    </li>
+    
+    <li>
+      <div class="post-title">
         <a href="/%E8%8B%B1%E8%AF%AD/2014/03/02/learn-english-2.html"> 学习英语第二周</a> </br>
       </div>
 
@@ -738,36 +805,6 @@
 <p><a href="http://gcc.gnu.org/">GCC</a> 是一款非常著名的编译器，支持诸如 C, C++, Java在内的多种程序设计语言，并且提供了许多选项，以支持用户不同程度的需求，例如查看编译中间结果，指定语言标准，指定优化程度等等 ，下面的内容就介绍这些最重要的功能。</p>
  
         <a href="/%E5%B7%A5%E5%85%B7/c%E8%AF%AD%E8%A8%80/2014/02/22/gcc-intro.html"> Read More ... </a> </br>
-      </div>
-
-    </li>
-    
-    <li>
-      <div class="post-title">
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> 不要做无谓的坚持和幻想的努力</a> </br>
-      </div>
-
-      <div class="post-info">
-        <ol>
-          <li class="post-time">2014-02-21</li> 
-          <li class="post-category"> 
-           生活
-          </li>
-        </ol>
-      </div>
-
-      <div class="post-preview">
-        <h1>不要做无谓的坚持和幻想的努力</h1>
-
-<p>有时候，你觉得自己一直在坚持和努力，可是从没问问自己这样的坚持和努力有用吗？</p>
-
-<p>其实你就是一只温水里的青蛙，还觉得自己一直都在坚持游泳呢。</p>
-
-<p>最近我有了一个非常明确和重要的启发，就是不要做无谓的坚持和幻想的努力。</p>
-
-<p>我在一个背单词的网站上背了471天单词，不长，不短，再坚持下去我也完全没有问题。但是，这真的就叫坚持，就叫努力吗？</p>
- 
-        <a href="/%E7%94%9F%E6%B4%BB/2014/02/21/no-useless-insistance.html"> Read More ... </a> </br>
       </div>
 
     </li>
