@@ -211,8 +211,10 @@ $$ \sum^{j-1}\_{k=0}{\widehat{\gamma}\_{kj} z_k} $$
 公式可以通过MathJax支持, 右击公式有惊喜。  
 另外，注意 `LaTex` 中下划线与Markdown中冲突，所以需要做转义处理
 
----
+如果不想做转义处理，可以尝试更改 markdown 的 render, 我现在用的是 redcarpet,可以改成 kramdown. 如果用的是　jekyll 基于　markdown 搭建博客，可以在　_config.yml 中设置 render，参考　[jekyll configuration](http://jekyllrb.com/docs/configuration/). 感谢评论中 Wead Hsu 提出这一点。
 
----
+
+另外，有的　render 在解释文章时可能会出问题，换一个　render 可能就解决了，可以自己实验一下。
+
 
 特别感谢 [Cmd Markdown](http://www.zybuluo.com/mdeditor?url=http://www.zybuluo.com/static/editor/md-help.markdown)教我使用Markdown
