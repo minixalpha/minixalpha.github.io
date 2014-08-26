@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (6) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -141,13 +81,73 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
@@ -532,18 +532,18 @@
 
       <article>
 
-<h1>C语言中的int类型的范围是由什么决定的</h1>
+<h1 id="cint">C语言中的int类型的范围是由什么决定的</h1>
 
 <p>在 K&amp;R 经典教材 <em>The C Programming Language</em> 的2.2节中，对 int 类型是这样描述的</p>
 
 <blockquote>
-<p>an integer, typically reflecting the natural size of integers on the host machine</p>
+  <p>an integer, typically reflecting the natural size of integers on the host machine</p>
 </blockquote>
 
 <p>意思是反映了机器整数类型的 <em>natural size</em>，可是，</p>
 
 <blockquote>
-<p>这个 natural size 又是什么意思呢？</p>
+  <p>这个 natural size 又是什么意思呢？</p>
 </blockquote>
 
 <p>书中后来在谈到 short, int, long 的关系时，又说，这些类型由编译器根据机器自由选择合适的大小，但是 short 和 int 至少 16 位，long 至少 32 位。</p>
@@ -551,21 +551,24 @@
 <p>这里的问题是  </p>
 
 <blockquote>
-<p>编译器是根据什么决定类型大小呢？</p>
+  <p>编译器是根据什么决定类型大小呢？</p>
 </blockquote>
 
 <p>后面书中又提到，这些类型啊，在<code>&lt;limits.h&gt;</code>中都有，我就在ubuntu下查看了 <code>/usr/include/limits.h</code>，里面确实提到 </p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* Minimum and maximum values a `signed int&#39; can hold.  */</span>
-<span class="cp">#  define INT_MIN   (-INT_MAX - 1)</span>
-<span class="cp">#  define INT_MAX   2147483647</span>
-</code></pre></div>
+
+<p><code>c
+/* Minimum and maximum values a `signed int' can hold.  */
+#  define INT_MIN	(-INT_MAX - 1)
+#  define INT_MAX	2147483647
+</code></p>
+
 <p>但是，这也是一种定义，还是没有说出为什么，我现在想知道的是</p>
 
 <blockquote>
-<p>为什么</p>
+  <p>为什么</p>
 </blockquote>
 
-<p>于是，我想起了那些年扫过的 《深入理解计算机系统》，英文名叫 <em>Computer Systems: A Programmer&#39;s Perspective</em>，速查之！</p>
+<p>于是，我想起了那些年扫过的 《深入理解计算机系统》，英文名叫 <em>Computer Systems: A Programmer&#8217;s Perspective</em>，速查之！</p>
 
 <p>在2.1节的开头提到，字节(byte)是最小可寻址单位，大多数计算机使用8位的块。
 啊，8位，那位又是什么呢？嗯，位是一种存储结构，一个位只能存储0或者1。</p>
@@ -573,7 +576,7 @@
 <p>后面2.1.2节中提到</p>
 
 <blockquote>
-<p>每台计算机都有一个字长(word size)，指明了整数和指针数据的 nominal size。</p>
+  <p>每台计算机都有一个字长(word size)，指明了整数和指针数据的 nominal size。</p>
 </blockquote>
 
 <p>指针是什么，指针就是内存中的地址啊，假如字长为w位，那么地址的数目就是2^w个啊，那一个地址代表多大内存呢？</p>
@@ -585,7 +588,7 @@
 <p>现在我们是由字长32位，也就是整数的大小32位，推出了内存空间4G。我现在在想：</p>
 
 <blockquote>
-<p>是不是一开始是决定内存空间是4G，所以才定下了字长32位的规矩，由此，机器的natural size是32位， 所以，编译器才将C语言中int类型才是32位呢？</p>
+  <p>是不是一开始是决定内存空间是4G，所以才定下了字长32位的规矩，由此，机器的natural size是32位， 所以，编译器才将C语言中int类型才是32位呢？</p>
 </blockquote>
 
 <p>可是我没有证据啊！</p>
@@ -609,50 +612,60 @@
 <p>其实，总的问题就是</p>
 
 <blockquote>
-<p>字长都与机器的什么部件相关</p>
+  <p>字长都与机器的什么部件相关</p>
 </blockquote>
 
 <p>要解释这个问题，我们发现自己不由自主地来到了《深入理解计算机系统》的第四章“处理器体系结构”。</p>
 
 <p>这一章以一种叫Y86的处理器介绍了处理器体系结构的方方面面。首先介绍了寄存器，寄存器是一种存储部件，存储什么？存储信息，存储信息用来做什么呢？用来计算。我们在C语言中使用一个简单的加法计算，在处理器这一层，就需要使用寄存器来帮助我们计算。我们把一个简单的C语言编译成汇编看看。</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* test_add.c */</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<p>```c
+/* test_add.c */
+#include <stdio.h></stdio.h></p>
 
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<p>int main(void) {
+    int a = 1;
+    int b = 2;
+    int c = a + b;</p>
+
+<pre><code>return 0; }
+</code></pre>
+
+<p>```</p>
+
 <p>使用 GCC 编译一下</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">   gcc -S test_add.c -o test_add.s
-</code></pre></div>
+
+<p><code>
+   gcc -S test_add.c -o test_add.s
+</code></p>
+
 <p>然后查看一下主要代码。</p>
-<div class="highlight"><pre><code class="gas language-gas" data-lang="gas">    <span class="nf">movl</span>    <span class="no">$1</span><span class="p">,</span> <span class="p">-</span><span class="mi">12</span><span class="p">(</span><span class="nv">%ebp</span><span class="p">)</span>
-    <span class="nf">movl</span>    <span class="no">$2</span><span class="p">,</span> <span class="p">-</span><span class="mi">8</span><span class="p">(</span><span class="nv">%ebp</span><span class="p">)</span>
 
-    <span class="nf">movl</span>    <span class="p">-</span><span class="mi">8</span><span class="p">(</span><span class="nv">%ebp</span><span class="p">),</span> <span class="nv">%eax</span>
-    <span class="nf">movl</span>    <span class="p">-</span><span class="mi">12</span><span class="p">(</span><span class="nv">%ebp</span><span class="p">),</span> <span class="nv">%edx</span>
+<p>```gas
+	movl	$1, -12(%ebp)
+	movl	$2, -8(%ebp)</p>
 
-    <span class="nf">addl</span>    <span class="nv">%edx</span><span class="p">,</span> <span class="nv">%eax</span>
-    <span class="nf">movl</span>    <span class="nv">%eax</span><span class="p">,</span> <span class="p">-</span><span class="mi">4</span><span class="p">(</span><span class="nv">%ebp</span><span class="p">)</span>
-</code></pre></div>
+<pre><code>movl	-8(%ebp), %eax
+movl	-12(%ebp), %edx
+
+addl	%edx, %eax
+movl	%eax, -4(%ebp) ```
+</code></pre>
+
 <p>其中的 ebp eax edx 就是寄存器。</p>
 
 <p>可以看出，数据先放到栈里，再从栈里放到寄存器里，然后再进行加法运算，最后再从寄存器里把结果放回栈里。</p>
 
 <p>下面的图是书中给出的一个处理器的抽象视图：</p>
 
-<p><img src="/assets/blog-images/SEQ.png" alt="SEQ_view"></p>
+<p><img src="/assets/blog-images/SEQ.png" alt="SEQ_view" /></p>
 
 <p>栈是什么？栈是一种抽象概念，这里的栈就是指内存。</p>
 
 <p>书里说了，在32位计算机中，这些寄存器的大小就是32位。可见，</p>
 
 <blockquote>
-<p>字长与寄存器大小一样</p>
+  <p>字长与寄存器大小一样</p>
 </blockquote>
 
 <p>除此之外，我们可以看到，需要计算的时候，movl 指令将数据从内存中放到寄存器里，由于内存和寄存器是不同的部件，所以需要一个部件来传递数据，这种部件叫做数据总线。</p>
@@ -660,13 +673,13 @@
 <p>寄存器的大小与字长相同，那么这种数据总线每次能传送的数据也应该与字长相同，所以：</p>
 
 <blockquote>
-<p>字长与数据总线宽度一样</p>
+  <p>字长与数据总线宽度一样</p>
 </blockquote>
 
 <p>另外，再想像一下，你想要从内存中取数据出来，总要告诉内存你取的是哪个地址的数据吧，所以，“地址”这个数据也是要从某个地方传送到内存的。只要传递，就需要有部件支持，这个部件叫做地址总线，地址总线传递地址，地址大小与字长一样，那么，我们可以知道：</p>
 
 <blockquote>
-<p>字长与地址总线宽度一样</p>
+  <p>字长与地址总线宽度一样</p>
 </blockquote>
 
 <p>好了，到了这里，我们的分析就差不多了，总结一下：</p>
@@ -674,14 +687,14 @@
 <p>我们由C语言中int类型的大小，得到了字长这个概念，又从字长这个概念寻找了与其相关的一些机器部件的属性。到现在为此，与字长相关的有:</p>
 
 <ul>
-<li>int 类型</li>
-<li>指针（即内存地址）</li>
-<li>寄存器</li>
-<li>数据总线</li>
-<li>地址总线 </li>
+  <li>int 类型</li>
+  <li>指针（即内存地址）</li>
+  <li>寄存器</li>
+  <li>数据总线</li>
+  <li>地址总线 </li>
 </ul>
 
-<p>在 Wikipedia 的 <a href="http://en.wikipedia.org/wiki/Word_(computer_architecture">Word(computer_architecture)</a>#Table<em>of</em>word_sizes)词条中，我们可以看到自1837年以来，一系列计算机体系结构中与字长相关的一些属性的变化。</p>
+<p>在 Wikipedia 的 <a href="http://en.wikipedia.org/wiki/Word_(computer_architecture)#Table_of_word_sizes">Word(computer_architecture)</a>词条中，我们可以看到自1837年以来，一系列计算机体系结构中与字长相关的一些属性的变化。</p>
 
 <p>我们再想想，为什么要将这么多种部件都设置成相同长度？我想，可能是因为计算机内部实在太复杂了，各个部件之间需要紧密地配合，共同完成复杂的任务。尤其是数据，需要在各个部件之间传递，如果这些部件之间大小不统一，就会增加机器的复杂度，由于，我们将这些部件大小尽可能统一，进而提出字长这种概念来描述计算机的重要性质。</p>
 

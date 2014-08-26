@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (6) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -141,13 +81,73 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
@@ -532,16 +532,17 @@
 
       <article>
 
-<h1>对Data Race Free 的理解</h1>
+<h1 id="data-race-free-">对Data Race Free 的理解</h1>
 
-<h2>Data Race Free 的动机</h2>
-
+<h2 id="data-race-free--1">Data Race Free 的动机</h2>
 <p>Data Race Free 是对多线程程序 <strong>同步程度</strong> 的一种描述，假如你的多线程程序的同步程度满足 DRF 的要求，那么，你的程序会有这样一个好处：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">程序在弱一致性模型下执行，执行的结果与在SC模型下执行一样
-</code></pre></div>
+
+<pre><code>程序在弱一致性模型下执行，执行的结果与在SC模型下执行一样
+</code></pre>
+
 <p>这意味着，程序员在写程序时，可以按SC模型来推断程序的执行。而程序在底层运行时，可以享受弱一致性模型带来的种种优化措施。</p>
 
-<h2>Data Race Free 具体内容</h2>
+<h2 id="data-race-free--2">Data Race Free 具体内容</h2>
 
 <p>DRF 要求多线程程序中不能有冲突的操作。</p>
 
@@ -566,9 +567,9 @@
 <p>从上图可以看出，同步操作将相互冲突的操作隔离开，这种隔离为原本无序的多线程程序添加了一些顺序：</p>
 
 <ul>
-<li>同步操作之间有顺序了</li>
-<li>同步操作与其之前的所有操作之间有顺序了</li>
-<li>同步操作与其之后的所有操作之间有顺序了</li>
+  <li>同步操作之间有顺序了</li>
+  <li>同步操作与其之前的所有操作之间有顺序了</li>
+  <li>同步操作与其之后的所有操作之间有顺序了</li>
 </ul>
 
 <p>这些顺序保证了程序在弱一致性模型下与在SC模型下执行结果一样。</p>
@@ -578,8 +579,10 @@
 <p>如果我们想找一个所有操作之间的全序，只需要在这些无须保证顺序的操作中随便选择一个顺序，另外，还需要保证那些因为同步而添加的顺序关系。如此构成一个全序。这个全序正是SC模型所需要的。</p>
 
 <p>由此，我们也明白了DRF的精髓:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">只保证必要的顺序，不保证不必要的顺序。
-</code></pre></div>
+
+<pre><code>只保证必要的顺序，不保证不必要的顺序。
+</code></pre>
+
 <p>所谓必要是指，保证这些顺序就可以使得程序在弱一致性模型下的执行结果与SC模型下的执行结果一致，不保证就不行。</p>
 
 

@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (6) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -141,13 +81,73 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
@@ -532,183 +532,214 @@
 
       <article>
 
-<h1>OpenJDK 源码阅读之 LinkedList</h1>
+<h1 id="openjdk--linkedlist">OpenJDK 源码阅读之 LinkedList</h1>
 
-<hr>
+<hr />
 
-<h2>定义</h2>
-<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-    <span class="kd">extends</span> <span class="n">AbstractSequentialList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-    <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
-<span class="o">{</span>
-<span class="o">}</span>
-</code></pre></div>
-<h2>盲点</h2>
+<h2 id="section">定义</h2>
+
+<p><code>java
+public class LinkedList&lt;E&gt;
+    extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
+{
+}
+</code></p>
+
+<h2 id="section-1">盲点</h2>
 
 <ul>
-<li>serialVersionUID</li>
+  <li>serialVersionUID</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">876323262645176354L</span><span class="o">;</span>
-</code></pre></div>
+
+<p><code>java
+    private static final long serialVersionUID = 876323262645176354L;
+</code></p>
+
 <p>序列化版本号，如果前一版本序列化后，后一版本发生了很大改变，就使用这个号告诉虚拟机，不能反序列化了。</p>
 
-<h2>问题</h2>
+<h2 id="section-2">问题</h2>
 
 <ul>
-<li>writeObject</li>
+  <li>writeObject</li>
 </ul>
 
 <p>比例一下 <code>ArrayList</code> 与 <code>LinkedList</code> 中的 writeObject</p>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">{</span>
-        <span class="c1">// Write out element count, and any hidden stuff</span>
-        <span class="kt">int</span> <span class="n">expectedModCount</span> <span class="o">=</span> <span class="n">modCount</span><span class="o">;</span>
-        <span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
 
-        <span class="c1">// Write out array length</span>
-        <span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+<p>```java
+    private void writeObject(java.io.ObjectOutputStream s)
+        throws java.io.IOException{
+        // Write out element count, and any hidden stuff
+        int expectedModCount = modCount;
+        s.defaultWriteObject();</p>
 
-        <span class="c1">// Write out all elements in the proper order.</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
-            <span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+<pre><code>    // Write out array length
+    s.writeInt(elementData.length);
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">modCount</span> <span class="o">!=</span> <span class="n">expectedModCount</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ConcurrentModificationException</span><span class="o">();</span>
-        <span class="o">}</span>
+    // Write out all elements in the proper order.
+    for (int i=0; i&lt;size; i++)
+        s.writeObject(elementData[i]);
 
-    <span class="o">}</span>
-</code></pre></div><div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span> <span class="o">{</span>
-        <span class="c1">// Write out any hidden serialization magic</span>
-        <span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
+    if (modCount != expectedModCount) {
+        throw new ConcurrentModificationException();
+    }
 
-        <span class="c1">// Write out size</span>
-        <span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+} ```
+</code></pre>
 
-        <span class="c1">// Write out all elements in the proper order.</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span>
-            <span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">);</span>
-    <span class="o">}</span>
-</code></pre></div>
+<p>```java
+    private void writeObject(java.io.ObjectOutputStream s)
+        throws java.io.IOException {
+        // Write out any hidden serialization magic
+        s.defaultWriteObject();</p>
+
+<pre><code>    // Write out size
+    s.writeInt(size);
+
+    // Write out all elements in the proper order.
+    for (Node&lt;E&gt; x = first; x != null; x = x.next)
+        s.writeObject(x.item);
+} ```
+</code></pre>
+
 <p>注意后者没有检查　<code>modCount</code>，这是为什么呢？之前看 <code>ArrayList</code>的时候觉得是为线程安全考虑的，可是现在为什么又不检查了呢？虽然两个文件的注释中都说到，如果有多个线程操作此数据结构，应该从外部进行同步。但是一个检查，一个不检查是几个意思呀？</p>
 
-<h2>思考</h2>
+<h2 id="section-3">思考</h2>
 
 <ul>
-<li>维护数据结构一致性</li>
+  <li>维护数据结构一致性</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">linkFirst</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">f</span><span class="o">);</span>
-        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="n">last</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-        <span class="k">else</span>
-            <span class="n">f</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-        <span class="n">size</span><span class="o">++;</span>
-        <span class="n">modCount</span><span class="o">++;</span>
-    <span class="o">}</span>
-</code></pre></div>
+
+<p><code>java
+    private void linkFirst(E e) {
+        final Node&lt;E&gt; f = first;
+        final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);
+        first = newNode;
+        if (f == null)
+            last = newNode;
+        else
+            f.prev = newNode;
+        size++;
+        modCount++;
+    }
+</code></p>
+
 <p>注意代码第 <code>5</code>行对 <code>f</code> 的检查，<code>6</code> 行对 <code>last</code> 的调整。一定要细心，保证操作后， <code>所有可能</code> 涉及的数据都得到相应更新。</p>
 
 <ul>
-<li>隐藏实现</li>
+  <li>隐藏实现</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="n">E</span> <span class="nf">getFirst</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NoSuchElementException</span><span class="o">();</span>
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-    <span class="o">}</span>
-</code></pre></div>
+
+<p><code>java
+    public E getFirst() {
+        final Node&lt;E&gt; f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return f.item;
+    }
+</code></p>
+
 <p>注意返回的是数据，而不是<code>Node</code>，外部根本不需要知道 <code>Node</code> 的存在。
 另外，为什么 <code>f == null</code> 要抛出异常而不是返回 <code>null</code>？</p>
 
-<h2>问题</h2>
+<h2 id="section-4">问题</h2>
 
 <ul>
-<li>为什么要分成两个函数　</li>
+  <li>为什么要分成两个函数　</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">private</span> <span class="n">E</span> <span class="nf">unlinkFirst</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// assert f == first &amp;&amp; f != null;</span>
-        <span class="kd">final</span> <span class="n">E</span> <span class="n">element</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="n">f</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="n">f</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// help GC</span>
-        <span class="n">first</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="n">last</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="k">else</span>
-            <span class="n">next</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="n">size</span><span class="o">--;</span>
-        <span class="n">modCount</span><span class="o">++;</span>
-        <span class="k">return</span> <span class="n">element</span><span class="o">;</span>
-    <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">E</span> <span class="nf">removeFirst</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NoSuchElementException</span><span class="o">();</span>
-        <span class="k">return</span> <span class="nf">unlinkFirst</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
-    <span class="o">}</span>
-</code></pre></div>
+<p>```java
+    private E unlinkFirst(Node<e> f) {
+        // assert f == first &amp;&amp; f != null;
+        final E element = f.item;
+        final Node<e> next = f.next;
+        f.item = null;
+        f.next = null; // help GC
+        first = next;
+        if (next == null)
+            last = null;
+        else
+            next.prev = null;
+        size--;
+        modCount++;
+        return element;
+    }</e></e></p>
+
+<pre><code>public E removeFirst() {
+    final Node&lt;E&gt; f = first;
+    if (f == null)
+        throw new NoSuchElementException();
+    return unlinkFirst(f);
+} ```
+</code></pre>
+
 <p>删除操作分成两个函数，这是为什么呢？还有其它的一些操作也是这样。能想到的是其它操作可能也需要用到 <code>unlinkFirst</code>。</p>
 
 <ul>
-<li>LinkedList 中以 index 检索</li>
+  <li>LinkedList 中以 index 检索</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">   <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">node</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// assert isElementIndex(index);</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="o">(</span><span class="n">size</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre></div>
+<p>```java
+   Node<e> node(int index) {
+        // assert isElementIndex(index);</e></p>
+
+<pre><code>    if (index &lt; (size &gt;&gt; 1)) {
+        Node&lt;E&gt; x = first;
+        for (int i = 0; i &lt; index; i++)
+            x = x.next;
+        return x;
+    } else {
+        Node&lt;E&gt; x = last;
+        for (int i = size - 1; i &gt; index; i--)
+            x = x.prev;
+        return x;
+    }
+} ```
+</code></pre>
+
 <p>可以看出这里的小技巧，以 <code>index</code> 在前半段还是后半段，来决定是从前向后搜索，还是从后向前。</p>
 
 <ul>
-<li>代码重复问题</li>
+  <li>代码重复问题</li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="n">E</span> <span class="nf">getFirst</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NoSuchElementException</span><span class="o">();</span>
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-    <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">E</span> <span class="nf">peek</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="k">return</span> <span class="o">(</span><span class="n">f</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">f</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-    <span class="o">}</span>
-</code></pre></div>
+<p>```java
+    public E getFirst() {
+        final Node<e> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return f.item;
+    }</e></p>
+
+<pre><code>public E peek() {
+    final Node&lt;E&gt; f = first;
+    return (f == null) ? null : f.item;
+} ```
+</code></pre>
+
 <p>好奇这两个函数为什么会同时存在，Google到，原来是为了实现不同的接口，所以需要同时存在这两个函数，类似的情况还存在。</p>
 
 <ul>
-<li>DescendingIterator </li>
+  <li>DescendingIterator </li>
 </ul>
-<div class="highlight"><pre><code class="java language-java" data-lang="java">   <span class="kd">private</span> <span class="kd">class</span> <span class="nc">DescendingIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="kd">final</span> <span class="n">ListItr</span> <span class="n">itr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListItr</span><span class="o">(</span><span class="n">size</span><span class="o">());</span>
-        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">itr</span><span class="o">.</span><span class="na">hasPrevious</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">E</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">itr</span><span class="o">.</span><span class="na">previous</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">itr</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre></div>
+
+<p><code>java
+   private class DescendingIterator implements Iterator&lt;E&gt; {
+        private final ListItr itr = new ListItr(size());
+        public boolean hasNext() {
+            return itr.hasPrevious();
+        }
+        public E next() {
+            return itr.previous();
+        }
+        public void remove() {
+            itr.remove();
+        }
+    }
+</code></p>
+
 <p>这个很有意思，直接把 <code>next</code>, <code>hasNext</code>　函数设置为 <code>previous</code> 就行了，很大程度上减少了代码。</p>
+
 
 
       </article>

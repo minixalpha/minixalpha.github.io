@@ -201,15 +201,15 @@ def hello():
 
 ### 效果
 
-$$ \sum^{j-1}\_{k=0}{\widehat{\gamma}\_{kj} z_k} $$
+$$ \sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k} $$
 
 ### 代码
 
-    $$ \sum^{j-1}\_{k=0}{\widehat{\gamma}\_{kj} z_k} $$
+    $$ \sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k} $$
 
 
 公式可以通过MathJax支持, 右击公式有惊喜。  
-另外，注意 `LaTex` 中下划线与Markdown中冲突，所以需要做转义处理
+另外，注意如果 markdown 的render 是 redcarpet, `LaTex` 中下划线与Markdown中冲突，所以需要做转义处理
 
 如果不想做转义处理，可以尝试更改 markdown 的 render, 我现在用的是 redcarpet,可以改成 kramdown. 如果用的是　jekyll 基于　markdown 搭建博客，可以在　_config.yml 中设置 render，参考　[jekyll configuration](http://jekyllrb.com/docs/configuration/). 感谢评论中 Wead Hsu 提出这一点。
 
