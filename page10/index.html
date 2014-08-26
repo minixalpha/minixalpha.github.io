@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (6) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -141,13 +81,73 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
@@ -549,109 +549,135 @@
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div>
-<h3>test_reloader(self)</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_reloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
-    <span class="kn">import</span> <span class="nn">foo</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+<pre><code>python test/application.py
+</code></pre>
 
-    <span class="c"># test class change</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+<h3 id="testreloaderself">test_reloader(self)</h3>
 
-    <span class="c"># test urls change</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">)</span>
-</code></pre></div>
+<p>```python
+def test_reloader(self):
+    write(&#8216;foo.py&#8217;, data % dict(classname=&#8217;a&#8217;, output=&#8217;a&#8217;))
+    import foo
+    app = foo.app</p>
+
+<pre><code>self.assertEquals(app.request('/').data, 'a')
+
+# test class change
+time.sleep(1)
+write('foo.py', data % dict(classname='a', output='b'))
+self.assertEquals(app.request('/').data, 'b')
+
+# test urls change
+time.sleep(1)
+write('foo.py', data % dict(classname='c', output='c'))
+self.assertEquals(app.request('/').data, 'c') ```
+</code></pre>
+
 <p>总的来说，这个过程会生成一个 foo.py 文件</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
-</code></pre></div>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
+
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;</p>
+
+<p>```</p>
+
 <p>这是一个典型的 web 服务端应用程序，表示对 <code>/</code> 发起 <code>GET</code>
 请求时，会调用 <code>class a</code> 中的 <code>GET</code> 函数，测试就是看看
-web.application 是否可以正常完成任务，即是否可以正确返回&quot;a&quot;</p>
+web.application 是否可以正常完成任务，即是否可以正确返回&#8221;a&#8221;</p>
 
 <p>下面详细看代码。</p>
 
 <p>首先使用 <code>write</code> 生成了一个 <code>foo.py</code> 程序:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python">        <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
-</code></pre></div>
+
+<p><code>python
+        write('foo.py', data % dict(classname='a', output='a'))
+</code></p>
+
 <p>write 源代码:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>
+
+<p><code>python
+def write(filename, data):
+    f = open(filename, 'w')
+    f.write(data)
+    f.close()
+</code></p>
+
 <p>data 定义:
 ```python
-data = &quot;&quot;&quot;
+data = &#8220;&#8221;&#8221;
 import web</p>
 
-<p>urls = (&quot;/&quot;, &quot;%(classname)s&quot;)
+<p>urls = (&#8220;/&#8221;, &#8220;%(classname)s&#8221;)
 app = web.application(urls, globals(), autoreload=True)</p>
 
 <p>class %(classname)s:
     def GET(self):
-        return &quot;%(output)s&quot;</p>
+        return &#8220;%(output)s&#8221;</p>
 
-<p>&quot;&quot;&quot;
+<p>&#8221;&#8221;&#8221;
 ```</p>
 
 <p><code>data</code> 相当于一个小型 web 程序的模板，类名和返回值由
 一个 <code>dict</code> 指定，生成一个字符串，由 <code>write</code> 生成文件。 </p>
 
 <p>下面是类别和返回值为 <code>a</code> 时的 <code>foo.py</code></p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
-</code></pre></div>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
+
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;
+```</p>
+
 <p>测试的方式采用 <code>TestCase</code> 中的 <code>assertEquals</code> 函数，比较
 实际值与预测值。</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">foo</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
-</code></pre></div>
-<p><code>app.request(&#39;/&#39;)</code> 会得到一个Storage类型的值：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;Storage {&#39;status&#39;: &#39;200 OK&#39;, &#39;headers&#39;: {}, &#39;header_items&#39;: [], &#39;data&#39;: &#39;a&#39;}&gt;
-</code></pre></div>
+
+<p><code>python
+import foo
+app = foo.app
+self.assertEquals(app.request('/').data, 'a')
+</code></p>
+
+<p><code>app.request('/')</code> 会得到一个Storage类型的值：</p>
+
+<pre><code>&lt;Storage {'status': '200 OK', 'headers': {}, 'header_items': [], 'data': 'a'}&gt;
+</code></pre>
+
 <p>其中的 <code>data</code> 就是 <code>foo.py</code> 中 <code>GET</code> 返回的值。 </p>
 
-<p>我对这个 <code>app.request(&#39;/&#39;)</code> 是比较困惑的。以 <code>foo.py</code> 为例，
+<p>我对这个 <code>app.request('/')</code> 是比较困惑的。以 <code>foo.py</code> 为例，
 之前写程序时，一般是有一个这样的程序：</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    app.run()
+```</p>
+
 <p>然后在浏览器中请求 <code>0.0.0.0:8080/</code> 。
 而在 <code>request</code> 之前，也没看到 <code>run</code> 啊，怎么就能 <code>request</code> 回
 数据呢，而且通过上述代码运行后，程序会一直运行直到手动关闭，
@@ -662,46 +688,57 @@ app = web.application(urls, globals(), autoreload=True)</p>
 <p>我们只看关键部分，即返回的值是如何被设值的。</p>
 
 <p>在 <code>web.application.request</code> 中:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localpart</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">host</span><span class="o">=</span><span class="s">&quot;0.0.0.0:8080&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">https</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
 
-    <span class="o">...</span>
+<p>```python
+def request(self, localpart=&#8217;/&#8217;, method=&#8217;GET&#8217;, data=None,
+            host=&#8221;0.0.0.0:8080&#8221;, headers=None, https=False, **kw):</p>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">storage</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">header_items</span> <span class="o">=</span> <span class="n">headers</span>
-<span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">()(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">))</span>
-<span class="k">return</span> <span class="n">response</span>
-</code></pre></div>
+<pre><code>...
+</code></pre>
+
+<p>response = web.storage()
+def start_response(status, headers):
+    response.status = status
+    response.headers = dict(headers)
+    response.header_items = headers
+response.data = &#8220;&#8220;.join(self.wsgifunc()(env, start_response))
+return response
+```</p>
+
 <p>上述代码中 <code>self.wsgifunc()(env, start_response)</code> 比较另人困惑，
 我还以为是调用函数的新方式呢，然后看了一下 <code>wsgifunc</code> 的代码，
 它会返回一个函数<code>wsgi</code>，<code>wsgi</code>以 <code>(env, start_response)</code> 为参数。
 在 <code>wsgi</code> 内部，又会调用 <code>handle_with_processors</code>, <code>handle_with_processors</code> 会再调用 <code>handle</code></p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">fn</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delegate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fvars</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-</code></pre></div>
+
+<p><code>python
+    def handle(self):
+        fn, args = self._match(self.mapping, web.ctx.path)
+        return self._delegate(fn, self.fvars, args)
+</code></p>
+
 <p>测试了一下，<code>self._match()</code> 会得到类名, <code>self._delegate</code> 会
 得到返回的字符串，即 <code>GET</code>的返回值。</p>
 
 <p>进入 <code>self._delegate</code>, 会最终调用一个关键函数 <code>handle_class</code>:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">handle_class</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-    <span class="n">meth</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span>
-    <span class="k">if</span> <span class="n">meth</span> <span class="o">==</span> <span class="s">&#39;HEAD&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
-        <span class="n">meth</span> <span class="o">=</span> <span class="s">&#39;GET&#39;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">nomethod</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
-    <span class="n">tocall</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">(),</span> <span class="n">meth</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tocall</span><span class="p">(</span>\<span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</code></pre></div>
+
+<p><code>python
+def handle_class(cls):
+    meth = web.ctx.method
+    if meth == 'HEAD' and not hasattr(cls, meth):
+        meth = 'GET'
+    if not hasattr(cls, meth):
+        raise web.nomethod(cls)
+    tocall = getattr(cls(), meth)
+    return tocall(\*args)
+</code></p>
+
 <p>参数<code>cls</code>值为<code>foo.a</code>, <code>meth</code> 会得到方法名 <code>GET</code>, 然后
 <code>tocall</code> 会得到函数 <code>a.GET</code>, 至此，我们终于得以调用，
 <code>GET</code>函数，得到了返回的字符串。</p>
 
 <p>从整个过程可以看出，没有启动服务器的代码，只是不断地调用
 函数，最终来到 <code>GET</code> 函数。</p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testreloader.html"> Read More ... </a> </br>
       </div>
@@ -723,13 +760,16 @@ app = web.application(urls, globals(), autoreload=True)</p>
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testUppercaseMethods.html"> Read More ... </a> </br>
       </div>
 
@@ -750,13 +790,16 @@ app = web.application(urls, globals(), autoreload=True)</p>
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html"> Read More ... </a> </br>
       </div>
 
@@ -777,13 +820,16 @@ app = web.application(urls, globals(), autoreload=True)</p>
       </div>
 
       <div class="post-preview">
-        <h2>分模块测试</h2>
+        <h2 id="section">分模块测试</h2>
 
-<h3>application.py</h3>
+<h3 id="applicationpy">application.py</h3>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html"> Read More ... </a> </br>
       </div>
 
@@ -804,61 +850,77 @@ app = web.application(urls, globals(), autoreload=True)</p>
       </div>
 
       <div class="post-preview">
-        <h1>目录文件说明</h1>
+        <h1 id="section">目录文件说明</h1>
 
-<h2>README</h2>
+<h2 id="readme">README</h2>
 
 <p>如何运行测试文件，包含全部测试及分模块测试</p>
 
 <p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
+
+<pre><code>$ python test/alltests.py
+</code></pre>
+
 <p>运行全部测试</p>
 
 <p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/db.py
-</code></pre></div>
+
+<pre><code>$ python test/db.py
+</code></pre>
+
 <p>运行db模块测试</p>
 
-<h2>alltest.py</h2>
+<h2 id="alltestpy">alltest.py</h2>
 
 <p>运行全部测试入口，调用 <code>webtest</code> 模块完成测试</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># alltest.py</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">webtest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<h2>webtest.py</h2>
+<p>```python
+# alltest.py</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    webtest.main()
+```</p>
+
+<h2 id="webtestpy">webtest.py</h2>
 
 <p>我们发现 webtest.py 中并没有 main 函数，而是从 <code>web.test</code> 中导入，</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># webtest.py</span>
-<span class="kn">from</span> <span class="nn">web.test</span> <span class="kn">import</span> <span class="o">*</span>
-</code></pre></div>
+
+<p><code>python
+# webtest.py
+from web.test import *
+</code></p>
+
 <p>也就是说，如果 <code>web.test</code>中有main函数的话，<code>webtest.main()</code>
 其实是调用 <code>web.test</code> 中的main函数。</p>
 
 <p>感觉～ 好神奇</p>
 
-<h2>web.test</h2>
+<h2 id="webtest">web.test</h2>
 
 <p>看web目录下的test.py文件，果然发现了main函数，终于找到入口啦~</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">suite</span><span class="p">:</span>
-        <span class="n">main_module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;__main__&#39;</span><span class="p">)</span>
-        <span class="c"># allow command line switches</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)]</span>
-        <span class="n">suite</span> <span class="o">=</span> <span class="n">module_suite</span><span class="p">(</span><span class="n">main_module</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">)</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">runTests</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">wasSuccessful</span><span class="p">())</span>
-</code></pre></div>
+<p>```python
+def main(suite=None):
+    if not suite:
+        main_module = <strong>import</strong>(&#8216;<strong>main</strong>&#8217;)
+        # allow command line switches
+        args = [a for a in sys.argv[1:] if not a.startswith(&#8216;-&#8216;)]
+        suite = module_suite(main_module, args or None)</p>
+
+<pre><code>result = runTests(suite)
+sys.exit(not result.wasSuccessful()) ```
+</code></pre>
+
 <p>把这个main函数改掉，再运行一下：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
+
+<pre><code>$ python test/alltests.py
+</code></pre>
+
 <p>果然是运行修改后的函数，所以这里确定是入口。</p>
 
 <p>在进入下一步之前，我们需要学习一下Python自动单元测试框架，即<code>unittest</code>模块。关于 <code>unittest</code> ，可以参考这篇文章：
 <a href="http://www.ibm.com/developerworks/cn/linux/l-pyunit/">Python自动单元测试框架</a></p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> Read More ... </a> </br>
       </div>

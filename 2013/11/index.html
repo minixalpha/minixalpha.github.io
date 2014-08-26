@@ -69,67 +69,7 @@
       
             
                 <li>
-                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/思想"> 思想 (2) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/技术"> 技术 (18) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/java"> java (11) </a>
-                </li>
-            
-      
-            
-                <li>
                 <a href="/categories/源代码阅读"> 源代码阅读 (20) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/科研"> 科研 (6) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -141,13 +81,73 @@
       
             
                 <li>
-                <a href="/categories/英语"> 英语 (10) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/技术"> 技术 (18) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/虚拟机"> 虚拟机 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/读书"> 读书 (1) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/c语言"> c语言 (4) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/英语"> 英语 (10) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/计算机系统"> 计算机系统 (3) </a>
                 </li>
             
       
@@ -548,17 +548,18 @@
       </div>
 
       <div class="post-preview">
-        <h1>Python包管理不同方式的区别</h1>
+        <h1 id="python">Python包管理不同方式的区别</h1>
 
 <p>学习Python已经有一段时间，经常会遇到安装各种包的问题，一会 <code>setup.py</code>，
 一会 <code>easy_install</code>，一会又是<code>pip</code>，还有一些概念比如<code>distutils</code>，
 <code>setuptools</code>等等，搞不清楚谁是谁，什么时候应该用什么，今天就把这些概念
 澄清一下。</p>
 
-<h2>distutils</h2>
+<h2 id="distutils">distutils</h2>
 
 <p>distutils是Python标准库的一部分，其初衷是为开发者提供一种方便的打包方式，
 同时为使用者提供方便的安装方式。</p>
+
  
         <a href="/%E6%8A%80%E6%9C%AF/2013/11/01/pypkg.html"> Read More ... </a> </br>
       </div>
@@ -577,61 +578,77 @@
       </div>
 
       <div class="post-preview">
-        <h1>目录文件说明</h1>
+        <h1 id="section">目录文件说明</h1>
 
-<h2>README</h2>
+<h2 id="readme">README</h2>
 
 <p>如何运行测试文件，包含全部测试及分模块测试</p>
 
 <p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
+
+<pre><code>$ python test/alltests.py
+</code></pre>
+
 <p>运行全部测试</p>
 
 <p>调用</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/db.py
-</code></pre></div>
+
+<pre><code>$ python test/db.py
+</code></pre>
+
 <p>运行db模块测试</p>
 
-<h2>alltest.py</h2>
+<h2 id="alltestpy">alltest.py</h2>
 
 <p>运行全部测试入口，调用 <code>webtest</code> 模块完成测试</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># alltest.py</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">webtest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<h2>webtest.py</h2>
+<p>```python
+# alltest.py</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    webtest.main()
+```</p>
+
+<h2 id="webtestpy">webtest.py</h2>
 
 <p>我们发现 webtest.py 中并没有 main 函数，而是从 <code>web.test</code> 中导入，</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># webtest.py</span>
-<span class="kn">from</span> <span class="nn">web.test</span> <span class="kn">import</span> <span class="o">*</span>
-</code></pre></div>
+
+<p><code>python
+# webtest.py
+from web.test import *
+</code></p>
+
 <p>也就是说，如果 <code>web.test</code>中有main函数的话，<code>webtest.main()</code>
 其实是调用 <code>web.test</code> 中的main函数。</p>
 
 <p>感觉～ 好神奇</p>
 
-<h2>web.test</h2>
+<h2 id="webtest">web.test</h2>
 
 <p>看web目录下的test.py文件，果然发现了main函数，终于找到入口啦~</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">suite</span><span class="p">:</span>
-        <span class="n">main_module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;__main__&#39;</span><span class="p">)</span>
-        <span class="c"># allow command line switches</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)]</span>
-        <span class="n">suite</span> <span class="o">=</span> <span class="n">module_suite</span><span class="p">(</span><span class="n">main_module</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">)</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">runTests</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">wasSuccessful</span><span class="p">())</span>
-</code></pre></div>
+<p>```python
+def main(suite=None):
+    if not suite:
+        main_module = <strong>import</strong>(&#8216;<strong>main</strong>&#8217;)
+        # allow command line switches
+        args = [a for a in sys.argv[1:] if not a.startswith(&#8216;-&#8216;)]
+        suite = module_suite(main_module, args or None)</p>
+
+<pre><code>result = runTests(suite)
+sys.exit(not result.wasSuccessful()) ```
+</code></pre>
+
 <p>把这个main函数改掉，再运行一下：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ python test/alltests.py
-</code></pre></div>
+
+<pre><code>$ python test/alltests.py
+</code></pre>
+
 <p>果然是运行修改后的函数，所以这里确定是入口。</p>
 
 <p>在进入下一步之前，我们需要学习一下Python自动单元测试框架，即<code>unittest</code>模块。关于 <code>unittest</code> ，可以参考这篇文章：
 <a href="http://www.ibm.com/developerworks/cn/linux/l-pyunit/">Python自动单元测试框架</a></p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_TestFrame.html"> Read More ... </a> </br>
       </div>
@@ -650,13 +667,16 @@
       </div>
 
       <div class="post-preview">
-        <h2>分模块测试</h2>
+        <h2 id="section">分模块测试</h2>
 
-<h3>application.py</h3>
+<h3 id="applicationpy">application.py</h3>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_intro.html"> Read More ... </a> </br>
       </div>
     </li>
@@ -674,13 +694,16 @@
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testRedirect.html"> Read More ... </a> </br>
       </div>
     </li>
@@ -698,13 +721,16 @@
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div> 
+
+<pre><code>python test/application.py
+</code></pre>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testUppercaseMethods.html"> Read More ... </a> </br>
       </div>
     </li>
@@ -722,109 +748,135 @@
       </div>
 
       <div class="post-preview">
-        <h1>分模块测试</h1>
+        <h1 id="section">分模块测试</h1>
 
-<h2>application.py</h2>
+<h2 id="applicationpy">application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
-</code></pre></div>
-<h3>test_reloader(self)</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_reloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
-    <span class="kn">import</span> <span class="nn">foo</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+<pre><code>python test/application.py
+</code></pre>
 
-    <span class="c"># test class change</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+<h3 id="testreloaderself">test_reloader(self)</h3>
 
-    <span class="c"># test urls change</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">)</span>
-</code></pre></div>
+<p>```python
+def test_reloader(self):
+    write(&#8216;foo.py&#8217;, data % dict(classname=&#8217;a&#8217;, output=&#8217;a&#8217;))
+    import foo
+    app = foo.app</p>
+
+<pre><code>self.assertEquals(app.request('/').data, 'a')
+
+# test class change
+time.sleep(1)
+write('foo.py', data % dict(classname='a', output='b'))
+self.assertEquals(app.request('/').data, 'b')
+
+# test urls change
+time.sleep(1)
+write('foo.py', data % dict(classname='c', output='c'))
+self.assertEquals(app.request('/').data, 'c') ```
+</code></pre>
+
 <p>总的来说，这个过程会生成一个 foo.py 文件</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
-</code></pre></div>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
+
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;</p>
+
+<p>```</p>
+
 <p>这是一个典型的 web 服务端应用程序，表示对 <code>/</code> 发起 <code>GET</code>
 请求时，会调用 <code>class a</code> 中的 <code>GET</code> 函数，测试就是看看
-web.application 是否可以正常完成任务，即是否可以正确返回&quot;a&quot;</p>
+web.application 是否可以正常完成任务，即是否可以正确返回&#8221;a&#8221;</p>
 
 <p>下面详细看代码。</p>
 
 <p>首先使用 <code>write</code> 生成了一个 <code>foo.py</code> 程序:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python">        <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
-</code></pre></div>
+
+<p><code>python
+        write('foo.py', data % dict(classname='a', output='a'))
+</code></p>
+
 <p>write 源代码:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>
+
+<p><code>python
+def write(filename, data):
+    f = open(filename, 'w')
+    f.write(data)
+    f.close()
+</code></p>
+
 <p>data 定义:
 ```python
-data = &quot;&quot;&quot;
+data = &#8220;&#8221;&#8221;
 import web</p>
 
-<p>urls = (&quot;/&quot;, &quot;%(classname)s&quot;)
+<p>urls = (&#8220;/&#8221;, &#8220;%(classname)s&#8221;)
 app = web.application(urls, globals(), autoreload=True)</p>
 
 <p>class %(classname)s:
     def GET(self):
-        return &quot;%(output)s&quot;</p>
+        return &#8220;%(output)s&#8221;</p>
 
-<p>&quot;&quot;&quot;
+<p>&#8221;&#8221;&#8221;
 ```</p>
 
 <p><code>data</code> 相当于一个小型 web 程序的模板，类名和返回值由
 一个 <code>dict</code> 指定，生成一个字符串，由 <code>write</code> 生成文件。 </p>
 
 <p>下面是类别和返回值为 <code>a</code> 时的 <code>foo.py</code></p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
-</code></pre></div>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
+
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;
+```</p>
+
 <p>测试的方式采用 <code>TestCase</code> 中的 <code>assertEquals</code> 函数，比较
 实际值与预测值。</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">foo</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
-</code></pre></div>
-<p><code>app.request(&#39;/&#39;)</code> 会得到一个Storage类型的值：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;Storage {&#39;status&#39;: &#39;200 OK&#39;, &#39;headers&#39;: {}, &#39;header_items&#39;: [], &#39;data&#39;: &#39;a&#39;}&gt;
-</code></pre></div>
+
+<p><code>python
+import foo
+app = foo.app
+self.assertEquals(app.request('/').data, 'a')
+</code></p>
+
+<p><code>app.request('/')</code> 会得到一个Storage类型的值：</p>
+
+<pre><code>&lt;Storage {'status': '200 OK', 'headers': {}, 'header_items': [], 'data': 'a'}&gt;
+</code></pre>
+
 <p>其中的 <code>data</code> 就是 <code>foo.py</code> 中 <code>GET</code> 返回的值。 </p>
 
-<p>我对这个 <code>app.request(&#39;/&#39;)</code> 是比较困惑的。以 <code>foo.py</code> 为例，
+<p>我对这个 <code>app.request('/')</code> 是比较困惑的。以 <code>foo.py</code> 为例，
 之前写程序时，一般是有一个这样的程序：</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>```python
+import web</p>
 
-<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
+<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
+app = web.application(urls, globals(), autoreload=True)</p>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
+<p>class a:
+    def GET(self):
+        return &#8220;a&#8221;</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    app.run()
+```</p>
+
 <p>然后在浏览器中请求 <code>0.0.0.0:8080/</code> 。
 而在 <code>request</code> 之前，也没看到 <code>run</code> 啊，怎么就能 <code>request</code> 回
 数据呢，而且通过上述代码运行后，程序会一直运行直到手动关闭，
@@ -835,46 +887,57 @@ app = web.application(urls, globals(), autoreload=True)</p>
 <p>我们只看关键部分，即返回的值是如何被设值的。</p>
 
 <p>在 <code>web.application.request</code> 中:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localpart</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">host</span><span class="o">=</span><span class="s">&quot;0.0.0.0:8080&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">https</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
 
-    <span class="o">...</span>
+<p>```python
+def request(self, localpart=&#8217;/&#8217;, method=&#8217;GET&#8217;, data=None,
+            host=&#8221;0.0.0.0:8080&#8221;, headers=None, https=False, **kw):</p>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">storage</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">header_items</span> <span class="o">=</span> <span class="n">headers</span>
-<span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">()(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">))</span>
-<span class="k">return</span> <span class="n">response</span>
-</code></pre></div>
+<pre><code>...
+</code></pre>
+
+<p>response = web.storage()
+def start_response(status, headers):
+    response.status = status
+    response.headers = dict(headers)
+    response.header_items = headers
+response.data = &#8220;&#8220;.join(self.wsgifunc()(env, start_response))
+return response
+```</p>
+
 <p>上述代码中 <code>self.wsgifunc()(env, start_response)</code> 比较另人困惑，
 我还以为是调用函数的新方式呢，然后看了一下 <code>wsgifunc</code> 的代码，
 它会返回一个函数<code>wsgi</code>，<code>wsgi</code>以 <code>(env, start_response)</code> 为参数。
 在 <code>wsgi</code> 内部，又会调用 <code>handle_with_processors</code>, <code>handle_with_processors</code> 会再调用 <code>handle</code></p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">fn</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delegate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fvars</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-</code></pre></div>
+
+<p><code>python
+    def handle(self):
+        fn, args = self._match(self.mapping, web.ctx.path)
+        return self._delegate(fn, self.fvars, args)
+</code></p>
+
 <p>测试了一下，<code>self._match()</code> 会得到类名, <code>self._delegate</code> 会
 得到返回的字符串，即 <code>GET</code>的返回值。</p>
 
 <p>进入 <code>self._delegate</code>, 会最终调用一个关键函数 <code>handle_class</code>:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">handle_class</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-    <span class="n">meth</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span>
-    <span class="k">if</span> <span class="n">meth</span> <span class="o">==</span> <span class="s">&#39;HEAD&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
-        <span class="n">meth</span> <span class="o">=</span> <span class="s">&#39;GET&#39;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">nomethod</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
-    <span class="n">tocall</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">(),</span> <span class="n">meth</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tocall</span><span class="p">(</span>\<span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</code></pre></div>
+
+<p><code>python
+def handle_class(cls):
+    meth = web.ctx.method
+    if meth == 'HEAD' and not hasattr(cls, meth):
+        meth = 'GET'
+    if not hasattr(cls, meth):
+        raise web.nomethod(cls)
+    tocall = getattr(cls(), meth)
+    return tocall(\*args)
+</code></p>
+
 <p>参数<code>cls</code>值为<code>foo.a</code>, <code>meth</code> 会得到方法名 <code>GET</code>, 然后
 <code>tocall</code> 会得到函数 <code>a.GET</code>, 至此，我们终于得以调用，
 <code>GET</code>函数，得到了返回的字符串。</p>
 
 <p>从整个过程可以看出，没有启动服务器的代码，只是不断地调用
 函数，最终来到 <code>GET</code> 函数。</p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/Application_testreloader.html"> Read More ... </a> </br>
       </div>
@@ -893,140 +956,171 @@ app = web.application(urls, globals(), autoreload=True)</p>
       </div>
 
       <div class="post-preview">
-        <h1>web.py 项目之 skeleton</h1>
+        <h1 id="webpy--skeleton">web.py 项目之 skeleton</h1>
 
 <p>skeleton 是 web.py 官网上给出的一个最简单的项目结构示例。</p>
 
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">.
-└── src  
-    ├── code.py  
-    ├── config.py  
-    ├── db.py  
+<h2 id="section">目录树</h2>
+<p>```
+.
+└── src<br />
+    ├── code.py<br />
+    ├── config.py<br />
+    ├── db.py<br />
     ├── sql
     │   └── tables.sql
     ├── templates
     │   ├── base.html
     │   ├── item.html
     │   └── listing.html
-    └── view.py
+    └── view.py</p>
 
-3 directories, 9 files
-</code></pre></div>
-<h2>结构分析</h2>
+<p>3 directories, 9 files
+```</p>
 
-<h3>控制模块</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#code.py</span>
+<h2 id="section-1">结构分析</h2>
 
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">view</span><span class="o">,</span> <span class="nn">config</span>
-<span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">render</span>
+<h3 id="section-2">控制模块</h3>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;index&#39;</span>
-<span class="p">)</span>
+<p>```python
+#code.py</p>
 
-<span class="k">class</span> <span class="nc">index</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">listing</span><span class="p">())</span>
+<p>import web
+import view, config
+from view import render</p>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">internalerror</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">debugerror</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
+<p>urls = (
+    &#8216;/&#8217;, &#8216;index&#8217;
+)</p>
+
+<p>class index:
+    def GET(self):
+        return render.base(view.listing())</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    app = web.application(urls, globals())
+    app.internalerror = web.debugerror
+    app.run()
+```</p>
+
 <p><code>code</code> 模块作为入口:</p>
 
 <ul>
-<li>app 的创建与启动</li>
-<li>url　与　处理类的映射与处理入口</li>
+  <li>app 的创建与启动</li>
+  <li>url　与　处理类的映射与处理入口</li>
 </ul>
 
 <p>但是，具体的处理并不在这里实现。而是放在了 <code>view</code> 模块中。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的C吗？
-</code></pre></div>
-<h3>显示模块</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#view.py</span>
 
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">db</span>
-<span class="kn">import</span> <span class="nn">config</span>
+<pre><code>这一模块是MVC中的C吗？
+</code></pre>
 
-<span class="n">t_globals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-  <span class="n">datestr</span><span class="o">=</span><span class="n">web</span><span class="o">.</span><span class="n">datestr</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">render</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;templates/&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> 
-    <span class="nb">globals</span><span class="o">=</span><span class="n">t_globals</span><span class="p">)</span>
-<span class="n">render</span><span class="o">.</span><span class="n">_keywords</span><span class="p">[</span><span class="s">&#39;globals&#39;</span><span class="p">][</span><span class="s">&#39;render&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render</span>
+<h3 id="section-3">显示模块</h3>
 
-<span class="k">def</span> <span class="nf">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">):</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-</code></pre></div>
+<p>```python
+#view.py</p>
+
+<p>import web
+import db
+import config</p>
+
+<p>t_globals = dict(
+  datestr=web.datestr,
+)
+render = web.template.render(&#8216;templates/&#8217;, cache=config.cache, 
+    globals=t_globals)
+render._keywords[&#8216;globals&#8217;][&#8216;render&#8217;] = render</p>
+
+<p>def listing(*<em>k):
+    l = db.listing(*</em>k)
+    return render.listing(l)
+```</p>
+
 <p>从这里可以看出　<code>view</code> 模块</p>
 
 <ul>
-<li>与模板关联 </li>
-<li>从数据库中取数据，然后发给模板</li>
+  <li>与模板关联 </li>
+  <li>从数据库中取数据，然后发给模板</li>
 </ul>
 
 <p>我们再来看看模板:</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
-<span class="c">    templates/base.html</span>
-<span class="c">--&gt;</span>
 
-$def with (page, title=None)
-<span class="nt">&lt;html&gt;&lt;head&gt;</span>
-<span class="nt">&lt;title&gt;</span>my site\
+<p>```html
+<!--
+    templates/base.html
+--></p>
+
+<p>$def with (page, title=None)</p>
+<html><head>
+<title>my site\
 $if title: : $title\
-<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
-<span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>my site<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
+</title>
+</head><body>
+<h1><a href="/">my site</a></h1>
 $:page   
-<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
-</code></pre></div>
+</body></html>
+<p>```</p>
+
 <p><code>base.html</code> 是所有模块的公共部分，每个模块只需要提供
 它的 <code>page</code> ，即内容就可以了。</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
-<span class="c">    templates/listing.html</span>
-<span class="c">--&gt;</span>
 
-$def with (items)
+<p>```html
+<!--
+    templates/listing.html
+--></p>
 
-$for item in items:
-    $:render.item(item)
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的V吗
-</code></pre></div>
-<h3>数据操作</h3>
+<p>$def with (items)</p>
+
+<p>$for item in items:
+    $:render.item(item)</p>
+
+<p>```</p>
+
+<pre><code>这一模块是MVC中的V吗
+</code></pre>
+
+<h3 id="section-4">数据操作</h3>
 
 <p>数据库操作分三部分</p>
 
 <ul>
-<li>sql/tables.sql 数据库表定义</li>
-<li>config.py 数据库连接</li>
-<li>db.py 数据库操作</li>
+  <li>sql/tables.sql 数据库表定义</li>
+  <li>config.py 数据库连接</li>
+  <li>db.py 数据库操作</li>
 </ul>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">/* tables.sql */
+
+<p><code>
+/* tables.sql */
 CREATE TABLE items (
     id serial primary key,
     author_id int references users,
     body text,
     created timestamp default current_timestamp 
 );
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">#config.py
+</code></p>
 
-import web
-DB = web.database(dbn=&#39;mysql&#39;, db=&#39;skeleton&#39;, user=&#39;root&#39;, pw=&#39;xx&#39;)
+<p>```
+#config.py</p>
+
+<p>import web
+DB = web.database(dbn=&#8217;mysql&#8217;, db=&#8217;skeleton&#8217;, user=&#8217;root&#8217;, pw=&#8217;xx&#8217;)
 cache = False
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text"># db.py
-import config
+```</p>
 
-def listing(\**k):
-    return config.DB.select(&#39;items&#39;, **k)
-</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这是MVC中的M吗
-</code></pre></div>
+<p>```
+# db.py
+import config</p>
+
+<p>def listing(**k):
+    return config.DB.select(&#8216;items&#8217;, **k)
+```</p>
+
+<pre><code>这是MVC中的M吗
+</code></pre>
+
 <p>这是 web.py 中最基本的一个项目结构。应该是使用的MVC设计模式。但是
 因为程序本身不大，还体会不到 MVC 的好处。</p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/14/skeleton_arch.html"> Read More ... </a> </br>
       </div>
@@ -1045,42 +1139,49 @@ def listing(\**k):
       </div>
 
       <div class="post-preview">
-        <h1>web.py 项目之 todolist</h1>
+        <h1 id="webpy--todolist">web.py 项目之 todolist</h1>
 
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">.
+<h2 id="section">目录树</h2>
+
+<p>```
+.
 └── src
     ├── model.py
     ├── schema.sql
     ├── templates
     │   ├── base.html
     │   └── index.html
-    ├── todo.py
+    ├── todo.py</p>
 
-2 directories, 8 files
-</code></pre></div>
-<h2>项目说明</h2>
+<p>2 directories, 8 files
+```</p>
+
+<h2 id="section-1">项目说明</h2>
 
 <p>项目来自 <a href="http://webpy.org/src/todo-list/0.3">webpy.org</a>,
 主要实现一个基于web的 todolist，就是可以添加删除一些任务。
 非常简单</p>
 
-<h2>结构分析</h2>
+<h2 id="section-2">结构分析</h2>
 
-<h3>控制模块</h3>
+<h3 id="section-3">控制模块</h3>
 
 <p>控制模块只有todo.py</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="sd">&quot;&quot;&quot; Basic todo list using webpy 0.3 &quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">model</span>
 
-<span class="c">### Url mappings</span>
+<p>```python</p>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;Index&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/del/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Delete&#39;</span>
-<span class="p">)</span>
-</code></pre></div> 
+<p>&#8221;&#8221;&#8221; Basic todo list using webpy 0.3 &#8220;&#8221;&#8221;
+import web
+import model</p>
+
+<h3 id="url-mappings">Url mappings</h3>
+
+<p>urls = (
+    &#8216;/&#8217;, &#8216;Index&#8217;,
+    &#8216;/del/(\d+)&#8217;, &#8216;Delete&#8217;
+)</p>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/17/todolist_arch.html"> Read More ... </a> </br>
       </div>
     </li>
@@ -1098,10 +1199,12 @@ def listing(\**k):
       </div>
 
       <div class="post-preview">
-        <h1>web.py 项目之 blog</h1>
+        <h1 id="webpy--blog">web.py 项目之 blog</h1>
 
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">src/
+<h2 id="section">目录树</h2>
+
+<p>```
+src/
 ├── blog.py
 ├── model.py
 ├── schema.sql
@@ -1110,34 +1213,38 @@ def listing(\**k):
     ├── edit.html
     ├── index.html
     ├── new.html
-    └── view.html
+    └── view.html</p>
 
-1 directory, 8 files
-</code></pre></div>
-<h2>项目说明</h2>
+<p>1 directory, 8 files
+```</p>
+
+<h2 id="section-1">项目说明</h2>
 
 <p>项目来自 <a href="http://webpy.org/src/blog/0.3">webpy.org</a>,
 主要实现一个基于web的博客系统，实现了基本的增删查改。</p>
 
-<h2>结构分析</h2>
+<h2 id="section-2">结构分析</h2>
 
-<h3>控制模块</h3>
+<h3 id="section-3">控制模块</h3>
 
 <p>控制模块包括 blog.py</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="sd">&quot;&quot;&quot; Basic blog using webpy 0.3 &quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">model</span>
 
-<span class="c">### Url mappings</span>
+<p>```python
+&#8220;&#8221;&#8221; Basic blog using webpy 0.3 &#8220;&#8221;&#8221;
+import web
+import model</p>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;Index&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/view/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;View&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/new&#39;</span><span class="p">,</span> <span class="s">&#39;New&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/delete/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Delete&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/edit/(\d+)&#39;</span><span class="p">,</span> <span class="s">&#39;Edit&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div> 
+<h3 id="url-mappings">Url mappings</h3>
+
+<p>urls = (
+    &#8216;/&#8217;, &#8216;Index&#8217;,
+    &#8216;/view/(\d+)&#8217;, &#8216;View&#8217;,
+    &#8216;/new&#8217;, &#8216;New&#8217;,
+    &#8216;/delete/(\d+)&#8217;, &#8216;Delete&#8217;,
+    &#8216;/edit/(\d+)&#8217;, &#8216;Edit&#8217;,
+)</p>
+
+ 
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/18/blog_arch.html"> Read More ... </a> </br>
       </div>
     </li>
@@ -1155,16 +1262,18 @@ def listing(\**k):
       </div>
 
       <div class="post-preview">
-        <h1>web.py 项目之 googlemodules</h1>
+        <h1 id="webpy--googlemodules">web.py 项目之 googlemodules</h1>
 
-<h2>项目说明</h2>
+<h2 id="section">项目说明</h2>
 
 <p>项目来自 <a href="http://webpy.org/src/">webpy.org</a>, 这是一个真实的在线上运行的
 项目: <a href="http://www.googlemodules.com/">Google Modules</a>, 可以上传，下载，
 一些模块，还有一些评分，打标签等等功能。(不过这网站挺奇怪的。。。)</p>
 
-<h2>目录树</h2>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">src/
+<h2 id="section-1">目录树</h2>
+
+<p>```
+src/
     ├── application.py
     ├── forum.py
     ├── config_example.py
@@ -1187,10 +1296,11 @@ def listing(\**k):
     │   ├── js
     │   └── rss
     ├── scripts
-    └── sql
+    └── sql</p>
 
-18 directories
-</code></pre></div>
+<p>18 directories
+```</p>
+
 <p>终于遇到个稍微大一点的项目了，要好好看看。</p>
 
 <p>从目录上看，整个项目分成两个部分，app 和 app_forum,每个部分都使用了
@@ -1208,85 +1318,88 @@ def listing(\**k):
 
 <p>项目使用的脚本放在scripts目录下，创建数据库使用的文件放在了sql目录下。</p>
 
-<h2>代码统计</h2>
+<h2 id="section-2">代码统计</h2>
 
 <p>先看看代码统计</p>
 
-<p><img src="/assets/blog-images/googlemodules_code_stat.jpg" alt="googlemodules_code_stat.jpg"></p>
+<p><img src="/assets/blog-images/googlemodules_code_stat.jpg" alt="googlemodules_code_stat.jpg" /></p>
 
-<h2>application 模块</h2>
+<h2 id="application-">application 模块</h2>
 
-<h3>application.py</h3>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#!/usr/bin/env python</span>
-<span class="c"># Author: Alex Ksikes </span>
+<h3 id="applicationpy">application.py</h3>
 
-<span class="c"># TODO: </span>
-<span class="c"># - setup SPF for sendmail and </span>
-<span class="c"># - emailerrors should be sent from same domain</span>
-<span class="c"># - clean up schema.sql</span>
-<span class="c"># - because of a bug in webpy unicode search fails (see models/sql_search.py)</span>
+<p>```python</p>
 
-<span class="kn">import</span> <span class="nn">web</span>
-<span class="kn">import</span> <span class="nn">config</span>
-<span class="kn">import</span> <span class="nn">app.controllers</span>
+<h1 id="usrbinenv-python">!/usr/bin/env python</h1>
+<p># Author: Alex Ksikes </p>
 
-<span class="kn">from</span> <span class="nn">app.helpers</span> <span class="kn">import</span> <span class="n">custom_error</span>
+<h1 id="todo">TODO:</h1>
+<p># - setup SPF for sendmail and 
+# - emailerrors should be sent from same domain
+# - clean up schema.sql
+# - because of a bug in webpy unicode search fails (see models/sql_search.py)</p>
 
-<span class="kn">import</span> <span class="nn">forum</span>
+<p>import web
+import config
+import app.controllers</p>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>        
-    <span class="c"># front page</span>
-    <span class="s">&#39;/&#39;</span><span class="p">,</span>                                    <span class="s">&#39;app.controllers.base.index&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/page/([0-9]+)/&#39;</span><span class="p">,</span>                      <span class="s">&#39;app.controllers.base.list&#39;</span><span class="p">,</span>
+<p>from app.helpers import custom_error</p>
 
-    <span class="c"># view, add a comment, vote</span>
-    <span class="s">&#39;/module/([0-9]+)/&#39;</span><span class="p">,</span>                    <span class="s">&#39;app.controllers.module.show&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/module/([0-9]+)/comment/&#39;</span><span class="p">,</span>            <span class="s">&#39;app.controllers.module.comment&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/module/([0-9]+)/vote/&#39;</span><span class="p">,</span>               <span class="s">&#39;app.controllers.module.vote&#39;</span><span class="p">,</span>
+<p>import forum</p>
 
-    <span class="c"># submit a module</span>
-    <span class="s">&#39;/submit/&#39;</span><span class="p">,</span>                             <span class="s">&#39;app.controllers.submit.submit&#39;</span><span class="p">,</span>
+<p>urls = (      <br />
+    # front page
+    &#8216;/&#8217;,                                    &#8216;app.controllers.base.index&#8217;,
+    &#8216;/page/([0-9]+)/&#8217;,                      &#8216;app.controllers.base.list&#8217;,</p>
 
-    <span class="c"># view author page</span>
-    <span class="s">&#39;/author/(.*?)/&#39;</span><span class="p">,</span>                       <span class="s">&#39;app.controllers.author.show&#39;</span><span class="p">,</span>      
+<pre><code># view, add a comment, vote
+'/module/([0-9]+)/',                    'app.controllers.module.show',
+'/module/([0-9]+)/comment/',            'app.controllers.module.comment',
+'/module/([0-9]+)/vote/',               'app.controllers.module.vote',
 
-    <span class="c"># search browse by tag name</span>
-    <span class="s">&#39;/search/&#39;</span><span class="p">,</span>                             <span class="s">&#39;app.controllers.search.search&#39;</span><span class="p">,</span>    
-    <span class="s">&#39;/tag/(.*?)/&#39;</span><span class="p">,</span>                          <span class="s">&#39;app.controllers.search.list_by_tag&#39;</span><span class="p">,</span>
+# submit a module
+'/submit/',                             'app.controllers.submit.submit',
 
-    <span class="c"># view tag clouds</span>
-    <span class="s">&#39;/tags/&#39;</span><span class="p">,</span>                               <span class="s">&#39;app.controllers.cloud.tag_cloud&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/authors/&#39;</span><span class="p">,</span>                            <span class="s">&#39;app.controllers.cloud.author_cloud&#39;</span><span class="p">,</span>
+# view author page
+'/author/(.*?)/',                       'app.controllers.author.show',      
 
-    <span class="c"># table modules</span>
-    <span class="s">&#39;/modules/(?:by-(.*?)/)?([0-9]+)?/?&#39;</span><span class="p">,</span>   <span class="s">&#39;app.controllers.all_modules.list_by&#39;</span><span class="p">,</span>
+# search browse by tag name
+'/search/',                             'app.controllers.search.search',    
+'/tag/(.*?)/',                          'app.controllers.search.list_by_tag',
 
-    <span class="c"># static pages</span>
-    <span class="s">&#39;/feedback/&#39;</span><span class="p">,</span>                           <span class="s">&#39;app.controllers.feedback.send&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/about/&#39;</span><span class="p">,</span>                              <span class="s">&#39;app.controllers.base.about&#39;</span><span class="p">,</span>
-    <span class="s">&#39;/help/&#39;</span><span class="p">,</span>                               <span class="s">&#39;app.controllers.base.help&#39;</span><span class="p">,</span>
+# view tag clouds
+'/tags/',                               'app.controllers.cloud.tag_cloud',
+'/authors/',                            'app.controllers.cloud.author_cloud',
 
-    <span class="c"># let lighttpd handle in production</span>
-    <span class="s">&#39;/(?:css|img|js|rss)/.+&#39;</span><span class="p">,</span>               <span class="s">&#39;app.controllers.public.public&#39;</span><span class="p">,</span>
+# table modules
+'/modules/(?:by-(.*?)/)?([0-9]+)?/?',   'app.controllers.all_modules.list_by',
 
-    <span class="c"># canonicalize /urls to /urls/</span>
-    <span class="s">&#39;/(.*[^/])&#39;</span><span class="p">,</span>                            <span class="s">&#39;app.controllers.public.redirect&#39;</span><span class="p">,</span>
+# static pages
+'/feedback/',                           'app.controllers.feedback.send',
+'/about/',                              'app.controllers.base.about',
+'/help/',                               'app.controllers.base.help',
 
-    <span class="c"># mini forum app</span>
-    <span class="s">&#39;/forum&#39;</span><span class="p">,</span>                               <span class="n">forum</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>    
+# let lighttpd handle in production
+'/(?:css|img|js|rss)/.+',               'app.controllers.public.public',
 
-    <span class="s">&#39;/hello/(.*)&#39;</span><span class="p">,</span>                            <span class="s">&#39;hello&#39;</span><span class="p">,</span>
+# canonicalize /urls to /urls/
+'/(.*[^/])',                            'app.controllers.public.redirect',
 
-    <span class="c"># site admin app</span>
-<span class="c">#    &#39;/admin&#39;,                              admin.app,    </span>
-<span class="p">)</span>
+# mini forum app
+'/forum',                               forum.app,    
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
-<span class="n">custom_error</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+'/hello/(.*)',                            'hello',
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
+# site admin app #    '/admin',                              admin.app,     )
+</code></pre>
+
+<p>app = web.application(urls, globals())
+custom_error.add(app)</p>
+
+<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
+    app.run()
+```</p>
+
 <p>可以看出，这是 application 部分的入口，这个模块仅仅是定义了各个请求的处理方式，
 并完成程序的启动，所有的实现均不在这里出现，而是通过 <code>import</code> 导入，特别需要
 注意 <code>urls</code> 最后定义的 <code>/forum</code> 和 <code>/admin</code> 使用了子程序，而不是通过之前的字符串
@@ -1298,17 +1411,22 @@ def listing(\**k):
 而且之前也不知道使用子程序，所有处理都堆在一起。看来读完这份源代码，真应该重构一
 下了。</p>
 
-<h3>app 模块</h3>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">app/
+<h3 id="app-">app 模块</h3>
+
+<p>```
+app/
     ├── models # 数据模块，MVC中的 M
     ├── views # 显示模块，MVC中的 V
     ├── controllers # 控制模块，MVC中的 C
-    └── helpers # 辅助模块，实现辅助功能
+    └── helpers # 辅助模块，实现辅助功能</p>
 
-4 directories
-</code></pre></div>
-<h3>controllers 模块</h3>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">controllers/
+<p>4 directories
+```</p>
+
+<h3 id="controllers-">controllers 模块</h3>
+
+<p><code>
+controllers/
     ├── base.py         # 对基本页面，如网站主页,关于网页，帮助等的处理
     ├── all_modules.py  # 显示全部模块
     ├── module.py       # 对模块页面的处理
@@ -1318,14 +1436,17 @@ def listing(\**k):
     ├── cloud.py        # 对标签云页面进行处理
     ├── feedback.py     # 处理反馈信息
     └── public.py       # 对静态文件的处理
-</code></pre></div>
+</code></p>
+
 <p>这个模块主要是对请求处理的实现，在 <code>urls</code> 里定义的那些映射关系，
 很多被映射到这里。</p>
 
 <p>实现过程中，调用 models 模块对数据操作，再送入 views 模块通过模板引擎显示数据内容。</p>
 
-<h3>models 模块</h3>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">models/
+<h3 id="models-">models 模块</h3>
+
+<p><code>
+models/
     ├── comments.py     # 对评论数据的处理
     ├── modules.py      # 对模块数据的处理
     ├── rss.py          # 对 rss 订阅的处理
@@ -1333,10 +1454,12 @@ def listing(\**k):
     ├── submission.py   # 对用户提交内容的处理
     ├── tags.py         # 对标签内容的数据处理
     └── votes.py        # 对用户投票的数据处理
-</code></pre></div>
+</code></p>
+
 <p>这个模块直接调用 web.py 的db模块对数据库进行操作，对数据库的连接在 config.py 中
 已经完成。这里完成数据的获取，处理，返回。可以看出，对不同种类的数据又分成了
 很多小的模块。</p>
+
  
         <a href="/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/2013/11/21/gmodules_arch.html"> Read More ... </a> </br>
       </div>
