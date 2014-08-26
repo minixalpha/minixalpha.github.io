@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,168 +532,138 @@
 
       <article>
 
-<h1 id="webpy--skeleton">web.py 项目之 skeleton</h1>
+<h1>web.py 项目之 skeleton</h1>
 
 <p>skeleton 是 web.py 官网上给出的一个最简单的项目结构示例。</p>
 
-<h2 id="section">目录树</h2>
-<p>```
-.
-└── src<br />
-    ├── code.py<br />
-    ├── config.py<br />
-    ├── db.py<br />
+<h2>目录树</h2>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">.
+└── src  
+    ├── code.py  
+    ├── config.py  
+    ├── db.py  
     ├── sql
     │   └── tables.sql
     ├── templates
     │   ├── base.html
     │   ├── item.html
     │   └── listing.html
-    └── view.py</p>
+    └── view.py
 
-<p>3 directories, 9 files
-```</p>
+3 directories, 9 files
+</code></pre></div>
+<h2>结构分析</h2>
 
-<h2 id="section-1">结构分析</h2>
+<h3>控制模块</h3>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#code.py</span>
 
-<h3 id="section-2">控制模块</h3>
+<span class="kn">import</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">view</span><span class="o">,</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">render</span>
 
-<p>```python
-#code.py</p>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;index&#39;</span>
+<span class="p">)</span>
 
-<p>import web
-import view, config
-from view import render</p>
+<span class="k">class</span> <span class="nc">index</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">listing</span><span class="p">())</span>
 
-<p>urls = (
-    &#8216;/&#8217;, &#8216;index&#8217;
-)</p>
-
-<p>class index:
-    def GET(self):
-        return render.base(view.listing())</p>
-
-<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
-    app = web.application(urls, globals())
-    app.internalerror = web.debugerror
-    app.run()
-```</p>
-
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">internalerror</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">debugerror</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
 <p><code>code</code> 模块作为入口:</p>
 
 <ul>
-  <li>app 的创建与启动</li>
-  <li>url　与　处理类的映射与处理入口</li>
+<li>app 的创建与启动</li>
+<li>url　与　处理类的映射与处理入口</li>
 </ul>
 
 <p>但是，具体的处理并不在这里实现。而是放在了 <code>view</code> 模块中。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的C吗？
+</code></pre></div>
+<h3>显示模块</h3>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c">#view.py</span>
 
-<pre><code>这一模块是MVC中的C吗？
-</code></pre>
+<span class="kn">import</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">db</span>
+<span class="kn">import</span> <span class="nn">config</span>
 
-<h3 id="section-3">显示模块</h3>
+<span class="n">t_globals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+  <span class="n">datestr</span><span class="o">=</span><span class="n">web</span><span class="o">.</span><span class="n">datestr</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">render</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;templates/&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> 
+    <span class="nb">globals</span><span class="o">=</span><span class="n">t_globals</span><span class="p">)</span>
+<span class="n">render</span><span class="o">.</span><span class="n">_keywords</span><span class="p">[</span><span class="s">&#39;globals&#39;</span><span class="p">][</span><span class="s">&#39;render&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render</span>
 
-<p>```python
-#view.py</p>
-
-<p>import web
-import db
-import config</p>
-
-<p>t_globals = dict(
-  datestr=web.datestr,
-)
-render = web.template.render(&#8216;templates/&#8217;, cache=config.cache, 
-    globals=t_globals)
-render._keywords[&#8216;globals&#8217;][&#8216;render&#8217;] = render</p>
-
-<p>def listing(*<em>k):
-    l = db.listing(*</em>k)
-    return render.listing(l)
-```</p>
-
+<span class="k">def</span> <span class="nf">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span>\<span class="o">**</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="o">.</span><span class="n">listing</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</code></pre></div>
 <p>从这里可以看出　<code>view</code> 模块</p>
 
 <ul>
-  <li>与模板关联 </li>
-  <li>从数据库中取数据，然后发给模板</li>
+<li>与模板关联 </li>
+<li>从数据库中取数据，然后发给模板</li>
 </ul>
 
 <p>我们再来看看模板:</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
+<span class="c">    templates/base.html</span>
+<span class="c">--&gt;</span>
 
-<p>```html
-<!--
-    templates/base.html
---></p>
-
-<p>$def with (page, title=None)</p>
-<html><head>
-<title>my site\
+$def with (page, title=None)
+<span class="nt">&lt;html&gt;&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>my site\
 $if title: : $title\
-</title>
-</head><body>
-<h1><a href="/">my site</a></h1>
+<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>my site<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
 $:page   
-</body></html>
-<p>```</p>
-
+<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
+</code></pre></div>
 <p><code>base.html</code> 是所有模块的公共部分，每个模块只需要提供
 它的 <code>page</code> ，即内容就可以了。</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="c">&lt;!--</span>
+<span class="c">    templates/listing.html</span>
+<span class="c">--&gt;</span>
 
-<p>```html
-<!--
-    templates/listing.html
---></p>
+$def with (items)
 
-<p>$def with (items)</p>
-
-<p>$for item in items:
-    $:render.item(item)</p>
-
-<p>```</p>
-
-<pre><code>这一模块是MVC中的V吗
-</code></pre>
-
-<h3 id="section-4">数据操作</h3>
+$for item in items:
+    $:render.item(item)
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这一模块是MVC中的V吗
+</code></pre></div>
+<h3>数据操作</h3>
 
 <p>数据库操作分三部分</p>
 
 <ul>
-  <li>sql/tables.sql 数据库表定义</li>
-  <li>config.py 数据库连接</li>
-  <li>db.py 数据库操作</li>
+<li>sql/tables.sql 数据库表定义</li>
+<li>config.py 数据库连接</li>
+<li>db.py 数据库操作</li>
 </ul>
-
-<p><code>
-/* tables.sql */
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/* tables.sql */
 CREATE TABLE items (
     id serial primary key,
     author_id int references users,
     body text,
     created timestamp default current_timestamp 
 );
-</code></p>
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">#config.py
 
-<p>```
-#config.py</p>
-
-<p>import web
-DB = web.database(dbn=&#8217;mysql&#8217;, db=&#8217;skeleton&#8217;, user=&#8217;root&#8217;, pw=&#8217;xx&#8217;)
+import web
+DB = web.database(dbn=&#39;mysql&#39;, db=&#39;skeleton&#39;, user=&#39;root&#39;, pw=&#39;xx&#39;)
 cache = False
-```</p>
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text"># db.py
+import config
 
-<p>```
-# db.py
-import config</p>
-
-<p>def listing(**k):
-    return config.DB.select(&#8216;items&#8217;, **k)
-```</p>
-
-<pre><code>这是MVC中的M吗
-</code></pre>
-
+def listing(\**k):
+    return config.DB.select(&#39;items&#39;, **k)
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">这是MVC中的M吗
+</code></pre></div>
 <p>这是 web.py 中最基本的一个项目结构。应该是使用的MVC设计模式。但是
 因为程序本身不大，还体会不到 MVC 的好处。</p>
 

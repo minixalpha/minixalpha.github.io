@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,34 +532,28 @@
 
       <article>
 
-<h1 id="openjdk--hashmap">OpenJDK 源代码阅读之 HashMap</h1>
+<h1>OpenJDK 源代码阅读之 HashMap</h1>
 
-<hr />
+<hr>
 
-<h2 id="section">概要</h2>
+<h2>概要</h2>
 
 <ul>
-  <li>类继承关系</li>
+<li>类继承关系</li>
 </ul>
-
-<p><code>
-java.lang.Object
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
     java.util.AbstractMap&lt;K,V&gt;
         java.util.TreeMap&lt;K,V&gt;
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>定义 </li>
+<li>定义 </li>
 </ul>
-
-<p><code>
-public class TreeMap&lt;K,V&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public class TreeMap&lt;K,V&gt;
 extends AbstractMap&lt;K,V&gt;
 implements NavigableMap&lt;K,V&gt;, Cloneable, Serializable
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>要点</li>
+<li>要点</li>
 </ul>
 
 <p>1) 与 Hashtable 区别在于：非同步，允许 <code>null</code>
@@ -568,80 +562,74 @@ implements NavigableMap&lt;K,V&gt;, Cloneable, Serializable
 4) 遍历操作 与 capacity+size 成正比
 5) HashMap 性能与 <code>capacity</code> 和 <code>load factor</code> 相关，<code>load factor</code> 是当前元素个数与 <code>capacity</code> 的比值，通常设定为 <code>0.75</code>，如果此值过大，空间利用率高，但是冲突的可能性增加，因而可能导致查找时间增加，如果过小，反之。当元素个数大于 <code>capacity * load_factor</code> 时，<code>HashMap</code> 会重新安排 Hash 表。因此高效地使用 <code>HashMap</code> 需要预估元素个数，设置最佳的 <code>capacity</code> 和 <code>load factor</code> ，使得重新安排 Hash 表的次数下降。</p>
 
-<h2 id="section-1">实现</h2>
+<h2>实现</h2>
 
 <ul>
-  <li>capacity</li>
+<li>capacity</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="nf">HashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Illegal initial capacity: &quot;</span> <span class="o">+</span>
+                                           <span class="n">initialCapacity</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&gt;</span> <span class="n">MAXIMUM_CAPACITY</span><span class="o">)</span>
+        <span class="n">initialCapacity</span> <span class="o">=</span> <span class="n">MAXIMUM_CAPACITY</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">loadFactor</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">Float</span><span class="o">.</span><span class="na">isNaN</span><span class="o">(</span><span class="n">loadFactor</span><span class="o">))</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Illegal load factor: &quot;</span> <span class="o">+</span>
+                                           <span class="n">loadFactor</span><span class="o">);</span>
 
-<p>```java
-public HashMap(int initialCapacity, float loadFactor) {
-    if (initialCapacity &lt; 0)
-        throw new IllegalArgumentException(&#8220;Illegal initial capacity: &#8220; +
-                                           initialCapacity);
-    if (initialCapacity &gt; MAXIMUM_CAPACITY)
-        initialCapacity = MAXIMUM_CAPACITY;
-    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
-        throw new IllegalArgumentException(&#8220;Illegal load factor: &#8220; +
-                                           loadFactor);</p>
+    <span class="c1">// Find a power of 2 &gt;= initialCapacity</span>
+    <span class="kt">int</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;</span> <span class="n">initialCapacity</span><span class="o">)</span>
+        <span class="n">capacity</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="o">;</span>
 
-<pre><code>// Find a power of 2 &gt;= initialCapacity
-int capacity = 1;
-while (capacity &lt; initialCapacity)
-    capacity &lt;&lt;= 1;
-
-this.loadFactor = loadFactor;
-threshold = (int)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);
-table = new Entry[capacity];
-useAltHashing = sun.misc.VM.isBooted() &amp;&amp;
-        (capacity &gt;= Holder.ALTERNATIVE_HASHING_THRESHOLD);
-init(); } ```
-</code></pre>
-
+    <span class="k">this</span><span class="o">.</span><span class="na">loadFactor</span> <span class="o">=</span> <span class="n">loadFactor</span><span class="o">;</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">capacity</span> <span class="o">*</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="n">MAXIMUM_CAPACITY</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">[</span><span class="n">capacity</span><span class="o">];</span>
+    <span class="n">useAltHashing</span> <span class="o">=</span> <span class="n">sun</span><span class="o">.</span><span class="na">misc</span><span class="o">.</span><span class="na">VM</span><span class="o">.</span><span class="na">isBooted</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
+            <span class="o">(</span><span class="n">capacity</span> <span class="o">&gt;=</span> <span class="n">Holder</span><span class="o">.</span><span class="na">ALTERNATIVE_HASHING_THRESHOLD</span><span class="o">);</span>
+    <span class="n">init</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>注意，<code>HashMap</code> 并不会按照你指定的 <code>initialCapacity</code> 来确定 <code>capacity</code> 大小，而是会找到一个比它大的数，并且是 <code>2的n次方</code>。</p>
 
 <blockquote>
-  <p>为什么要是 2 的n次方呢？</p>
+<p>为什么要是 2 的n次方呢？</p>
 </blockquote>
 
 <ul>
-  <li>hash </li>
+<li>hash </li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Retrieve object hash code and applies a supplemental hash function to the</span>
+<span class="cm"> * result hash, which defends against poor quality hash functions.  This is</span>
+<span class="cm"> * critical because HashMap uses power-of-two length hash tables, that</span>
+<span class="cm"> * otherwise encounter collisions for hashCodes that do not differ</span>
+<span class="cm"> * in lower bits. Note: Null keys always map to hash 0, thus index 0.</span>
+<span class="cm"> */</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="nf">hash</span><span class="o">(</span><span class="n">Object</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">useAltHashing</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="k">instanceof</span> <span class="n">String</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">sun</span><span class="o">.</span><span class="na">misc</span><span class="o">.</span><span class="na">Hashing</span><span class="o">.</span><span class="na">stringHash32</span><span class="o">((</span><span class="n">String</span><span class="o">)</span> <span class="n">k</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">hashSeed</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<p>```java
-/**
- * Retrieve object hash code and applies a supplemental hash function to the
- * result hash, which defends against poor quality hash functions.  This is
- * critical because HashMap uses power-of-two length hash tables, that
- * otherwise encounter collisions for hashCodes that do not differ
- * in lower bits. Note: Null keys always map to hash 0, thus index 0.
- */
-final int hash(Object k) {
-    int h = 0;
-    if (useAltHashing) {
-        if (k instanceof String) {
-            return sun.misc.Hashing.stringHash32((String) k);
-        }
-        h = hashSeed;
-    }</p>
+    <span class="n">h</span> <span class="o">^=</span> <span class="n">k</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
 
-<pre><code>h ^= k.hashCode();
-
-// This function ensures that hashCodes that differ only by
-// constant multiples at each bit position have a bounded
-// number of collisions (approximately 8 at default load factor).
-h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);
-return h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4); } ```
-</code></pre>
-
+    <span class="c1">// This function ensures that hashCodes that differ only by</span>
+    <span class="c1">// constant multiples at each bit position have a bounded</span>
+    <span class="c1">// number of collisions (approximately 8 at default load factor).</span>
+    <span class="n">h</span> <span class="o">^=</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">^</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">12</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">h</span> <span class="o">^</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">7</span><span class="o">)</span> <span class="o">^</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">4</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>如果 <code>k</code> 是 <code>String</code> 类型，使用了特别的 <code>hash</code> 函数，否则首先得到 <code>hashCode</code>，然后又对 <code>h</code> 作了移位，异或操作，问题：</p>
 
 <blockquote>
-  <p>为什么这里要作移位，异或操作呢？</p>
+<p>为什么这里要作移位，异或操作呢？</p>
 </blockquote>
-
-<p><code>
-at 22: 
+<div class="highlight"><pre><code class="text language-text" data-lang="text">at 22: 
 h = abcdefgh
 h1 = h &gt;&gt;&gt; 20 = 00000abc
 h2 = h &gt;&gt;&gt; 12 = 000abcde
@@ -650,120 +638,108 @@ h4 = h ^ h3 = [a][b][c][a^d][b^e][a^c^f][b^d^g][c^e^h]
 h5 = h4 &gt;&gt;&gt; 4 = [0][a][b][c][a^d][b^e][a^c^f][b^d^g]
 h6 = h4 &gt;&gt;&gt; 7 = ([0][:3])[0][0][a][b][c][a^d][b^e][a^c^f]([a^c^f][0])
 h7 = h4 ^ h6 = 太凶残了。。。
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>put</li>
+<li>put</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Associates the specified value with the specified key in this map.</span>
+<span class="cm"> * If the map previously contained a mapping for the key, the old</span>
+<span class="cm"> * value is replaced.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param key key with which the specified value is to be associated</span>
+<span class="cm"> * @param value value to be associated with the specified key</span>
+<span class="cm"> * @return the previous value associated with &lt;tt&gt;key&lt;/tt&gt;, or</span>
+<span class="cm"> *         &lt;tt&gt;null&lt;/tt&gt; if there was no mapping for &lt;tt&gt;key&lt;/tt&gt;.</span>
+<span class="cm"> *         (A &lt;tt&gt;null&lt;/tt&gt; return can also indicate that the map</span>
+<span class="cm"> *         previously associated &lt;tt&gt;null&lt;/tt&gt; with &lt;tt&gt;key&lt;/tt&gt;.)</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="nf">putForNullKey</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">hash</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">indexFor</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">k</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span> <span class="o">&amp;&amp;</span> <span class="o">((</span><span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">key</span><span class="o">)</span> <span class="o">==</span> <span class="n">key</span> <span class="o">||</span> <span class="n">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">k</span><span class="o">)))</span> <span class="o">{</span>
+            <span class="n">V</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">recordAccess</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<p>```java
-/**
- * Associates the specified value with the specified key in this map.
- * If the map previously contained a mapping for the key, the old
- * value is replaced.
- *
- * @param key key with which the specified value is to be associated
- * @param value value to be associated with the specified key
- * @return the previous value associated with <tt>key</tt>, or
- *         <tt>null</tt> if there was no mapping for <tt>key</tt>.
- *         (A <tt>null</tt> return can also indicate that the map
- *         previously associated <tt>null</tt> with <tt>key</tt>.)
- */
-public V put(K key, V value) {
-    if (key == null)
-        return putForNullKey(value);
-    int hash = hash(key);
-    int i = indexFor(hash, table.length);
-    for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) {
-        Object k;
-        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) {
-            V oldValue = e.value;
-            e.value = value;
-            e.recordAccess(this);
-            return oldValue;
-        }
-    }</p>
-
-<pre><code>modCount++;
-addEntry(hash, key, value, i);
-return null; } ```
-</code></pre>
-
+    <span class="n">modCount</span><span class="o">++;</span>
+    <span class="n">addEntry</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>从 <code>put</code> 其实可以看出各个 <code>hash</code> 表是如何实现的，首先取得 <code>hash</code> 值，然后由 <code>indexFor</code> 找到链表头的 <code>index</code>，然后开始遍历链表，如果链表里的一个元素 <code>hash</code> 值与当前 <code>key</code> 的 <code>hash</code> 值相同，或者元素 <code>key</code> 的引用与当前 <code>key</code> 相同，或者 <code>equals</code> 相同，就说明当前 <code>key</code> 已经在 <code>hash</code> 表里了，那么修改它的值，返回旧值。</p>
 
 <p>如果不在表里，会调用 <code>addEntry</code>，将这一 <code>(key, value)</code> 对添加进去。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Adds a new entry with the specified key, value and hash code to</span>
+<span class="cm"> * the specified bucket.  It is the responsibility of this</span>
+<span class="cm"> * method to resize the table if appropriate.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Subclass overrides this to alter the behavior of put method.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">addEntry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bucketIndex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">((</span><span class="n">size</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">table</span><span class="o">[</span><span class="n">bucketIndex</span><span class="o">]))</span> <span class="o">{</span>
+        <span class="n">resize</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+        <span class="n">hash</span> <span class="o">=</span> <span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">key</span><span class="o">)</span> <span class="o">?</span> <span class="n">hash</span><span class="o">(</span><span class="n">key</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">bucketIndex</span> <span class="o">=</span> <span class="n">indexFor</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<p>```java
-/**
- * Adds a new entry with the specified key, value and hash code to
- * the specified bucket.  It is the responsibility of this
- * method to resize the table if appropriate.
- *
- * Subclass overrides this to alter the behavior of put method.
- */
-void addEntry(int hash, K key, V value, int bucketIndex) {
-    if ((size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])) {
-        resize(2 * table.length);
-        hash = (null != key) ? hash(key) : 0;
-        bucketIndex = indexFor(hash, table.length);
-    }</p>
+    <span class="n">createEntry</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">bucketIndex</span><span class="o">);</span>
+<span class="o">}</span>
 
-<pre><code>createEntry(hash, key, value, bucketIndex); }
-</code></pre>
-
-<p>/**
- * Like addEntry except that this version is used when creating entries
- * as part of Map construction or &#8220;pseudo-construction&#8221; (cloning,
- * deserialization).  This version needn&#8217;t worry about resizing the table.
- *
- * Subclass overrides this to alter the behavior of HashMap(Map),
- * clone, and readObject.
- */
-void createEntry(int hash, K key, V value, int bucketIndex) {
-    Entry&lt;K,V&gt; e = table[bucketIndex];
-    table[bucketIndex] = new Entry&lt;&gt;(hash, key, value, e);
-    size++;
-}
-```</p>
-
+<span class="cm">/**</span>
+<span class="cm"> * Like addEntry except that this version is used when creating entries</span>
+<span class="cm"> * as part of Map construction or &quot;pseudo-construction&quot; (cloning,</span>
+<span class="cm"> * deserialization).  This version needn&#39;t worry about resizing the table.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Subclass overrides this to alter the behavior of HashMap(Map),</span>
+<span class="cm"> * clone, and readObject.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">createEntry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bucketIndex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">bucketIndex</span><span class="o">];</span>
+    <span class="n">table</span><span class="o">[</span><span class="n">bucketIndex</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+    <span class="n">size</span><span class="o">++;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>可以看出，新增加元素时，可能会调整 <code>hash</code> 表的大小，原因之前已经讨论过。直接的添加在 <code>createEntry</code> 中完成，但是这里并没有体现出如何处理冲突。</p>
-
-<p><code>java
-Entry(int h, K k, V v, Entry&lt;K,V&gt; n) {
-    value = v;
-    next = n;
-    key = k;
-    hash = h;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="n">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">h</span><span class="o">,</span> <span class="n">K</span> <span class="n">k</span><span class="o">,</span> <span class="n">V</span> <span class="n">v</span><span class="o">,</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+    <span class="n">next</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">k</span><span class="o">;</span>
+    <span class="n">hash</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>注意这里，将 <code>n</code> 赋值给了 <code>next</code>，这其实就是将新添加的项指向了当前链表头。这一操作在 <code>Entry</code> 的构造函数中完成。</p>
 
 <p><code>put</code> 操作的基本思路在到这里已经很清楚了，有了这个思路，不难想象 <code>get</code> 是如何动作的。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="n">V</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="nf">getForNullKey</span><span class="o">();</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">getEntry</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
 
-<p>```java
-public V get(Object key) {
-    if (key == null)
-        return getForNullKey();
-    Entry&lt;K,V&gt; entry = getEntry(key);</p>
+    <span class="k">return</span> <span class="kc">null</span> <span class="o">==</span> <span class="n">entry</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+<span class="o">}</span>
 
-<pre><code>return null == entry ? null : entry.getValue(); }
-</code></pre>
-
-<p>final Entry&lt;K,V&gt; getEntry(Object key) {
-    int hash = (key == null) ? 0 : hash(key);
-    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];
-         e != null;
-         e = e.next) {
-        Object k;
-        if (e.hash == hash &amp;&amp;
-            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-            return e;
-    }
-    return null;
-}
-```</p>
-
+<span class="kd">final</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">getEntry</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">hash</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">indexFor</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">)];</span>
+         <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+         <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">k</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span> <span class="o">&amp;&amp;</span>
+            <span class="o">((</span><span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">key</span><span class="o">)</span> <span class="o">==</span> <span class="n">key</span> <span class="o">||</span> <span class="o">(</span><span class="n">key</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">k</span><span class="o">))))</span>
+            <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>和 <code>put</code> 差不多，只是找到了就会返回相应的 <code>value</code> ，找不到就返回 <code>null</code>。</p>
 
 

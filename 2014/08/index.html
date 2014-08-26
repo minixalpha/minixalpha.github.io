@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -548,14 +548,13 @@
       </div>
 
       <div class="post-preview">
-        <h1 id="java-">对 Java 内存模型的理解</h1>
+        <h1>对 Java 内存模型的理解</h1>
 
-<h2 id="java--1">Java 内存模型</h2>
+<h2>Java 内存模型</h2>
 
 <p>Java内存模型规定了在多线程程序中，什么样的行为是允许出现的，什么样的行为是禁止出现的。这样说可能有点抽象，我们换一个角度。将程序行为抽象成读操作和写操作，每个线程有自己的局部变量，同时线程之间还存在共享变量。那么一个多线程程序执行结束后，所有变量会有一个最终值。Java内存模型来决定什么样的值合法，什么样的值不合法。</p>
 
 <p>内存模型不能要求的太严格，这样会阻碍很多优化方法，降低程序执行的效率，但也不能要求的太松，因为这样会导致一些执行结果违反我们的直觉。例如指令间的重排序问题，如果线程内部的指令完全按照程序中指明的次序执行，并且每次执行一条指令，执行的结果立即生效，那么就会阻碍很多优化方法，但这样对程序员是有好处的，因为程序员很容易推断程序的执行结果，这样写出的程序就容易与自己的意图一致。这种内存模型被称为顺序一致性模型(Sequential Consistency)。反之，如果为了优化程序执行效率，重排序的可能性有很多，那么程序的效率是提高了，但对程序员来说，就很难推断程序的执行结果。这一类的内存模型被称为Relaxed Memory Model。</p>
-
  
         <a href="/%E7%A7%91%E7%A0%94/2014/08/17/java-memory-model.html"> Read More ... </a> </br>
       </div>

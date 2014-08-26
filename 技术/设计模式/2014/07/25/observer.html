@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,88 +532,84 @@
 
       <article>
 
-<h1 id="section">观察者模式</h1>
+<h1>观察者模式</h1>
 
-<hr />
+<hr>
 
 <ul>
-  <li>定义 </li>
+<li>定义 </li>
 </ul>
 
 <p>观察者模式定义了对象之间的一对多依赖，当一个对象改变时，所以依赖于它的对象都会得到通知。</p>
 
 <ul>
-  <li>示例</li>
+<li>示例</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">interface</span> <span class="nc">Observer</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">int</span> <span class="n">data</span><span class="o">);</span>
+<span class="o">}</span>
 
-<p>```java
-interface Observer {
-	void update(int data);
-}</p>
+<span class="kd">class</span> <span class="nc">NewsPaper</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Observer</span><span class="o">&gt;</span> <span class="n">observers</span><span class="o">;</span>
 
-<p>class NewsPaper {
-	private LinkedList<observer> observers;</observer></p>
+    <span class="kd">public</span> <span class="nf">NewsPaper</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
 
-<pre><code>public NewsPaper() {
-	observers = new LinkedList&lt;&gt;();
-}
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subscribe</span><span class="o">(</span><span class="n">Observer</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+    <span class="o">}</span>
 
-public void subscribe(Observer o) {
-	observers.add(o);
-}
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unsubscribe</span><span class="o">(</span><span class="n">Observer</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+    <span class="o">}</span>
 
-public void unsubscribe(Observer o) {
-	observers.remove(o);
-}
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeData</span><span class="o">(</span><span class="kt">int</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Observer</span> <span class="n">o</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">o</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-public void changeData(int data) {
-	for (Observer o : observers) {
-		o.update(data);
-	}
-} }
-</code></pre>
+<span class="kd">class</span> <span class="nc">Reader</span> <span class="kd">implements</span> <span class="n">Observer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-<p>class Reader implements Observer {
-	private String name;</p>
+    <span class="kd">public</span> <span class="nf">Reader</span><span class="o">(</span><span class="n">NewsPaper</span> <span class="n">paper</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="n">paper</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<pre><code>public Reader(NewsPaper paper, String name) {
-	this.name = name;
-	paper.subscribe(this);
-}
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">int</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot; update data:&quot;</span> <span class="o">+</span> <span class="n">data</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-@Override
-public void update(int data) {
-	System.out.println(name + " update data:" + data);
-} }
-</code></pre>
-
-<p>public class TestObserve {
-	public static void main(String[] args) {
-		NewsPaper newsPaper = new NewsPaper();
-		Reader tom = new Reader(newsPaper, &#8220;tom&#8221;);
-		Reader jack = new Reader(newsPaper, &#8220;jack&#8221;);
-		newsPaper.changeData(10);
-		System.out.println(&#8220;&#8211;&#8221;);
-		newsPaper.unsubscribe(tom);
-		newsPaper.changeData(5);
-	}
-}
-```</p>
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestObserve</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">NewsPaper</span> <span class="n">newsPaper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NewsPaper</span><span class="o">();</span>
+        <span class="n">Reader</span> <span class="n">tom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Reader</span><span class="o">(</span><span class="n">newsPaper</span><span class="o">,</span> <span class="s">&quot;tom&quot;</span><span class="o">);</span>
+        <span class="n">Reader</span> <span class="n">jack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Reader</span><span class="o">(</span><span class="n">newsPaper</span><span class="o">,</span> <span class="s">&quot;jack&quot;</span><span class="o">);</span>
+        <span class="n">newsPaper</span><span class="o">.</span><span class="na">changeData</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--&quot;</span><span class="o">);</span>
+        <span class="n">newsPaper</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">(</span><span class="n">tom</span><span class="o">);</span>
+        <span class="n">newsPaper</span><span class="o">.</span><span class="na">changeData</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>所有  Reader 都是观察者，当他订阅了 NewsPaper 后。NewsPaper 一有新数据，就会通知所有订阅了它的 Reader。</p>
 
 <ul>
-  <li>为什么</li>
+<li>为什么</li>
 </ul>
 
 <p>为什么要使用观察者模式？因为在初始化被观察者时，并不知道当数据变化时，需要通知谁。需要通知的对象是动态变化的。</p>
 
 <ul>
-  <li>谁还用了观察者模式</li>
+<li>谁还用了观察者模式</li>
 </ul>
 
 <p>在 GUI 编程时，我们想要在事件被触发时，执行我们指定的动作。例如想在按钮被点击时弹窗口，就可以通过类似 <code>AddListener</code>，将已经实现相应接口的对象添加到按钮的“订阅列表”中，当按钮被点击时，系统会依次调用“订阅列表”中对象的相应方法。弹窗口因此被触发。</p>
-
 
 
       </article>

@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,34 +532,28 @@
 
       <article>
 
-<h1 id="openjdk--treemap">OpenJDK 源代码阅读之 TreeMap</h1>
+<h1>OpenJDK 源代码阅读之 TreeMap</h1>
 
-<hr />
+<hr>
 
-<h2 id="section">概要</h2>
+<h2>概要</h2>
 
 <ul>
-  <li>类继承关系</li>
+<li>类继承关系</li>
 </ul>
-
-<p><code>
-java.lang.Object
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
     java.util.AbstractMap&lt;K,V&gt;
         java.util.HashMap&lt;K,V&gt;
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>定义 </li>
+<li>定义 </li>
 </ul>
-
-<p><code>
-public class TreeMap&lt;K,V&gt;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public class TreeMap&lt;K,V&gt;
     extends AbstractMap&lt;K,V&gt;
     implements NavigableMap&lt;K,V&gt;, Cloneable, java.io.Serializable
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>要点</li>
+<li>要点</li>
 </ul>
 
 <p>1) 基于 NavigableMap 实现的红黑树
@@ -567,521 +561,477 @@ public class TreeMap&lt;K,V&gt;
 3) 基本操作 <code>containsKey</code>,<code>get</code>,<code>put</code> 有 <code>log(n)</code> 的时间复杂度。
 4) 非线程安全</p>
 
-<h2 id="section-1">实现</h2>
+<h2>实现</h2>
 
 <ul>
-  <li>Comparator</li>
+<li>Comparator</li>
 </ul>
-
-<p><code>java
-private final Comparator&lt;? super K&gt; comparator;
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">;</span>
+</code></pre></div>
 <p>这说明提供的 <code>Comparator</code> 参数类型是 <code>K</code> 的基类就行。这似乎意味着基类的 <code>Comparator</code> 与导出类的要一致。</p>
 
 <ul>
-  <li>Entry</li>
+<li>Entry</li>
 </ul>
-
-<p><code>java
-private transient Entry&lt;K,V&gt; root = null;
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kd">transient</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</code></pre></div>
 <p><code>root</code> 是这棵红黑树的根，那么从 <code>Entry</code> 的定义可以体现树的结构：</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
+    <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">color</span> <span class="o">=</span> <span class="n">BLACK</span><span class="o">;</span>
 
-<p>```java
-static final class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    K key;
-    V value;
-    Entry&lt;K,V&gt; left = null;
-    Entry&lt;K,V&gt; right = null;
-    Entry&lt;K,V&gt; parent;
-    boolean color = BLACK;</p>
-
-<pre><code>... } ```
-</code></pre>
-
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>注意这是个 <code>static final</code> 类，<code>left</code>,<code>right</code>,<code>parent</code> 分别指向左子树，右子树，父结点, <code>color</code> 颜色默认为黑。</p>
 
 <ul>
-  <li>containsKey</li>
+<li>containsKey</li>
 </ul>
-
-<p><code>java
-public boolean containsKey(Object key) {
-    return getEntry(key) != null;
-}
-</code></p>
-
-<p><code>java
-final Entry&lt;K,V&gt; getEntry(Object key) {
-    // Offload comparator-based version for sake of performance
-    if (comparator != null)
-        return getEntryUsingComparator(key);
-    if (key == null)
-        throw new NullPointerException();
-    Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;
-    Entry&lt;K,V&gt; p = root;
-    while (p != null) {
-        int cmp = k.compareTo(p.key);
-        if (cmp &lt; 0)
-            p = p.left;
-        else if (cmp &gt; 0)
-            p = p.right;
-        else
-            return p;
-    }
-    return null;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsKey</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">getEntry</span><span class="o">(</span><span class="n">key</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">final</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">getEntry</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Offload comparator-based version for sake of performance</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">comparator</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="nf">getEntryUsingComparator</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">();</span>
+    <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;)</span> <span class="n">key</span><span class="o">;</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">key</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>关键操作 <code>containsKey</code> 是通过调用 <code>getEntry</code> 完成其功能的。可以看出，这是通过在红黑树上进行查找完成的，每次比较都会下降到树的下一层，由于红黑树的平衡性，时间复杂度为 <code>log(n)</code>。</p>
 
 <ul>
-  <li>containsValue</li>
+<li>containsValue</li>
 </ul>
-
-<p><code>java
-public boolean containsValue(Object value) {
-    for (Entry&lt;K,V&gt; e = getFirstEntry(); e != null; e = successor(e))
-        if (valEquals(value, e.value))
-            return true;
-    return false;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">getFirstEntry</span><span class="o">();</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">successor</span><span class="o">(</span><span class="n">e</span><span class="o">))</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">valEquals</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">))</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>可以看出，对 <code>value</code> 的查找，与对 <code>key</code> 是不同的。是通过 <code>getFirstEntry</code> 取得第一个结点，再通过 <code>successor</code> 遍历实现。</p>
-
-<p><code>java
-final Entry&lt;K,V&gt; getFirstEntry() {
-    Entry&lt;K,V&gt; p = root;
-    if (p != null)
-        while (p.left != null)
-            p = p.left;
-    return p;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">final</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">getFirstEntry</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>可以看出，这是找到了树中最左边的结点，如果左子树中的值小于右子树，这就意味是第一个比较的结点是最小的结点。</p>
-
-<p><code>java
-static &lt;K,V&gt; TreeMap.Entry&lt;K,V&gt; successor(Entry&lt;K,V&gt; t) {
-    if (t == null)
-        return null;
-    else if (t.right != null) {
-        Entry&lt;K,V&gt; p = t.right;
-        while (p.left != null)
-            p = p.left;
-        return p;
-    } else {
-        Entry&lt;K,V&gt; p = t.parent;
-        Entry&lt;K,V&gt; ch = t;
-        while (p != null &amp;&amp; ch == p.right) {
-            ch = p;
-            p = p.parent;
-        }
-        return p;
-    }
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">TreeMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">successor</span><span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ch</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 <p><code>successor</code> 其实就是一个结点的 <code>下一个结点</code>，所谓 <code>下一个</code>，是按次序排序后的下一个结点。从代码中可以看出，如果右子树不为空，就返回右子树中最小结点。如果右子树为空，就要向上回溯了。在这种情况下，<code>t</code> 是以其为根的树的最后一个结点。如果它是其父结点的左孩子，那么父结点就是它的下一个结点，否则，<code>t</code> 就是以其父结点为根的树的最后一个结点，需要再次向上回溯。一直到 <code>ch</code> 是 <code>p</code> 的左孩子为止。</p>
 
 <ul>
-  <li>getCeilingEntry</li>
+<li>getCeilingEntry</li>
 </ul>
-
-<p><code>java
-/**
- * Gets the entry corresponding to the specified key; if no such entry
- * exists, returns the entry for the least key greater than the specified
- * key; if no such entry exists (i.e., the greatest key in the Tree is less
- * than the specified key), returns {@code null}.
- */
-final Entry&lt;K,V&gt; getCeilingEntry(K key) {
-    Entry&lt;K,V&gt; p = root;
-    while (p != null) {
-        int cmp = compare(key, p.key);
-        if (cmp &lt; 0) {
-            if (p.left != null)
-                p = p.left;
-            else
-                return p;
-        } else if (cmp &gt; 0) {
-            if (p.right != null) {
-                p = p.right;
-            } else {
-                Entry&lt;K,V&gt; parent = p.parent;
-                Entry&lt;K,V&gt; ch = p;
-                while (parent != null &amp;&amp; ch == parent.right) {
-                    ch = parent;
-                    parent = parent.parent;
-                }
-                return parent;
-            }
-        } else
-            return p;
-    }
-    return null;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Gets the entry corresponding to the specified key; if no such entry</span>
+<span class="cm"> * exists, returns the entry for the least key greater than the specified</span>
+<span class="cm"> * key; if no such entry exists (i.e., the greatest key in the Tree is less</span>
+<span class="cm"> * than the specified key), returns {@code null}.</span>
+<span class="cm"> */</span>
+<span class="kd">final</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">getCeilingEntry</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="n">compare</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">key</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+                <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+                <span class="k">while</span> <span class="o">(</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">parent</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">ch</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+                    <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">parent</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span>
+            <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>这个函数看起来有点奇怪，可以从 <code>return</code> 语句，猜想一下这是在做什么，我觉得是在找一个 <code>x.key &gt;= key</code> 的元素，并且 <code>x</code> 是满足条件的元素中最小的。从 <code>23</code> 行看，找到的 <code>p</code>，<code>key</code> 值与参数 <code>key</code> 相等，从 <code>8</code> 行看，又有 <code>key &lt;= p.key</code>，并且 <code>p.left == null</code>。</p>
 
 <p><code>put</code></p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Associates the specified value with the specified key in this map.</span>
+<span class="cm"> * If the map previously contained a mapping for the key, the old</span>
+<span class="cm"> * value is replaced.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param key key with which the specified value is to be associated</span>
+<span class="cm"> * @param value value to be associated with the specified key</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return the previous value associated with {@code key}, or</span>
+<span class="cm"> *         {@code null} if there was no mapping for {@code key}.</span>
+<span class="cm"> *         (A {@code null} return can also indicate that the map</span>
+<span class="cm"> *         previously associated {@code null} with {@code key}.)</span>
+<span class="cm"> * @throws ClassCastException if the specified key cannot be compared</span>
+<span class="cm"> *         with the keys currently in the map</span>
+<span class="cm"> * @throws NullPointerException if the specified key is null</span>
+<span class="cm"> *         and this map uses natural ordering, or its comparator</span>
+<span class="cm"> *         does not permit null keys</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">compare</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span> <span class="c1">// type (and possibly null) check</span>
 
-<p>```java
-/**
- * Associates the specified value with the specified key in this map.
- * If the map previously contained a mapping for the key, the old
- * value is replaced.
- *
- * @param key key with which the specified value is to be associated
- * @param value value to be associated with the specified key
- *
- * @return the previous value associated with {@code key}, or
- *         {@code null} if there was no mapping for {@code key}.
- *         (A {@code null} return can also indicate that the map
- *         previously associated {@code null} with {@code key}.)
- * @throws ClassCastException if the specified key cannot be compared
- *         with the keys currently in the map
- * @throws NullPointerException if the specified key is null
- *         and this map uses natural ordering, or its comparator
- *         does not permit null keys
- */
-public V put(K key, V value) {
-    Entry&lt;K,V&gt; t = root;
-    if (t == null) {
-        compare(key, key); // type (and possibly null) check</p>
-
-<pre><code>    root = new Entry&lt;&gt;(key, value, null);
-    size = 1;
-    modCount++;
-    return null;
-}
-int cmp;
-Entry&lt;K,V&gt; parent;
-// split comparator and comparable paths
-Comparator&lt;? super K&gt; cpr = comparator;
-if (cpr != null) {
-    do {
-        parent = t;
-        cmp = cpr.compare(key, t.key);
-        if (cmp &lt; 0)
-            t = t.left;
-        else if (cmp &gt; 0)
-            t = t.right;
-        else
-            return t.setValue(value);
-    } while (t != null);
-}
-else {
-    if (key == null)
-        throw new NullPointerException();
-    Comparable&lt;? super K&gt; k = (Comparable&lt;? super K&gt;) key;
-    do {
-        parent = t;
-        cmp = k.compareTo(t.key);
-        if (cmp &lt; 0)
-            t = t.left;
-        else if (cmp &gt; 0)
-            t = t.right;
-        else
-            return t.setValue(value);
-    } while (t != null);
-}
-Entry&lt;K,V&gt; e = new Entry&lt;&gt;(key, value, parent);
-if (cmp &lt; 0)
-    parent.left = e;
-else
-    parent.right = e;
-fixAfterInsertion(e);
-size++;
-modCount++;
-return null; } ```
-</code></pre>
-
+        <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kt">int</span> <span class="n">cmp</span><span class="o">;</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">parent</span><span class="o">;</span>
+    <span class="c1">// split comparator and comparable paths</span>
+    <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">cpr</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">cpr</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+            <span class="n">cmp</span> <span class="o">=</span> <span class="n">cpr</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">t</span><span class="o">.</span><span class="na">key</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">t</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">();</span>
+        <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">K</span><span class="o">&gt;)</span> <span class="n">key</span><span class="o">;</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+            <span class="n">cmp</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">key</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">t</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="k">else</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="n">fixAfterInsertion</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="n">size</span><span class="o">++;</span>
+    <span class="n">modCount</span><span class="o">++;</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p><code>put</code> 的过程，其实是将 <code>(key, value)</code> 加入到红黑树中的过程。如果树是空的，那么创建根结点。否则就要在树中插入结点。这个过程根据 <code>comparator</code> 是否存在设置成了两种方式，其实没什么区别，就是比较方式的不同，都是在树中查找一个合适的位置，如果 <code>key</code> 在树中，就 <code>setValue</code> 设置新值，否则，就在 <code>60-64</code> 行插入新结点。这里有个重要的地方是 <code>65</code> 行的 <code>fixAfterInsertion</code> ，这个很重要，因为这是一棵红黑树，红黑树关键的思想是要保持它的平衡性，插入结点后，平衡性可能被破坏。所以需要 <code>fix</code>。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/** From CLR */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">fixAfterInsertion</span><span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">x</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">RED</span><span class="o">;</span>
 
-<p>```java
-/** From CLR */
-private void fixAfterInsertion(Entry&lt;K,V&gt; x) {
-    x.color = RED;</p>
-
-<pre><code>while (x != null &amp;&amp; x != root &amp;&amp; x.parent.color == RED) {
-    if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
-        Entry&lt;K,V&gt; y = rightOf(parentOf(parentOf(x)));
-        if (colorOf(y) == RED) {
-            setColor(parentOf(x), BLACK);
-            setColor(y, BLACK);
-            setColor(parentOf(parentOf(x)), RED);
-            x = parentOf(parentOf(x));
-        } else {
-            if (x == rightOf(parentOf(x))) {
-                x = parentOf(x);
-                rotateLeft(x);
-            }
-            setColor(parentOf(x), BLACK);
-            setColor(parentOf(parentOf(x)), RED);
-            rotateRight(parentOf(parentOf(x)));
-        }
-    } else {
-        Entry&lt;K,V&gt; y = leftOf(parentOf(parentOf(x)));
-        if (colorOf(y) == RED) {
-            setColor(parentOf(x), BLACK);
-            setColor(y, BLACK);
-            setColor(parentOf(parentOf(x)), RED);
-            x = parentOf(parentOf(x));
-        } else {
-            if (x == leftOf(parentOf(x))) {
-                x = parentOf(x);
-                rotateRight(x);
-            }
-            setColor(parentOf(x), BLACK);
-            setColor(parentOf(parentOf(x)), RED);
-            rotateLeft(parentOf(parentOf(x)));
-        }
-    }
-}
-root.color = BLACK; } ```
-</code></pre>
-
+    <span class="k">while</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">x</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">color</span> <span class="o">==</span> <span class="n">RED</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">==</span> <span class="n">leftOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">))))</span> <span class="o">{</span>
+            <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rightOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">colorOf</span><span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">==</span> <span class="n">RED</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)),</span> <span class="n">RED</span><span class="o">);</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">rightOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)))</span> <span class="o">{</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+                    <span class="n">rotateLeft</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)),</span> <span class="n">RED</span><span class="o">);</span>
+                <span class="n">rotateRight</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)));</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">leftOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">colorOf</span><span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">==</span> <span class="n">RED</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)),</span> <span class="n">RED</span><span class="o">);</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">leftOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)))</span> <span class="o">{</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+                    <span class="n">rotateRight</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">BLACK</span><span class="o">);</span>
+                <span class="n">setColor</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)),</span> <span class="n">RED</span><span class="o">);</span>
+                <span class="n">rotateLeft</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">parentOf</span><span class="o">(</span><span class="n">x</span><span class="o">)));</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">root</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">BLACK</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>这是 <code>fixAfterInsertion</code> 的源代码，我不具体解释了，这是一个根据不同情况进行旋转，调整结点颜色的过程，可以参考《算法导论》中的解释。</p>
 
 <ul>
-  <li>remove</li>
+<li>remove</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="n">V</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">getEntry</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 
-<p>```java
-public V remove(Object key) {
-    Entry&lt;K,V&gt; p = getEntry(key);
-    if (p == null)
-        return null;</p>
-
-<pre><code>V oldValue = p.value;
-deleteEntry(p);
-return oldValue; } ```
-</code></pre>
-
+    <span class="n">V</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+    <span class="n">deleteEntry</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>删除的过程主要调用 <code>delteEntry</code> 完成：</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">deleteEntry</span><span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">modCount</span><span class="o">++;</span>
+    <span class="n">size</span><span class="o">--;</span>
 
-<p>```java
-private void deleteEntry(Entry&lt;K,V&gt; p) {
-    modCount++;
-    size&#8211;;</p>
+    <span class="c1">// If strictly internal, copy successor&#39;s element to p and then make p</span>
+    <span class="c1">// point to successor.</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">successor</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">key</span><span class="o">;</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// p has 2 children</span>
 
-<pre><code>// If strictly internal, copy successor's element to p and then make p
-// point to successor.
-if (p.left != null &amp;&amp; p.right != null) {
-    Entry&lt;K,V&gt; s = successor(p);
-    p.key = s.key;
-    p.value = s.value;
-    p = s;
-} // p has 2 children
+    <span class="c1">// Start fixup at replacement node, if it exists.</span>
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">replacement</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">:</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
 
-// Start fixup at replacement node, if it exists.
-Entry&lt;K,V&gt; replacement = (p.left != null ? p.left : p.right);
+    <span class="k">if</span> <span class="o">(</span><span class="n">replacement</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Link replacement to parent</span>
+        <span class="n">replacement</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span><span class="o">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span>  <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">replacement</span><span class="o">;</span>
 
-if (replacement != null) {
-    // Link replacement to parent
-    replacement.parent = p.parent;
-    if (p.parent == null)
-        root = replacement;
-    else if (p == p.parent.left)
-        p.parent.left  = replacement;
-    else
-        p.parent.right = replacement;
+        <span class="c1">// Null out links so they are OK to use by fixAfterDeletion.</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-    // Null out links so they are OK to use by fixAfterDeletion.
-    p.left = p.right = p.parent = null;
+        <span class="c1">// Fix replacement</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">color</span> <span class="o">==</span> <span class="n">BLACK</span><span class="o">)</span>
+            <span class="n">fixAfterDeletion</span><span class="o">(</span><span class="n">replacement</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// return if we are the only node.</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">//  No children. Use self as phantom replacement and unlink.</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">color</span> <span class="o">==</span> <span class="n">BLACK</span><span class="o">)</span>
+            <span class="n">fixAfterDeletion</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
 
-    // Fix replacement
-    if (p.color == BLACK)
-        fixAfterDeletion(replacement);
-} else if (p.parent == null) { // return if we are the only node.
-    root = null;
-} else { //  No children. Use self as phantom replacement and unlink.
-    if (p.color == BLACK)
-        fixAfterDeletion(p);
-
-    if (p.parent != null) {
-        if (p == p.parent.left)
-            p.parent.left = null;
-        else if (p == p.parent.right)
-            p.parent.right = null;
-        p.parent = null;
-    }
-} } ```
-</code></pre>
-
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span><span class="o">)</span>
+                <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span><span class="o">)</span>
+                <span class="n">p</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>这个过程同样是与红黑树的性质相关的。在树中删除一个结点，那他的孩子怎么办啊，红黑树不平衡了怎么办啊，树空了怎么办啊，都需要考虑到。</p>
 
 <ul>
-  <li>clear</li>
+<li>clear</li>
 </ul>
-
-<p><code>java
-public void clear() {
-    modCount++;
-    size = 0;
-    root = null;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">modCount</span><span class="o">++;</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>居然就是把值都清空了。。</p>
 
 <ul>
-  <li>clone</li>
+<li>clone</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Returns a shallow copy of this {@code TreeMap} instance. (The keys and</span>
+<span class="cm"> * values themselves are not cloned.)</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return a shallow copy of this map</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">Object</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">clone</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">clone</span> <span class="o">=</span> <span class="o">(</span><span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InternalError</span><span class="o">();</span>
+    <span class="o">}</span>
 
-<p>```java
-/**
- * Returns a shallow copy of this {@code TreeMap} instance. (The keys and
- * values themselves are not cloned.)
- *
- * @return a shallow copy of this map
- */
-public Object clone() {
-    TreeMap&lt;K,V&gt; clone = null;
-    try {
-        clone = (TreeMap&lt;K,V&gt;) super.clone();
-    } catch (CloneNotSupportedException e) {
-        throw new InternalError();
-    }</p>
+    <span class="c1">// Put clone into &quot;virgin&quot; state (except for comparator)</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">root</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">modCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">entrySet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">navigableKeySet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">clone</span><span class="o">.</span><span class="na">descendingMap</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-<pre><code>// Put clone into "virgin" state (except for comparator)
-clone.root = null;
-clone.size = 0;
-clone.modCount = 0;
-clone.entrySet = null;
-clone.navigableKeySet = null;
-clone.descendingMap = null;
+    <span class="c1">// Initialize clone with our mappings</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">clone</span><span class="o">.</span><span class="na">buildFromSorted</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">entrySet</span><span class="o">().</span><span class="na">iterator</span><span class="o">(),</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span> <span class="n">cannotHappen</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">cannotHappen</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
 
-// Initialize clone with our mappings
-try {
-    clone.buildFromSorted(size, entrySet().iterator(), null, null);
-} catch (java.io.IOException cannotHappen) {
-} catch (ClassNotFoundException cannotHappen) {
-}
-
-return clone; } ```
-</code></pre>
-
+    <span class="k">return</span> <span class="n">clone</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p><code>clone</code> 复制了一份新的元素，使用了 <code>super.clone()</code> 得的一个新对象，而不是使用 <code>new</code>，这是为啥？然后把各个域值清空，然后使用 <code>buildFromSorted</code> 插入数据。之所以使用这个函数，是因为红黑树插入操作时间复杂度为 <code>O(lgn)</code>，n个元素插入就是 <code>O(n*lgn)</code>，太不划算，更何况我们现在插入的是一个红黑树，所以用一个线性时间复杂度的算法来实现复制数据的操作。</p>
-
-<p><code>java
-/**
- * Linear time tree building algorithm from sorted data.  Can accept keys
- * and/or values from iterator or stream. This leads to too many
- * parameters, but seems better than alternatives.  The four formats
- * that this method accepts are:
- *
- *    1) An iterator of Map.Entries.  (it != null, defaultVal == null).
- *    2) An iterator of keys.         (it != null, defaultVal != null).
- *    3) A stream of alternating serialized keys and values.
- *                                   (it == null, defaultVal == null).
- *    4) A stream of serialized keys. (it == null, defaultVal != null).
- *
- * It is assumed that the comparator of the TreeMap is already set prior
- * to calling this method.
- *
- * @param size the number of keys (or key-value pairs) to be read from
- *        the iterator or stream
- * @param it If non-null, new entries are created from entries
- *        or keys read from this iterator.
- * @param str If non-null, new entries are created from keys and
- *        possibly values read from this stream in serialized form.
- *        Exactly one of it and str should be non-null.
- * @param defaultVal if non-null, this default value is used for
- *        each value in the map.  If null, each value is read from
- *        iterator or stream, as described above.
- * @throws IOException propagated from stream reads. This cannot
- *         occur if str is null.
- * @throws ClassNotFoundException propagated from readObject.
- *         This cannot occur if str is null.
- */
-private void buildFromSorted(int size, Iterator it,
-                             java.io.ObjectInputStream str,
-                             V defaultVal)
-    throws  java.io.IOException, ClassNotFoundException {
-    this.size = size;
-    root = buildFromSorted(0, 0, size-1, computeRedLevel(size),
-                           it, str, defaultVal);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Linear time tree building algorithm from sorted data.  Can accept keys</span>
+<span class="cm"> * and/or values from iterator or stream. This leads to too many</span>
+<span class="cm"> * parameters, but seems better than alternatives.  The four formats</span>
+<span class="cm"> * that this method accepts are:</span>
+<span class="cm"> *</span>
+<span class="cm"> *    1) An iterator of Map.Entries.  (it != null, defaultVal == null).</span>
+<span class="cm"> *    2) An iterator of keys.         (it != null, defaultVal != null).</span>
+<span class="cm"> *    3) A stream of alternating serialized keys and values.</span>
+<span class="cm"> *                                   (it == null, defaultVal == null).</span>
+<span class="cm"> *    4) A stream of serialized keys. (it == null, defaultVal != null).</span>
+<span class="cm"> *</span>
+<span class="cm"> * It is assumed that the comparator of the TreeMap is already set prior</span>
+<span class="cm"> * to calling this method.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param size the number of keys (or key-value pairs) to be read from</span>
+<span class="cm"> *        the iterator or stream</span>
+<span class="cm"> * @param it If non-null, new entries are created from entries</span>
+<span class="cm"> *        or keys read from this iterator.</span>
+<span class="cm"> * @param str If non-null, new entries are created from keys and</span>
+<span class="cm"> *        possibly values read from this stream in serialized form.</span>
+<span class="cm"> *        Exactly one of it and str should be non-null.</span>
+<span class="cm"> * @param defaultVal if non-null, this default value is used for</span>
+<span class="cm"> *        each value in the map.  If null, each value is read from</span>
+<span class="cm"> *        iterator or stream, as described above.</span>
+<span class="cm"> * @throws IOException propagated from stream reads. This cannot</span>
+<span class="cm"> *         occur if str is null.</span>
+<span class="cm"> * @throws ClassNotFoundException propagated from readObject.</span>
+<span class="cm"> *         This cannot occur if str is null.</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">buildFromSorted</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="n">Iterator</span> <span class="n">it</span><span class="o">,</span>
+                             <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectInputStream</span> <span class="n">str</span><span class="o">,</span>
+                             <span class="n">V</span> <span class="n">defaultVal</span><span class="o">)</span>
+    <span class="kd">throws</span>  <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">buildFromSorted</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">computeRedLevel</span><span class="o">(</span><span class="n">size</span><span class="o">),</span>
+                           <span class="n">it</span><span class="o">,</span> <span class="n">str</span><span class="o">,</span> <span class="n">defaultVal</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>好吧，我们继续。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">buildFromSorted</span><span class="o">(</span><span class="kt">int</span> <span class="n">level</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lo</span><span class="o">,</span> <span class="kt">int</span> <span class="n">hi</span><span class="o">,</span>
+                                         <span class="kt">int</span> <span class="n">redLevel</span><span class="o">,</span>
+                                         <span class="n">Iterator</span> <span class="n">it</span><span class="o">,</span>
+                                         <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">ObjectInputStream</span> <span class="n">str</span><span class="o">,</span>
+                                         <span class="n">V</span> <span class="n">defaultVal</span><span class="o">)</span>
+    <span class="kd">throws</span>  <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+    <span class="cm">/*</span>
+<span class="cm">     * Strategy: The root is the middlemost element. To get to it, we</span>
+<span class="cm">     * have to first recursively construct the entire left subtree,</span>
+<span class="cm">     * so as to grab all of its elements. We can then proceed with right</span>
+<span class="cm">     * subtree.</span>
+<span class="cm">     *</span>
+<span class="cm">     * The lo and hi arguments are the minimum and maximum</span>
+<span class="cm">     * indices to pull out of the iterator or stream for current subtree.</span>
+<span class="cm">     * They are not actually indexed, we just proceed sequentially,</span>
+<span class="cm">     * ensuring that items are extracted in corresponding order.</span>
+<span class="cm">     */</span>
 
-<p>```java
-private final Entry&lt;K,V&gt; buildFromSorted(int level, int lo, int hi,
-                                         int redLevel,
-                                         Iterator it,
-                                         java.io.ObjectInputStream str,
-                                         V defaultVal)
-    throws  java.io.IOException, ClassNotFoundException {
-    /*
-     * Strategy: The root is the middlemost element. To get to it, we
-     * have to first recursively construct the entire left subtree,
-     * so as to grab all of its elements. We can then proceed with right
-     * subtree.
-     *
-     * The lo and hi arguments are the minimum and maximum
-     * indices to pull out of the iterator or stream for current subtree.
-     * They are not actually indexed, we just proceed sequentially,
-     * ensuring that items are extracted in corresponding order.
-     */</p>
+    <span class="k">if</span> <span class="o">(</span><span class="n">hi</span> <span class="o">&lt;</span> <span class="n">lo</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 
-<pre><code>if (hi &lt; lo) return null;
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
 
-int mid = (lo + hi) &gt;&gt;&gt; 1;
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">left</span>  <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">lo</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="o">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">buildFromSorted</span><span class="o">(</span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">redLevel</span><span class="o">,</span>
+                               <span class="n">it</span><span class="o">,</span> <span class="n">str</span><span class="o">,</span> <span class="n">defaultVal</span><span class="o">);</span>
 
-Entry&lt;K,V&gt; left  = null;
-if (lo &lt; mid)
-    left = buildFromSorted(level+1, lo, mid - 1, redLevel,
-                           it, str, defaultVal);
+    <span class="c1">// extract key and/or value from iterator or stream</span>
+    <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
+    <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">defaultVal</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="n">K</span><span class="o">)</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">defaultVal</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// use stream</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="n">K</span><span class="o">)</span> <span class="n">str</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="o">(</span><span class="n">defaultVal</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultVal</span> <span class="o">:</span> <span class="o">(</span><span class="n">V</span><span class="o">)</span> <span class="n">str</span><span class="o">.</span><span class="na">readObject</span><span class="o">());</span>
+    <span class="o">}</span>
 
-// extract key and/or value from iterator or stream
-K key;
-V value;
-if (it != null) {
-    if (defaultVal==null) {
-        Map.Entry&lt;K,V&gt; entry = (Map.Entry&lt;K,V&gt;)it.next();
-        key = entry.getKey();
-        value = entry.getValue();
-    } else {
-        key = (K)it.next();
-        value = defaultVal;
-    }
-} else { // use stream
-    key = (K) str.readObject();
-    value = (defaultVal != null ? defaultVal : (V) str.readObject());
-}
+    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">middle</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
 
-Entry&lt;K,V&gt; middle =  new Entry&lt;&gt;(key, value, null);
+    <span class="c1">// color nodes in non-full bottommost level red</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">redLevel</span><span class="o">)</span>
+        <span class="n">middle</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">RED</span><span class="o">;</span>
 
-// color nodes in non-full bottommost level red
-if (level == redLevel)
-    middle.color = RED;
+    <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">middle</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>
+        <span class="n">left</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">middle</span><span class="o">;</span>
+    <span class="o">}</span>
 
-if (left != null) {
-    middle.left = left;
-    left.parent = middle;
-}
+    <span class="k">if</span> <span class="o">(</span><span class="n">mid</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">buildFromSorted</span><span class="o">(</span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">hi</span><span class="o">,</span> <span class="n">redLevel</span><span class="o">,</span>
+                                           <span class="n">it</span><span class="o">,</span> <span class="n">str</span><span class="o">,</span> <span class="n">defaultVal</span><span class="o">);</span>
+        <span class="n">middle</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">right</span><span class="o">;</span>
+        <span class="n">right</span><span class="o">.</span><span class="na">parent</span> <span class="o">=</span> <span class="n">middle</span><span class="o">;</span>
+    <span class="o">}</span>
 
-if (mid &lt; hi) {
-    Entry&lt;K,V&gt; right = buildFromSorted(level+1, mid+1, hi, redLevel,
-                                       it, str, defaultVal);
-    middle.right = right;
-    right.parent = middle;
-}
-
-return middle; } ```
-</code></pre>
-
+    <span class="k">return</span> <span class="n">middle</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>可以看出这是一个递归的算法，找出中间结点，构造左右子树，并将他们连接在一起。时间复杂度分析可以根据递归式：</p>
 
 <blockquote>
-  <p>T(n) = 2 * T(n/2) + C</p>
+<p>T(n) = 2 * T(n/2) + C</p>
 </blockquote>
 
 <p>如果看不出来的话，可以使用《算法导论》第4章中的主定理，可以得到时间复杂度为 <code>O(n)</code> 。</p>

@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,305 +532,270 @@
 
       <article>
 
-<h1 id="openjdk--string">OpenJDK 源代码阅读之 String</h1>
+<h1>OpenJDK 源代码阅读之 String</h1>
 
-<hr />
+<hr>
 
-<h2 id="section">概要</h2>
+<h2>概要</h2>
 
 <ul>
-  <li>类继承关系</li>
+<li>类继承关系</li>
 </ul>
-
-<p><code>
-java.lang.Object
+<div class="highlight"><pre><code class="text language-text" data-lang="text">java.lang.Object
     java.lang.String
-</code></p>
-
+</code></pre></div>
 <ul>
-  <li>定义</li>
+<li>定义</li>
 </ul>
-
-<p><code>java
-public final class String
-extends Object
-implements Serializable, Comparable&lt;String&gt;, CharSequence
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">String</span>
+<span class="kd">extends</span> <span class="n">Object</span>
+<span class="kd">implements</span> <span class="n">Serializable</span><span class="o">,</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;,</span> <span class="n">CharSequence</span>
+</code></pre></div>
 <ul>
-  <li>要点</li>
+<li>要点</li>
 </ul>
 
 <p>一旦创建就不可改变</p>
 
-<h2 id="section-1">实现</h2>
+<h2>实现</h2>
 
 <ul>
-  <li>storage</li>
+<li>storage</li>
 </ul>
-
-<p><code>java
-/** The value is used for character storage. */
-private final char value[];
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/** The value is used for character storage. */</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="kt">char</span> <span class="n">value</span><span class="o">[];</span>
+</code></pre></div>
 <p>可以看出 <code>String</code> 中的数据是如何存储的。</p>
 
 <ul>
-  <li>初始化</li>
+<li>初始化</li>
 </ul>
-
-<p><code>java
-    public String(String original) {
-        this.value = original.value;
-        this.hash = original.hash;
-    }
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">String</span> <span class="n">original</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">hash</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="na">hash</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div>
 <p>可以看出使用 <code>String</code> 类型初始化，新 <code>String</code> 实际上与原来的 <code>String</code> 指向同一块内存。</p>
-
-<p><code>java
-public String(char value[]) {
-    this.value = Arrays.copyOf(value, value.length);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="kt">char</span> <span class="n">value</span><span class="o">[])</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>如果用 <code>char[]</code> 初始化，可以看出，新分配了内存，并复制，保证了两者相互独立，只是内容相同。</p>
-
-<p><code>java
-    public String(StringBuffer buffer) {
-        synchronized(buffer) {
-            this.value = Arrays.copyOf(buffer.getValue(), buffer.length());
-        }
-    }
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">buffer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">synchronized</span><span class="o">(</span><span class="n">buffer</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">buffer</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div>
 <p>注意用 <code>StringBuffer</code> 初始化时，对同一 <code>buffer</code> 是线程安全的，即初始化 <code>String</code> 的过程中，其它线程不会改变 <code>buffer</code> 的内容。</p>
 
 <p>另外，能告诉我下面这段代码是怎么回事么？</p>
-
-<p><code>java
-   public String(StringBuilder builder) {
-        this.value = Arrays.copyOf(builder.getValue(), builder.length());
-    }
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java">   <span class="kd">public</span> <span class="nf">String</span><span class="o">(</span><span class="n">StringBuilder</span> <span class="n">builder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">builder</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div>
 <p>为啥这次不同步了呢？</p>
 
 <ul>
-  <li>equals </li>
+<li>equals </li>
 </ul>
-
-<p><code>java
-public boolean equals(Object anObject) {
-    if (this == anObject) {
-        return true;
-    }
-    if (anObject instanceof String) {
-        String anotherString = (String) anObject;
-        int n = value.length;
-        if (n == anotherString.value.length) {
-            char v1[] = value;
-            char v2[] = anotherString.value;
-            int i = 0;
-            while (n-- != 0) {
-                if (v1[i] != v2[i])
-                        return false;
-                i++;
-            }
-            return true;
-        }
-    }
-    return false;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">anObject</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">anObject</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">anObject</span> <span class="k">instanceof</span> <span class="n">String</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">anotherString</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">anObject</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">anotherString</span><span class="o">.</span><span class="na">value</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">v1</span><span class="o">[]</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+            <span class="kt">char</span> <span class="n">v2</span><span class="o">[]</span> <span class="o">=</span> <span class="n">anotherString</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">--</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">v1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">v2</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="n">i</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>注意：</p>
 
 <p>1) 检查类型
 2) <code>value</code> 直接通过点访问了，<code>value</code> 是 <code>private</code> 的啊，怎么能这样？</p>
 
 <ul>
-  <li>hashCode </li>
+<li>hashCode </li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">hash</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">val</span><span class="o">[]</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
 
-<p>```java
-public int hashCode() {
-    int h = hash;
-    if (h == 0 &amp;&amp; value.length &gt; 0) {
-        char val[] = value;</p>
-
-<pre><code>    for (int i = 0; i &lt; value.length; i++) {
-        h = 31 * h + val[i];
-    }
-    hash = h;
-}
-return h; } ```
-</code></pre>
-
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">h</span> <span class="o">+</span> <span class="n">val</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="n">hash</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">h</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p><code>String</code> 的 <code>hashCode</code> 公式：</p>
 
 <blockquote>
-  <p>s[0]*31^(n-1) + s[1]*31^(n-2) + &#8230; + s[n-1]</p>
+<p>s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]</p>
 </blockquote>
 
 <ul>
-  <li>replace</li>
+<li>replace</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="n">String</span> <span class="nf">replace</span><span class="o">(</span><span class="kt">char</span> <span class="n">oldChar</span><span class="o">,</span> <span class="kt">char</span> <span class="n">newChar</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">oldChar</span> <span class="o">!=</span> <span class="n">newChar</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">val</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span> <span class="cm">/* avoid getfield opcode */</span>
 
-<p>```java
-public String replace(char oldChar, char newChar) {
-    if (oldChar != newChar) {
-        int len = value.length;
-        int i = -1;
-        char[] val = value; /* avoid getfield opcode */</p>
-
-<pre><code>    while (++i &lt; len) {
-        if (val[i] == oldChar) {
-            break;
-        }
-    }
-    if (i &lt; len) {
-        char buf[] = new char[len];
-        for (int j = 0; j &lt; i; j++) {
-            buf[j] = val[j];
-        }
-        while (i &lt; len) {
-            char c = val[i];
-            buf[i] = (c == oldChar) ? newChar : c;
-            i++;
-        }
-        return new String(buf, true);
-    }
-}
-return this; } ```
-</code></pre>
-
+        <span class="k">while</span> <span class="o">(++</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">val</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">oldChar</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">buf</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">len</span><span class="o">];</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">buf</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+            <span class="o">}</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">val</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                <span class="n">buf</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">oldChar</span><span class="o">)</span> <span class="o">?</span> <span class="n">newChar</span> <span class="o">:</span> <span class="n">c</span><span class="o">;</span>
+                <span class="n">i</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>从中可以看出，虽然说是 <code>replace</code>，但是实际上还是新生成了 <code>buf</code> ，然后再生成新的 <code>String</code>，而不是在原来的 <code>value</code> 上修改。如果有大量的替换，还是自己实现比较好诶～</p>
 
 <ul>
-  <li>indexOf</li>
+<li>indexOf</li>
 </ul>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Code shared by String and StringBuffer to do searches. The</span>
+<span class="cm"> * source is the character array being searched, and the target</span>
+<span class="cm"> * is the string being searched for.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   source       the characters being searched.</span>
+<span class="cm"> * @param   sourceOffset offset of the source string.</span>
+<span class="cm"> * @param   sourceCount  count of the source string.</span>
+<span class="cm"> * @param   target       the characters being searched for.</span>
+<span class="cm"> * @param   targetOffset offset of the target string.</span>
+<span class="cm"> * @param   targetCount  count of the target string.</span>
+<span class="cm"> * @param   fromIndex    the index to begin searching from.</span>
+<span class="cm"> */</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">indexOf</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">source</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sourceOffset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sourceCount</span><span class="o">,</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span> <span class="n">targetOffset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">targetCount</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">fromIndex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">fromIndex</span> <span class="o">&gt;=</span> <span class="n">sourceCount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">targetCount</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">sourceCount</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">fromIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">targetCount</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">fromIndex</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<p>```java
-/**
- * Code shared by String and StringBuffer to do searches. The
- * source is the character array being searched, and the target
- * is the string being searched for.
- *
- * @param   source       the characters being searched.
- * @param   sourceOffset offset of the source string.
- * @param   sourceCount  count of the source string.
- * @param   target       the characters being searched for.
- * @param   targetOffset offset of the target string.
- * @param   targetCount  count of the target string.
- * @param   fromIndex    the index to begin searching from.
- */
-static int indexOf(char[] source, int sourceOffset, int sourceCount,
-        char[] target, int targetOffset, int targetCount,
-        int fromIndex) {
-    if (fromIndex &gt;= sourceCount) {
-        return (targetCount == 0 ? sourceCount : -1);
-    }
-    if (fromIndex &lt; 0) {
-        fromIndex = 0;
-    }
-    if (targetCount == 0) {
-        return fromIndex;
-    }</p>
+    <span class="kt">char</span> <span class="n">first</span> <span class="o">=</span> <span class="n">target</span><span class="o">[</span><span class="n">targetOffset</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">sourceOffset</span> <span class="o">+</span> <span class="o">(</span><span class="n">sourceCount</span> <span class="o">-</span> <span class="n">targetCount</span><span class="o">);</span>
 
-<pre><code>char first = target[targetOffset];
-int max = sourceOffset + (sourceCount - targetCount);
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">sourceOffset</span> <span class="o">+</span> <span class="n">fromIndex</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="cm">/* Look for first character. */</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">first</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(++</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max</span> <span class="o">&amp;&amp;</span> <span class="n">source</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">first</span><span class="o">);</span>
+        <span class="o">}</span>
 
-for (int i = sourceOffset + fromIndex; i &lt;= max; i++) {
-    /* Look for first character. */
-    if (source[i] != first) {
-        while (++i &lt;= max &amp;&amp; source[i] != first);
-    }
+        <span class="cm">/* Found first character, now look at the rest of v2 */</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">targetCount</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">targetOffset</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">source</span><span class="o">[</span><span class="n">j</span><span class="o">]</span>
+                    <span class="o">==</span> <span class="n">target</span><span class="o">[</span><span class="n">k</span><span class="o">];</span> <span class="n">j</span><span class="o">++,</span> <span class="n">k</span><span class="o">++);</span>
 
-    /* Found first character, now look at the rest of v2 */
-    if (i &lt;= max) {
-        int j = i + 1;
-        int end = j + targetCount - 1;
-        for (int k = targetOffset + 1; j &lt; end &amp;&amp; source[j]
-                == target[k]; j++, k++);
-
-        if (j == end) {
-            /* Found whole string. */
-            return i - sourceOffset;
-        }
-    }
-}
-return -1; } ```
-</code></pre>
-
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+                <span class="cm">/* Found whole string. */</span>
+                <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="n">sourceOffset</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>这段代码从 <code>source</code> 中寻找 <code>target</code> 第一次出现的位置，<code>for</code> 循环每次都先让 <code>i</code> 停留在一个位置，此位置上内容与 <code>target</code> 首字符相同，然后开始遍历。可以看出这是一个 <code>O(n^2)</code> 的算法，所以，标准库也不一定是最高效的，要是要高效，还是需要自己实现，或者找其它库的。</p>
 
 <ul>
-  <li>matches</li>
+<li>matches</li>
 </ul>
-
-<p><code>java
-public boolean matches(String regex) {
-    return Pattern.matches(regex, this);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">matches</span><span class="o">(</span><span class="n">String</span> <span class="n">regex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="n">regex</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>正则表达式匹配函数。可以看出，是直接调用了 <code>Pattern</code> 中的相应函数。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">split</span><span class="o">(</span><span class="n">String</span> <span class="n">regex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+    <span class="cm">/* fastpath if the regex is a</span>
+<span class="cm">     (1)one-char String and this character is not one of the</span>
+<span class="cm">        RegEx&#39;s meta characters &quot;.$|()[{^?*+\\&quot;, or</span>
+<span class="cm">     (2)two-char String and the first char is the backslash and</span>
+<span class="cm">        the second is not the ascii digit or ascii letter.</span>
+<span class="cm">     */</span>
+    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(((</span><span class="n">regex</span><span class="o">.</span><span class="na">value</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>
+         <span class="s">&quot;.$|()[{^?*+\\&quot;</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">ch</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">||</span>
+         <span class="o">(</span><span class="n">regex</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span>
+          <span class="n">regex</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;\\&#39;</span> <span class="o">&amp;&amp;</span>
+          <span class="o">(((</span><span class="n">ch</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">))-</span><span class="sc">&#39;0&#39;</span><span class="o">)|(</span><span class="sc">&#39;9&#39;</span><span class="o">-</span><span class="n">ch</span><span class="o">))</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+          <span class="o">((</span><span class="n">ch</span><span class="o">-</span><span class="sc">&#39;a&#39;</span><span class="o">)|(</span><span class="sc">&#39;z&#39;</span><span class="o">-</span><span class="n">ch</span><span class="o">))</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+          <span class="o">((</span><span class="n">ch</span><span class="o">-</span><span class="sc">&#39;A&#39;</span><span class="o">)|(</span><span class="sc">&#39;Z&#39;</span><span class="o">-</span><span class="n">ch</span><span class="o">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">))</span> <span class="o">&amp;&amp;</span>
+        <span class="o">(</span><span class="n">ch</span> <span class="o">&lt;</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_HIGH_SURROGATE</span> <span class="o">||</span>
+         <span class="n">ch</span> <span class="o">&gt;</span> <span class="n">Character</span><span class="o">.</span><span class="na">MAX_LOW_SURROGATE</span><span class="o">))</span>
+    <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">off</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">boolean</span> <span class="n">limited</span> <span class="o">=</span> <span class="n">limit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">while</span> <span class="o">((</span><span class="n">next</span> <span class="o">=</span> <span class="n">indexOf</span><span class="o">(</span><span class="n">ch</span><span class="o">,</span> <span class="n">off</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">limited</span> <span class="o">||</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">substring</span><span class="o">(</span><span class="n">off</span><span class="o">,</span> <span class="n">next</span><span class="o">));</span>
+                <span class="n">off</span> <span class="o">=</span> <span class="n">next</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>    <span class="c1">// last one</span>
+                <span class="c1">//assert (list.size() == limit - 1);</span>
+                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">substring</span><span class="o">(</span><span class="n">off</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+                <span class="n">off</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="c1">// If no match was found, return this</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">off</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="k">this</span><span class="o">};</span>
 
-<p>```java
-public String[] split(String regex, int limit) {
-    /* fastpath if the regex is a
-     (1)one-char String and this character is not one of the
-        RegEx&#8217;s meta characters &#8220;.$|()[{^?<em>+\&#8221;, or
-     (2)two-char String and the first char is the backslash and
-        the second is not the ascii digit or ascii letter.
-     */
-    char ch = 0;
-    if (((regex.value.length == 1 &amp;&amp;
-         &#8220;.$|()[{^?</em>+\&#8220;.indexOf(ch = regex.charAt(0)) == -1) ||
-         (regex.length() == 2 &amp;&amp;
-          regex.charAt(0) == &#8216;\&#8217; &amp;&amp;
-          (((ch = regex.charAt(1))-&#8216;0&#8217;)|(&#8216;9&#8217;-ch)) &lt; 0 &amp;&amp;
-          ((ch-&#8216;a&#8217;)|(&#8216;z&#8217;-ch)) &lt; 0 &amp;&amp;
-          ((ch-&#8216;A&#8217;)|(&#8216;Z&#8217;-ch)) &lt; 0)) &amp;&amp;
-        (ch &lt; Character.MIN_HIGH_SURROGATE ||
-         ch &gt; Character.MAX_LOW_SURROGATE))
-    {
-        int off = 0;
-        int next = 0;
-        boolean limited = limit &gt; 0;
-        ArrayList<string> list = new ArrayList&lt;&gt;();
-        while ((next = indexOf(ch, off)) != -1) {
-            if (!limited || list.size() &lt; limit - 1) {
-                list.add(substring(off, next));
-                off = next + 1;
-            } else {    // last one
-                //assert (list.size() == limit - 1);
-                list.add(substring(off, value.length));
-                off = value.length;
-                break;
-            }
-        }
-        // If no match was found, return this
-        if (off == 0)
-            return new String[]{this};</string></p>
+        <span class="c1">// Add remaining segment</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">limited</span> <span class="o">||</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="o">)</span>
+            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">substring</span><span class="o">(</span><span class="n">off</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
 
-<pre><code>    // Add remaining segment
-    if (!limited || list.size() &lt; limit)
-        list.add(substring(off, value.length));
-
-    // Construct result
-    int resultSize = list.size();
-    if (limit == 0)
-        while (resultSize &gt; 0 &amp;&amp; list.get(resultSize - 1).length() == 0)
-            resultSize--;
-    String[] result = new String[resultSize];
-    return list.subList(0, resultSize).toArray(result);
-}
-return Pattern.compile(regex).split(this, limit); } ```
-</code></pre>
-
+        <span class="c1">// Construct result</span>
+        <span class="kt">int</span> <span class="n">resultSize</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">limit</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">resultSize</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">resultSize</span> <span class="o">-</span> <span class="mi">1</span><span class="o">).</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">resultSize</span><span class="o">--;</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">resultSize</span><span class="o">];</span>
+        <span class="k">return</span> <span class="n">list</span><span class="o">.</span><span class="na">subList</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">resultSize</span><span class="o">).</span><span class="na">toArray</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">regex</span><span class="o">).</span><span class="na">split</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">limit</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>按 <code>regex</code> 将字符串分割，思路是如果是单个字符，或者转义字符，就手工分割，否则就直接调用 <code>Pattern.comile(regex).split</code> 函数。手工分割时每次都将 <code>[off, next]</code> 之间的内容加入 <code>list</code>，最后将 剩余的 <code>[off, ]</code>  加入。另外注意 <code>limit</code> 对分割次数的限制。</p>
 
 

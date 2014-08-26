@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,135 +532,109 @@
 
       <article>
 
-<h1 id="section">分模块测试</h1>
+<h1>分模块测试</h1>
 
-<h2 id="applicationpy">application.py</h2>
+<h2>application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
+</code></pre></div>
+<h3>test_reloader(self)</h3>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_reloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
+    <span class="kn">import</span> <span class="nn">foo</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
 
-<pre><code>python test/application.py
-</code></pre>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
 
-<h3 id="testreloaderself">test_reloader(self)</h3>
+    <span class="c"># test class change</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
 
-<p>```python
-def test_reloader(self):
-    write(&#8216;foo.py&#8217;, data % dict(classname=&#8217;a&#8217;, output=&#8217;a&#8217;))
-    import foo
-    app = foo.app</p>
-
-<pre><code>self.assertEquals(app.request('/').data, 'a')
-
-# test class change
-time.sleep(1)
-write('foo.py', data % dict(classname='a', output='b'))
-self.assertEquals(app.request('/').data, 'b')
-
-# test urls change
-time.sleep(1)
-write('foo.py', data % dict(classname='c', output='c'))
-self.assertEquals(app.request('/').data, 'c') ```
-</code></pre>
-
+    <span class="c"># test urls change</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;c&#39;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">)</span>
+</code></pre></div>
 <p>总的来说，这个过程会生成一个 foo.py 文件</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<p>```python
-import web</p>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
-app = web.application(urls, globals(), autoreload=True)</p>
-
-<p>class a:
-    def GET(self):
-        return &#8220;a&#8221;</p>
-
-<p>```</p>
-
+<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
+</code></pre></div>
 <p>这是一个典型的 web 服务端应用程序，表示对 <code>/</code> 发起 <code>GET</code>
 请求时，会调用 <code>class a</code> 中的 <code>GET</code> 函数，测试就是看看
-web.application 是否可以正常完成任务，即是否可以正确返回&#8221;a&#8221;</p>
+web.application 是否可以正常完成任务，即是否可以正确返回&quot;a&quot;</p>
 
 <p>下面详细看代码。</p>
 
 <p>首先使用 <code>write</code> 生成了一个 <code>foo.py</code> 程序:</p>
-
-<p><code>python
-        write('foo.py', data % dict(classname='a', output='a'))
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python">        <span class="n">write</span><span class="p">(</span><span class="s">&#39;foo.py&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">))</span>
+</code></pre></div>
 <p>write 源代码:</p>
-
-<p><code>python
-def write(filename, data):
-    f = open(filename, 'w')
-    f.write(data)
-    f.close()
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
 <p>data 定义:
 ```python
-data = &#8220;&#8221;&#8221;
+data = &quot;&quot;&quot;
 import web</p>
 
-<p>urls = (&#8220;/&#8221;, &#8220;%(classname)s&#8221;)
+<p>urls = (&quot;/&quot;, &quot;%(classname)s&quot;)
 app = web.application(urls, globals(), autoreload=True)</p>
 
 <p>class %(classname)s:
     def GET(self):
-        return &#8220;%(output)s&#8221;</p>
+        return &quot;%(output)s&quot;</p>
 
-<p>&#8221;&#8221;&#8221;
+<p>&quot;&quot;&quot;
 ```</p>
 
 <p><code>data</code> 相当于一个小型 web 程序的模板，类名和返回值由
 一个 <code>dict</code> 指定，生成一个字符串，由 <code>write</code> 生成文件。 </p>
 
 <p>下面是类别和返回值为 <code>a</code> 时的 <code>foo.py</code></p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<p>```python
-import web</p>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
-app = web.application(urls, globals(), autoreload=True)</p>
-
-<p>class a:
-    def GET(self):
-        return &#8220;a&#8221;
-```</p>
-
+<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
+</code></pre></div>
 <p>测试的方式采用 <code>TestCase</code> 中的 <code>assertEquals</code> 函数，比较
 实际值与预测值。</p>
-
-<p><code>python
-import foo
-app = foo.app
-self.assertEquals(app.request('/').data, 'a')
-</code></p>
-
-<p><code>app.request('/')</code> 会得到一个Storage类型的值：</p>
-
-<pre><code>&lt;Storage {'status': '200 OK', 'headers': {}, 'header_items': [], 'data': 'a'}&gt;
-</code></pre>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">foo</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">app</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><code>app.request(&#39;/&#39;)</code> 会得到一个Storage类型的值：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;Storage {&#39;status&#39;: &#39;200 OK&#39;, &#39;headers&#39;: {}, &#39;header_items&#39;: [], &#39;data&#39;: &#39;a&#39;}&gt;
+</code></pre></div>
 <p>其中的 <code>data</code> 就是 <code>foo.py</code> 中 <code>GET</code> 返回的值。 </p>
 
-<p>我对这个 <code>app.request('/')</code> 是比较困惑的。以 <code>foo.py</code> 为例，
+<p>我对这个 <code>app.request(&#39;/&#39;)</code> 是比较困惑的。以 <code>foo.py</code> 为例，
 之前写程序时，一般是有一个这样的程序：</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">web</span>
 
-<p>```python
-import web</p>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<p>urls = (&#8220;/&#8221;, &#8220;a&#8221;)
-app = web.application(urls, globals(), autoreload=True)</p>
+<span class="k">class</span> <span class="nc">a</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;a&quot;</span>
 
-<p>class a:
-    def GET(self):
-        return &#8220;a&#8221;</p>
-
-<p>if <strong>name</strong> == &#8220;<strong>main</strong>&#8221;:
-    app.run()
-```</p>
-
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
 <p>然后在浏览器中请求 <code>0.0.0.0:8080/</code> 。
 而在 <code>request</code> 之前，也没看到 <code>run</code> 啊，怎么就能 <code>request</code> 回
 数据呢，而且通过上述代码运行后，程序会一直运行直到手动关闭，
@@ -671,50 +645,40 @@ app = web.application(urls, globals(), autoreload=True)</p>
 <p>我们只看关键部分，即返回的值是如何被设值的。</p>
 
 <p>在 <code>web.application.request</code> 中:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localpart</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="n">host</span><span class="o">=</span><span class="s">&quot;0.0.0.0:8080&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">https</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
 
-<p>```python
-def request(self, localpart=&#8217;/&#8217;, method=&#8217;GET&#8217;, data=None,
-            host=&#8221;0.0.0.0:8080&#8221;, headers=None, https=False, **kw):</p>
+    <span class="o">...</span>
 
-<pre><code>...
-</code></pre>
-
-<p>response = web.storage()
-def start_response(status, headers):
-    response.status = status
-    response.headers = dict(headers)
-    response.header_items = headers
-response.data = &#8220;&#8220;.join(self.wsgifunc()(env, start_response))
-return response
-```</p>
-
+<span class="n">response</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">storage</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">header_items</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">()(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
 <p>上述代码中 <code>self.wsgifunc()(env, start_response)</code> 比较另人困惑，
 我还以为是调用函数的新方式呢，然后看了一下 <code>wsgifunc</code> 的代码，
 它会返回一个函数<code>wsgi</code>，<code>wsgi</code>以 <code>(env, start_response)</code> 为参数。
 在 <code>wsgi</code> 内部，又会调用 <code>handle_with_processors</code>, <code>handle_with_processors</code> 会再调用 <code>handle</code></p>
-
-<p><code>python
-    def handle(self):
-        fn, args = self._match(self.mapping, web.ctx.path)
-        return self._delegate(fn, self.fvars, args)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delegate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fvars</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 <p>测试了一下，<code>self._match()</code> 会得到类名, <code>self._delegate</code> 会
 得到返回的字符串，即 <code>GET</code>的返回值。</p>
 
 <p>进入 <code>self._delegate</code>, 会最终调用一个关键函数 <code>handle_class</code>:</p>
-
-<p><code>python
-def handle_class(cls):
-    meth = web.ctx.method
-    if meth == 'HEAD' and not hasattr(cls, meth):
-        meth = 'GET'
-    if not hasattr(cls, meth):
-        raise web.nomethod(cls)
-    tocall = getattr(cls(), meth)
-    return tocall(\*args)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">handle_class</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+    <span class="n">meth</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span>
+    <span class="k">if</span> <span class="n">meth</span> <span class="o">==</span> <span class="s">&#39;HEAD&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
+        <span class="n">meth</span> <span class="o">=</span> <span class="s">&#39;GET&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">meth</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">nomethod</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+    <span class="n">tocall</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">(),</span> <span class="n">meth</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tocall</span><span class="p">(</span>\<span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 <p>参数<code>cls</code>值为<code>foo.a</code>, <code>meth</code> 会得到方法名 <code>GET</code>, 然后
 <code>tocall</code> 会得到函数 <code>a.GET</code>, 至此，我们终于得以调用，
 <code>GET</code>函数，得到了返回的字符串。</p>
@@ -723,99 +687,84 @@ def handle_class(cls):
 函数，最终来到 <code>GET</code> 函数。</p>
 
 <p>再看看 <code>web.application.run</code>:</p>
-
-<p><code>python
-def run(self, *middleware):
-    return wsgi.runwsgi(self.wsgifunc(\*middleware))
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">middleware</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">wsgi</span><span class="o">.</span><span class="n">runwsgi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">(</span>\<span class="o">*</span><span class="n">middleware</span><span class="p">))</span>
+</code></pre></div>
 <p>接着，我们来到 <code>wsgi.runwsgi</code>:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">runwsgi</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a WSGI-compatible `func` using FCGI, SCGI, or a simple web server,</span>
+<span class="sd">    as appropriate based on context and `sys.argv`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<p>```python
-def runwsgi(func):
-    &#8220;&#8221;&#8221;
-    Runs a WSGI-compatible <code>func</code> using FCGI, SCGI, or a simple web server,
-    as appropriate based on context and <code>sys.argv</code>.
-    &#8220;&#8221;&#8221;</p>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;SERVER_SOFTWARE&#39;</span><span class="p">):</span> <span class="c"># cgi</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;FCGI_FORCE_CGI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Y&#39;</span>
 
-<pre><code>if os.environ.has_key('SERVER_SOFTWARE'): # cgi
-    os.environ['FCGI_FORCE_CGI'] = 'Y'
+    <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;PHP_FCGI_CHILDREN&#39;</span><span class="p">)</span> <span class="c">#lighttpd fastcgi</span>
+      <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;SERVER_SOFTWARE&#39;</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">runfcgi</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
-if (os.environ.has_key('PHP_FCGI_CHILDREN') #lighttpd fastcgi
-  or os.environ.has_key('SERVER_SOFTWARE')):
-    return runfcgi(func, None)
+    <span class="k">if</span> <span class="s">&#39;fcgi&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="ow">or</span> <span class="s">&#39;fastcgi&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="s">&#39;fastcgi&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;fastcgi&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s">&#39;fcgi&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;fcgi&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">runfcgi</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">validaddr</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">runfcgi</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
-if 'fcgi' in sys.argv or 'fastcgi' in sys.argv:
-    args = sys.argv[1:]
-    if 'fastcgi' in args: args.remove('fastcgi')
-    elif 'fcgi' in args: args.remove('fcgi')
-    if args:
-        return runfcgi(func, validaddr(args[0]))
-    else:
-        return runfcgi(func, None)
-
-if 'scgi' in sys.argv:
-    args = sys.argv[1:]
-    args.remove('scgi')
-    if args:
-        return runscgi(func, validaddr(args[0]))
-    else:
-        return runscgi(func)
+    <span class="k">if</span> <span class="s">&#39;scgi&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;scgi&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">runscgi</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">validaddr</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">runscgi</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
 
-server_addr = validip(listget(sys.argv, 1, ''))
-if os.environ.has_key('PORT'): # e.g. Heroku
-    server_addr = ('0.0.0.0', intget(os.environ['PORT']))
+    <span class="n">server_addr</span> <span class="o">=</span> <span class="n">validip</span><span class="p">(</span><span class="n">listget</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;PORT&#39;</span><span class="p">):</span> <span class="c"># e.g. Heroku</span>
+        <span class="n">server_addr</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">intget</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;PORT&#39;</span><span class="p">]))</span>
 
-return httpserver.runsimple(func, server_addr) ```
-</code></pre>
-
+    <span class="k">return</span> <span class="n">httpserver</span><span class="o">.</span><span class="n">runsimple</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">server_addr</span><span class="p">)</span>
+</code></pre></div>
 <p>前面是对参数 <code>sys.argv</code> 分析，根据参数指定，启动相应服务，
 我们的简单web程序没有参数，所以直接来到最后几行。</p>
 
 <p>关键在于最后的 <code>return</code></p>
-
-<p><code>python
-return httpserver.runsimple(func, server_addr)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">return</span> <span class="n">httpserver</span><span class="o">.</span><span class="n">runsimple</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">server_addr</span><span class="p">)</span>
+</code></pre></div>
 <p>可以看出，这里启动了一个服务器。</p>
 
 <p>再看看 <code>httpserver.runsimple</code>的代码：</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">runsimple</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">server_address</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">8080</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs [CherryPy][cp] WSGI server hosting WSGI app `func`. </span>
+<span class="sd">    The directory `static/` is hosted statically.</span>
 
-<p>```python
-def runsimple(func, server_address=(&#8220;0.0.0.0&#8221;, 8080)):
-    &#8220;&#8221;&#8221;
-    Runs [CherryPy][cp] WSGI server hosting WSGI app <code>func</code>. 
-    The directory <code>static/</code> is hosted statically.</p>
+<span class="sd">    [cp]: http://www.cherrypy.org</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">server</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">StaticMiddleware</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">LogMiddleware</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
-<pre><code>[cp]: http://www.cherrypy.org
-"""
-global server
-func = StaticMiddleware(func)
-func = LogMiddleware(func)
+    <span class="n">server</span> <span class="o">=</span> <span class="n">WSGIServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
 
-server = WSGIServer(server_address, func)
+    <span class="k">if</span> <span class="n">server</span><span class="o">.</span><span class="n">ssl_adapter</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;https://</span><span class="si">%s</span><span class="s">:</span><span class="si">%d</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="n">server_address</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;http://</span><span class="si">%s</span><span class="s">:</span><span class="si">%d</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="n">server_address</span>
 
-if server.ssl_adapter:
-    print "https://%s:%d/" % server_address
-else:
-    print "http://%s:%d/" % server_address
-
-try:
-    server.start()
-except (KeyboardInterrupt, SystemExit):
-    server.stop()
-    server = None ```
-</code></pre>
-
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemExit</span><span class="p">):</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
+</code></pre></div>
 <p>从注释中可以看出，这里使用了 <code>CherryPy</code>中的 <code>WSGI server</code>,
 启动了服务器。</p>
-
-<p><code>python
-        server.start()
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python">        <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre></div>
 <p>我们不再继续深入下去。只是直观地了解一下， <code>application.run</code>
 和 <code>application.request</code> 的不同之处。</p>
 
@@ -823,19 +772,19 @@ except (KeyboardInterrupt, SystemExit):
 这里有几篇对 <code>WSGI</code> 作介绍的博客：</p>
 
 <ul>
-  <li><a href="http://blog.kenshinx.me/blog/wsgi-research/">Wsgi研究</a> </li>
-  <li><a href="http://linluxiang.iteye.com/blog/799163">wsgi初探</a> </li>
-  <li>[Getting Started with WSGI] (http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/) </li>
-  <li>[An Introduction to the Python Web Server Gateway Interface] (http://ivory.idyll.org/articles/wsgi-intro/what-is-wsgi.html) </li>
-  <li><a href="http://blog.ez2learn.com/2010/01/27/introduction-to-wsgi/">化整為零的次世代網頁開發標準: WSGI</a> </li>
+<li><a href="http://blog.kenshinx.me/blog/wsgi-research/">Wsgi研究</a> </li>
+<li><a href="http://linluxiang.iteye.com/blog/799163">wsgi初探</a> </li>
+<li><a href="http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/">Getting Started with WSGI</a> </li>
+<li><a href="http://ivory.idyll.org/articles/wsgi-intro/what-is-wsgi.html">An Introduction to the Python Web Server Gateway Interface</a> </li>
+<li><a href="http://blog.ez2learn.com/2010/01/27/introduction-to-wsgi/">化整為零的次世代網頁開發標準: WSGI</a> </li>
 </ul>
 
 <p>这里有对 <code>WSGI</code> 的详细介绍:</p>
 
 <ul>
-  <li><a href="http://webpython.codepoint.net/wsgi_tutorial">WSGI Tutorial</a> </li>
-  <li><a href="http://wsgi.readthedocs.org/en/latest/">WSGI org</a> </li>
-  <li><a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> </li>
+<li><a href="http://webpython.codepoint.net/wsgi_tutorial">WSGI Tutorial</a> </li>
+<li><a href="http://wsgi.readthedocs.org/en/latest/">WSGI org</a> </li>
+<li><a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> </li>
 </ul>
 
 

@@ -75,25 +75,19 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
             
                 <li>
                 <a href="/categories/科研"> 科研 (6) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/思想"> 思想 (2) </a>
                 </li>
             
       
@@ -105,7 +99,7 @@
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,46 +532,39 @@
 
       <article>
 
-<h1 id="python">Python包管理不同方式的区别</h1>
+<h1>Python包管理不同方式的区别</h1>
 
 <p>学习Python已经有一段时间，经常会遇到安装各种包的问题，一会 <code>setup.py</code>，
 一会 <code>easy_install</code>，一会又是<code>pip</code>，还有一些概念比如<code>distutils</code>，
 <code>setuptools</code>等等，搞不清楚谁是谁，什么时候应该用什么，今天就把这些概念
 澄清一下。</p>
 
-<h2 id="distutils">distutils</h2>
+<h2>distutils</h2>
 
 <p>distutils是Python标准库的一部分，其初衷是为开发者提供一种方便的打包方式，
 同时为使用者提供方便的安装方式。</p>
 
 <p>例如你创建了一个名为foo的包，包含一个foo.py文件，你想把它打包以便其它人使用。
 这时候你需要写一个setup.py文件：   </p>
-
-<p><code>python
-from distutils.core import setup
-setup(name='foo',
-      version='1.0',
-      py_modules=['foo'],
-      )
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;foo&#39;</span><span class="p">,</span>
+      <span class="n">version</span><span class="o">=</span><span class="s">&#39;1.0&#39;</span><span class="p">,</span>
+      <span class="n">py_modules</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">],</span>
+      <span class="p">)</span>
+</code></pre></div>
 <p>然后运行命令</p>
-
-<pre><code>$python setup.py sdist
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$python setup.py sdist
+</code></pre></div>
 <p>然后你发现当前目录下出现一个名为dist的文件夹，里面有一个foo-1.0.tar.gz的包。
 这个包里有三个文件，foo.py, setup.py, PKG-INFO，前两个文件和我们之前提到的两个文件一样。
 PKG-INFO是关于包的一些信息。然后你就可以把foo-1.0.tar.gz给别人安装了。</p>
 
 <p>安装者要使用这个包时，只需要解压这个foo-1.0.tar.gz文件，再运行命令</p>
-
-<pre><code>$python setup install
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$python setup install
+</code></pre></div>
 <p>这个包就会被自动安装到系统合适的位置。</p>
 
-<h2 id="setuptools">setuptools</h2>
+<h2>setuptools</h2>
 
 <p><a href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a> 是对 distutils 的增强,
 尤其是引入了包依赖管理。</p>
@@ -583,18 +576,16 @@ Python 与 egg 文件的关系，相当于java与jar包的关系。 </p>
 另外， easy_install 可以自动从 <a href="https://pypi.python.org/pypi">PyPI</a> 上下载相关的包，并完成安装，升级。</p>
 
 <p>easy_install 提供了多种安装,升级Python包的方式，例如：  </p>
-
-<pre><code>easy_install SQLObject
+<div class="highlight"><pre><code class="text language-text" data-lang="text">easy_install SQLObject
 easy_install -f http://pythonpaste.org/package_index.html SQLObject
 easy_install http://example.com/path/to/MyPackage-1.2.3.tgz
 easy_install /my_downloads/OtherPackage-3.2.1-py2.3.egg
 easy_install --upgrade PyProtocols
-</code></pre>
-
+</code></pre></div>
 <p>后来开发者们觉得 setuptools 开发的太慢了，fork出了 Distribute 项目，然后2013年8月，
 Distribute 又合并回 setuptools 0.7。</p>
 
-<h2 id="pip">pip</h2>
+<h2>pip</h2>
 
 <p>pip 是安装，管理Python包的工具。它是对 easy_install 的一种增强。
 同样可以从 PyPI 上自动下载，安装包。</p>
@@ -602,31 +593,30 @@ Distribute 又合并回 setuptools 0.7。</p>
 <p>在pip中，  </p>
 
 <ul>
-  <li>安装前所有需要的包都要先下载，所以不会出现安装了一部分，另一部分没安装的情况</li>
-  <li>所有安装的包会被跟踪，所以你可以知道为什么他们被安装，同时可以卸载。 </li>
-  <li>无需使用 egg 文件。 </li>
+<li>安装前所有需要的包都要先下载，所以不会出现安装了一部分，另一部分没安装的情况</li>
+<li>所有安装的包会被跟踪，所以你可以知道为什么他们被安装，同时可以卸载。 </li>
+<li>无需使用 egg 文件。 </li>
 </ul>
 
 <p>使用方式简单：</p>
-
-<pre><code>pip install pkg_name
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pip install pkg_name
 pip uninstall pkg_name
-</code></pre>
-
-<h2 id="section">总结</h2>
+</code></pre></div>
+<h2>总结</h2>
 
 <p>用 <code>pip</code> 吧！</p>
 
-<h2 id="section-1">参考资料</h2>
+<h2>参考资料</h2>
+
 <ul>
-  <li><a href="http://docs.python.org/2/distutils/introduction.html">An Introduction to Distutils</a></li>
-  <li><a href="http://www.ibm.com/developerworks/cn/linux/sdk/python/charm-19/">可爱的 Python: pydoc 和 distutils 模块</a></li>
-  <li><a href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a></li>
-  <li>[easy_install] (http://peak.telecommunity.com/DevCenter/EasyInstall)</li>
-  <li>[Python Egg] (http://peak.telecommunity.com/DevCenter/PythonEggs)</li>
-  <li>[why pip] (http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install)</li>
-  <li><a href="http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2">Differences between distribute, distutils, setuptools and distutils2?</a></li>
-  <li><a href="http://blog.yangyubo.com/2012/07/27/python-packaging/">Python 包工具之间的关系</a></li>
+<li><a href="http://docs.python.org/2/distutils/introduction.html">An Introduction to Distutils</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/sdk/python/charm-19/">可爱的 Python: pydoc 和 distutils 模块</a></li>
+<li><a href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a></li>
+<li><a href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a></li>
+<li><a href="http://peak.telecommunity.com/DevCenter/PythonEggs">Python Egg</a></li>
+<li><a href="http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install">why pip</a></li>
+<li><a href="http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2">Differences between distribute, distutils, setuptools and distutils2?</a></li>
+<li><a href="http://blog.yangyubo.com/2012/07/27/python-packaging/">Python 包工具之间的关系</a></li>
 </ul>
 
 
