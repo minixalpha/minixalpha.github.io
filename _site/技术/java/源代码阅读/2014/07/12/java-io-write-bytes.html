@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,205 +532,164 @@
 
       <article>
 
-<h1 id="openjdk--java-io--">OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输出</h1>
+<h1>OpenJDK 源码阅读之 Java 输入输出(I/O) 之 字节流输出</h1>
 
 <p>标签（空格分隔）： 源代码阅读 Java 封神之路</p>
 
-<h3 id="section">字节流输出</h3>
+<h3>字节流输出</h3>
 
-<p><img src="/assets/blog-images/java_io_write_bytes.png" alt="java_io_write_bytes" /></p>
+<p><img src="/assets/blog-images/java_io_write_bytes.png" alt="java_io_write_bytes"></p>
 
 <p>图1 Java 字节输出类</p>
 
 <ul>
-  <li>OutputStream</li>
+<li>OutputStream</li>
 </ul>
 
 <p>OutputStream是所有字节输出类的超类，这是个抽象类，需要实现其中定义的 <code>write</code> 函数，才能有实用的功能。</p>
-
-<p><code>java
-    public abstract void write(int b) throws IOException;
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span>
+</code></pre></div>
 <p>其它方法都是在 <code>write</code> 的基础上实现的。例如这个多态的　<code>write</code> ：</p>
-
-<p><code>java
-public void write(byte b[], int off, int len) 
-throws IOException {
-    if (b == null) {
-        throw new NullPointerException();
-    } else if ((off &lt; 0) || (off &gt; b.length) || (len &lt; 0) ||
-               ((off + len) &gt; b.length) || ((off + len) &lt; 0)) {
-        throw new IndexOutOfBoundsException();
-    } else if (len == 0) {
-        return;
-    }
-    for (int i = 0 ; i &lt; len ; i++) {
-        write(b[off + i]);
-    }
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">byte</span> <span class="n">b</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">off</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> 
+<span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">((</span><span class="n">off</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">off</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">||</span>
+               <span class="o">((</span><span class="n">off</span> <span class="o">+</span> <span class="n">len</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">||</span> <span class="o">((</span><span class="n">off</span> <span class="o">+</span> <span class="n">len</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">write</span><span class="o">(</span><span class="n">b</span><span class="o">[</span><span class="n">off</span> <span class="o">+</span> <span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 <ul>
-  <li>FileOutputStream</li>
+<li>FileOutputStream</li>
 </ul>
 
 <p><code>FileOutputStream</code> 会将内容输出到 <code>File</code> 或者 <code>FileDescriptor</code>， 此类是按照字节输出，如果想按照字符输出，可以使用 <code>FileReader</code> 类。</p>
 
 <p>构造器中，需要指明输出的文件：</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="nf">FileOutputStream</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">append</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">FileNotFoundException</span>
+<span class="o">{</span>
+    <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="o">(</span><span class="n">file</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">file</span><span class="o">.</span><span class="na">getPath</span><span class="o">()</span> <span class="o">:</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="n">SecurityManager</span> <span class="n">security</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">security</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">security</span><span class="o">.</span><span class="na">checkWrite</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">name</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">fd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileDescriptor</span><span class="o">();</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">append</span> <span class="o">=</span> <span class="n">append</span><span class="o">;</span>
 
-<p>```java
-public FileOutputStream(File file, boolean append)
-    throws FileNotFoundException
-{
-    String name = (file != null ? file.getPath() : null);
-    SecurityManager security = System.getSecurityManager();
-    if (security != null) {
-        security.checkWrite(name);
-    }
-    if (name == null) {
-        throw new NullPointerException();
-    }
-    this.fd = new FileDescriptor();
-    this.append = append;</p>
-
-<pre><code>fd.incrementAndGetUseCount();
-open(name, append); } ```
-</code></pre>
-
+    <span class="n">fd</span><span class="o">.</span><span class="na">incrementAndGetUseCount</span><span class="o">();</span>
+    <span class="n">open</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">append</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>写入操作是一个　<code>native</code> 函数，与操作系统相关。</p>
-
-<p><code>java
-private native void write(int b, boolean append) throws IOException;
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">private</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">append</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span>
+</code></pre></div>
 <p>如果对比一下字节输入类，你会发现输入和输出在实现上有很大的相似性，它们是对称的。</p>
 
 <ul>
-  <li>ByteArrayOutputStream</li>
+<li>ByteArrayOutputStream</li>
 </ul>
 
 <p>ByteArrayOutputStream　会将数据写入字节数组中, 可以通过 <code>toByteArray,toString</code> 得到这些数据。</p>
-
-<p><code>java
-protected byte buf[];
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">byte</span> <span class="n">buf</span><span class="o">[];</span>
+</code></pre></div>
 <p>初始化时，可以指定这个数组的大小：</p>
-
-<p><code>java
-public ByteArrayOutputStream(int size) {
-    if (size &lt; 0) {
-        throw new IllegalArgumentException("Negative initial size: "
-                                           + size);
-    }
-    buf = new byte[size];
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ByteArrayOutputStream</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Negative initial size: &quot;</span>
+                                           <span class="o">+</span> <span class="n">size</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>写入时，会写入这个数组。<code>write</code> 会先保证数组的大小，如果不够用，还会自动进行扩充。</p>
-
-<p><code>java
-public synchronized void write(int b) {
-    ensureCapacity(count + 1);
-    buf[count] = (byte) b;
-    count += 1;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ensureCapacity</span><span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="n">buf</span><span class="o">[</span><span class="n">count</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">b</span><span class="o">;</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <ul>
-  <li>FilterOutputStream</li>
+<li>FilterOutputStream</li>
 </ul>
 
 <p>所有有过滤功能的类的基类，例如，对输出流进行转化，或者添加新的功能。初始化时，需要提供一个底层的流，用于写入数据，<code>FilterOUtputStream</code> 类的所有方法都是通过调用这个底层流的方法实现的。</p>
 
 <p>初始化时，</p>
-
-<p><code>java
-protected OutputStream out;
-public FilterOutputStream(OutputStream out) {
-    this.out = out;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">protected</span> <span class="n">OutputStream</span> <span class="n">out</span><span class="o">;</span>
+<span class="kd">public</span> <span class="nf">FilterOutputStream</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>写入时：</p>
-
-<p><code>java
-public void write(int b) throws IOException {
-    out.write(b);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <ul>
-  <li>BufferedOutputStream</li>
+<li>BufferedOutputStream</li>
 </ul>
 
 <p>BufferedOutputStream 是 FilterOutputStream 的子类，提供缓冲功能，所以，你不用每写入一个字节都要调用操作系统的 <code>write</code> 方法，而是积累到缓冲区，然后一起写入。</p>
 
 <p>缓冲区就是一个字节数组，在构造器中被初始化。</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">byte</span> <span class="n">buf</span><span class="o">[];</span>
 
-<p>```java
-protected byte buf[];</p>
+<span class="kd">public</span> <span class="nf">BufferedOutputStream</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">out</span><span class="o">,</span> <span class="mi">8192</span><span class="o">);</span>
+<span class="o">}</span>
 
-<p>public BufferedOutputStream(OutputStream out) {
-    this(out, 8192);
-}</p>
-
-<p>public BufferedOutputStream(OutputStream out, int size) {
-    super(out);
-    if (size &lt;= 0) {
-        throw new IllegalArgumentException(&#8220;Buffer size &lt;= 0&#8221;);
-    }
-    buf = new byte[size];
-}
-```</p>
-
+<span class="kd">public</span> <span class="nf">BufferedOutputStream</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">out</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Buffer size &lt;= 0&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>当调用 <code>write(b)</code> 时，并不真正写入，而是将要写入的数据存放在缓冲区内，等缓冲区满后，一次性写入数据。</p>
-
-<p><code>java
-public synchronized void write(int b) throws IOException {
-    if (count &gt;= buf.length) {
-        flushBuffer();
-    }
-    buf[count++] = (byte)b;
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="n">buf</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">flushBuffer</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="n">buf</span><span class="o">[</span><span class="n">count</span><span class="o">++]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span><span class="n">b</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 <ul>
-  <li>DataOutputStream</li>
+<li>DataOutputStream</li>
 </ul>
 
 <p>DataOutputStream 可以按 Java 的基本类型写入数据。写入的原理是，将基本类型数据中的字节分离出来，然后将这些字节写入。例如：</p>
-
-<p><code>java
-public final void writeBoolean(boolean v) throws IOException {
-    out.write(v ? 1 : 0);
-    incCount(1);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">writeBoolean</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">v</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">v</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="n">incCount</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>boolean 类型就是按照 <code>0/1</code> 的方式写入的。</p>
-
-<p><code>java
-public final void writeShort(int v) throws IOException {
-    out.write((v &gt;&gt;&gt; 8) &amp; 0xFF);
-    out.write((v &gt;&gt;&gt; 0) &amp; 0xFF);
-    incCount(2);
-}
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">writeShort</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">((</span><span class="n">v</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">8</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="o">);</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">((</span><span class="n">v</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="o">);</span>
+    <span class="n">incCount</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>short 是两个字节，需要将其中的两个字节分离出来，分别写入，<code>incCount</code> 加了2. <code>writeChar</code> 同理，因为它也是写入两个字节。</p>
 
 <p>浮点数比较特殊，没法直接分离出各个字节，要调用 <code>Float</code> 的一个静态方法，把浮点数转化成四个字节，再通过 <code>writeInt</code> 写入。<code>floatToInitBits</code> 会调用一个 <code>native</code> 方法, 按照 IEEE 754 标准，完成其主要功能。</p>
-
-<p><code>java
-    public final void writeFloat(float v) throws IOException {
-        writeInt(Float.floatToIntBits(v));
-    }
-</code></p>
-
+<div class="highlight"><pre><code class="java language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">writeFloat</span><span class="o">(</span><span class="kt">float</span> <span class="n">v</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">writeInt</span><span class="o">(</span><span class="n">Float</span><span class="o">.</span><span class="na">floatToIntBits</span><span class="o">(</span><span class="n">v</span><span class="o">));</span>
+    <span class="o">}</span>
+</code></pre></div>
 <ul>
-  <li>PipedOutputStream</li>
+<li>PipedOutputStream</li>
 </ul>
 
 <p>管道输出流可以与一个管道输入流相关联，关联后，共用一个缓冲区，输出流写入数据，输入流读取数据，二者应该处于不同线程，否则可能出现死锁。</p>
@@ -739,17 +698,15 @@ public final void writeShort(int v) throws IOException {
 
 <p>另外，我觉得在这里，有必要说一下那几个用于压缩和解压缩的类，实现就不说了，就讲下他们的功能与关系。</p>
 
-<h2 id="java-io-">JAVA IO 压缩与解压缩</h2>
+<h2>JAVA IO 压缩与解压缩</h2>
 
 <ul>
-  <li>InflaterInputStream: 用于解压 deflate 格式的压缩数据，底层流为压缩后的数据，read 返回解压后的数据。</li>
-  <li>InflaterOutputStream: 用于解压 deflate 格式的压缩数据，底层流为压缩后的数据，write 写入解压后的数据。</li>
-  <li>DeflaterInputStream: 用于压缩成 deflate 格式的数据，底层流为未压缩数据，read 返回压缩后的数据。</li>
-  <li>
-    <p>DeflaterOutputStream: 用于压缩成 deflate 格式的数据，底层流为未压缩数据，write 写入压缩后的数据。</p>
-  </li>
-  <li>GZIPInputStream: 用于解压 GZip 格式的压缩数据，底层流为压缩后的数据，read 返回解压后的数据。它是 InflaterInputStream 的子类。</li>
-  <li>GZIPOutputStream: 用于压缩成 Gzip格式的数据，底层流为未压缩数据，write 写入压缩后的数据。是 DeflaterOutputStream 的子类(注意不是InflaterOutputStream) 。</li>
+<li>InflaterInputStream: 用于解压 deflate 格式的压缩数据，底层流为压缩后的数据，read 返回解压后的数据。</li>
+<li>InflaterOutputStream: 用于解压 deflate 格式的压缩数据，底层流为压缩后的数据，write 写入解压后的数据。</li>
+<li>DeflaterInputStream: 用于压缩成 deflate 格式的数据，底层流为未压缩数据，read 返回压缩后的数据。</li>
+<li><p>DeflaterOutputStream: 用于压缩成 deflate 格式的数据，底层流为未压缩数据，write 写入压缩后的数据。</p></li>
+<li><p>GZIPInputStream: 用于解压 GZip 格式的压缩数据，底层流为压缩后的数据，read 返回解压后的数据。它是 InflaterInputStream 的子类。</p></li>
+<li><p>GZIPOutputStream: 用于压缩成 Gzip格式的数据，底层流为未压缩数据，write 写入压缩后的数据。是 DeflaterOutputStream 的子类(注意不是InflaterOutputStream) 。</p></li>
 </ul>
 
 <p>不得不说，这个API设计的真是太反直觉了。GZIP 格式的解压和压缩一个是 GZIPInputStream，一个是 GZIPOutputStream。而 deflate 格式的解压和压缩，一个是 InflaterInputStream/InflaterOutputStream，另一个是 DeflaterInputStream/DeflaterOutputStream。当同时需要对 gzip 和 deflate 压缩和解压缩时，就感觉，真是反直觉。</p>

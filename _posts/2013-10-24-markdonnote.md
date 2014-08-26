@@ -201,11 +201,11 @@ def hello():
 
 ### 效果
 
-$$ \sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k} $$
+$$ \sum^{j-1}\_{k=0}{\widehat{\gamma}\_{kj} z_k} $$
 
 ### 代码
 
-    $$ \sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k} $$
+    $$ \sum^{j-1}\_{k=0}{\widehat{\gamma}\_{kj} z_k} $$
 
 
 公式可以通过MathJax支持, 右击公式有惊喜。  

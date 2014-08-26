@@ -1,5 +1,5 @@
 baseurl: ""
-markdown: kramdown
+markdown: redcarpet
 redcarpet:
     extensions: [tables]
 safe: false

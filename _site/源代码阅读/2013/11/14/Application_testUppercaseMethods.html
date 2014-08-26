@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,160 +532,134 @@
 
       <article>
 
-<h1 id="section">分模块测试</h1>
+<h1>分模块测试</h1>
 
-<h2 id="applicationpy">application.py</h2>
+<h2>application.py</h2>
 
 <p>对 application.py 的测试，调用命令：</p>
-
-<pre><code>python test/application.py
-</code></pre>
-
-<h3 id="testuppercasemethodsself">test_UppercaseMethods(self)</h3>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">python test/application.py
+</code></pre></div>
+<h3>test_UppercaseMethods(self)</h3>
 
 <p>这个函数源代码是：</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">testUppercaseMethods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="nb">locals</span><span class="p">())</span>
+    <span class="k">class</span> <span class="nc">hello</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="s">&quot;hello&quot;</span>
+        <span class="k">def</span> <span class="nf">internal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="s">&quot;secret&quot;</span>
 
-<p>```python
-def testUppercaseMethods(self):
-    urls = (&#8220;/&#8221;, &#8220;hello&#8221;)
-    app = web.application(urls, locals())
-    class hello:
-        def GET(self): return &#8220;hello&#8221;
-        def internal(self): return &#8220;secret&#8221;</p>
-
-<pre><code>response = app.request('/', method='internal')
-self.assertEquals(response.status, '405 Method Not Allowed') ```
-</code></pre>
-
+    <span class="n">response</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;internal&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="s">&#39;405 Method Not Allowed&#39;</span><span class="p">)</span>
+</code></pre></div>
 <p>这个函数似乎是在测试 <code>request</code> 请求的方法不正确时，<code>application</code>
 的反应。</p>
 
 <p>我们打印一下 <code>response</code> 的值，发现内容是这样的：</p>
-
-<pre><code>&lt;Storage {'status': '405 Method Not Allowed', 
-'headers': {'Content-Type': 'text/html', 
-'Allow': 'GET, HEAD, POST, PUT, DELETE'}, 
-'header_items': [('Content-Type', 'text/html'), 
-('Allow', 'GET, HEAD, POST, PUT, DELETE')], 'data': 'None'}&gt;
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;Storage {&#39;status&#39;: &#39;405 Method Not Allowed&#39;, 
+&#39;headers&#39;: {&#39;Content-Type&#39;: &#39;text/html&#39;, 
+&#39;Allow&#39;: &#39;GET, HEAD, POST, PUT, DELETE&#39;}, 
+&#39;header_items&#39;: [(&#39;Content-Type&#39;, &#39;text/html&#39;), 
+(&#39;Allow&#39;, &#39;GET, HEAD, POST, PUT, DELETE&#39;)], &#39;data&#39;: &#39;None&#39;}&gt;
+</code></pre></div>
 <p>从这里可以看出允许的方法：</p>
-
-<pre><code>'Allow': 'GET, HEAD, POST, PUT, DELETE'
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&#39;Allow&#39;: &#39;GET, HEAD, POST, PUT, DELETE&#39;
+</code></pre></div>
 <p><code>response.status</code> 最终值为：</p>
-
-<pre><code>'status': '405 Method Not Allowed',
-</code></pre>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&#39;status&#39;: &#39;405 Method Not Allowed&#39;,
+</code></pre></div>
 <p>我们再一次深入 <code>web.application.request</code>, 看一看具体实现。</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localpart</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                <span class="n">host</span><span class="o">=</span><span class="s">&quot;0.0.0.0:8080&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">https</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
 
-<p>```python
-    def request(self, localpart=&#8217;/&#8217;, method=&#8217;GET&#8217;, data=None,
-                host=&#8221;0.0.0.0:8080&#8221;, headers=None, https=False, **kw):</p>
+        <span class="o">...</span>
 
-<pre><code>    ...
+        <span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">env</span><span class="p">,</span> 
+            <span class="n">HTTP_HOST</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> 
+            <span class="n">REQUEST_METHOD</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> 
+            <span class="n">PATH_INFO</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> 
+            <span class="n">QUERY_STRING</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> 
+            <span class="n">HTTPS</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">https</span><span class="p">)</span>
+            <span class="p">)</span>
 
-    env = dict(
-        env, 
-        HTTP_HOST=host, 
-        REQUEST_METHOD=method, 
-        PATH_INFO=path, 
-        QUERY_STRING=query, 
-        HTTPS=str(https)
-        )
+        <span class="o">...</span>
 
-    ...
+        <span class="n">response</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">storage</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">header_items</span> <span class="o">=</span> <span class="n">headers</span>
 
-    response = web.storage()
-    def start_response(status, headers):
-        response.status = status
-        response.headers = dict(headers)
-        response.header_items = headers
+        <span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">()(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">))</span>
 
-    response.data = "".join(self.wsgifunc()(env, start_response))
-
-    return response ```
-</code></pre>
-
+        <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
 <p>我们只保留了关键代码，可以看出，method 首先被设置在了 <code>env</code> 中，然后，
 通过 </p>
-
-<p><code>python
-    self.wsgifunc()(env, start_response))
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="bp">self</span><span class="o">.</span><span class="n">wsgifunc</span><span class="p">()(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">))</span>
+</code></pre></div>
 <p><code>start_response</code> 被 <code>wsgifunc()</code> 返回的函数调用，<code>response</code> 的值被设置。 如果阅读了前面推荐的几篇关于 <code>WSGI</code> 的文章，对这里的 <code>self.wsgifunc()</code> 和 <code>start_response</code>应该不会感觉到陌生。</p>
 
 <p>好，我们继续深入 <code>web.application.wsgifunc()</code></p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python">    <span class="k">def</span> <span class="nf">wsgifunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">middleware</span><span class="p">):</span>
 
-<p>```python
-    def wsgifunc(self, *middleware):</p>
+        <span class="o">...</span>
 
-<pre><code>    ...
+        <span class="k">def</span> <span class="nf">wsgi</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_resp</span><span class="p">):</span>
+            <span class="c"># clear threadlocal to avoid inteference of previous requests</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup</span><span class="p">()</span>
 
-    def wsgi(env, start_resp):
-        # clear threadlocal to avoid inteference of previous requests
-        self._cleanup()
+            <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># allow uppercase methods only</span>
+                <span class="k">if</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">nomethod</span><span class="p">()</span>
 
-        self.load(env)
-        try:
-            # allow uppercase methods only
-            if web.ctx.method.upper() != web.ctx.method:
-                raise web.nomethod()
-
-            result = self.handle_with_processors()
-            if is_generator(result):
-                result = peep(result)
-            else:
-                result = [result]
-        except web.HTTPError, e:
-            result = [e.data]
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_with_processors</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">is_generator</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">peep</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">]</span>
+            <span class="k">except</span> <span class="n">web</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">data</span><span class="p">]</span>
 
 
-        result = web.safestr(iter(result))
+            <span class="n">result</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">safestr</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 
-        status, headers = web.ctx.status, web.ctx.headers
-        start_resp(status, headers)
-        
-        def cleanup():
-            self._cleanup()
-            yield '' # force this function to be a generator
+            <span class="n">status</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">headers</span>
+            <span class="n">start_resp</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 
-        return itertools.chain(result, cleanup())
+            <span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup</span><span class="p">()</span>
+                <span class="k">yield</span> <span class="s">&#39;&#39;</span> <span class="c"># force this function to be a generator</span>
 
-    for m in middleware: 
-        wsgi = m(wsgi)
+            <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">cleanup</span><span class="p">())</span>
 
-    return wsgi ```
-</code></pre>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">middleware</span><span class="p">:</span> 
+            <span class="n">wsgi</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">wsgi</span><span class="p">)</span>
 
+        <span class="k">return</span> <span class="n">wsgi</span>
+</code></pre></div>
 <p>从上述代码可以看出，返回的函数就是 <code>wsgi</code>, <code>wsgi</code> 在返回前，可能
 会使用 <code>middleware</code> 进行一层一层的包装。不过这里，我们只看 <code>wsgi</code>
 的代码就可以了。</p>
 
 <p>关键的两行在：</p>
-
-<p><code>python
-status, headers = web.ctx.status, web.ctx.headers
-start_resp(status, headers)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">status</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">headers</span>
+<span class="n">start_resp</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
 <p>这里，<code>web.application.requests.start_response</code> 函数 被调用，并设置好
 <code>status</code> 和 <code>headers</code>，二者的值从 <code>web.ctx</code> 中取得。所以，下一部，我们
 关心 <code>web.ctx</code> 值的来源。因为 <code>method</code> 的信息在 <code>env</code> 中，所以 
 <code>web.ctx</code> 的值一定会受 <code>env</code> 的影响，所以在 <code>wsgi</code> 中要找到 <code>env</code>是如何
 被使用的。</p>
-
-<p><code>python
-self.load(env)
-try:
-    # allow uppercase methods only
-    if web.ctx.method.upper() != web.ctx.method:
-        raise web.nomethod()
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c"># allow uppercase methods only</span>
+    <span class="k">if</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">method</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">nomethod</span><span class="p">()</span>
+</code></pre></div>
 <p>我们猜想 <code>self.load(env)</code> 对 <code>web.ctx</code> 进行了设置，然后后面的 <code>try</code>
 对 <code>web.ctx</code> 检查，这里对 <code>upper</code>的检查，让我们想到了，原来一开始的
 <code>testUppercaseMethods</code> 是在测试 <code>method</code> 名字是不是全是大写。。。</p>
@@ -693,21 +667,18 @@ try:
 <p>于是在 <code>raise web.nomethod()</code> 前加一个 <code>print</code> ，测试一下是不是执行到
 了这里，发现还真是。那么我们再深入 <code>load</code> ，看看如何根据 <code>env</code> 设置
 <code>web.ctx</code>。</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initializes ctx using env.&quot;&quot;&quot;</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s">&#39;200 OK&#39;</span>
 
-<p>```python
-def load(self, env):
-    &#8220;"&#8221;Initializes ctx using env.&#8221;&#8221;&#8221;
-    ctx = web.ctx
-    ctx.clear()
-    ctx.status = &#8216;200 OK&#8217;</p>
+    <span class="o">...</span>
 
-<pre><code>...
+    <span class="n">ctx</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">)</span>
 
-ctx.method = env.get('REQUEST_METHOD')
-
-... ```
-</code></pre>
-
+    <span class="o">...</span>
+</code></pre></div>
 <p><code>load</code> 函数会根据 <code>env</code> 设置 <code>web.ctx</code> ，但是只是简单赋值，没有对
 <code>method</code> 方法的检查。于是，我明白了，原来是在 <code>raise web.nomethod()</code>中对
 <code>status</code> 进行了设置。</p>
@@ -717,49 +688,39 @@ ctx.method = env.get('REQUEST_METHOD')
 
 <p>这个函数在 <code>webapi.py</code> 中，进入文件一看，果然是对许多状态的定义。
 找到 <code>nomethod</code> ，发现指向 <code>NoMethod</code>，下面看 <code>NoMethod</code>:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">class</span> <span class="nc">NoMethod</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A `405 Method Not Allowed` error.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s">&#39;405 Method Not Allowed&#39;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;text/html&#39;</span>
 
-<p>```python
-class NoMethod(HTTPError):
-    &#8220;"&#8221;A <code>405 Method Not Allowed</code> error.&#8221;&#8221;&#8221;
-    def <strong>init</strong>(self, cls=None):
-        status = &#8216;405 Method Not Allowed&#8217;
-        headers = {}
-        headers[&#8216;Content-Type&#8217;] = &#8216;text/html&#8217;</p>
+        <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;HEAD&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="s">&#39;PUT&#39;</span><span class="p">,</span> <span class="s">&#39;DELETE&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="p">:</span>
+            <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="n">method</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span>
 
-<pre><code>    methods = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE']
-    if cls:
-        methods = [method for method in methods if hasattr(cls, method)]
-
-    headers['Allow'] = ', '.join(methods)
-    data = None
-    HTTPError.__init__(self, status, headers, data) ```
-</code></pre>
-
+        <span class="n">headers</span><span class="p">[</span><span class="s">&#39;Allow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">methods</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">HTTPError</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</code></pre></div>
 <p>发现还真是对错误号 <code>405</code> 的处理。 设置好status, 最终的处理
 发给了 <code>HTTPError</code>，所以我们再进入 <code>HTTPError</code>。</p>
-
-<p><code>python
-class HTTPError(Exception):
-    def __init__(self, status, headers={}, data=""):
-        ctx.status = status
-        for k, v in headers.items():
-            header(k, v)
-        self.data = data
-        Exception.__init__(self, status)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">class</span> <span class="nc">HTTPError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{},</span> <span class="n">data</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">header</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</code></pre></div>
 <p>这里终于发现了对 <code>ctx.status</code> 的设置。这就是在这里我们知道了下面这两
 行关键代码的最终来源。</p>
-
-<p><code>python
-status, headers = web.ctx.status, web.ctx.headers
-start_resp(status, headers)
-</code></p>
-
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">status</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">web</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">headers</span>
+<span class="n">start_resp</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
 <p>前者设置 <code>status</code> 和 <code>headers</code>，后者调用 <code>requests</code> 函数中的 <code>start_response</code> 对
  <code>response</code> 的状态进行了设置。最后返回给最一开始 <code>testUppercaseMethods</code> 中的 
  <code>response</code>。</p>
-
 
 
       </article>

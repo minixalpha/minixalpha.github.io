@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,102 +532,93 @@
 
       <article>
 
-<h1 id="cstatic">对C语言中的static关键字的深入理解</h1>
+<h1>对C语言中的static关键字的深入理解</h1>
 
 <p>在阅读一些项目源代码时，我发现很多时候，会把函数和变量声明为static，所以，很好奇为什么要这样做，于是有了下面这篇文章。</p>
 
-<h1 id="section">基本概念</h1>
+<h1>基本概念</h1>
 
 <p>使用static有三种情况：</p>
 
 <ul>
-  <li>函数内部static变量</li>
-  <li>函数外部static变量</li>
-  <li>static函数</li>
+<li>函数内部static变量</li>
+<li>函数外部static变量</li>
+<li>static函数</li>
 </ul>
 
 <p>函数内部的static变量，关键在于生命周期持久，他的值不会随着函数调用的结束而消失，下一次调用时，static变量的值，还保留着上次调用后的内容。</p>
 
 <p>函数外部的static变量，以及static函数，关键在于私有性，它们只属于当前文件，其它文件看不到他们。例如：</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* test_static1.c */</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
-<p>```c
-/* test_static1.c */
-#include <stdio.h></stdio.h></p>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>void foo() {
-}</p>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>static void bar() {
-}</p>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-<p>int i = 3;
-static int j = 4;</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* test_static2.c */</span>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>int main(void){
-    printf (&#8220;%d \n&#8221;, i);
-    printf (&#8220;%d \n&#8221;, j);
-    return 0;
-}</p>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>```</p>
-
-<p>```c
-/* test_static2.c */
-void foo() {
-}</p>
-
-<p>static void bar() {
-}</p>
-
-<p>int i = 1;
-static int j = 2;</p>
-
-<p>```</p>
-
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
 <p>将两个文件一起编译</p>
 
 <blockquote>
-  <p>gcc test_static1.c test_static2.c -o test_static</p>
+<p>gcc test<em>static1.c test</em>static2.c -o test_static</p>
 </blockquote>
 
 <p>编译器会提示：</p>
-
-<pre><code>/tmp/ccuerF9V.o: In function `foo':
-test_static2.c:(.text+0x0): multiple definition of `foo'
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/tmp/ccuerF9V.o: In function `foo&#39;:
+test_static2.c:(.text+0x0): multiple definition of `foo&#39;
 /tmp/cc9qncdw.o:test_static1.c:(.text+0x0): first defined here
-/tmp/ccuerF9V.o:(.data+0x0): multiple definition of `i'
+/tmp/ccuerF9V.o:(.data+0x0): multiple definition of `i&#39;
 /tmp/cc9qncdw.o:(.data+0x0): first defined here
 collect2: ld returned 1 exit status
-</code></pre>
-
+</code></pre></div>
 <p>把与非static变量i相的语句注释掉就不会有此提示i重复定义了，原因就在于使用static声明后，变量私有化了，不同文件中的同名变量不会相互冲突。</p>
 
 <p>static 函数也与此类似，将函数声明为static，说明我们只在当前文件中使用这个函数，其它文件看不到，即使重名，也不会相互冲突。</p>
 
-<h1 id="section-1">深入理解</h1>
+<h1>深入理解</h1>
 
 <blockquote>
-  <p>从来就不应该仅仅满足于了解现象，还要了解现象的背后有什么</p>
+<p>从来就不应该仅仅满足于了解现象，还要了解现象的背后有什么</p>
 </blockquote>
 
-<h2 id="static">为什么函数内部的static变量和普通函数变量生命周期不一样</h2>
+<h2>为什么函数内部的static变量和普通函数变量生命周期不一样</h2>
+
 <p>我们的程序，从源代码经过编译，链接生成了可执行文件，可执行文件被加载到存储器中，然后执行。以Unix程序为例，每个Unix程序都有一个运行时存储器映像。可以理解为程序运行时，存储器中的数据分布。</p>
 
-<p><img src="/assets/blog-images/linux_run_time_memory_image.png" alt="linux_rtmi" /></p>
+<p><img src="/assets/blog-images/linux_run_time_memory_image.png" alt="linux_rtmi"></p>
 
 <p>图1 Linux运行时存储器映像</p>
 
 <p>当程序运行时，操作系统会创建用户栈(User stack)，一个函数被调用时，它的参数，局部变量，返回地址等等，都会被压入栈中，当函数执行结束后，这些数据就会被其它函数使用，所以函数调用结束后，局部变量的值不会被保持。我们将此区域放大，可以看到用户栈中都有哪些内容。</p>
 
-<p><img src="/assets/blog-images/stack_frame_structure.png" alt="sfs" /></p>
+<p><img src="/assets/blog-images/stack_frame_structure.png" alt="sfs"></p>
 
 <p>图2 栈帧结构</p>
 
-<p>而static变量与普通局部变量不同，它不是保留在栈中。注意图一中，有一块区域，&#8221;Loaded from executable file&#8221;，其中有一块 .data, .bss区，static变量会被存储在这里，所以函数调用结束后，static变量的值仍然会得到保留。而 .data, .bss区，executable file，与程序的编译，链接，相关。</p>
+<p>而static变量与普通局部变量不同，它不是保留在栈中。注意图一中，有一块区域，&quot;Loaded from executable file&quot;，其中有一块 .data, .bss区，static变量会被存储在这里，所以函数调用结束后，static变量的值仍然会得到保留。而 .data, .bss区，executable file，与程序的编译，链接，相关。</p>
 
 <p>首先，多个源代码会分别被编译成可重定位目标程序，然后链接器会最终生成可执行目标程序。可重定位目标程序的结构如图3所示，可以看出，此时，.data, .bss区，已经出现。</p>
 
-<p><img src="/assets/blog-images/relocatable_elf.png" alt="re" /></p>
+<p><img src="/assets/blog-images/relocatable_elf.png" alt="re"></p>
 
 <p>图3 可重定位目标程序</p>
 
@@ -635,70 +626,60 @@ collect2: ld returned 1 exit status
 
 <p>可执行目标程序的结构如图4所示</p>
 
-<p><img src="/assets/blog-images/executable_elf.png" alt="ee" /></p>
+<p><img src="/assets/blog-images/executable_elf.png" alt="ee"></p>
 
 <p>图4 可执行目标程序</p>
 
-<p>将图4与图1比较，就会发现，可执行目标程序的一部分被加载到存储器中，这就是&#8221;Loaded from executable file&#8221;的来源。</p>
+<p>将图4与图1比较，就会发现，可执行目标程序的一部分被加载到存储器中，这就是&quot;Loaded from executable file&quot;的来源。</p>
 
 <p>另外，从图一中，也可以看出，使用malloc分配的内存空间，与函数局部变量，static变量的不同。</p>
 
-<h2 id="staticstatic">为什么函数外部的static变量及static函数只对文件内部可见</h2>
+<h2>为什么函数外部的static变量及static函数只对文件内部可见</h2>
 
 <p>要解释这个问题，我们首先要理解问题本身。这个问题的本质其实是，当我们遇到一个变量或者函数时，我们去哪里寻找它，static变量/函数与普通变量/函数的寻找方式有什么不同。</p>
 
 <p>我们回到刚才的例子，这一次，仔细地观察编译链接时的提示信息：</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* test_static1.c */</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
 
-<p>```c
-/* test_static1.c */
-#include <stdio.h></stdio.h></p>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>void foo() {
-}</p>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>static void bar() {
-}</p>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-<p>int i = 3;
-static int j = 4;</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cm">/* test_static2.c */</span>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>int main(void){
-    printf (&#8220;%d \n&#8221;, i);
-    printf (&#8220;%d \n&#8221;, j);
-    return 0;
-}</p>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
 
-<p>```</p>
-
-<p>```c
-/* test_static2.c */
-void foo() {
-}</p>
-
-<p>static void bar() {
-}</p>
-
-<p>int i = 1;
-static int j = 2;</p>
-
-<p>```</p>
-
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
 <p>将两个文件一起编译</p>
 
 <blockquote>
-  <p>gcc test_static1.c test_static2.c -o test_static</p>
+<p>gcc test<em>static1.c test</em>static2.c -o test_static</p>
 </blockquote>
 
 <p>编译器会提示：</p>
-
-<pre><code>/tmp/ccuerF9V.o: In function `foo':
-test_static2.c:(.text+0x0): multiple definition of `foo'
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/tmp/ccuerF9V.o: In function `foo&#39;:
+test_static2.c:(.text+0x0): multiple definition of `foo&#39;
 /tmp/cc9qncdw.o:test_static1.c:(.text+0x0): first defined here
-/tmp/ccuerF9V.o:(.data+0x0): multiple definition of `i'
+/tmp/ccuerF9V.o:(.data+0x0): multiple definition of `i&#39;
 /tmp/cc9qncdw.o:(.data+0x0): first defined here
 collect2: ld returned 1 exit status
-</code></pre>
-
+</code></pre></div>
 <p>你会发现，虽然我们只用了一条命令对两个文件进行编译链接，但是，实际上，两个源文件是被分别编译成/tmp/ccuerF9V.o及/tmp/cc9qncdw.o，并且，错误并不是出现在编译时，而是出现在链接时，链接器ld返回了1。链接是把两个可重新定位的目标程序，组合在一起，组合的时候，我们发现了变量i及函数foo的定义出现冲突。而声明为static的变量j及函数bar并没有提示冲突。</p>
 
 <p>这说明，在ld进行链接时，需要进行某种检查，去发现冲突。ld的输入是每个源文件生成的可重定位目标文件，那么这些目标文件里一定会有一些信息，告诉ld它们有什么变量，然后ld才能检查是不是有冲突。</p>
@@ -707,25 +688,23 @@ collect2: ld returned 1 exit status
 
 <p>此时，我们不得不回到可重定位目标文件的格式。</p>
 
-<p><img src="/assets/blog-images/relocatable_elf.png" alt="re" /></p>
+<p><img src="/assets/blog-images/relocatable_elf.png" alt="re"></p>
 
 <p>图3 可重定位目标程序</p>
 
 <p>注意 .symtab节，这个节存储符号表，假设当前可重定位目标模块为m, 符号表会告诉我们m中定义和引用的符号信息，主要分为：</p>
 
 <ul>
-  <li>m定义，并可以被其它模块引用的全局符号：m中的非static函数，非static全局变量。</li>
-  <li>由其它模块定义，并被m引用的全局符号：m中使用extern声明的变量</li>
-  <li>只被m引用的本地符号：m中的static函数，static全局变量。</li>
+<li>m定义，并可以被其它模块引用的全局符号：m中的非static函数，非static全局变量。</li>
+<li>由其它模块定义，并被m引用的全局符号：m中使用extern声明的变量</li>
+<li>只被m引用的本地符号：m中的static函数，static全局变量。</li>
 </ul>
 
 <p>现在编译一下，然后用GNU READELF工具看一下符号表。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    $ gcc -c test_static1.c -o test_static1.o
+    $ readelf -s test_static1.o
 
-<p>```
-    $ gcc -c test_static1.c -o test_static1.o
-    $ readelf -s test_static1.o</p>
-
-<p>Symbol table &#8216;.symtab&#8217; contains 15 entries:
+Symbol table &#39;.symtab&#39; contains 15 entries:
    Num:    Value  Size Type    Bind   Vis      Ndx Name
      0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
      1: 00000000     0 FILE    LOCAL  DEFAULT  ABS test_static1.c
@@ -742,8 +721,7 @@ collect2: ld returned 1 exit status
     12: 00000000     4 OBJECT  GLOBAL DEFAULT    3 i
     13: 0000000a    62 FUNC    GLOBAL DEFAULT    1 main
     14: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND printf
-```</p>
-
+</code></pre></div>
 <p>表的数据结构不解释，有兴趣，看扩展阅读部分。</p>
 
 <p>现在，假如你是链接器ld，我给你2个可重定位目标程序，你从中得到两个符号表，这时候，你就可以检查出两个符号表是否存在冲突了。</p>
@@ -751,24 +729,25 @@ collect2: ld returned 1 exit status
 <p>由于全局符号可能会定义相同的名字，链接器会有一套规则，来确定选择哪个符号。符号分为强符号与弱符号。</p>
 
 <ul>
-  <li>强符号：函数和已经初始化的全局变量是强符号</li>
-  <li>弱符号：未初始化的全局变量是弱符号</li>
+<li>强符号：函数和已经初始化的全局变量是强符号</li>
+<li>弱符号：未初始化的全局变量是弱符号</li>
 </ul>
 
 <p>处理相同名字的全局符号的规则是：</p>
 
 <ol>
-  <li>不允许有多个强符号</li>
-  <li>如果有一个强符号，多个弱符号，那么选择强符号</li>
-  <li>如果有多个弱符号，那么从中任意选择一个</li>
+<li>不允许有多个强符号</li>
+<li>如果有一个强符号，多个弱符号，那么选择强符号</li>
+<li>如果有多个弱符号，那么从中任意选择一个</li>
 </ol>
 
 <p>明白了这些规则，你其实可以明白很多事情，不仅仅包括什么时候，变量名，函数名会冲突，还包括为什么要尽量避免使用全局变量，为什么要使用static把数据私有化。看看规则3，“任意”两个字，有没有让你感觉有一丝不适。</p>
 
 <p>这也是为什么我们要探索事物背后机理的原因，不仅仅是在出现错误时，我们知道哪里有问题，还帮助我们写出更健壮的程序。</p>
 
-<h1 id="section-2">扩展阅读</h1>
-<p>《深入理解计算机系统》(Computer Systems, A Programmer&#8217;s Perspective): 第七章 链接</p>
+<h1>扩展阅读</h1>
+
+<p>《深入理解计算机系统》(Computer Systems, A Programmer&#39;s Perspective): 第七章 链接</p>
 
 
       </article>

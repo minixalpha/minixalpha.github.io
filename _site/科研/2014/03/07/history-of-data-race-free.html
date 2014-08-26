@@ -75,19 +75,7 @@
       
             
                 <li>
-                <a href="/categories/生活"> 生活 (1) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/工具"> 工具 (4) </a>
-                </li>
-            
-      
-            
-                <li>
-                <a href="/categories/操作系统"> 操作系统 (1) </a>
+                <a href="/categories/设计模式"> 设计模式 (3) </a>
                 </li>
             
       
@@ -99,13 +87,19 @@
       
             
                 <li>
+                <a href="/categories/思想"> 思想 (2) </a>
+                </li>
+            
+      
+            
+                <li>
                 <a href="/categories/技术"> 技术 (18) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/设计模式"> 设计模式 (3) </a>
+                <a href="/categories/工具"> 工具 (4) </a>
                 </li>
             
       
@@ -117,13 +111,13 @@
       
             
                 <li>
-                <a href="/categories/思想"> 思想 (2) </a>
+                <a href="/categories/java"> java (11) </a>
                 </li>
             
       
             
                 <li>
-                <a href="/categories/java"> java (11) </a>
+                <a href="/categories/c语言"> c语言 (4) </a>
                 </li>
             
       
@@ -135,7 +129,7 @@
       
             
                 <li>
-                <a href="/categories/c语言"> c语言 (4) </a>
+                <a href="/categories/操作系统"> 操作系统 (1) </a>
                 </li>
             
       
@@ -148,6 +142,12 @@
             
                 <li>
                 <a href="/categories/计算机系统"> 计算机系统 (3) </a>
+                </li>
+            
+      
+            
+                <li>
+                <a href="/categories/生活"> 生活 (1) </a>
                 </li>
             
       
@@ -532,7 +532,7 @@
 
       <article>
 
-<h1 id="data-race-free-">Data Race Free 的前世今生</h1>
+<h1>Data Race Free 的前世今生</h1>
 
 <p>Data Race Free 是多线程程序是非常重要的概念，因为Java 和 C++的内存模型都是基于 Data Race Free 的，这篇文章将介绍这个概念的由来，另一篇文章《Data Race Free的理解》介绍它的主要思想。</p>
 
@@ -546,7 +546,7 @@
 新的定义出于这样一种想法，程序员习惯使用 sequential consistency来推断程序的运行结果，而底层的系统要想取得更高的性能，又不能使用sequential consistency内存模型来运行程序。那么</p>
 
 <blockquote>
-  <p>如何使得程序员可以使用sequential consistency推断程序结果，底层的实现又可以进行种种优化呢？</p>
+<p>如何使得程序员可以使用sequential consistency推断程序结果，底层的实现又可以进行种种优化呢？</p>
 </blockquote>
 
 <p>解决方案是：对程序本身进行足够的同步。</p>
@@ -558,7 +558,7 @@
 <p>这里有一个关键问题：</p>
 
 <blockquote>
-  <p>什么叫“足够的同步”</p>
+<p>什么叫“足够的同步”</p>
 </blockquote>
 
 <p>Adve提出了Data Race Free的概念，也就是说，你的程序要是满足Data Race Free的条件了，你的同步就足够了，“足够”的意思就是说，这程序在weak ordering上跑和在sequential consistency上跑，结果是一样一样的～</p>
@@ -566,7 +566,7 @@
 <p>Adve对weak ordering给出的新定义是：</p>
 
 <blockquote>
-  <p>Hardware is weakly ordered with respect to a synchronization model if
+<p>Hardware is weakly ordered with respect to a synchronization model if
 and only if it appears sequentially consistent to all software that obey the synchronization model.</p>
 </blockquote>
 
