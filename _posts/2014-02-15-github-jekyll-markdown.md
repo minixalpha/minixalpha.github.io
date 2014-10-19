@@ -172,19 +172,23 @@ GitHub还为我们提供了更一种解析网站的方式，那就是直接上�
 Makefile 内容如下：
 
 ```
+
 deploy:
-	git checkout master
-    git add -A
-    git commit -m "deploy blog"
+	git checkout source
+	jekyll build
+	git add -A
+	git commit -m "update source"
 	cp -r _site/ /tmp/
-	git checkout gh-pages
+	git checkout master
 	rm -r ./*
 	cp -r /tmp/_site/* ./
 	git add -A
 	git commit -m "deploy blog"
-	git push origin gh-pages
-	git checkout master
+	git push origin master
+	git checkout source
 	echo "deploy succeed"
+	git push origin source
+	echo "push source"
 ```
 
 下面的内容涉及源代码，如果需要进一步学习，或者有问题，可以在 
