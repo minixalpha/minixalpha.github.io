@@ -38,6 +38,12 @@ if __name__ == "__main__":
 
 ---
 
+#### 图片测试
+
+![博客截图](/assets/blog-images/new_blog_snapshot.png)
+
+---
+
 感谢访问！
 
 ## 致谢
