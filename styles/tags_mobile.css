@@ -1,0 +1,97 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFF;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: jinkaiFont;
+}
+
+a {
+    color: #57BF7D;
+    text-decoration: none;
+}
+
+.nickname {
+    font-size: 16px;
+    color: #AAA;
+    font-family: mottoFont;
+    margin-bottom: 20px;
+}
+
+.tag-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.categories-area {
+    order: 1;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.categories-area-title {
+    margin-bottom: 20px;
+}
+
+.category-item {
+    display: inline-block;
+    font-size: 18px;
+    vertical-align: bottom;
+}
+
+.category-name {
+    margin-left: 15px;
+    display: inline-block;
+    line-height: 30px;
+    color: #666;
+}
+
+.category-number {
+    display: inline-block;
+    color: #666;
+    font-size: 16px;
+}
+
+#archives {
+    width: 100%;
+    order: 2;
+}
+
+.archive-group {
+    box-sizing: border-box;
+    background-color: #FFF;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.category-head {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.archive-item {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.archive-item a {
+    color: #666;
+}
+
+.archive-item a:hover {
+    color: #73BC83;
+}

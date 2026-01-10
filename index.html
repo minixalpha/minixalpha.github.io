@@ -1,56 +1,78 @@
 ---
-layout: default
-title: 首页
+layout: home
+title: minixalpha
 ---
 
-<ul class="post-list">
-    {% for post in paginator.posts %}
-    <li>
-      <div class="post-title">
-        <a href="{{site.baseurl}}{{post.url}}"> {{post.title}}</a> </br>
-      </div>
+<div class="topbar">
+  <div class="topbar-button topbar-mine">
+    <a href="{{ site.url }}/index.html">minixalpha</a>
+  </div>
+  <div class="topbar-button">
+    <a href="{{ site.url }}/tags.html">Tags</a>
+  </div>
+  <div class="topbar-button">
+    <a href="{{ site.url }}/projects.html">Projects</a>
+  </div>
+  <div class="topbar-button">
+    <a href="{{ site.url }}/feed.xml">Feeds</a>
+  </div>
+  <div class="topbar-button">
+    <a href="{{ site.url }}/about.html">About</a>
+  </div>
+</div>
 
-      <div class="post-info">
-        <ol>
-          <li class="post-time">{{ post.date | date: "%F" }}</li> 
-          <li class="post-category"> 
-           {{ post.categories | join: '&nbsp&nbsp' }}
-          </li>
-        </ol>
-      </div>
+<div class="slogan">
+  「reading, coding, thinking」
+</div>
 
-      <div class="post-preview">
-        {{ post.excerpt }} 
-        <a href="{{site.baseurl}}{{post.url}}"> Read More ... </a> </br>
-      </div>
-
-    </li>
+<ul>
+  <div class="char-total-counter">
+    {% assign count = 0 %}
+    {% for post in site.posts %}
+    {% assign single_count = post.content | strip_html | strip_newlines | remove: " " | size %}
+    {% assign count = count | plus: single_count %}
     {% endfor %}
-</ul>
 
-<!-- Pagination links -->
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-  {% else %}
-    <span>&laquo; Prev</span>
-  {% endif %}
+    {{ site.posts.size }}篇文章
+    {{ count }}字
+  </div>
 
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      {{ page }}
-    {% elsif page == 1 %}
-      <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-    {% else %}
-      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-    {% endif %}
+  {% for post in site.posts %}
+
+  <li class="post-line">
+    <a
+      class="post-title"
+      href="{{ site.baseurl }}{{ post.url }}">
+      {{ post.title }}
+    </a>
+
+    <a href="{{ site.baseurl }}{{ post.url }}">
+      <div class="post-summary">
+        {{ post.content | strip_html | truncate: 80, " ..." }}
+      </div>
+    </a>
+    <div class="post-info">
+      <div class="category-area">
+        {% for category in post.categories %}
+        <a href="{{ site.url }}/tags.html#{{ category }}">
+          <div class="category">
+            {{ category }}
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <div class="right-info-area">
+        <div class="char-counter">
+          {{ post.content | strip_html | strip_newlines | remove: " " | size }}字
+        </div>
+        
+        <div class="post-date">
+          {{ post.date | date: "%Y-%m-%d" }}
+        </div>
+      </div>
+    </div>
+  </li>
+
   {% endfor %}
 
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-  {% else %}
-    <span>Next &raquo;</span>
-  {% endif %}
-</div>
-{% endif %}
+</ul>

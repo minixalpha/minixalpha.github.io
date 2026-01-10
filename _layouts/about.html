@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% include header.html %}
+
+        <link rel="stylesheet" href="{{site.url}}/styles/font.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/about.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/about_mobile.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/navigatebar.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/navigatebar_mobile.css">
+    </head>
+    <body>
+        {% include navigatebar.html %}
+        {{ content }}
+    </body>
+</html>

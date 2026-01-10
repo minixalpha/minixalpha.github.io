@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{site.url}}/styles/font.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/tags.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/tags_mobile.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/navigatebar.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/navigatebar_mobile.css">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>{{ page.title }}</title>
+    </head>
+    <body>
+        {% include navigatebar.html %}
+        {{ content }}
+    </body>
+</html>

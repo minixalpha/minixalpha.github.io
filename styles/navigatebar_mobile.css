@@ -1,0 +1,36 @@
+.navigatebar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navigatebar-button {
+    margin-right: 10px;
+    color: #888;
+    font-size: 20px;
+    font-family: angelinaFont;
+}
+
+.navigatebar-button a {
+    color: #888;
+    text-decoration: none;
+}
+
+.navigatebar-button a:hover {
+    color: #73BC83;
+}
+
+.navigatebar-slogan {
+    display: none;
+}
+
+.navigatebar-mine {
+    margin-left: 20px;
+}
+
+.navigatebar-about {
+}

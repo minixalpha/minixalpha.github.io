@@ -1,9 +1,19 @@
-baseurl: ""
-markdown: redcarpet
-redcarpet:
-    extensions: [tables]
-safe: false
-pygments: true
-excerpt_separator: "\n\n\n"
-paginate: 5
-sitemapurl: "http://minixalpha.github.io"
+url: https://minixalpha.github.io
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
+
+plugins:
+  - jekyll-feed
+
+collections:
+  posts:
+    permalink: /:year/:month/:day/:title/
+
+timezone: Asia/Shanghai

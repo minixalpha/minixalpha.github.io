@@ -1,0 +1,112 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFF;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: jinkaiFont;
+}
+
+a {
+    color: #57BF7D;
+    text-decoration: none;
+}
+
+.nickname {
+    font-size: 16px;
+    color: #AAA;
+    font-family: mottoFont;
+    margin-bottom: 20px;
+}
+
+.categories-area {
+    display: none;
+}
+
+.category-name {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline;
+    line-height: 30px;
+    font-weight: bold;
+    color: #666;
+}
+
+#archives {
+    width: 100%;
+}
+
+.archive-group {
+    box-sizing: border-box;
+    background-color: #FFF;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.category-head {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.archive-item {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.archive-item a {
+    color: #666;
+}
+
+.archive-item a:hover {
+    color: #73BC83;
+}
+
+.project-list {
+    width: 80%;
+    font-family: jinkaiFont;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: center;
+
+    margin-bottom: 60px;
+}
+
+.project-category {
+    font-size: 18px;
+    border-bottom: 2px solid #73BC83;
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    align-self: center;
+}
+
+.project-item {
+    margin-top: 20px;
+}
+
+.project-name {
+    color: #73BC83;
+    font-size: 20px;
+}
+
+.project-intro {
+    font-size: 14px;
+}

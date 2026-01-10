@@ -1,0 +1,14 @@
+@font-face {
+    font-family: mottoFont;
+    src: url("../fonts/SCRIPTIN.ttf") format("TrueType");
+}
+
+@font-face {
+    font-family: angelinaFont;
+    src: url("../fonts/angelina.ttf") format("TrueType");
+}
+
+@font-face {
+    font-family: jinkaiFont;
+    src: url("../fonts/jinkai.ttf") format("TrueType");
+}

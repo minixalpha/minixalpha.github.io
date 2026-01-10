@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% include header.html %}
+
+        <link rel="stylesheet" href="{{site.url}}/styles/font.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/post.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/post_mobile.css">
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="{{site.url}}/styles/navigatebar.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{{site.url}}/styles/navigatebar_mobile.css">
+        <link rel="stylesheet" href="{{site.url}}/theme/highlight.css">
+    </head>
+    <body>
+        {% include navigatebar.html %}
+        <div class="content-area">
+            <div class="title">
+                {{ page.title }}
+            </div>
+            <div class="category-area">
+                「{% for category in page.categories %}
+                <a href="{{ site.url }}/tags.html#{{ category }}">
+                    <div class="category">
+                        {{ category }}
+                    </div>
+                </a>
+                {% endfor %}」
+            </div>
+            <div class="char-counter">
+              {{ page.date | date: "%Y-%m-%d" }} {{ page.content | strip_html | strip_newlines | remove: " " | size }}字
+            </div>
+            <div class="content">
+                {{ content }}
+            </div>
+        </div>
+    </body>
+</html>
