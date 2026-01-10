@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
 #### 引用测试
 
-> reading, coding, thinking
+> {{ site.motto }}
 
 #### 列表测试
 
