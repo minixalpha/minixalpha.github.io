@@ -1,0 +1,105 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFF;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: jinkaiFont;
+}
+
+a {
+    color: #AAA;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #57BF7D;
+}
+
+.nickname {
+    font-size: 16px;
+    color: #AAA;
+    font-family: mottoFont;
+    margin-bottom: 20px;
+}
+
+.tag-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.categories-area {
+    position: absolute;
+    top: 130px;
+    right: 200px;
+    border-left: 1px solid #EFEFEF;
+    padding-left: 20px;
+}
+
+.categories-area-title {
+    display: none;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.category-name {
+    margin-left: 10px;
+    margin-right: 5px;
+    display: inline;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.category-number {
+    font-size: 16px;
+}
+
+#archives {
+    width: 100%;
+}
+
+.archive-group {
+    box-sizing: border-box;
+    background-color: #FFF;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.category-head {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.archive-item {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.archive-item a {
+    font-size: 20px;
+    color: #666;
+}
+
+.archive-item a:hover {
+    color: #73BC83;
+}

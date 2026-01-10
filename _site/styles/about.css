@@ -1,0 +1,100 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFF;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: jinkaiFont;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+    padding-top: 10px;
+    margin: 0;
+}
+
+li {
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.about a {
+    color: #000;
+    text-decoration: none;
+}
+
+.about a:hover {
+    color: #73BC83;
+}
+
+.nickname {
+    font-size: 16px;
+    color: #AAA;
+    font-family: mottoFont;
+    margin-bottom: 20px;
+}
+
+.about {
+    box-sizing: border-box;
+    background-color: #FFF;
+    border-radius: 5px;
+    width: 60%;
+    margin: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+@media screen and (max-width: 600px) {
+    .about {
+        width: 80%;
+    }
+}
+
+.title-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.title {
+    color: #AAA;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 2px solid #AAA;
+    border-bottom: 2px solid #AAA;
+    font-family: angelinaFont;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.name {
+    font-size: 20px;
+    text-align: center;
+    color: #888;
+    margin-bottom: 40px;
+}
+
+.segement {
+    color: #888;
+    font-size: 22px;
+    margin-top: 40px;
+}
+
+.segement-content {
+    padding-left: 20px;
+    padding-top: 10px;
+    margin: 0;
+}
