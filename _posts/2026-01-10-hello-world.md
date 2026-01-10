@@ -47,4 +47,4 @@ if __name__ == "__main__":
 感谢访问！
 
 ## 致谢
-博客主题来自 [manateelazycat](https://manateelazycat.github.io/), 感谢他的无数优秀的分享。
+博客主题来自 [manateelazycat](https://manateelazycat.github.io/), 感谢他无数优秀的分享。
