@@ -71,19 +71,19 @@ a {
 }
 
 .topbar-mine {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #666;
-    flex: 1;
-    font-family: angelinaFont;
+    margin-right: 20px;
+    font-family: jinkaiFont;
 }
 
 .topbar-button {
     margin-left: 0px;
     margin-right: 10px;
     color: #888;
-    font-size: 20px;
-    font-family: angelinaFont;
+    font-size: 16px;
+    font-family: jinkaiFont;
 }
 
 .slogan {
