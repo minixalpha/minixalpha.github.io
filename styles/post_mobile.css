@@ -143,14 +143,13 @@ td {
 
 .category {
     color: #999;
-    font-size: 18px;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 10px;
     border-radius: 5px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background: #f0f0f0;
+    white-space: nowrap;
 }
 
 .char-counter {
