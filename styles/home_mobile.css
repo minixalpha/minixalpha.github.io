@@ -120,17 +120,12 @@ a {
 .category {
     color: #999;
     font-size: 14px;
-    height: 18px;
     position: relative;
     background: #EFEFEF;
     margin-right: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 2px 10px;
     border-radius: 5px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    white-space: nowrap;
 }
 
 .char-total-counter {
